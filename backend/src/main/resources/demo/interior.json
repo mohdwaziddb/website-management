@@ -1,0 +1,275 @@
+{
+ "settings": {
+  "site_name": "Studio Aangan Interiors",
+  "tagline": "Spaces that feel like you",
+  "about_short": "<p>Studio Aangan designs warm, functional homes and offices with end-to-end execution — from concept to keys in 45 days.</p>",
+  "phone": "+91 79 4000 5566",
+  "email": "design@studioaangan.in",
+  "address": "Sindhu Bhavan Road, Ahmedabad 380059",
+  "cta_text": "Book a Design Consultation",
+  "cta_link": "/contact",
+  "footer_text": "10-year warranty on all modular work."
+ },
+ "modules": {
+  "sliders": [
+   {
+    "title": "Design that feels like home",
+    "description": "Warm, minimal, timeless interiors.",
+    "image": "u:1618221195710-dd6b41faaea6"
+   },
+   {
+    "title": "Bedrooms you'll never want to leave",
+    "description": "Calm palettes and soft textures.",
+    "image": "u:1615874959474-d609969a20ed"
+   },
+   {
+    "title": "Kitchens made for living",
+    "description": "Modular kitchens with smart storage.",
+    "image": "u:1556909114-f6e7ad7d3136"
+   }
+  ],
+  "projects": [
+   {
+    "title": "The Shah Residence",
+    "category": "Living Room",
+    "client": "Shah family",
+    "location": "Ahmedabad",
+    "cover_image": "u:1618221195710-dd6b41faaea6",
+    "project_date": "2026-08-01",
+    "summary": "A warm minimal 4 BHK with oak and linen.",
+    "description": "<p>A warm minimal 4 BHK with oak and linen.</p>"
+   },
+   {
+    "title": "Mustard Loft",
+    "category": "Apartment",
+    "client": "Ritika M.",
+    "location": "Mumbai",
+    "cover_image": "u:1586023492125-27b2c045efd7",
+    "project_date": "2026-06-15",
+    "summary": "Bold accents in a compact city loft.",
+    "description": "<p>Bold accents in a compact city loft.</p>"
+   },
+   {
+    "title": "Serene Suite",
+    "category": "Bedroom",
+    "client": "The Kapoors",
+    "location": "Delhi",
+    "cover_image": "u:1505693416388-ac5ce068fe85",
+    "project_date": "2026-04-10",
+    "summary": "Hotel-style master bedroom.",
+    "description": "<p>Hotel-style master bedroom.</p>"
+   },
+   {
+    "title": "Green Haven",
+    "category": "Living Room",
+    "client": "Dr. Patel",
+    "location": "Surat",
+    "cover_image": "u:1600210492486-724fe5c67fb0",
+    "project_date": "2026-02-20",
+    "summary": "Biophilic design with 40 plants.",
+    "description": "<p>Biophilic design with 40 plants.</p>"
+   },
+   {
+    "title": "Boho Retreat",
+    "category": "Bedroom",
+    "client": "Sana K.",
+    "location": "Pune",
+    "cover_image": "u:1615874959474-d609969a20ed",
+    "project_date": "2025-12-01",
+    "summary": "Rattan, macramé and morning light.",
+    "description": "<p>Rattan, macramé and morning light.</p>"
+   },
+   {
+    "title": "Family Kitchen",
+    "category": "Kitchen",
+    "client": "Mehta family",
+    "location": "Vadodara",
+    "cover_image": "u:1556909114-f6e7ad7d3136",
+    "project_date": "2025-10-01",
+    "summary": "Modular kitchen with breakfast counter.",
+    "description": "<p>Modular kitchen with breakfast counter.</p>"
+   }
+  ],
+  "services": [
+   {
+    "title": "Full Home Interiors",
+    "icon": "Home",
+    "summary": "Concept to execution with one team.",
+    "price": "From ₹1,800/sqft",
+    "image": "u:1616486338812-3dadae4b4ace"
+   },
+   {
+    "title": "Modular Kitchens",
+    "icon": "Utensils",
+    "summary": "Factory-finished, installed in 10 days.",
+    "price": "From ₹2.5L",
+    "image": "u:1556909114-f6e7ad7d3136"
+   },
+   {
+    "title": "Bedroom Design",
+    "icon": "Bed",
+    "summary": "Wardrobes, beds and lighting.",
+    "price": null,
+    "image": "u:1615874959474-d609969a20ed"
+   },
+   {
+    "title": "Space Planning",
+    "icon": "Ruler",
+    "summary": "Smart layouts for small homes.",
+    "price": null,
+    "image": "u:1600210492486-724fe5c67fb0"
+   }
+  ],
+  "team_members": [
+   {
+    "title": "Nidhi Shah",
+    "designation": "Principal Designer",
+    "bio": "Architect, 14 years.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Kunal Patel",
+    "designation": "Project Manager",
+    "bio": "On-time, every time.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Riya Desai",
+    "designation": "3D Visualiser",
+    "bio": "Photo-real renders before we build.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "testimonials": [
+   {
+    "title": "Our dream home",
+    "parent_name": "Mr. & Mrs. Shah",
+    "child_name": "4 BHK, Ahmedabad",
+    "description": "Every corner feels thoughtful. Delivered in 42 days!",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Loved the 3D previews",
+    "parent_name": "Ritika M.",
+    "child_name": "Mumbai loft",
+    "description": "What we saw in 3D is exactly what we got.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Stress-free process",
+    "parent_name": "Dr. Patel",
+    "child_name": "Surat",
+    "description": "One team handled everything.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "stats": [
+   {
+    "title": "Homes designed",
+    "value": "600+",
+    "icon": "Home"
+   },
+   {
+    "title": "Days avg. delivery",
+    "value": "45",
+    "icon": "Clock"
+   },
+   {
+    "title": "Design awards",
+    "value": "9",
+    "icon": "Award"
+   },
+   {
+    "title": "Warranty",
+    "value": "10 yrs",
+    "icon": "Shield"
+   }
+  ],
+  "faqs": [
+   {
+    "title": "What is the cost of full-home interiors?",
+    "answer": "Typically ₹1,800–3,500 per sqft depending on finishes."
+   },
+   {
+    "title": "Do you show 3D designs?",
+    "answer": "Yes, photo-real 3D before execution."
+   },
+   {
+    "title": "Do you work outside Gujarat?",
+    "answer": "Yes — Mumbai, Pune and Delhi NCR."
+   }
+  ],
+  "partners": [
+   {
+    "title": "Hettich"
+   },
+   {
+    "title": "Asian Paints"
+   },
+   {
+    "title": "Jaquar"
+   },
+   {
+    "title": "Greenply"
+   },
+   {
+    "title": "Hafele"
+   }
+  ],
+  "gallery_categories": [
+   {
+    "_key": "living",
+    "title": "Living"
+   },
+   {
+    "_key": "bedroom",
+    "title": "Bedrooms"
+   }
+  ],
+  "image_gallery": [
+   {
+    "title": "Warm minimal living",
+    "image": "u:1618221195710-dd6b41faaea6",
+    "category_id": "@living"
+   },
+   {
+    "title": "Mustard accent",
+    "image": "u:1586023492125-27b2c045efd7",
+    "category_id": "@living"
+   },
+   {
+    "title": "Neutral lounge",
+    "image": "u:1616486338812-3dadae4b4ace",
+    "category_id": "@living"
+   },
+   {
+    "title": "Boho bedroom",
+    "image": "u:1615874959474-d609969a20ed",
+    "category_id": "@bedroom"
+   },
+   {
+    "title": "Green corner",
+    "image": "u:1600210492486-724fe5c67fb0",
+    "category_id": "@living"
+   },
+   {
+    "title": "Classic suite",
+    "image": "u:1505693416388-ac5ce068fe85",
+    "category_id": "@bedroom"
+   }
+  ],
+  "blogs": [
+   {
+    "title": "7 ways to make a small home feel bigger",
+    "slug": "small-home-bigger",
+    "author": "Nidhi Shah",
+    "published_date": "2026-09-18",
+    "cover_image": "u:1616486338812-3dadae4b4ace",
+    "summary": "Light colours and mirrors are just the start.",
+    "body": "<p>Light colours and mirrors are just the start.</p><p>Use floating furniture and keep one consistent floor material.</p>",
+    "tags": "tips"
+   }
+  ]
+ },
+ "type": "interior"
+}

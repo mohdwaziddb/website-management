@@ -1,0 +1,262 @@
+{
+ "settings": {
+  "site_name": "Iron Pulse Fitness",
+  "tagline": "Stronger every single day",
+  "about_short": "<p>Iron Pulse is a 12,000 sq ft performance gym with certified coaches, modern equipment and a community that pushes you to be your best.</p>",
+  "phone": "+91 99887 66554",
+  "email": "join@ironpulse.fit",
+  "address": "2nd Floor, Phoenix Mall, Pune 411014",
+  "opening_hours": "Mon – Sat: 5 AM – 11 PM\nSunday: 7 AM – 1 PM",
+  "cta_text": "Start Free Trial",
+  "cta_link": "/contact",
+  "footer_text": "No excuses. Just results."
+ },
+ "modules": {
+  "sliders": [
+   {
+    "title": "Train like an athlete",
+    "description": "Strength, conditioning and coaching under one roof.",
+    "image": "u:1517836357463-d25dfeac3438"
+   },
+   {
+    "title": "Burn it in 45 minutes",
+    "description": "High-energy HIIT classes every hour.",
+    "image": "u:1599058917212-d750089bc07e"
+   },
+   {
+    "title": "Find your balance",
+    "description": "Yoga & mobility sessions for body and mind.",
+    "image": "u:1544367567-0f2fcb009e0b"
+   }
+  ],
+  "services": [
+   {
+    "title": "Strength Training",
+    "icon": "Dumbbell",
+    "summary": "Progressive programs to build muscle and power safely.",
+    "price": "Daily",
+    "image": "u:1534438327276-14e5300c3a48"
+   },
+   {
+    "title": "HIIT & Functional",
+    "icon": "Zap",
+    "summary": "Fat-burning circuits with ropes, sleds and kettlebells.",
+    "price": "45 min",
+    "image": "u:1599058917212-d750089bc07e"
+   },
+   {
+    "title": "Yoga & Mobility",
+    "icon": "Leaf",
+    "summary": "Improve flexibility, posture and breathing.",
+    "price": "60 min",
+    "image": "u:1544367567-0f2fcb009e0b"
+   },
+   {
+    "title": "Personal Training",
+    "icon": "Target",
+    "summary": "1-on-1 coaching with nutrition guidance.",
+    "price": "From ₹6,000/mo",
+    "image": "u:1571019613454-1cb2f99b2d8b"
+   }
+  ],
+  "pricing_plans": [
+   {
+    "title": "Basic",
+    "price": "₹1,499",
+    "period": "/month",
+    "features": "Gym floor access\nLocker & shower\n1 fitness assessment",
+    "highlighted": false,
+    "badge": null,
+    "button_text": "Join Basic",
+    "button_link": "/contact"
+   },
+   {
+    "title": "Pro",
+    "price": "₹2,999",
+    "period": "/month",
+    "features": "Everything in Basic\nUnlimited group classes\nMonthly body-composition scan\nDiet plan",
+    "highlighted": true,
+    "badge": "Most Popular",
+    "button_text": "Go Pro",
+    "button_link": "/contact"
+   },
+   {
+    "title": "Elite",
+    "price": "₹7,999",
+    "period": "/month",
+    "features": "Everything in Pro\n12 personal training sessions\nRecovery zone access",
+    "highlighted": false,
+    "badge": null,
+    "button_text": "Go Elite",
+    "button_link": "/contact"
+   }
+  ],
+  "team_members": [
+   {
+    "title": "Karan Singh",
+    "designation": "Head Coach",
+    "bio": "NSCA certified, 10 years coaching athletes.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Priya Nair",
+    "designation": "Yoga Instructor",
+    "bio": "RYT-500, specialises in mobility.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Rahul Verma",
+    "designation": "HIIT Coach",
+    "bio": "Former national-level sprinter.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   },
+   {
+    "title": "Meera Joshi",
+    "designation": "Nutritionist",
+    "bio": "Builds sustainable meal plans.",
+    "photo": "p:1438761681033-6461ffad8d80"
+   }
+  ],
+  "testimonials": [
+   {
+    "title": "Lost 12 kg in 4 months",
+    "parent_name": "Amit Shah",
+    "child_name": "Member since 2024",
+    "description": "The coaches tracked everything. Best decision I made this year.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Amazing community",
+    "parent_name": "Sneha Patil",
+    "child_name": "Pro member",
+    "description": "Group classes are so much fun — I never miss a session.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "World-class equipment",
+    "parent_name": "Rahul Desai",
+    "child_name": "Powerlifter",
+    "description": "Calibrated plates, proper racks. A lifter's dream gym.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "stats": [
+   {
+    "title": "Active members",
+    "value": "1,200+",
+    "icon": "Users"
+   },
+   {
+    "title": "Expert coaches",
+    "value": "18",
+    "icon": "Award"
+   },
+   {
+    "title": "Classes / week",
+    "value": "60+",
+    "icon": "Clock"
+   },
+   {
+    "title": "Sq ft space",
+    "value": "12K",
+    "icon": "Dumbbell"
+   }
+  ],
+  "faqs": [
+   {
+    "title": "Is there a free trial?",
+    "answer": "Yes, a 3-day free pass with one coached session."
+   },
+   {
+    "title": "Can I freeze my membership?",
+    "answer": "Pro and Elite members can freeze up to 30 days a year."
+   },
+   {
+    "title": "Do you have women-only batches?",
+    "answer": "Yes, 7–8 AM and 6–7 PM every weekday."
+   }
+  ],
+  "partners": [
+   {
+    "title": "MuscleBlaze"
+   },
+   {
+    "title": "Decathlon"
+   },
+   {
+    "title": "Cult Sport"
+   },
+   {
+    "title": "Optimum Nutrition"
+   },
+   {
+    "title": "Garmin"
+   }
+  ],
+  "gallery_categories": [
+   {
+    "_key": "floor",
+    "title": "Gym Floor"
+   },
+   {
+    "_key": "classes",
+    "title": "Classes"
+   }
+  ],
+  "image_gallery": [
+   {
+    "title": "Free weights zone",
+    "image": "u:1534438327276-14e5300c3a48",
+    "category_id": "@floor"
+   },
+   {
+    "title": "Cardio deck",
+    "image": "u:1540497077202-7c8a3999166f",
+    "category_id": "@floor"
+   },
+   {
+    "title": "Power lifting",
+    "image": "u:1517836357463-d25dfeac3438",
+    "category_id": "@floor"
+   },
+   {
+    "title": "HIIT circuit",
+    "image": "u:1599058917212-d750089bc07e",
+    "category_id": "@classes"
+   },
+   {
+    "title": "Group workout",
+    "image": "u:1518611012118-696072aa579a",
+    "category_id": "@classes"
+   },
+   {
+    "title": "Sunrise yoga",
+    "image": "u:1544367567-0f2fcb009e0b",
+    "category_id": "@classes"
+   }
+  ],
+  "blogs": [
+   {
+    "title": "5 mistakes beginners make in the gym",
+    "slug": "beginner-mistakes",
+    "author": "Coach Karan",
+    "published_date": "2026-10-10",
+    "cover_image": "u:1583454110551-21f2fa2afe61",
+    "summary": "Skipping warm-ups and ego lifting top the list.",
+    "body": "<p>Skipping warm-ups and ego lifting top the list.</p><p>Start light, learn form, sleep 8 hours and eat enough protein.</p>",
+    "tags": "training,tips"
+   },
+   {
+    "title": "Why mobility matters",
+    "slug": "why-mobility",
+    "author": "Priya Nair",
+    "published_date": "2026-09-28",
+    "cover_image": "u:1544367567-0f2fcb009e0b",
+    "summary": "Mobility keeps you lifting for decades.",
+    "body": "<p>Mobility keeps you lifting for decades.</p><p>Ten minutes a day of hip and shoulder work makes every lift better.</p>",
+    "tags": "yoga"
+   }
+  ]
+ },
+ "type": "gym"
+}

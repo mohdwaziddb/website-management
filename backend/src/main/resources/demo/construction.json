@@ -1,0 +1,257 @@
+{
+ "settings": {
+  "site_name": "Bharat Buildcon",
+  "tagline": "Building trust since 1998",
+  "about_short": "<p>Bharat Buildcon is a turnkey construction company delivering residential, commercial and infrastructure projects on time and on budget.</p>",
+  "phone": "+91 120 456 7890",
+  "email": "projects@bharatbuildcon.in",
+  "address": "Sector 62, Noida, Uttar Pradesh 201309",
+  "cta_text": "Request a Quote",
+  "cta_link": "/contact",
+  "footer_text": "ISO 9001 · Safety first, always."
+ },
+ "modules": {
+  "sliders": [
+   {
+    "title": "We build what matters",
+    "description": "25 years · 300+ projects · zero compromises.",
+    "image": "u:1487958449943-2429e8be8625"
+   },
+   {
+    "title": "Safety on every site",
+    "description": "Certified engineers and trained crews.",
+    "image": "u:1504307651254-35680f356dfd"
+   },
+   {
+    "title": "From blueprint to skyline",
+    "description": "Design-build services under one roof.",
+    "image": "u:1503387762-592deb58ef4e"
+   }
+  ],
+  "projects": [
+   {
+    "title": "Orchid Heights",
+    "category": "Residential",
+    "client": "Orchid Developers",
+    "location": "Noida",
+    "cover_image": "u:1487958449943-2429e8be8625",
+    "project_date": "2026-05-01",
+    "summary": "Twin 22-storey towers with 340 apartments.",
+    "description": "<p>Twin 22-storey towers with 340 apartments.</p>"
+   },
+   {
+    "title": "TechPark Phase II",
+    "category": "Commercial",
+    "client": "InfoSpace Ltd",
+    "location": "Gurugram",
+    "cover_image": "u:1486406146926-c627a92ad1ab",
+    "project_date": "2025-11-15",
+    "summary": "6 lakh sqft Grade-A office space.",
+    "description": "<p>6 lakh sqft Grade-A office space.</p>"
+   },
+   {
+    "title": "Metro Depot Civil Works",
+    "category": "Infrastructure",
+    "client": "DMRC",
+    "location": "Delhi",
+    "cover_image": "u:1541888946425-d81bb19240f5",
+    "project_date": "2025-08-01",
+    "summary": "Civil works for a 40-acre metro depot.",
+    "description": "<p>Civil works for a 40-acre metro depot.</p>"
+   },
+   {
+    "title": "City Mall Expansion",
+    "category": "Commercial",
+    "client": "City Malls",
+    "location": "Ghaziabad",
+    "cover_image": "u:1486325212027-8081e485255e",
+    "project_date": "2025-03-10",
+    "summary": "Two new floors without closing the mall.",
+    "description": "<p>Two new floors without closing the mall.</p>"
+   }
+  ],
+  "services": [
+   {
+    "title": "Residential Construction",
+    "icon": "Home",
+    "summary": "Villas, apartments and townships.",
+    "price": null,
+    "image": "u:1487958449943-2429e8be8625"
+   },
+   {
+    "title": "Commercial Projects",
+    "icon": "Building2",
+    "summary": "Offices, malls and hospitals.",
+    "price": null,
+    "image": "u:1486406146926-c627a92ad1ab"
+   },
+   {
+    "title": "Civil & Infrastructure",
+    "icon": "HardHat",
+    "summary": "Roads, bridges and metro works.",
+    "price": null,
+    "image": "u:1541888946425-d81bb19240f5"
+   },
+   {
+    "title": "Design & Build",
+    "icon": "Ruler",
+    "summary": "Architecture to handover, one contract.",
+    "price": null,
+    "image": "u:1503387762-592deb58ef4e"
+   }
+  ],
+  "team_members": [
+   {
+    "title": "Ramesh Gupta",
+    "designation": "Managing Director",
+    "bio": "Civil engineer, 30 years.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Anjali Saxena",
+    "designation": "Chief Architect",
+    "bio": "Award-winning designer.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Harpreet Singh",
+    "designation": "Head of Safety",
+    "bio": "Zero-accident record for 5 years.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   },
+   {
+    "title": "Mohit Tyagi",
+    "designation": "Project Director",
+    "bio": "Delivered 80+ projects.",
+    "photo": "p:1438761681033-6461ffad8d80"
+   }
+  ],
+  "testimonials": [
+   {
+    "title": "Delivered 2 months early",
+    "parent_name": "Vivek Jain",
+    "child_name": "MD, Orchid Developers",
+    "description": "Exceptional quality and planning.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Safety culture is top class",
+    "parent_name": "Er. S. Rao",
+    "child_name": "DMRC",
+    "description": "A contractor we trust with critical works.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Transparent costing",
+    "parent_name": "Neeraj Arora",
+    "child_name": "City Malls",
+    "description": "No surprises, no overruns.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "stats": [
+   {
+    "title": "Projects",
+    "value": "300+",
+    "icon": "Building2"
+   },
+   {
+    "title": "Years",
+    "value": "25",
+    "icon": "Award"
+   },
+   {
+    "title": "Sq ft built",
+    "value": "1.2Cr",
+    "icon": "Ruler"
+   },
+   {
+    "title": "Engineers",
+    "value": "150",
+    "icon": "HardHat"
+   }
+  ],
+  "faqs": [
+   {
+    "title": "Do you handle approvals?",
+    "answer": "Yes, we manage all municipal and environmental approvals."
+   },
+   {
+    "title": "What areas do you serve?",
+    "answer": "Delhi NCR, UP, Haryana and Rajasthan."
+   },
+   {
+    "title": "Do you do renovations?",
+    "answer": "Yes, for commercial buildings above 20,000 sqft."
+   }
+  ],
+  "partners": [
+   {
+    "title": "UltraTech"
+   },
+   {
+    "title": "Tata Steel"
+   },
+   {
+    "title": "L&T"
+   },
+   {
+    "title": "ACC"
+   },
+   {
+    "title": "JSW"
+   }
+  ],
+  "gallery_categories": [
+   {
+    "_key": "sites",
+    "title": "Sites"
+   }
+  ],
+  "image_gallery": [
+   {
+    "title": "Ongoing site",
+    "image": "u:1504307651254-35680f356dfd",
+    "category_id": "@sites"
+   },
+   {
+    "title": "Ground work",
+    "image": "u:1541888946425-d81bb19240f5",
+    "category_id": "@sites"
+   },
+   {
+    "title": "Planning",
+    "image": "u:1503387762-592deb58ef4e",
+    "category_id": "@sites"
+   },
+   {
+    "title": "Completed tower",
+    "image": "u:1487958449943-2429e8be8625",
+    "category_id": "@sites"
+   },
+   {
+    "title": "City projects",
+    "image": "u:1486325212027-8081e485255e",
+    "category_id": "@sites"
+   },
+   {
+    "title": "Commercial",
+    "image": "u:1486406146926-c627a92ad1ab",
+    "category_id": "@sites"
+   }
+  ],
+  "blogs": [
+   {
+    "title": "How we keep projects on schedule",
+    "slug": "on-schedule",
+    "author": "Mohit Tyagi",
+    "published_date": "2026-09-12",
+    "cover_image": "u:1503387762-592deb58ef4e",
+    "summary": "Daily planning meetings and BIM models.",
+    "body": "<p>Daily planning meetings and BIM models.</p><p>We track every activity against a digital twin of the project.</p>",
+    "tags": "process"
+   }
+  ]
+ },
+ "type": "construction"
+}

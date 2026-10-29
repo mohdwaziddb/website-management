@@ -1,0 +1,307 @@
+{
+ "settings": {
+  "site_name": "The Saffron Table",
+  "tagline": "Slow-cooked flavours, warm hospitality",
+  "about_short": "<p>Since 2012 The Saffron Table has served hand-crafted North Indian and continental dishes made with farm-fresh ingredients, in a cosy space made for long conversations.</p>",
+  "phone": "+91 98100 22334",
+  "email": "hello@saffrontable.in",
+  "address": "14 Khan Market, New Delhi 110003",
+  "opening_hours": "Mon – Fri: 12 PM – 11 PM\nSat – Sun: 9 AM – 12 AM",
+  "cta_text": "Book a Table",
+  "cta_link": "/contact",
+  "footer_text": "Fresh food, good mood. Reservations recommended on weekends."
+ },
+ "modules": {
+  "sliders": [
+   {
+    "title": "A table full of stories",
+    "description": "Seasonal menus cooked slow and served with love.",
+    "image": "u:1517248135467-4c7edcad34c4"
+   },
+   {
+    "title": "Weekend brunch is here",
+    "description": "Fluffy pancakes, eggs your way and bottomless coffee.",
+    "image": "u:1567620905732-2d1ec7ab7445"
+   },
+   {
+    "title": "Rooftop evenings",
+    "description": "Live music every Friday under the stars.",
+    "image": "u:1559339352-11d035aa65de"
+   }
+  ],
+  "catalog_items": [
+   {
+    "title": "Paneer Tikka Platter",
+    "category": "Starters",
+    "price": "₹420",
+    "old_price": null,
+    "image": "u:1504674900247-0877df9cc836",
+    "badge": "Chef's Pick",
+    "location": null,
+    "specs": "Serves 2",
+    "summary": "Char-grilled cottage cheese, mint chutney, pickled onions."
+   },
+   {
+    "title": "Burrata & Heirloom Salad",
+    "category": "Starters",
+    "price": "₹480",
+    "old_price": null,
+    "image": "u:1540189549336-e6e99c3679fe",
+    "badge": null,
+    "location": null,
+    "specs": "Veg",
+    "summary": "Creamy burrata, tomatoes, basil oil, sourdough crisps."
+   },
+   {
+    "title": "Margherita Wood-fired Pizza",
+    "category": "Mains",
+    "price": "₹560",
+    "old_price": "₹620",
+    "image": "u:1565299624946-b28f40a0ae38",
+    "badge": "Best Seller",
+    "location": null,
+    "specs": "12 inch",
+    "summary": "San Marzano tomato, mozzarella, fresh basil."
+   },
+   {
+    "title": "Smoked Butter Chicken",
+    "category": "Mains",
+    "price": "₹640",
+    "old_price": null,
+    "image": "u:1414235077428-338989a2e8c0",
+    "badge": null,
+    "location": null,
+    "specs": "With garlic naan",
+    "summary": "Tandoor-smoked chicken in silky makhani gravy."
+   },
+   {
+    "title": "Buddha Power Bowl",
+    "category": "Healthy",
+    "price": "₹450",
+    "old_price": null,
+    "image": "u:1512621776951-a57141f2eefd",
+    "badge": "Vegan",
+    "location": null,
+    "specs": "520 kcal",
+    "summary": "Quinoa, roasted veggies, chickpeas, tahini dressing."
+   },
+   {
+    "title": "Classic Pancake Stack",
+    "category": "Brunch",
+    "price": "₹390",
+    "old_price": null,
+    "image": "u:1567620905732-2d1ec7ab7445",
+    "badge": null,
+    "location": null,
+    "specs": "Weekends",
+    "summary": "Maple syrup, berries and whipped butter."
+   },
+   {
+    "title": "Avocado Eggs Benedict",
+    "category": "Brunch",
+    "price": "₹420",
+    "old_price": null,
+    "image": "u:1482049016688-2d3e1b311543",
+    "badge": null,
+    "location": null,
+    "specs": null,
+    "summary": "Poached eggs, hollandaise, smashed avocado on toast."
+   },
+   {
+    "title": "Single-origin Cappuccino",
+    "category": "Beverages",
+    "price": "₹220",
+    "old_price": null,
+    "image": "u:1495474472287-4d71bcdd2085",
+    "badge": null,
+    "location": null,
+    "specs": null,
+    "summary": "Coorg beans, velvety micro-foam."
+   }
+  ],
+  "services": [
+   {
+    "title": "Private Dining",
+    "icon": "Users",
+    "summary": "Celebrate birthdays and anniversaries in our private room for up to 20 guests.",
+    "price": null,
+    "image": "u:1555396273-367ea4eb4db5"
+   },
+   {
+    "title": "Outdoor Catering",
+    "icon": "Truck",
+    "summary": "Our chefs bring the Saffron experience to your events.",
+    "price": null,
+    "image": "u:1504674900247-0877df9cc836"
+   },
+   {
+    "title": "Live Music Nights",
+    "icon": "Music",
+    "summary": "Acoustic sets every Friday and Saturday on the terrace.",
+    "price": null,
+    "image": "u:1559339352-11d035aa65de"
+   }
+  ],
+  "team_members": [
+   {
+    "title": "Arjun Mehra",
+    "designation": "Head Chef",
+    "bio": "15 years across Mumbai and London kitchens.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Sara D'Souza",
+    "designation": "Pastry Chef",
+    "bio": "Makes the city's most talked-about cheesecake.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Vikram Rao",
+    "designation": "Sous Chef",
+    "bio": "Tandoor master and spice whisperer.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "testimonials": [
+   {
+    "title": "Best butter chicken in town",
+    "parent_name": "Neha Kapoor",
+    "child_name": "Food blogger",
+    "description": "The smoked butter chicken is unreal. Lovely staff and cosy vibe.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Perfect brunch spot",
+    "parent_name": "Rohan Gupta",
+    "child_name": "Regular guest",
+    "description": "Pancakes + cappuccino on the terrace = my Sunday ritual.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Great for celebrations",
+    "parent_name": "Ananya Iyer",
+    "child_name": "Hosted a birthday",
+    "description": "Private dining room was beautifully decorated. Highly recommend!",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "stats": [
+   {
+    "title": "Happy guests",
+    "value": "50K+",
+    "icon": "Smile"
+   },
+   {
+    "title": "Dishes on menu",
+    "value": "80+",
+    "icon": "Utensils"
+   },
+   {
+    "title": "Years of taste",
+    "value": "12",
+    "icon": "Award"
+   },
+   {
+    "title": "Google rating",
+    "value": "4.8★",
+    "icon": "Star"
+   }
+  ],
+  "faqs": [
+   {
+    "title": "Do you take reservations?",
+    "answer": "Yes — call us or use the Book a Table button. Weekends fill up fast."
+   },
+   {
+    "title": "Do you have vegan options?",
+    "answer": "Plenty! Look for the Vegan badge on the menu."
+   },
+   {
+    "title": "Is parking available?",
+    "answer": "Valet parking is available from 7 PM onwards."
+   }
+  ],
+  "partners": [
+   {
+    "title": "Zomato"
+   },
+   {
+    "title": "Swiggy"
+   },
+   {
+    "title": "EazyDiner"
+   },
+   {
+    "title": "Dineout"
+   },
+   {
+    "title": "Times Food"
+   }
+  ],
+  "gallery_categories": [
+   {
+    "_key": "ambience",
+    "title": "Ambience"
+   },
+   {
+    "_key": "food",
+    "title": "Food"
+   }
+  ],
+  "image_gallery": [
+   {
+    "title": "Main dining hall",
+    "image": "u:1517248135467-4c7edcad34c4",
+    "category_id": "@ambience"
+   },
+   {
+    "title": "Rooftop terrace",
+    "image": "u:1559339352-11d035aa65de",
+    "category_id": "@ambience"
+   },
+   {
+    "title": "Chef's special plate",
+    "image": "u:1414235077428-338989a2e8c0",
+    "category_id": "@food"
+   },
+   {
+    "title": "Wood-fired pizza",
+    "image": "u:1565299624946-b28f40a0ae38",
+    "category_id": "@food"
+   },
+   {
+    "title": "Cafe corner",
+    "image": "u:1554118811-1e0d58224f24",
+    "category_id": "@ambience"
+   },
+   {
+    "title": "Healthy bowls",
+    "image": "u:1512621776951-a57141f2eefd",
+    "category_id": "@food"
+   }
+  ],
+  "blogs": [
+   {
+    "title": "The secret behind our butter chicken",
+    "slug": "secret-butter-chicken",
+    "author": "Chef Arjun",
+    "published_date": "2026-10-05",
+    "cover_image": "u:1414235077428-338989a2e8c0",
+    "summary": "It starts with a 24-hour marinade and ends in a tandoor kissed with charcoal.",
+    "body": "<p>It starts with a 24-hour marinade and ends in a tandoor kissed with charcoal.</p><p>We smoke the chicken over charcoal, then finish it in a gravy made from slow-roasted tomatoes and cultured butter.</p>",
+    "tags": "recipes,chef"
+   },
+   {
+    "title": "Weekend brunch menu launched",
+    "slug": "weekend-brunch",
+    "author": "Team Saffron",
+    "published_date": "2026-09-20",
+    "cover_image": "u:1567620905732-2d1ec7ab7445",
+    "summary": "Pancakes, eggs benedict and cold brews — brunch is served every Saturday and Sunday.",
+    "body": "<p>Pancakes, eggs benedict and cold brews — brunch is served every Saturday and Sunday.</p><p>Join us from 9 AM to 1 PM. Kids under 6 eat free.</p>",
+    "tags": "news"
+   }
+  ]
+ },
+ "type": "restaurant"
+}

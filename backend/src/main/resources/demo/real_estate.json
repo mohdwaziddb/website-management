@@ -1,0 +1,319 @@
+{
+ "settings": {
+  "site_name": "Prime Nest Realty",
+  "tagline": "Find a home you'll love coming back to",
+  "about_short": "<p>Prime Nest Realty helps families and investors buy, sell and rent premium homes across Bengaluru with complete legal and loan support.</p>",
+  "phone": "+91 80 4567 8910",
+  "email": "homes@primenest.in",
+  "address": "Level 5, UB City, Vittal Mallya Road, Bengaluru 560001",
+  "cta_text": "Schedule a Visit",
+  "cta_link": "/contact",
+  "footer_text": "RERA registered. Trusted by 2,000+ families."
+ },
+ "modules": {
+  "sliders": [
+   {
+    "title": "Luxury villas with private pools",
+    "description": "Handpicked properties in Bengaluru's finest neighbourhoods.",
+    "image": "u:1600596542815-ffad4c1539a9"
+   },
+   {
+    "title": "Modern homes, smart prices",
+    "description": "Ready-to-move 3 & 4 BHK homes from ₹1.2 Cr.",
+    "image": "u:1600585154340-be6161a56a0c"
+   },
+   {
+    "title": "Your keys are waiting",
+    "description": "Zero-brokerage on select new launches this month.",
+    "image": "u:1560518883-ce09059eeffa"
+   }
+  ],
+  "catalog_items": [
+   {
+    "title": "Skyline Infinity Villa",
+    "category": "Villa",
+    "price": "₹4.8 Cr",
+    "old_price": null,
+    "image": "u:1600596542815-ffad4c1539a9",
+    "badge": "For Sale",
+    "location": "Whitefield, Bengaluru",
+    "specs": "5 Beds · 6 Baths · 6,200 sqft",
+    "summary": "Private infinity pool, home theatre, landscaped garden."
+   },
+   {
+    "title": "Cedar Modern Residence",
+    "category": "Independent House",
+    "price": "₹2.1 Cr",
+    "old_price": "₹2.4 Cr",
+    "image": "u:1600585154340-be6161a56a0c",
+    "badge": "Price Drop",
+    "location": "HSR Layout",
+    "specs": "4 Beds · 4 Baths · 3,400 sqft",
+    "summary": "Floor-to-ceiling glass and a courtyard garden."
+   },
+   {
+    "title": "Palm Grove Villa",
+    "category": "Villa",
+    "price": "₹3.6 Cr",
+    "old_price": null,
+    "image": "u:1564013799919-ab600027ffc6",
+    "badge": "New Launch",
+    "location": "Sarjapur Road",
+    "specs": "4 Beds · 5 Baths · 4,800 sqft",
+    "summary": "Gated community with clubhouse and pool."
+   },
+   {
+    "title": "The Lumina Estate",
+    "category": "Luxury",
+    "price": "₹9.5 Cr",
+    "old_price": null,
+    "image": "u:1512917774080-9991f1c4c750",
+    "badge": "Exclusive",
+    "location": "Koramangala",
+    "specs": "6 Beds · 7 Baths · 9,000 sqft",
+    "summary": "An architectural landmark with a rooftop lounge."
+   },
+   {
+    "title": "Maple Family Home",
+    "category": "Independent House",
+    "price": "₹1.35 Cr",
+    "old_price": null,
+    "image": "u:1580587771525-78b9dba3b914",
+    "badge": "Ready to Move",
+    "location": "Electronic City",
+    "specs": "3 Beds · 3 Baths · 2,200 sqft",
+    "summary": "Quiet street, near schools and metro."
+   },
+   {
+    "title": "Twilight Cottage",
+    "category": "Rent",
+    "price": "₹85,000/mo",
+    "old_price": null,
+    "image": "u:1568605114967-8130f3a36994",
+    "badge": "For Rent",
+    "location": "Indiranagar",
+    "specs": "3 Beds · 3 Baths · 2,600 sqft",
+    "summary": "Fully furnished, pet friendly."
+   }
+  ],
+  "services": [
+   {
+    "title": "Buy a Home",
+    "icon": "Home",
+    "summary": "Verified listings, site visits and price negotiation.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Sell Your Property",
+    "icon": "TrendingUp",
+    "summary": "Professional photos, marketing and qualified buyers.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Home Loans",
+    "icon": "Briefcase",
+    "summary": "Tie-ups with 12 banks for the best interest rates.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Legal & Registration",
+    "icon": "Shield",
+    "summary": "Title checks, agreements and registration handled.",
+    "price": null,
+    "image": null
+   }
+  ],
+  "team_members": [
+   {
+    "title": "Rajesh Kumar",
+    "designation": "Founder & CEO",
+    "bio": "20 years in Bengaluru real estate.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Aisha Khan",
+    "designation": "Senior Agent",
+    "bio": "Luxury villa specialist.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Vivek Menon",
+    "designation": "Property Advisor",
+    "bio": "Investment and NRI deals.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   },
+   {
+    "title": "Pooja Reddy",
+    "designation": "Legal Head",
+    "bio": "Property law expert.",
+    "photo": "p:1438761681033-6461ffad8d80"
+   }
+  ],
+  "projects": [
+   {
+    "title": "Prime Nest Greens",
+    "category": "Township",
+    "client": "Prime Nest",
+    "location": "Devanahalli",
+    "cover_image": "u:1564013799919-ab600027ffc6",
+    "project_date": "2025-12-01",
+    "summary": "120 villa plots with clubhouse and lake view.",
+    "description": "<p>120 villa plots with clubhouse and lake view.</p>"
+   },
+   {
+    "title": "Urban Heights",
+    "category": "Apartments",
+    "client": "Prime Nest",
+    "location": "Hebbal",
+    "cover_image": "u:1600585154340-be6161a56a0c",
+    "project_date": "2026-03-15",
+    "summary": "Premium 3 BHK towers next to the metro.",
+    "description": "<p>Premium 3 BHK towers next to the metro.</p>"
+   }
+  ],
+  "testimonials": [
+   {
+    "title": "Smooth home buying",
+    "parent_name": "Kiran Rao",
+    "child_name": "Bought in Whitefield",
+    "description": "From site visits to registration, everything was transparent.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Sold in 3 weeks",
+    "parent_name": "Deepa Sharma",
+    "child_name": "Seller",
+    "description": "Their photos and marketing got us 15 serious buyers.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Great for NRIs",
+    "parent_name": "Arun Pillai",
+    "child_name": "Dubai",
+    "description": "Managed the whole purchase remotely. Very professional.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "stats": [
+   {
+    "title": "Homes sold",
+    "value": "2,000+",
+    "icon": "Home"
+   },
+   {
+    "title": "Happy families",
+    "value": "1,800",
+    "icon": "Smile"
+   },
+   {
+    "title": "Years experience",
+    "value": "20",
+    "icon": "Award"
+   },
+   {
+    "title": "Partner banks",
+    "value": "12",
+    "icon": "Building2"
+   }
+  ],
+  "faqs": [
+   {
+    "title": "Do you charge brokerage?",
+    "answer": "Zero brokerage on new launches; 1% on resale properties."
+   },
+   {
+    "title": "Are listings verified?",
+    "answer": "Every property is legally verified before listing."
+   },
+   {
+    "title": "Can you help with loans?",
+    "answer": "Yes, we work with 12 banks and get you pre-approved."
+   }
+  ],
+  "partners": [
+   {
+    "title": "HDFC Bank"
+   },
+   {
+    "title": "SBI Home Loans"
+   },
+   {
+    "title": "Prestige"
+   },
+   {
+    "title": "Sobha"
+   },
+   {
+    "title": "Brigade"
+   }
+  ],
+  "gallery_categories": [
+   {
+    "_key": "exteriors",
+    "title": "Exteriors"
+   },
+   {
+    "_key": "interiors",
+    "title": "Interiors"
+   }
+  ],
+  "image_gallery": [
+   {
+    "title": "Infinity pool villa",
+    "image": "u:1600596542815-ffad4c1539a9",
+    "category_id": "@exteriors"
+   },
+   {
+    "title": "Contemporary home",
+    "image": "u:1600585154340-be6161a56a0c",
+    "category_id": "@exteriors"
+   },
+   {
+    "title": "Garden villa",
+    "image": "u:1564013799919-ab600027ffc6",
+    "category_id": "@exteriors"
+   },
+   {
+    "title": "Open living room",
+    "image": "u:1600607687939-ce8a6c25118c",
+    "category_id": "@interiors"
+   },
+   {
+    "title": "Evening facade",
+    "image": "u:1568605114967-8130f3a36994",
+    "category_id": "@exteriors"
+   },
+   {
+    "title": "Luxury estate",
+    "image": "u:1512917774080-9991f1c4c750",
+    "category_id": "@exteriors"
+   }
+  ],
+  "blogs": [
+   {
+    "title": "Top 5 areas to buy in Bengaluru in 2026",
+    "slug": "top-areas-2026",
+    "author": "Rajesh Kumar",
+    "published_date": "2026-10-02",
+    "cover_image": "u:1600585154340-be6161a56a0c",
+    "summary": "Metro lines are reshaping prices.",
+    "body": "<p>Metro lines are reshaping prices.</p><p>Whitefield, Hebbal, Sarjapur, Devanahalli and HSR lead our list.</p>",
+    "tags": "market"
+   },
+   {
+    "title": "Checklist before buying a resale flat",
+    "slug": "resale-checklist",
+    "author": "Pooja Reddy",
+    "published_date": "2026-09-15",
+    "cover_image": "u:1560518883-ce09059eeffa",
+    "summary": "Title, OC and society dues — check them all.",
+    "body": "<p>Title, OC and society dues — check them all.</p><p>Always ask for the encumbrance certificate for 30 years.</p>",
+    "tags": "legal"
+   }
+  ]
+ },
+ "type": "real_estate"
+}

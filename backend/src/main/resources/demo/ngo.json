@@ -1,0 +1,241 @@
+{
+ "settings": {
+  "site_name": "Asha Foundation",
+  "tagline": "Every child deserves a chance",
+  "about_short": "<p>Asha Foundation works with 200 villages to give children education, nutrition and healthcare. 92% of every donation reaches the ground.</p>",
+  "phone": "+91 33 4000 7788",
+  "email": "give@ashafoundation.org",
+  "address": "Salt Lake Sector V, Kolkata 700091",
+  "cta_text": "Donate Now",
+  "cta_link": "/contact",
+  "footer_text": "Donations are tax exempt under section 80G."
+ },
+ "modules": {
+  "sliders": [
+   {
+    "title": "Give a child a future",
+    "description": "₹1,000 feeds a child for a month.",
+    "image": "u:1488521787991-ed7bbaae773c"
+   },
+   {
+    "title": "Be the change",
+    "description": "Join 3,000 volunteers across India.",
+    "image": "u:1559027615-cd4628902d4a"
+   },
+   {
+    "title": "Relief when it matters",
+    "description": "Food and medicine to flood-hit families.",
+    "image": "u:1593113598332-cd288d649433"
+   }
+  ],
+  "services": [
+   {
+    "title": "Education for All",
+    "icon": "BookOpen",
+    "summary": "Learning centres and scholarships for 8,000 children.",
+    "price": "₹500 = 1 month of school",
+    "image": "u:1509099836639-18ba1795216d"
+   },
+   {
+    "title": "Nutrition",
+    "icon": "Utensils",
+    "summary": "Daily mid-day meals in 150 schools.",
+    "price": "₹1,000 = 30 meals",
+    "image": "u:1488521787991-ed7bbaae773c"
+   },
+   {
+    "title": "Health Camps",
+    "icon": "HeartPulse",
+    "summary": "Free check-ups and medicines in remote villages.",
+    "price": null,
+    "image": "u:1559027615-cd4628902d4a"
+   },
+   {
+    "title": "Disaster Relief",
+    "icon": "Shield",
+    "summary": "Rapid response kits during floods and cyclones.",
+    "price": null,
+    "image": "u:1593113598332-cd288d649433"
+   }
+  ],
+  "projects": [
+   {
+    "title": "Flood Relief Bengal 2026",
+    "category": "Relief",
+    "client": "Asha Foundation",
+    "location": "Sundarbans",
+    "cover_image": "u:1593113598332-cd288d649433",
+    "project_date": "2026-08-01",
+    "summary": "12,000 families received food and medicine kits.",
+    "description": "<p>12,000 families received food and medicine kits.</p>"
+   },
+   {
+    "title": "1,000 Girls to School",
+    "category": "Education",
+    "client": "Asha Foundation",
+    "location": "Bihar",
+    "cover_image": "u:1509099836639-18ba1795216d",
+    "project_date": "2026-04-01",
+    "summary": "Scholarships and cycles for girl students.",
+    "description": "<p>Scholarships and cycles for girl students.</p>"
+   },
+   {
+    "title": "Clean Water Drive",
+    "category": "Health",
+    "client": "Asha Foundation",
+    "location": "Jharkhand",
+    "cover_image": "u:1469571486292-0ba58a3f068b",
+    "project_date": "2025-12-01",
+    "summary": "40 villages with safe drinking water.",
+    "description": "<p>40 villages with safe drinking water.</p>"
+   }
+  ],
+  "team_members": [
+   {
+    "title": "Dr. Meenakshi Bose",
+    "designation": "Founder",
+    "bio": "Paediatrician turned changemaker.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Arindam Das",
+    "designation": "Programs Head",
+    "bio": "15 years in rural development.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Sneha Ghosh",
+    "designation": "Volunteer Lead",
+    "bio": "Manages 3,000 volunteers.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "testimonials": [
+   {
+    "title": "I can study now",
+    "parent_name": "Puja, 12",
+    "child_name": "Scholarship student",
+    "description": "I want to become a teacher like my didi at the centre.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Transparent and impactful",
+    "parent_name": "Rajiv Sinha",
+    "child_name": "Monthly donor",
+    "description": "I get photo updates of exactly where my money goes.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Volunteering changed me",
+    "parent_name": "Kavya Rao",
+    "child_name": "Volunteer",
+    "description": "The best weekends of my life.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "stats": [
+   {
+    "title": "Children helped",
+    "value": "85,000",
+    "icon": "Smile"
+   },
+   {
+    "title": "Villages",
+    "value": "200",
+    "icon": "Home"
+   },
+   {
+    "title": "Volunteers",
+    "value": "3,000",
+    "icon": "HandHeart"
+   },
+   {
+    "title": "Meals served",
+    "value": "1.2Cr",
+    "icon": "Utensils"
+   }
+  ],
+  "faqs": [
+   {
+    "title": "Is my donation tax deductible?",
+    "answer": "Yes, 50% deduction under section 80G."
+   },
+   {
+    "title": "How is money used?",
+    "answer": "92% goes directly to programs; audited yearly."
+   },
+   {
+    "title": "Can I volunteer?",
+    "answer": "Yes! Fill the contact form and we'll call you."
+   }
+  ],
+  "partners": [
+   {
+    "title": "CRY"
+   },
+   {
+    "title": "GiveIndia"
+   },
+   {
+    "title": "Tata Trusts"
+   },
+   {
+    "title": "Rotary Club"
+   },
+   {
+    "title": "UNICEF India"
+   }
+  ],
+  "gallery_categories": [
+   {
+    "_key": "field",
+    "title": "In the Field"
+   }
+  ],
+  "image_gallery": [
+   {
+    "title": "Smiles we serve",
+    "image": "u:1488521787991-ed7bbaae773c",
+    "category_id": "@field"
+   },
+   {
+    "title": "Volunteers",
+    "image": "u:1559027615-cd4628902d4a",
+    "category_id": "@field"
+   },
+   {
+    "title": "Relief drives",
+    "image": "u:1593113598332-cd288d649433",
+    "category_id": "@field"
+   },
+   {
+    "title": "Together",
+    "image": "u:1469571486292-0ba58a3f068b",
+    "category_id": "@field"
+   },
+   {
+    "title": "Every rupee counts",
+    "image": "u:1532629345422-7515f3d16bb6",
+    "category_id": "@field"
+   },
+   {
+    "title": "Joy",
+    "image": "u:1509099836639-18ba1795216d",
+    "category_id": "@field"
+   }
+  ],
+  "blogs": [
+   {
+    "title": "Puja's journey back to school",
+    "slug": "puja-story",
+    "author": "Sneha Ghosh",
+    "published_date": "2026-10-07",
+    "cover_image": "u:1509099836639-18ba1795216d",
+    "summary": "From working in fields to topping her class.",
+    "body": "<p>From working in fields to topping her class.</p><p>Your support made Puja's story possible.</p>",
+    "tags": "stories"
+   }
+  ]
+ },
+ "type": "ngo"
+}

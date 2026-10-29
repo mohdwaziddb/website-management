@@ -1,0 +1,290 @@
+{
+ "settings": {
+  "site_name": "Azure Bay Resort & Travels",
+  "tagline": "Wake up to paradise",
+  "about_short": "<p>A boutique beachfront resort in Goa with 48 rooms, an infinity pool and curated holiday packages across India.</p>",
+  "phone": "+91 832 270 1234",
+  "email": "stay@azurebay.in",
+  "address": "Candolim Beach Road, North Goa 403515",
+  "cta_text": "Book Your Stay",
+  "cta_link": "/contact",
+  "opening_hours": "Check-in: 2 PM\nCheck-out: 11 AM",
+  "footer_text": "Best rate guaranteed when you book direct."
+ },
+ "modules": {
+  "sliders": [
+   {
+    "title": "Your private paradise in Goa",
+    "description": "Beachfront rooms, sunsets and slow mornings.",
+    "image": "u:1520250497591-112f2f40a3f4"
+   },
+   {
+    "title": "Evenings by the pool",
+    "description": "Cocktails, live music and starry skies.",
+    "image": "u:1542314831-068cd1dbfeeb"
+   },
+   {
+    "title": "Explore beyond the beach",
+    "description": "Handcrafted holiday packages across India.",
+    "image": "u:1501785888041-af3ef285b470"
+   }
+  ],
+  "catalog_items": [
+   {
+    "title": "Ocean View Suite",
+    "category": "Room",
+    "price": "₹12,500/night",
+    "old_price": "₹15,000",
+    "image": "u:1582719478250-c89cae4dc85b",
+    "badge": "Best Seller",
+    "location": "Goa",
+    "specs": "King bed · 2 Guests · Balcony",
+    "summary": "Floor-to-ceiling windows facing the Arabian Sea."
+   },
+   {
+    "title": "Garden Deluxe Room",
+    "category": "Room",
+    "price": "₹7,800/night",
+    "old_price": null,
+    "image": "u:1631049307264-da0ec9d70304",
+    "badge": null,
+    "location": "Goa",
+    "specs": "Queen bed · 2 Guests",
+    "summary": "Peaceful garden views and a rain shower."
+   },
+   {
+    "title": "Pool Villa",
+    "category": "Room",
+    "price": "₹24,000/night",
+    "old_price": null,
+    "image": "u:1566073771259-6a8506099945",
+    "badge": "Luxury",
+    "location": "Goa",
+    "specs": "2 Bedrooms · 4 Guests · Private pool",
+    "summary": "Your own plunge pool and butler service."
+   },
+   {
+    "title": "Kashmir Lakes Escape",
+    "category": "Package",
+    "price": "₹38,999/person",
+    "old_price": "₹45,000",
+    "image": "u:1476514525535-07fb3b4ae5f1",
+    "badge": "6N / 7D",
+    "location": "Srinagar · Pahalgam",
+    "specs": "Flights · Hotels · Shikara ride",
+    "summary": "Houseboat stay and Gulmarg gondola."
+   },
+   {
+    "title": "Himalayan Road Trip",
+    "category": "Package",
+    "price": "₹29,999/person",
+    "old_price": null,
+    "image": "u:1469854523086-cc02fe5d8800",
+    "badge": "5N / 6D",
+    "location": "Manali · Leh",
+    "specs": "Tempo traveller · Camps",
+    "summary": "The ultimate mountain adventure."
+   },
+   {
+    "title": "Andaman Beach Bliss",
+    "category": "Package",
+    "price": "₹42,500/person",
+    "old_price": null,
+    "image": "u:1507525428034-b723cf961d3e",
+    "badge": "Honeymoon",
+    "location": "Port Blair · Havelock",
+    "specs": "Flights · Ferry · Scuba",
+    "summary": "Turquoise water and white sand."
+   }
+  ],
+  "services": [
+   {
+    "title": "Infinity Pool",
+    "icon": "Sparkles",
+    "summary": "Overlooking the sea, open 7 AM – 10 PM.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Spa & Wellness",
+    "icon": "Leaf",
+    "summary": "Ayurvedic massages and yoga.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Beachside Dining",
+    "icon": "Utensils",
+    "summary": "Fresh Goan seafood and global cuisine.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Free Wi-Fi",
+    "icon": "Wifi",
+    "summary": "High-speed internet everywhere.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Airport Transfer",
+    "icon": "Car",
+    "summary": "Pickup from Mopa & Dabolim airports.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Kids Club",
+    "icon": "Smile",
+    "summary": "Games and activities for little ones.",
+    "price": null,
+    "image": null
+   }
+  ],
+  "team_members": [
+   {
+    "title": "Rhea Fernandes",
+    "designation": "General Manager",
+    "bio": "Hospitality veteran of 15 years.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Carlos Pinto",
+    "designation": "Executive Chef",
+    "bio": "Goan seafood specialist.",
+    "photo": "p:1494790108377-be9c29b29330"
+   }
+  ],
+  "testimonials": [
+   {
+    "title": "Felt like home",
+    "parent_name": "Ankit & Shreya",
+    "child_name": "Honeymoon, Oct 2026",
+    "description": "The ocean view suite was magical. Staff went out of their way.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Perfect family trip",
+    "parent_name": "The Mehta family",
+    "child_name": "Kashmir package",
+    "description": "Everything was organised to the minute.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Best sunsets in Goa",
+    "parent_name": "Lucy Brown",
+    "child_name": "UK traveller",
+    "description": "I'd come back just for the sunset deck.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "stats": [
+   {
+    "title": "Rooms & villas",
+    "value": "48",
+    "icon": "Bed"
+   },
+   {
+    "title": "Happy travellers",
+    "value": "25K+",
+    "icon": "Smile"
+   },
+   {
+    "title": "Destinations",
+    "value": "40+",
+    "icon": "Plane"
+   },
+   {
+    "title": "TripAdvisor",
+    "value": "4.9★",
+    "icon": "Star"
+   }
+  ],
+  "faqs": [
+   {
+    "title": "Is breakfast included?",
+    "answer": "Yes, a buffet breakfast is included in all room rates."
+   },
+   {
+    "title": "Are pets allowed?",
+    "answer": "Pets are welcome in garden rooms."
+   },
+   {
+    "title": "What is the cancellation policy?",
+    "answer": "Free cancellation up to 7 days before check-in."
+   }
+  ],
+  "partners": [
+   {
+    "title": "MakeMyTrip"
+   },
+   {
+    "title": "Booking.com"
+   },
+   {
+    "title": "Airbnb"
+   },
+   {
+    "title": "TripAdvisor"
+   },
+   {
+    "title": "Goa Tourism"
+   }
+  ],
+  "gallery_categories": [
+   {
+    "_key": "resort",
+    "title": "Resort"
+   },
+   {
+    "_key": "destinations",
+    "title": "Destinations"
+   }
+  ],
+  "image_gallery": [
+   {
+    "title": "Sunset deck",
+    "image": "u:1566073771259-6a8506099945",
+    "category_id": "@resort"
+   },
+   {
+    "title": "Pool at night",
+    "image": "u:1542314831-068cd1dbfeeb",
+    "category_id": "@resort"
+   },
+   {
+    "title": "Tropical pool",
+    "image": "u:1520250497591-112f2f40a3f4",
+    "category_id": "@resort"
+   },
+   {
+    "title": "Golden beach",
+    "image": "u:1507525428034-b723cf961d3e",
+    "category_id": "@destinations"
+   },
+   {
+    "title": "Mountain lake",
+    "image": "u:1501785888041-af3ef285b470",
+    "category_id": "@destinations"
+   },
+   {
+    "title": "Road trips",
+    "image": "u:1469854523086-cc02fe5d8800",
+    "category_id": "@destinations"
+   }
+  ],
+  "blogs": [
+   {
+    "title": "10 hidden beaches in North Goa",
+    "slug": "hidden-beaches",
+    "author": "Rhea Fernandes",
+    "published_date": "2026-10-03",
+    "cover_image": "u:1507525428034-b723cf961d3e",
+    "summary": "Skip the crowds and find quiet sand.",
+    "body": "<p>Skip the crowds and find quiet sand.</p><p>Our favourites: Ashwem, Querim and Butterfly beach.</p>",
+    "tags": "travel,goa"
+   }
+  ]
+ },
+ "type": "hotel_travel"
+}

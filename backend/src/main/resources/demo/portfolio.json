@@ -1,0 +1,172 @@
+{
+ "settings": {
+  "site_name": "Aarav Kapoor",
+  "tagline": "Product designer & front-end developer",
+  "about_short": "<p>I'm Aarav — I design and build clean, accessible digital products. 8 years of turning ideas into interfaces people love.</p>",
+  "phone": "+91 98990 11223",
+  "email": "hello@aaravkapoor.dev",
+  "address": "Bengaluru, India · Available worldwide",
+  "cta_text": "Hire Me",
+  "cta_link": "/contact",
+  "footer_text": "Let's build something great together."
+ },
+ "modules": {
+  "sliders": [
+   {
+    "title": "Hi, I'm Aarav.",
+    "description": "I design & build digital products people love.",
+    "image": "u:1499951360447-b19be8fe80f5"
+   }
+  ],
+  "projects": [
+   {
+    "title": "FinTrack Dashboard",
+    "category": "UI/UX",
+    "client": "FinTrack",
+    "location": "Remote",
+    "cover_image": "u:1551288049-bebda4e38f71",
+    "project_date": "2026-07-01",
+    "summary": "A personal finance dashboard used by 200K people.",
+    "description": "<p>A personal finance dashboard used by 200K people.</p>"
+   },
+   {
+    "title": "Swatch Design System",
+    "category": "Design System",
+    "client": "Lumos",
+    "location": "Remote",
+    "cover_image": "u:1561070791-2526d30994b5",
+    "project_date": "2026-04-10",
+    "summary": "120 components shared across 6 products.",
+    "description": "<p>120 components shared across 6 products.</p>"
+   },
+   {
+    "title": "CodeCamp Website",
+    "category": "Web Development",
+    "client": "CodeCamp",
+    "location": "Bengaluru",
+    "cover_image": "u:1498050108023-c5249f4df085",
+    "project_date": "2026-01-15",
+    "summary": "Next.js site with 98 Lighthouse score.",
+    "description": "<p>Next.js site with 98 Lighthouse score.</p>"
+   },
+   {
+    "title": "Sketchbook App",
+    "category": "Mobile App",
+    "client": "Personal",
+    "location": "—",
+    "cover_image": "u:1558655146-9f40138edfeb",
+    "project_date": "2025-10-01",
+    "summary": "A drawing app for iPad.",
+    "description": "<p>A drawing app for iPad.</p>"
+   },
+   {
+    "title": "DevNotes",
+    "category": "Open Source",
+    "client": "GitHub",
+    "location": "—",
+    "cover_image": "u:1517694712202-14dd9538aa97",
+    "project_date": "2025-06-01",
+    "summary": "Markdown notes app with 4K stars.",
+    "description": "<p>Markdown notes app with 4K stars.</p>"
+   }
+  ],
+  "services": [
+   {
+    "title": "Product Design",
+    "icon": "PenTool",
+    "summary": "Research, wireframes and polished UI.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Front-end Development",
+    "icon": "Code",
+    "summary": "React, Next.js and TypeScript.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Design Systems",
+    "icon": "Palette",
+    "summary": "Scalable, documented component libraries.",
+    "price": null,
+    "image": null
+   }
+  ],
+  "testimonials": [
+   {
+    "title": "A rare designer-developer",
+    "parent_name": "Priya Menon",
+    "child_name": "Founder, FinTrack",
+    "description": "Aarav shipped our dashboard in 6 weeks. Beautiful work.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Detail-obsessed",
+    "parent_name": "Tom Becker",
+    "child_name": "Head of Design, Lumos",
+    "description": "Our design system finally makes sense.",
+    "photo": "p:1494790108377-be9c29b29330"
+   }
+  ],
+  "stats": [
+   {
+    "title": "Projects",
+    "value": "60+",
+    "icon": "Briefcase"
+   },
+   {
+    "title": "Years",
+    "value": "8",
+    "icon": "Clock"
+   },
+   {
+    "title": "Happy clients",
+    "value": "35",
+    "icon": "Smile"
+   },
+   {
+    "title": "GitHub stars",
+    "value": "6K",
+    "icon": "Star"
+   }
+  ],
+  "faqs": [
+   {
+    "title": "Are you available for freelance?",
+    "answer": "Yes, from December 2026."
+   },
+   {
+    "title": "Do you work with startups?",
+    "answer": "Startups are my favourite clients."
+   }
+  ],
+  "partners": [
+   {
+    "title": "Razorpay"
+   },
+   {
+    "title": "Lumos"
+   },
+   {
+    "title": "FinTrack"
+   },
+   {
+    "title": "CodeCamp"
+   }
+  ],
+  "blogs": [
+   {
+    "title": "Designing for accessibility first",
+    "slug": "accessibility-first",
+    "author": "Aarav",
+    "published_date": "2026-08-05",
+    "cover_image": "u:1558655146-9f40138edfeb",
+    "summary": "Accessible design is just good design.",
+    "body": "<p>Accessible design is just good design.</p><p>Start with contrast, focus states and real content.</p>",
+    "tags": "design"
+   }
+  ]
+ },
+ "type": "portfolio"
+}

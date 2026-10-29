@@ -1,0 +1,280 @@
+{
+ "settings": {
+  "site_name": "Lumière Stories",
+  "tagline": "Wedding & portrait photography",
+  "about_short": "<p>We are a team of storytellers capturing weddings, pre-weddings and portraits across India with a candid, cinematic style.</p>",
+  "phone": "+91 98110 55667",
+  "email": "book@lumierestories.in",
+  "address": "Hauz Khas Village, New Delhi 110016",
+  "cta_text": "Check Availability",
+  "cta_link": "/contact",
+  "footer_text": "Every love story deserves to be told beautifully."
+ },
+ "modules": {
+  "sliders": [
+   {
+    "title": "Love, captured candidly",
+    "description": "Cinematic wedding stories across India.",
+    "image": "u:1511285560929-80b456fea0bc"
+   },
+   {
+    "title": "Golden hour magic",
+    "description": "Pre-wedding shoots that feel like you.",
+    "image": "u:1606216794074-735e91aa2c92"
+   },
+   {
+    "title": "Details that matter",
+    "description": "From rings to roses, we notice everything.",
+    "image": "u:1465495976277-4387d4b0b4c6"
+   }
+  ],
+  "projects": [
+   {
+    "title": "Aisha & Kabir — Udaipur",
+    "category": "Wedding",
+    "client": "Aisha & Kabir",
+    "location": "Udaipur",
+    "cover_image": "u:1511285560929-80b456fea0bc",
+    "project_date": "2026-02-14",
+    "summary": "A three-day palace wedding by the lake.",
+    "description": "<p>A three-day palace wedding by the lake.</p>"
+   },
+   {
+    "title": "Riya & Dev — Goa",
+    "category": "Pre-wedding",
+    "client": "Riya & Dev",
+    "location": "Goa",
+    "cover_image": "u:1537633552985-df8429e8048b",
+    "project_date": "2026-01-10",
+    "summary": "Barefoot on the beach at sunset.",
+    "description": "<p>Barefoot on the beach at sunset.</p>"
+   },
+   {
+    "title": "Meera & Arjun — Jaipur",
+    "category": "Wedding",
+    "client": "Meera & Arjun",
+    "location": "Jaipur",
+    "cover_image": "u:1519741497674-611481863552",
+    "project_date": "2025-12-05",
+    "summary": "Pink city, royal vibes.",
+    "description": "<p>Pink city, royal vibes.</p>"
+   },
+   {
+    "title": "Sana & Imran — Delhi",
+    "category": "Engagement",
+    "client": "Sana & Imran",
+    "location": "Delhi",
+    "cover_image": "u:1465495976277-4387d4b0b4c6",
+    "project_date": "2025-11-20",
+    "summary": "An intimate ring ceremony.",
+    "description": "<p>An intimate ring ceremony.</p>"
+   },
+   {
+    "title": "Tara & Vikram — Kerala",
+    "category": "Pre-wedding",
+    "client": "Tara & Vikram",
+    "location": "Alleppey",
+    "cover_image": "u:1606216794074-735e91aa2c92",
+    "project_date": "2025-10-08",
+    "summary": "Backwaters and banana leaves.",
+    "description": "<p>Backwaters and banana leaves.</p>"
+   },
+   {
+    "title": "Studio Portraits",
+    "category": "Portrait",
+    "client": "Various",
+    "location": "Delhi",
+    "cover_image": "u:1516035069371-29a1b244cc32",
+    "project_date": "2025-09-01",
+    "summary": "Timeless studio portraits.",
+    "description": "<p>Timeless studio portraits.</p>"
+   }
+  ],
+  "services": [
+   {
+    "title": "Wedding Photography",
+    "icon": "Camera",
+    "summary": "Full-day candid + traditional coverage.",
+    "price": null,
+    "image": "u:1511285560929-80b456fea0bc"
+   },
+   {
+    "title": "Cinematic Films",
+    "icon": "Sparkles",
+    "summary": "Teasers and full wedding films.",
+    "price": null,
+    "image": "u:1606216794074-735e91aa2c92"
+   },
+   {
+    "title": "Pre-wedding Shoots",
+    "icon": "Heart",
+    "summary": "Destination shoots anywhere in India.",
+    "price": null,
+    "image": "u:1537633552985-df8429e8048b"
+   }
+  ],
+  "pricing_plans": [
+   {
+    "title": "Essential",
+    "price": "₹75,000",
+    "period": "/event day",
+    "features": "1 lead photographer\n400 edited photos\nOnline gallery",
+    "highlighted": false,
+    "badge": null,
+    "button_text": "Enquire",
+    "button_link": "/contact"
+   },
+   {
+    "title": "Signature",
+    "price": "₹1,80,000",
+    "period": "/wedding",
+    "features": "2 photographers + 1 filmmaker\nTeaser + full film\nPremium album",
+    "highlighted": true,
+    "badge": "Most Popular",
+    "button_text": "Enquire",
+    "button_link": "/contact"
+   },
+   {
+    "title": "Luxury",
+    "price": "₹3,50,000",
+    "period": "/wedding",
+    "features": "Full team across 3 days\nDrone coverage\nSame-day edit",
+    "highlighted": false,
+    "badge": null,
+    "button_text": "Enquire",
+    "button_link": "/contact"
+   }
+  ],
+  "testimonials": [
+   {
+    "title": "They captured every emotion",
+    "parent_name": "Aisha Khan",
+    "child_name": "Bride, Udaipur 2026",
+    "description": "We cry every time we watch our film.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Super professional",
+    "parent_name": "Dev Malhotra",
+    "child_name": "Groom, Goa",
+    "description": "Made us feel so comfortable in front of the camera.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Album is a masterpiece",
+    "parent_name": "Mrs. Sharma",
+    "child_name": "Mother of the bride",
+    "description": "Worth every rupee.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "stats": [
+   {
+    "title": "Weddings shot",
+    "value": "450+",
+    "icon": "Heart"
+   },
+   {
+    "title": "Cities",
+    "value": "60",
+    "icon": "MapPin"
+   },
+   {
+    "title": "Awards",
+    "value": "14",
+    "icon": "Award"
+   },
+   {
+    "title": "Years",
+    "value": "9",
+    "icon": "Camera"
+   }
+  ],
+  "faqs": [
+   {
+    "title": "How far in advance should we book?",
+    "answer": "6–9 months for peak wedding season."
+   },
+   {
+    "title": "Do you travel?",
+    "answer": "Anywhere in India and abroad."
+   },
+   {
+    "title": "When do we get our photos?",
+    "answer": "Sneak peeks in 48 hours, full gallery in 4 weeks."
+   }
+  ],
+  "partners": [
+   {
+    "title": "WedMeGood"
+   },
+   {
+    "title": "Vogue Weddings"
+   },
+   {
+    "title": "ShaadiSaga"
+   },
+   {
+    "title": "Canon"
+   },
+   {
+    "title": "Sony"
+   }
+  ],
+  "gallery_categories": [
+   {
+    "_key": "weddings",
+    "title": "Weddings"
+   },
+   {
+    "_key": "prewedding",
+    "title": "Pre-wedding"
+   }
+  ],
+  "image_gallery": [
+   {
+    "title": "The bouquet",
+    "image": "u:1519741497674-611481863552",
+    "category_id": "@weddings"
+   },
+   {
+    "title": "The vows",
+    "image": "u:1511285560929-80b456fea0bc",
+    "category_id": "@weddings"
+   },
+   {
+    "title": "Forever rings",
+    "image": "u:1465495976277-4387d4b0b4c6",
+    "category_id": "@weddings"
+   },
+   {
+    "title": "Golden hour",
+    "image": "u:1606216794074-735e91aa2c92",
+    "category_id": "@prewedding"
+   },
+   {
+    "title": "By the sea",
+    "image": "u:1537633552985-df8429e8048b",
+    "category_id": "@prewedding"
+   },
+   {
+    "title": "Memories",
+    "image": "u:1452587925148-ce544e77e70d",
+    "category_id": "@prewedding"
+   }
+  ],
+  "blogs": [
+   {
+    "title": "How to plan a pre-wedding shoot",
+    "slug": "plan-prewedding",
+    "author": "Lumière Team",
+    "published_date": "2026-09-25",
+    "cover_image": "u:1606216794074-735e91aa2c92",
+    "summary": "Pick a location that means something to you.",
+    "body": "<p>Pick a location that means something to you.</p><p>Shoot at golden hour and bring two outfit changes.</p>",
+    "tags": "tips"
+   }
+  ]
+ },
+ "type": "photography"
+}

@@ -1,0 +1,303 @@
+{
+ "settings": {
+  "site_name": "GrowthLab Digital",
+  "tagline": "We turn clicks into customers",
+  "about_short": "<p>GrowthLab is a performance marketing agency. SEO, ads, social and content — measured in revenue, not likes.</p>",
+  "phone": "+91 98200 12345",
+  "email": "hello@growthlab.agency",
+  "address": "WeWork BKC, Mumbai 400051",
+  "cta_text": "Get a Free Audit",
+  "cta_link": "/contact",
+  "footer_text": "Google Premier Partner · Meta Business Partner"
+ },
+ "modules": {
+  "sliders": [
+   {
+    "title": "Marketing that pays for itself",
+    "description": "Average 4.2× ROAS across 150+ brands.",
+    "image": "u:1460925895917-afdab827c52f"
+   },
+   {
+    "title": "Ideas that get noticed",
+    "description": "Creative campaigns powered by data.",
+    "image": "u:1557804506-669a67965ba0"
+   },
+   {
+    "title": "Grow on every channel",
+    "description": "Search, social, email and beyond.",
+    "image": "u:1542744173-8e7e53415bb0"
+   }
+  ],
+  "services": [
+   {
+    "title": "SEO",
+    "icon": "TrendingUp",
+    "summary": "Rank higher and win organic traffic that converts.",
+    "price": "From ₹25,000/mo",
+    "image": null
+   },
+   {
+    "title": "Performance Ads",
+    "icon": "Target",
+    "summary": "Google & Meta ads optimised for ROAS.",
+    "price": "15% of ad spend",
+    "image": null
+   },
+   {
+    "title": "Social Media",
+    "icon": "Megaphone",
+    "summary": "Content calendars, reels and community management.",
+    "price": "From ₹30,000/mo",
+    "image": null
+   },
+   {
+    "title": "Web Design",
+    "icon": "PenTool",
+    "summary": "Fast, beautiful websites that convert.",
+    "price": "From ₹60,000",
+    "image": null
+   },
+   {
+    "title": "Content Marketing",
+    "icon": "BookOpen",
+    "summary": "Blogs, videos and newsletters that build trust.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Analytics",
+    "icon": "Zap",
+    "summary": "Dashboards that show what's really working.",
+    "price": null,
+    "image": null
+   }
+  ],
+  "projects": [
+   {
+    "title": "UrbanKicks: 6× ROAS",
+    "category": "Performance Ads",
+    "client": "UrbanKicks",
+    "location": "Delhi",
+    "cover_image": "u:1460925895917-afdab827c52f",
+    "project_date": "2026-07-01",
+    "summary": "Scaled D2C sneaker sales from ₹10L to ₹65L/month.",
+    "description": "<p>Scaled D2C sneaker sales from ₹10L to ₹65L/month.</p>"
+   },
+   {
+    "title": "BrewCo goes viral",
+    "category": "Social Media",
+    "client": "BrewCo",
+    "location": "Bengaluru",
+    "cover_image": "u:1533750349088-cd871a92f312",
+    "project_date": "2026-04-12",
+    "summary": "A reel series with 12M views and 40K new followers.",
+    "description": "<p>A reel series with 12M views and 40K new followers.</p>"
+   },
+   {
+    "title": "HealthFirst SEO",
+    "category": "SEO",
+    "client": "HealthFirst",
+    "location": "Chennai",
+    "cover_image": "u:1551434678-e076c223a692",
+    "project_date": "2025-12-01",
+    "summary": "#1 rankings for 120 keywords in 8 months.",
+    "description": "<p>#1 rankings for 120 keywords in 8 months.</p>"
+   },
+   {
+    "title": "EduSmart launch",
+    "category": "Branding",
+    "client": "EduSmart",
+    "location": "Pune",
+    "cover_image": "u:1557804506-669a67965ba0",
+    "project_date": "2025-09-15",
+    "summary": "Brand identity and launch campaign for an ed-tech app.",
+    "description": "<p>Brand identity and launch campaign for an ed-tech app.</p>"
+   }
+  ],
+  "pricing_plans": [
+   {
+    "title": "Starter",
+    "price": "₹35,000",
+    "period": "/month",
+    "features": "SEO for 10 keywords\n8 social posts\nMonthly report",
+    "highlighted": false,
+    "badge": null,
+    "button_text": "Get Started",
+    "button_link": "/contact"
+   },
+   {
+    "title": "Growth",
+    "price": "₹75,000",
+    "period": "/month",
+    "features": "SEO for 30 keywords\nGoogle + Meta ads\n16 posts + 4 reels\nWeekly calls",
+    "highlighted": true,
+    "badge": "Most Popular",
+    "button_text": "Get Started",
+    "button_link": "/contact"
+   },
+   {
+    "title": "Scale",
+    "price": "₹1,50,000",
+    "period": "/month",
+    "features": "Full-funnel strategy\nDedicated team\nCRO & landing pages",
+    "highlighted": false,
+    "badge": null,
+    "button_text": "Talk to us",
+    "button_link": "/contact"
+   }
+  ],
+  "team_members": [
+   {
+    "title": "Kabir Malhotra",
+    "designation": "Founder",
+    "bio": "Ex-Google, growth hacker.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Isha Sethi",
+    "designation": "Creative Director",
+    "bio": "Award-winning designer.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Nikhil Jain",
+    "designation": "Head of Performance",
+    "bio": "Managed ₹50Cr+ ad spend.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   },
+   {
+    "title": "Tanya Arora",
+    "designation": "SEO Lead",
+    "bio": "Technical SEO nerd.",
+    "photo": "p:1438761681033-6461ffad8d80"
+   }
+  ],
+  "testimonials": [
+   {
+    "title": "Revenue tripled",
+    "parent_name": "Rohit Bajaj",
+    "child_name": "Founder, UrbanKicks",
+    "description": "Best agency we've worked with. Transparent and fast.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Creative + data",
+    "parent_name": "Megha Rao",
+    "child_name": "CMO, BrewCo",
+    "description": "They actually understand our audience.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Real SEO results",
+    "parent_name": "Dr. Kumar",
+    "child_name": "HealthFirst",
+    "description": "Our clinic gets 3× more bookings from Google.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "stats": [
+   {
+    "title": "Brands grown",
+    "value": "150+",
+    "icon": "Rocket"
+   },
+   {
+    "title": "Avg. ROAS",
+    "value": "4.2×",
+    "icon": "TrendingUp"
+   },
+   {
+    "title": "Ad spend managed",
+    "value": "₹50Cr",
+    "icon": "Target"
+   },
+   {
+    "title": "Client retention",
+    "value": "92%",
+    "icon": "Heart"
+   }
+  ],
+  "faqs": [
+   {
+    "title": "Do you lock clients into contracts?",
+    "answer": "No — month-to-month after the first 3 months."
+   },
+   {
+    "title": "How soon will I see results?",
+    "answer": "Ads: 2–4 weeks. SEO: 3–6 months."
+   },
+   {
+    "title": "Do you work with small businesses?",
+    "answer": "Yes, our Starter plan is built for them."
+   }
+  ],
+  "partners": [
+   {
+    "title": "Google Partner"
+   },
+   {
+    "title": "Meta"
+   },
+   {
+    "title": "Shopify"
+   },
+   {
+    "title": "HubSpot"
+   },
+   {
+    "title": "Semrush"
+   }
+  ],
+  "gallery_categories": [
+   {
+    "_key": "studio",
+    "title": "Studio"
+   }
+  ],
+  "image_gallery": [
+   {
+    "title": "Strategy sessions",
+    "image": "u:1557804506-669a67965ba0",
+    "category_id": "@studio"
+   },
+   {
+    "title": "Data-driven",
+    "image": "u:1460925895917-afdab827c52f",
+    "category_id": "@studio"
+   },
+   {
+    "title": "Creative desk",
+    "image": "u:1533750349088-cd871a92f312",
+    "category_id": "@studio"
+   },
+   {
+    "title": "Dev team",
+    "image": "u:1551434678-e076c223a692",
+    "category_id": "@studio"
+   },
+   {
+    "title": "Client workshop",
+    "image": "u:1542744173-8e7e53415bb0",
+    "category_id": "@studio"
+   },
+   {
+    "title": "Teamwork",
+    "image": "u:1522071820081-009f0129c71c",
+    "category_id": "@studio"
+   }
+  ],
+  "blogs": [
+   {
+    "title": "The 2026 guide to Meta ads",
+    "slug": "meta-ads-2026",
+    "author": "Nikhil Jain",
+    "published_date": "2026-10-11",
+    "cover_image": "u:1460925895917-afdab827c52f",
+    "summary": "Broad targeting + great creatives win.",
+    "body": "<p>Broad targeting + great creatives win.</p><p>Let the algorithm find buyers; spend your time on creative testing.</p>",
+    "tags": "ads"
+   }
+  ]
+ },
+ "type": "agency"
+}

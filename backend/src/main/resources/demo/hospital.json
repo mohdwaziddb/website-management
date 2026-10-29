@@ -1,0 +1,272 @@
+{
+ "settings": {
+  "site_name": "CarePlus Multispeciality Hospital",
+  "tagline": "Compassionate care, advanced medicine",
+  "about_short": "<p>CarePlus is a 150-bed NABH accredited hospital offering 24×7 emergency care, advanced surgery and preventive health programs.</p>",
+  "phone": "+91 22 6123 4567",
+  "email": "care@careplus.in",
+  "address": "Plot 8, Sector 17, Vashi, Navi Mumbai 400703",
+  "opening_hours": "Emergency: 24 × 7\nOPD: Mon – Sat, 9 AM – 8 PM",
+  "cta_text": "Book Appointment",
+  "cta_link": "/contact",
+  "footer_text": "In an emergency call 1066 — our ambulance reaches you fast."
+ },
+ "modules": {
+  "sliders": [
+   {
+    "title": "Healthcare you can trust",
+    "description": "150 beds · 40 specialists · 24×7 emergency.",
+    "image": "u:1519494026892-80bbd2d6fd0d"
+   },
+   {
+    "title": "Advanced surgical care",
+    "description": "Modular OTs and minimally invasive procedures.",
+    "image": "u:1551076805-e1869033e561"
+   },
+   {
+    "title": "Doctors who listen",
+    "description": "Book an OPD appointment in under a minute.",
+    "image": "u:1631217868264-e5b90bb7e133"
+   }
+  ],
+  "services": [
+   {
+    "title": "Cardiology",
+    "icon": "HeartPulse",
+    "summary": "ECG, echo, angiography and cardiac surgery.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Orthopaedics",
+    "icon": "Shield",
+    "summary": "Joint replacement and sports injury care.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Paediatrics",
+    "icon": "Baby",
+    "summary": "Newborn and child care with a gentle touch.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Neurology",
+    "icon": "Lightbulb",
+    "summary": "Stroke, epilepsy and headache clinics.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Gynaecology",
+    "icon": "Heart",
+    "summary": "Maternity, fertility and women's health.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Emergency & Trauma",
+    "icon": "Clock",
+    "summary": "24×7 ICU-equipped emergency unit.",
+    "price": null,
+    "image": null
+   }
+  ],
+  "team_members": [
+   {
+    "title": "Dr. Anil Deshmukh",
+    "designation": "Chief Cardiologist",
+    "bio": "MD, DM Cardiology · 22 years",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Dr. Kavita Shah",
+    "designation": "Gynaecologist",
+    "bio": "MS OBG · 15 years",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Dr. Sameer Joshi",
+    "designation": "Orthopaedic Surgeon",
+    "bio": "MS Ortho · Joint replacement",
+    "photo": "p:1500648767791-00dcc994a43e"
+   },
+   {
+    "title": "Dr. Ritu Agarwal",
+    "designation": "Paediatrician",
+    "bio": "MD Paediatrics · 12 years",
+    "photo": "p:1438761681033-6461ffad8d80"
+   }
+  ],
+  "pricing_plans": [
+   {
+    "title": "Basic Health Check",
+    "price": "₹1,499",
+    "period": "one time",
+    "features": "CBC, sugar, lipid profile\nDoctor consultation\nReport in 24 hrs",
+    "highlighted": false,
+    "badge": null,
+    "button_text": "Book Now",
+    "button_link": "/contact"
+   },
+   {
+    "title": "Comprehensive",
+    "price": "₹3,999",
+    "period": "one time",
+    "features": "60+ tests\nECG & chest X-ray\nDiet consultation\nFree follow-up",
+    "highlighted": true,
+    "badge": "Most Popular",
+    "button_text": "Book Now",
+    "button_link": "/contact"
+   },
+   {
+    "title": "Senior Citizen",
+    "price": "₹4,999",
+    "period": "one time",
+    "features": "Cardiac risk panel\nBone density scan\nEye & ENT check",
+    "highlighted": false,
+    "badge": null,
+    "button_text": "Book Now",
+    "button_link": "/contact"
+   }
+  ],
+  "testimonials": [
+   {
+    "title": "Saved my father's life",
+    "parent_name": "Prakash Jain",
+    "child_name": "Cardiac patient's son",
+    "description": "Quick emergency response and an excellent cardiology team.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Caring maternity staff",
+    "parent_name": "Shruti Kulkarni",
+    "child_name": "New mother",
+    "description": "Felt safe and supported throughout. Thank you CarePlus!",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Clean and efficient",
+    "parent_name": "Imran Shaikh",
+    "child_name": "OPD patient",
+    "description": "No long waiting, and the doctors explain everything clearly.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "stats": [
+   {
+    "title": "Beds",
+    "value": "150",
+    "icon": "Bed"
+   },
+   {
+    "title": "Specialists",
+    "value": "40+",
+    "icon": "Stethoscope"
+   },
+   {
+    "title": "Patients treated",
+    "value": "2L+",
+    "icon": "HeartPulse"
+   },
+   {
+    "title": "Emergency",
+    "value": "24×7",
+    "icon": "Clock"
+   }
+  ],
+  "faqs": [
+   {
+    "title": "How do I book an appointment?",
+    "answer": "Call us or use the Book Appointment button — we confirm within 30 minutes."
+   },
+   {
+    "title": "Do you accept insurance?",
+    "answer": "Cashless treatment with 30+ insurers and TPAs."
+   },
+   {
+    "title": "Is there a pharmacy?",
+    "answer": "Yes, a 24×7 in-house pharmacy."
+   }
+  ],
+  "partners": [
+   {
+    "title": "Star Health"
+   },
+   {
+    "title": "HDFC Ergo"
+   },
+   {
+    "title": "ICICI Lombard"
+   },
+   {
+    "title": "NABH"
+   },
+   {
+    "title": "Apollo Labs"
+   }
+  ],
+  "gallery_categories": [
+   {
+    "_key": "facility",
+    "title": "Facilities"
+   }
+  ],
+  "image_gallery": [
+   {
+    "title": "Reception & lobby",
+    "image": "u:1519494026892-80bbd2d6fd0d",
+    "category_id": "@facility"
+   },
+   {
+    "title": "Modern OT",
+    "image": "u:1551076805-e1869033e561",
+    "category_id": "@facility"
+   },
+   {
+    "title": "Patient wards",
+    "image": "u:1538108149393-fbbd81895907",
+    "category_id": "@facility"
+   },
+   {
+    "title": "Consultation",
+    "image": "u:1631217868264-e5b90bb7e133",
+    "category_id": "@facility"
+   },
+   {
+    "title": "Surgical team",
+    "image": "u:1579684385127-1ef15d508118",
+    "category_id": "@facility"
+   },
+   {
+    "title": "Diagnostics",
+    "image": "u:1584982751601-97dcc096659c",
+    "category_id": "@facility"
+   }
+  ],
+  "blogs": [
+   {
+    "title": "Know the warning signs of a heart attack",
+    "slug": "heart-attack-signs",
+    "author": "Dr. Anil Deshmukh",
+    "published_date": "2026-10-12",
+    "cover_image": "u:1584982751601-97dcc096659c",
+    "summary": "Chest pain is not the only symptom.",
+    "body": "<p>Chest pain is not the only symptom.</p><p>Breathlessness, jaw pain and sweating need urgent attention. Call 1066 immediately.</p>",
+    "tags": "cardiology"
+   },
+   {
+    "title": "Monsoon health tips for kids",
+    "slug": "monsoon-kids",
+    "author": "Dr. Ritu Agarwal",
+    "published_date": "2026-08-20",
+    "cover_image": "u:1631217868264-e5b90bb7e133",
+    "summary": "Clean water and timely vaccines prevent most infections.",
+    "body": "<p>Clean water and timely vaccines prevent most infections.</p><p>Keep kids hydrated and avoid street food during the rains.</p>",
+    "tags": "paediatrics"
+   }
+  ]
+ },
+ "type": "hospital"
+}

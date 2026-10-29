@@ -1,0 +1,324 @@
+{
+ "settings": {
+  "site_name": "Sunrise Public School",
+  "tagline": "Learn · Lead · Inspire",
+  "about_short": "<p>Sunrise Public School is a co-educational CBSE school offering a balanced education that combines academic excellence with sports, arts and values.</p>",
+  "phone": "+91 98765 43210",
+  "email": "info@sunriseschool.in",
+  "address": "12 Knowledge Park, New Delhi 110001",
+  "affiliation_no": "2730145",
+  "cta_text": "Admissions Open",
+  "cta_link": "/contact",
+  "footer_text": "Affiliated to CBSE, New Delhi."
+ },
+ "modules": {
+  "sliders": [
+   {
+    "title": "Welcome to Sunrise",
+    "description": "Nurturing curious minds since 1985 — where every child shines.",
+    "image": "u:1509062522246-3755977927d7"
+   },
+   {
+    "title": "Admissions Open 2026-27",
+    "description": "Limited seats for Nursery to Class IX. Apply online today.",
+    "image": "u:1580582932707-520aed937b7b"
+   },
+   {
+    "title": "A library of 20,000 books",
+    "description": "Reading opens every door.",
+    "image": "u:1427504494785-3a9ca7044f45"
+   }
+  ],
+  "thoughts": [
+   {
+    "title": "Thought of the Day",
+    "description": "Education is not the filling of a pail, but the lighting of a fire.",
+    "thought_date": "2026-10-29"
+   }
+  ],
+  "services": [
+   {
+    "title": "Smart Classrooms",
+    "icon": "Lightbulb",
+    "summary": "Interactive boards in every classroom.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Science & Robotics Labs",
+    "icon": "Rocket",
+    "summary": "Hands-on STEM learning.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Sports Complex",
+    "icon": "Trophy",
+    "summary": "Cricket, football, swimming and skating.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Safe Transport",
+    "icon": "Truck",
+    "summary": "GPS-tracked buses with attendants.",
+    "price": null,
+    "image": null
+   }
+  ],
+  "team_members": [
+   {
+    "title": "Mrs. Sunita Sharma",
+    "designation": "Principal",
+    "bio": "M.Ed · 25 years in education.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Mr. Rakesh Verma",
+    "designation": "Vice Principal",
+    "bio": "Physics · 18 years.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Ms. Fatima Ali",
+    "designation": "Head of Primary",
+    "bio": "Early-childhood specialist.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   },
+   {
+    "title": "Mr. John Mathew",
+    "designation": "Sports Director",
+    "bio": "Former state-level athlete.",
+    "photo": "p:1438761681033-6461ffad8d80"
+   }
+  ],
+  "achievements": [
+   {
+    "title": "100% Board Results",
+    "achievement_date": "2026-05-20",
+    "image": "u:1497633762265-9d179a990aa6",
+    "description": "<p>All Class X and XII students passed with distinction.</p>"
+   },
+   {
+    "title": "State Science Olympiad Winners",
+    "achievement_date": "2026-02-11",
+    "image": "u:1509062522246-3755977927d7",
+    "description": "<p>Gold and silver at the state level.</p>"
+   },
+   {
+    "title": "Green School Award",
+    "achievement_date": "2025-12-05",
+    "image": "u:1546410531-bb4caa6b424d",
+    "description": "<p>Recognised for sustainability.</p>"
+   }
+  ],
+  "award_categories": [
+   {
+    "_key": "academic",
+    "title": "Academic"
+   },
+   {
+    "_key": "sports",
+    "title": "Sports"
+   }
+  ],
+  "awards": [
+   {
+    "title": "Best CBSE School — North Zone",
+    "category_id": "@academic",
+    "award_date": "2026-08-15",
+    "image": "u:1580582932707-520aed937b7b",
+    "description": "<p>Awarded by Education Today for academic excellence.</p>"
+   },
+   {
+    "title": "Inter-school Football Champions",
+    "category_id": "@sports",
+    "award_date": "2026-01-20",
+    "image": "u:1509062522246-3755977927d7",
+    "description": "<p>Under-14 team won the district cup.</p>"
+   },
+   {
+    "title": "National Spelling Bee — Gold",
+    "category_id": "@academic",
+    "award_date": "2025-11-10",
+    "image": "u:1497633762265-9d179a990aa6",
+    "description": "<p>Riya (Class 6) took the top prize.</p>"
+   }
+  ],
+  "activities": [
+   {
+    "title": "Inter-house Debate Competition",
+    "activity_date": "2026-10-10",
+    "image": "u:1427504494785-3a9ca7044f45",
+    "description": "<p>Topic: Technology in classrooms.</p>"
+   },
+   {
+    "title": "Art & Craft Week",
+    "activity_date": "2026-09-18",
+    "image": "u:1588072432836-e10032774350",
+    "description": "<p>500 artworks exhibited by students.</p>"
+   }
+  ],
+  "press_releases": [
+   {
+    "title": "School wins National Robotics Challenge",
+    "release_date": "2026-10-20",
+    "description": "<p>Our Class 9 team beat 120 schools in the final round.</p>"
+   },
+   {
+    "title": "New smart classrooms inaugurated",
+    "release_date": "2026-09-05",
+    "description": "<p>All 60 classrooms now have interactive panels.</p>"
+   }
+  ],
+  "tenders": [
+   {
+    "title": "Supply of sports equipment",
+    "tender_no": "T-2026/14",
+    "start_date": "2026-10-20",
+    "end_date": "2026-11-10"
+   }
+  ],
+  "testimonials": [
+   {
+    "title": "Wonderful teachers",
+    "parent_name": "Mrs. Sharma",
+    "child_name": "Parent of Aarav, Class 5",
+    "description": "The teachers know every child personally. My son loves school!",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "All-round growth",
+    "parent_name": "Mr. Khan",
+    "child_name": "Parent of Zoya, Class 8",
+    "description": "Academics, sports and arts — the balance is excellent.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Safe and caring",
+    "parent_name": "Mrs. Iyer",
+    "child_name": "Parent of Diya, Class 2",
+    "description": "Transport, security and communication are handled very well.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "stats": [
+   {
+    "title": "Students",
+    "value": "2,400+",
+    "icon": "Users"
+   },
+   {
+    "title": "Teachers",
+    "value": "120",
+    "icon": "GraduationCap"
+   },
+   {
+    "title": "Years of excellence",
+    "value": "40",
+    "icon": "Award"
+   },
+   {
+    "title": "Board results",
+    "value": "100%",
+    "icon": "Trophy"
+   }
+  ],
+  "faqs": [
+   {
+    "title": "When do admissions start?",
+    "answer": "Registrations open every December for the next session."
+   },
+   {
+    "title": "Is transport available?",
+    "answer": "Yes, buses cover a 15 km radius."
+   },
+   {
+    "title": "What is the student-teacher ratio?",
+    "answer": "1:20 in all classes."
+   }
+  ],
+  "partners": [
+   {
+    "title": "CBSE"
+   },
+   {
+    "title": "British Council"
+   },
+   {
+    "title": "Atal Tinkering Lab"
+   },
+   {
+    "title": "NCC"
+   },
+   {
+    "title": "Khelo India"
+   }
+  ],
+  "gallery_categories": [
+   {
+    "_key": "campus",
+    "title": "Campus"
+   },
+   {
+    "_key": "events",
+    "title": "Events"
+   }
+  ],
+  "image_gallery": [
+   {
+    "title": "Smart classrooms",
+    "image": "u:1580582932707-520aed937b7b",
+    "category_id": "@campus"
+   },
+   {
+    "title": "Library",
+    "image": "u:1427504494785-3a9ca7044f45",
+    "category_id": "@campus"
+   },
+   {
+    "title": "Art class",
+    "image": "u:1588072432836-e10032774350",
+    "category_id": "@events"
+   },
+   {
+    "title": "Group learning",
+    "image": "u:1509062522246-3755977927d7",
+    "category_id": "@events"
+   },
+   {
+    "title": "Reading corner",
+    "image": "u:1497633762265-9d179a990aa6",
+    "category_id": "@campus"
+   },
+   {
+    "title": "Love to learn",
+    "image": "u:1546410531-bb4caa6b424d",
+    "category_id": "@events"
+   }
+  ],
+  "blogs": [
+   {
+    "title": "How we make learning joyful",
+    "slug": "joyful-learning",
+    "author": "Principal",
+    "published_date": "2026-10-15",
+    "cover_image": "u:1588072432836-e10032774350",
+    "summary": "Activity-based learning, small classes and caring teachers.",
+    "body": "<p>Activity-based learning, small classes and caring teachers.</p><p>A look inside our classrooms, from robotics to theatre.</p>",
+    "tags": "academics"
+   },
+   {
+    "title": "Annual Day 2026 highlights",
+    "slug": "annual-day-2026",
+    "author": "Admin",
+    "published_date": "2026-09-30",
+    "cover_image": "u:1509062522246-3755977927d7",
+    "summary": "Dance, drama and music lit up the stage.",
+    "body": "<p>Dance, drama and music lit up the stage.</p><p>Over 600 students performed in front of 2,000 parents.</p>",
+    "tags": "events"
+   }
+  ]
+ },
+ "type": "school"
+}

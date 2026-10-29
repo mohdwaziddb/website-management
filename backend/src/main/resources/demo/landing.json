@@ -1,0 +1,199 @@
+{
+ "settings": {
+  "site_name": "FlowDesk",
+  "tagline": "The all-in-one workspace for fast teams",
+  "about_short": "<p>FlowDesk brings tasks, docs and chat into one beautiful app so your team ships faster with fewer meetings.</p>",
+  "phone": "+91 80 1234 5678",
+  "email": "hi@flowdesk.app",
+  "address": "Koramangala, Bengaluru 560034",
+  "cta_text": "Start Free — No Card Needed",
+  "cta_link": "/contact",
+  "footer_text": "Made with ❤ in India for teams everywhere."
+ },
+ "modules": {
+  "sliders": [
+   {
+    "title": "Work flows better here",
+    "description": "Tasks, docs and chat — finally in one place.",
+    "image": "u:1551288049-bebda4e38f71"
+   },
+   {
+    "title": "Built for remote teams",
+    "description": "Async updates that replace status meetings.",
+    "image": "u:1519389950473-47ba0277781c"
+   }
+  ],
+  "services": [
+   {
+    "title": "Smart Tasks",
+    "icon": "CheckCircle",
+    "summary": "Kanban, lists and timelines that update themselves.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Live Docs",
+    "icon": "PenTool",
+    "summary": "Write together in real time.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Team Chat",
+    "icon": "Users",
+    "summary": "Threads linked to the work they're about.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Automations",
+    "icon": "Zap",
+    "summary": "Save hours with no-code workflows.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Insights",
+    "icon": "TrendingUp",
+    "summary": "See where time actually goes.",
+    "price": null,
+    "image": null
+   },
+   {
+    "title": "Enterprise Security",
+    "icon": "Shield",
+    "summary": "SSO, audit logs and SOC 2.",
+    "price": null,
+    "image": null
+   }
+  ],
+  "pricing_plans": [
+   {
+    "title": "Free",
+    "price": "₹0",
+    "period": "/forever",
+    "features": "Up to 5 users\nUnlimited tasks\n1 GB storage",
+    "highlighted": false,
+    "badge": null,
+    "button_text": "Start Free",
+    "button_link": "/contact"
+   },
+   {
+    "title": "Team",
+    "price": "₹299",
+    "period": "/user/month",
+    "features": "Unlimited users\nAutomations\n100 GB storage\nPriority support",
+    "highlighted": true,
+    "badge": "Most Popular",
+    "button_text": "Try 14 days free",
+    "button_link": "/contact"
+   },
+   {
+    "title": "Enterprise",
+    "price": "Custom",
+    "period": "",
+    "features": "SSO & SCIM\nAudit logs\nDedicated success manager",
+    "highlighted": false,
+    "badge": null,
+    "button_text": "Contact Sales",
+    "button_link": "/contact"
+   }
+  ],
+  "testimonials": [
+   {
+    "title": "Replaced 4 tools",
+    "parent_name": "Arjun Nair",
+    "child_name": "CTO, Kitekart",
+    "description": "We cancelled Trello, Notion, Slack threads and a docs tool.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Meetings down 60%",
+    "parent_name": "Sophie Martin",
+    "child_name": "PM, Lumos",
+    "description": "Async updates changed how we work.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Onboarding in a day",
+    "parent_name": "Rahul Khanna",
+    "child_name": "Founder, Quickship",
+    "description": "The team was productive on day one.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "stats": [
+   {
+    "title": "Teams",
+    "value": "12,000+",
+    "icon": "Users"
+   },
+   {
+    "title": "Tasks completed",
+    "value": "40M",
+    "icon": "CheckCircle"
+   },
+   {
+    "title": "Uptime",
+    "value": "99.99%",
+    "icon": "Shield"
+   },
+   {
+    "title": "Rating",
+    "value": "4.9★",
+    "icon": "Star"
+   }
+  ],
+  "faqs": [
+   {
+    "title": "Is there a free plan?",
+    "answer": "Yes, free forever for up to 5 users."
+   },
+   {
+    "title": "Can I import from Trello or Asana?",
+    "answer": "One-click import from both."
+   },
+   {
+    "title": "Is my data secure?",
+    "answer": "Encrypted at rest and in transit, SOC 2 Type II certified."
+   },
+   {
+    "title": "Can I cancel anytime?",
+    "answer": "Yes, no lock-in."
+   }
+  ],
+  "partners": [
+   {
+    "title": "Razorpay"
+   },
+   {
+    "title": "Zerodha"
+   },
+   {
+    "title": "Freshworks"
+   },
+   {
+    "title": "Swiggy"
+   },
+   {
+    "title": "CRED"
+   },
+   {
+    "title": "Meesho"
+   }
+  ],
+  "blogs": [
+   {
+    "title": "How we cut our meetings in half",
+    "slug": "fewer-meetings",
+    "author": "FlowDesk Team",
+    "published_date": "2026-10-06",
+    "cover_image": "u:1519389950473-47ba0277781c",
+    "summary": "Async-first is a habit, not a tool.",
+    "body": "<p>Async-first is a habit, not a tool.</p><p>Write daily updates, record short videos and keep decisions in docs.</p>",
+    "tags": "productivity"
+   }
+  ]
+ },
+ "type": "landing"
+}

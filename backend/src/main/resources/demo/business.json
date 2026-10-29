@@ -1,0 +1,274 @@
+{
+ "settings": {
+  "site_name": "Vertex Solutions",
+  "tagline": "Technology that grows your business",
+  "about_short": "<p>Vertex Solutions is an IT services company helping 300+ businesses modernise with cloud, ERP and custom software since 2010.</p>",
+  "phone": "+91 40 4000 1234",
+  "email": "contact@vertexsolutions.in",
+  "address": "Cyber Towers, HITEC City, Hyderabad 500081",
+  "cta_text": "Get a Free Consultation",
+  "cta_link": "/contact",
+  "footer_text": "ISO 9001:2015 & 27001 certified."
+ },
+ "modules": {
+  "sliders": [
+   {
+    "title": "Build. Scale. Succeed.",
+    "description": "Software, cloud and consulting for ambitious companies.",
+    "image": "u:1486406146926-c627a92ad1ab"
+   },
+   {
+    "title": "Your digital transformation partner",
+    "description": "From strategy to delivery in weeks, not months.",
+    "image": "u:1522071820081-009f0129c71c"
+   },
+   {
+    "title": "People-first technology",
+    "description": "300+ clients across 12 countries.",
+    "image": "u:1600880292203-757bb62b4baf"
+   }
+  ],
+  "services": [
+   {
+    "title": "Cloud Migration",
+    "icon": "Globe",
+    "summary": "Move to AWS or Azure with zero downtime.",
+    "price": null,
+    "image": "u:1497366811353-6870744d04b2"
+   },
+   {
+    "title": "Custom Software",
+    "icon": "Code",
+    "summary": "Web and mobile apps built for your workflow.",
+    "price": null,
+    "image": "u:1454165804606-c3d57bc86b40"
+   },
+   {
+    "title": "ERP Implementation",
+    "icon": "Package",
+    "summary": "SAP and Odoo setup, training and support.",
+    "price": null,
+    "image": "u:1497366216548-37526070297c"
+   },
+   {
+    "title": "IT Consulting",
+    "icon": "Lightbulb",
+    "summary": "Roadmaps and audits from senior architects.",
+    "price": null,
+    "image": "u:1556761175-5973dc0f32e7"
+   }
+  ],
+  "team_members": [
+   {
+    "title": "Sanjay Reddy",
+    "designation": "Founder & CEO",
+    "bio": "Ex-Infosys, 25 years in IT.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Lakshmi Narayan",
+    "designation": "CTO",
+    "bio": "Cloud architect, AWS certified.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Farhan Qureshi",
+    "designation": "Head of Sales",
+    "bio": "Builds long-term client relationships.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   },
+   {
+    "title": "Divya Menon",
+    "designation": "HR Director",
+    "bio": "Culture and talent.",
+    "photo": "p:1438761681033-6461ffad8d80"
+   }
+  ],
+  "projects": [
+   {
+    "title": "Retail ERP for FreshMart",
+    "category": "ERP",
+    "client": "FreshMart",
+    "location": "Hyderabad",
+    "cover_image": "u:1454165804606-c3d57bc86b40",
+    "project_date": "2026-06-01",
+    "summary": "Unified inventory and billing for 120 stores.",
+    "description": "<p>Unified inventory and billing for 120 stores.</p>"
+   },
+   {
+    "title": "Cloud move for MediCore",
+    "category": "Cloud",
+    "client": "MediCore Labs",
+    "location": "Pune",
+    "cover_image": "u:1497366811353-6870744d04b2",
+    "project_date": "2026-03-10",
+    "summary": "Migrated 40 servers to AWS, cutting costs 35%.",
+    "description": "<p>Migrated 40 servers to AWS, cutting costs 35%.</p>"
+   },
+   {
+    "title": "Logistics app for ShipFast",
+    "category": "Software",
+    "client": "ShipFast",
+    "location": "Mumbai",
+    "cover_image": "u:1522071820081-009f0129c71c",
+    "project_date": "2025-11-20",
+    "summary": "Real-time tracking app with 50K daily users.",
+    "description": "<p>Real-time tracking app with 50K daily users.</p>"
+   }
+  ],
+  "catalog_items": [
+   {
+    "title": "VertexHR Suite",
+    "category": "Product",
+    "price": "₹199/user/mo",
+    "old_price": null,
+    "image": "u:1497366216548-37526070297c",
+    "badge": "New",
+    "location": null,
+    "specs": "Cloud · Mobile app",
+    "summary": "Payroll, attendance and leave in one place."
+   },
+   {
+    "title": "VertexPOS",
+    "category": "Product",
+    "price": "₹2,999/mo",
+    "old_price": null,
+    "image": "u:1454165804606-c3d57bc86b40",
+    "badge": null,
+    "location": null,
+    "specs": "Offline-first",
+    "summary": "Billing and inventory for retail."
+   }
+  ],
+  "testimonials": [
+   {
+    "title": "Delivered ahead of schedule",
+    "parent_name": "Ravi Agarwal",
+    "child_name": "CEO, FreshMart",
+    "description": "Our ERP went live 2 weeks early. Fantastic team.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Reliable cloud partner",
+    "parent_name": "Shalini Gupta",
+    "child_name": "CTO, MediCore",
+    "description": "Zero downtime migration and great support.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Truly understands business",
+    "parent_name": "Mark Williams",
+    "child_name": "Director, ShipFast UK",
+    "description": "They think like owners, not vendors.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "stats": [
+   {
+    "title": "Clients",
+    "value": "300+",
+    "icon": "Briefcase"
+   },
+   {
+    "title": "Projects delivered",
+    "value": "850",
+    "icon": "Rocket"
+   },
+   {
+    "title": "Countries",
+    "value": "12",
+    "icon": "Globe"
+   },
+   {
+    "title": "Team members",
+    "value": "220",
+    "icon": "Users"
+   }
+  ],
+  "faqs": [
+   {
+    "title": "Do you work with startups?",
+    "answer": "Yes — we have special packages for early-stage startups."
+   },
+   {
+    "title": "Where are you based?",
+    "answer": "Hyderabad HQ, with teams in Pune and Dubai."
+   },
+   {
+    "title": "How do engagements work?",
+    "answer": "Fixed price for defined scope, or monthly dedicated teams."
+   }
+  ],
+  "partners": [
+   {
+    "title": "AWS"
+   },
+   {
+    "title": "Microsoft"
+   },
+   {
+    "title": "SAP"
+   },
+   {
+    "title": "Odoo"
+   },
+   {
+    "title": "Google Cloud"
+   },
+   {
+    "title": "Salesforce"
+   }
+  ],
+  "gallery_categories": [
+   {
+    "_key": "office",
+    "title": "Our Office"
+   }
+  ],
+  "image_gallery": [
+   {
+    "title": "Headquarters",
+    "image": "u:1486406146926-c627a92ad1ab",
+    "category_id": "@office"
+   },
+   {
+    "title": "Workspace",
+    "image": "u:1497366216548-37526070297c",
+    "category_id": "@office"
+   },
+   {
+    "title": "Team huddle",
+    "image": "u:1552664730-d307ca884978",
+    "category_id": "@office"
+   },
+   {
+    "title": "Client meeting",
+    "image": "u:1556761175-5973dc0f32e7",
+    "category_id": "@office"
+   },
+   {
+    "title": "Celebrating wins",
+    "image": "u:1600880292203-757bb62b4baf",
+    "category_id": "@office"
+   },
+   {
+    "title": "Collaboration",
+    "image": "u:1522071820081-009f0129c71c",
+    "category_id": "@office"
+   }
+  ],
+  "blogs": [
+   {
+    "title": "5 signs your business needs an ERP",
+    "slug": "need-erp",
+    "author": "Sanjay Reddy",
+    "published_date": "2026-10-08",
+    "cover_image": "u:1454165804606-c3d57bc86b40",
+    "summary": "Spreadsheets everywhere is sign number one.",
+    "body": "<p>Spreadsheets everywhere is sign number one.</p><p>If month-end closing takes a week, it's time.</p>",
+    "tags": "erp"
+   }
+  ]
+ },
+ "type": "business"
+}

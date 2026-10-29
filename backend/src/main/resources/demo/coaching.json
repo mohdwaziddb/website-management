@@ -1,0 +1,267 @@
+{
+ "settings": {
+  "site_name": "Achievers Academy",
+  "tagline": "IIT-JEE · NEET · Foundation",
+  "about_short": "<p>Achievers Academy has guided 15,000+ students to top engineering and medical colleges with expert faculty, small batches and weekly tests.</p>",
+  "phone": "+91 141 400 5000",
+  "email": "admissions@achievers.in",
+  "address": "Indra Vihar, Kota, Rajasthan 324005",
+  "cta_text": "Book Free Demo Class",
+  "cta_link": "/contact",
+  "footer_text": "Results that speak for themselves."
+ },
+ "modules": {
+  "sliders": [
+   {
+    "title": "Crack JEE & NEET with India's best",
+    "description": "Small batches. Weekly tests. Personal mentoring.",
+    "image": "u:1524178232363-1fb2b075b655"
+   },
+   {
+    "title": "New batches from 1st November",
+    "description": "Limited seats — scholarship test this Sunday.",
+    "image": "u:1522202176988-66273c2fd55f"
+   },
+   {
+    "title": "Learn anywhere",
+    "description": "Live + recorded classes on our app.",
+    "image": "u:1513258496099-48168024aec0"
+   }
+  ],
+  "services": [
+   {
+    "title": "IIT-JEE (Main + Advanced)",
+    "icon": "Rocket",
+    "summary": "2-year classroom program for Class 11 & 12.",
+    "price": "2 years",
+    "image": "u:1524178232363-1fb2b075b655"
+   },
+   {
+    "title": "NEET UG",
+    "icon": "Stethoscope",
+    "summary": "Biology-focused program with NCERT mastery.",
+    "price": "2 years",
+    "image": "u:1456513080510-7bf3a84b82f8"
+   },
+   {
+    "title": "Foundation (Class 8–10)",
+    "icon": "BookOpen",
+    "summary": "Build concepts early for Olympiads and boards.",
+    "price": "1 year",
+    "image": "u:1434030216411-0b793f4b4173"
+   },
+   {
+    "title": "Crash Course",
+    "icon": "Zap",
+    "summary": "60-day revision with full-length mock tests.",
+    "price": "60 days",
+    "image": "u:1501504905252-473c47e087f8"
+   }
+  ],
+  "pricing_plans": [
+   {
+    "title": "Foundation",
+    "price": "₹45,000",
+    "period": "/year",
+    "features": "Class 8–10 batches\nWeekly tests\nStudy material",
+    "highlighted": false,
+    "badge": null,
+    "button_text": "Enquire",
+    "button_link": "/contact"
+   },
+   {
+    "title": "JEE / NEET Classroom",
+    "price": "₹1,35,000",
+    "period": "/year",
+    "features": "Expert faculty\nDaily doubt sessions\nAll India test series\nMentor support",
+    "highlighted": true,
+    "badge": "Most Popular",
+    "button_text": "Enquire",
+    "button_link": "/contact"
+   },
+   {
+    "title": "Online Live",
+    "price": "₹55,000",
+    "period": "/year",
+    "features": "Live classes on app\nRecorded lectures\nOnline tests",
+    "highlighted": false,
+    "badge": null,
+    "button_text": "Enquire",
+    "button_link": "/contact"
+   }
+  ],
+  "team_members": [
+   {
+    "title": "Er. Rajiv Malhotra",
+    "designation": "Director · Physics",
+    "bio": "IIT Bombay, 18 years teaching.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Dr. Neha Gupta",
+    "designation": "Biology Head",
+    "bio": "MBBS, AIIMS Delhi.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Mr. Suresh Iyer",
+    "designation": "Mathematics",
+    "bio": "IIT Madras, author of 3 books.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   },
+   {
+    "title": "Ms. Anjali Rao",
+    "designation": "Chemistry",
+    "bio": "M.Sc, 10 years teaching.",
+    "photo": "p:1438761681033-6461ffad8d80"
+   }
+  ],
+  "achievements": [
+   {
+    "title": "AIR 12 in JEE Advanced 2026",
+    "achievement_date": "2026-06-10",
+    "image": "u:1522202176988-66273c2fd55f",
+    "description": "<p>Aditya Sharma, classroom student.</p>"
+   },
+   {
+    "title": "312 NEET qualifiers",
+    "achievement_date": "2026-06-14",
+    "image": "u:1456513080510-7bf3a84b82f8",
+    "description": "<p>Our best result ever.</p>"
+   },
+   {
+    "title": "48 students in Top 1000",
+    "achievement_date": "2026-06-10",
+    "image": "u:1524178232363-1fb2b075b655",
+    "description": "<p>JEE Advanced 2026.</p>"
+   }
+  ],
+  "testimonials": [
+   {
+    "title": "Mentors made the difference",
+    "parent_name": "Aditya Sharma",
+    "child_name": "AIR 12, JEE Adv 2026",
+    "description": "Weekly tests and doubt sessions kept me on track.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Biology made easy",
+    "parent_name": "Riya Sen",
+    "child_name": "NEET 2026 — 690/720",
+    "description": "Dr. Neha's notes are pure gold.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Best decision for my son",
+    "parent_name": "Mr. Bansal",
+    "child_name": "Parent",
+    "description": "Regular updates and caring teachers.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "stats": [
+   {
+    "title": "Selections",
+    "value": "15,000+",
+    "icon": "Trophy"
+   },
+   {
+    "title": "Expert faculty",
+    "value": "85",
+    "icon": "GraduationCap"
+   },
+   {
+    "title": "Top 100 ranks",
+    "value": "120",
+    "icon": "Award"
+   },
+   {
+    "title": "Years",
+    "value": "16",
+    "icon": "Clock"
+   }
+  ],
+  "faqs": [
+   {
+    "title": "Is there a scholarship test?",
+    "answer": "Yes — up to 90% fee waiver based on the ASAT test."
+   },
+   {
+    "title": "Do you provide hostel?",
+    "answer": "Separate boys' and girls' hostels near campus."
+   },
+   {
+    "title": "Can I attend a demo class?",
+    "answer": "Yes, book a free demo class anytime."
+   }
+  ],
+  "partners": [
+   {
+    "title": "NTA Pattern"
+   },
+   {
+    "title": "Physics Wallah Books"
+   },
+   {
+    "title": "Unacademy"
+   },
+   {
+    "title": "Byju's Tests"
+   },
+   {
+    "title": "Allen Modules"
+   }
+  ],
+  "gallery_categories": [
+   {
+    "_key": "classroom",
+    "title": "Classrooms"
+   }
+  ],
+  "image_gallery": [
+   {
+    "title": "Lecture hall",
+    "image": "u:1524178232363-1fb2b075b655",
+    "category_id": "@classroom"
+   },
+   {
+    "title": "Doubt sessions",
+    "image": "u:1522202176988-66273c2fd55f",
+    "category_id": "@classroom"
+   },
+   {
+    "title": "Self study zone",
+    "image": "u:1501504905252-473c47e087f8",
+    "category_id": "@classroom"
+   },
+   {
+    "title": "Test practice",
+    "image": "u:1434030216411-0b793f4b4173",
+    "category_id": "@classroom"
+   },
+   {
+    "title": "Library",
+    "image": "u:1456513080510-7bf3a84b82f8",
+    "category_id": "@classroom"
+   },
+   {
+    "title": "Online classes",
+    "image": "u:1513258496099-48168024aec0",
+    "category_id": "@classroom"
+   }
+  ],
+  "blogs": [
+   {
+    "title": "How to plan the last 90 days before JEE",
+    "slug": "jee-90-days",
+    "author": "Er. Rajiv Malhotra",
+    "published_date": "2026-10-01",
+    "cover_image": "u:1501504905252-473c47e087f8",
+    "summary": "Revise, test, analyse — repeat.",
+    "body": "<p>Revise, test, analyse — repeat.</p><p>Give at least 3 full mocks a week and keep an error notebook.</p>",
+    "tags": "jee,strategy"
+   }
+  ]
+ },
+ "type": "coaching"
+}
