@@ -19,9 +19,13 @@ public class ActivityLogServiceImpl implements ActivityLogService {
 
     @Override
     public void addLog(String module, Long recordId, String action, String summary) {
-        AuthPrincipal p = AuthPrincipal.current();
+        // website ka visitor (contact form) / customer bhi log kar sakta hai — admin na ho to naam "Website visitor"
+        var auth = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+        AuthPrincipal p = auth != null && auth.getPrincipal() instanceof AuthPrincipal ap ? ap : null;
         ds.current().update("INSERT INTO activity_logs (module, record_id, action, summary, user_id, user_name, created_on) " +
-                "VALUES (?,?,?,?,?,?,NOW())", module, recordId, action, summary, p.userId(), p.name());
+                "VALUES (?,?,?,?,?,?,NOW())", module, recordId, action, summary,
+                p == null || AuthPrincipal.SCOPE_CUSTOMER.equals(p.scope()) ? null : p.userId(),
+                p == null ? "Website visitor" : AuthPrincipal.SCOPE_CUSTOMER.equals(p.scope()) ? p.name() + " (customer)" : p.name());
     }
 
     @Override
@@ -40,6 +44,19 @@ public class ActivityLogServiceImpl implements ActivityLogService {
         if (recordId != null) {
             where.append(" AND record_id = ?");
             args.add(recordId);
+        }
+        String action = DataTypeUtility.stringNullValue(param.get("action"));
+        if (action != null) {
+            where.append(" AND action = ?");
+            args.add(action.toUpperCase(java.util.Locale.ROOT));
+        }
+        // kya badla / kisne badla — dono me dhoondo
+        String q = DataTypeUtility.stringNullValue(param.get("q"));
+        if (q != null) {
+            String like = "%" + q.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%";
+            where.append(" AND (summary LIKE ? OR user_name LIKE ?)");
+            args.add(like);
+            args.add(like);
         }
         long total = ds.current().queryForObject("SELECT COUNT(*) FROM activity_logs" + where, Long.class, args.toArray());
         args.add(size);

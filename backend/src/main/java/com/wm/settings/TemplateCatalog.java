@@ -29,6 +29,8 @@ public final class TemplateCatalog {
         add("ngo", "hope", "earth", "unity");
         add("interior", "loft", "nordic", "luxe");
         add("construction", "builder", "steel", "skyline");
+        add("news", "herald", "flash", "digest");
+        add("ecommerce", "shopfront", "boutique", "megamart");
     }
 
     public static final List<String> KEYS = List.copyOf(TYPE_OF.keySet());

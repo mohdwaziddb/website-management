@@ -140,13 +140,41 @@ https:// {
     root * /var/www/wm/dist
     reverse_proxy /api/* 127.0.0.1:6900
     reverse_proxy /files/* 127.0.0.1:6900
+
+    # Google: har website ka apna sitemap / robots
+    rewrite /sitemap.xml /api/public/sitemap.xml
+    rewrite /robots.txt /api/public/robots.txt
+    reverse_proxy /api/public/sitemap.xml 127.0.0.1:6900
+    reverse_proxy /api/public/robots.txt 127.0.0.1:6900
+
+    # WhatsApp / Facebook / X / LinkedIn bots JS nahi chalate — unhe page ka title + photo wala HTML
+    @socialbots header_regexp User-Agent (?i)(facebookexternalhit|facebot|whatsapp|twitterbot|linkedinbot|slackbot|telegrambot|discordbot|pinterest)
+    handle @socialbots {
+        rewrite * /api/public/share?path={path}
+        reverse_proxy 127.0.0.1:6900
+    }
+
     try_files {path} /index.html
     file_server
 }
 ```
 
 nginx use karna ho to `server_name _;` (default_server) block, `proxy_set_header Host $host;` zaroori, aur har custom domain ka certificate certbot se.
-Backend **Host header** se hi website pehchanta hai.
+Backend **Host header** se hi website pehchanta hai. nginx me upar wale rules:
+
+```nginx
+proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;            # contact form ka spam limit asli IP par
+proxy_set_header X-Forwarded-Proto $scheme;         # sitemap / share me https links
+location = /sitemap.xml { proxy_pass http://127.0.0.1:6900/api/public/sitemap.xml; }
+location = /robots.txt  { proxy_pass http://127.0.0.1:6900/api/public/robots.txt; }
+location / {
+    if ($http_user_agent ~* "(facebookexternalhit|facebot|whatsapp|twitterbot|linkedinbot|slackbot|telegrambot|discordbot|pinterest)") {
+        rewrite ^ /api/public/share?path=$uri last;
+    }
+    try_files $uri /index.html;
+}
+```
 
 ## Main APIs
 

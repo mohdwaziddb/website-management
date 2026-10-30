@@ -10,7 +10,7 @@ describe("App routing on root domain", () => {
   it("/ => marketing site", () => {
     window.history.pushState({}, "", "/");
     render(<App />);
-    expect(screen.getByText("47 templates for 15 kinds of websites")).toBeInTheDocument();
+    expect(screen.getByText("Pick your industry. See it live.")).toBeInTheDocument();
     expect(screen.getAllByText("Admin login").length).toBeGreaterThan(0);
   });
 

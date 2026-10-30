@@ -3,7 +3,7 @@ import type { SiteTypeKey } from "../siteTypes";
 /** Home page ka ek section + uska style, e.g. "services:icons", "catalog:menu", "contact" */
 export type SectionSpec = string;
 
-export type HeroVariant = "carousel" | "split" | "minimal" | "fullscreen" | "elegant" | "typewriter" | "collage" | "centered" | "kenburns" | "magazine";
+export type HeroVariant = "carousel" | "split" | "minimal" | "fullscreen" | "elegant" | "typewriter" | "collage" | "centered" | "kenburns" | "magazine" | "headlines" | "spotlight" | "mosaic";
 export type NavVariant = "solid" | "light" | "centered" | "floating" | "classic" | "dark";
 export type HeadingStyle = "underline" | "center" | "eyebrow" | "serif" | "badge";
 

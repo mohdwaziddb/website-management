@@ -31,6 +31,12 @@ public final class SettingsRegistry {
             f("linkedin", "LinkedIn URL", FieldType.URL),
             f("primary_color", "Theme Color", FieldType.TEXT),
             f("footer_text", "Footer Text", FieldType.TEXTAREA),
+            // SEO + Google (Google search / WhatsApp-Facebook share preview)
+            FieldDef.of("seo_title", "Search Title (SEO)", FieldType.TEXT).help("Google me dikhne wala title — khaali = Website Name").build(),
+            FieldDef.of("seo_description", "Search Description (SEO)", FieldType.TEXTAREA).help("150-160 characters — Google aur share preview me").build(),
+            FieldDef.of("share_image", "Share Image", FieldType.IMAGE).help("WhatsApp / Facebook par link share karne par dikhne wali photo (1200×630)").build(),
+            FieldDef.of("google_analytics_id", "Google Analytics ID", FieldType.TEXT).help("e.g. G-AB12CD34EF").build(),
+            FieldDef.of("google_site_verification", "Google Search Console Code", FieldType.TEXT).help("Search Console → HTML tag ka content=\"…\" wala code").build(),
             f("about_short", "About (short)", FieldType.RICHTEXT),
             FieldDef.of("template", "Website Template", FieldType.SELECT)
                     .options(TemplateCatalog.KEYS.toArray(String[]::new))

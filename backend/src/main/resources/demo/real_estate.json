@@ -11,6 +11,58 @@
   "footer_text": "RERA registered. Trusted by 2,000+ families."
  },
  "modules": {
+  "menus": [
+   {
+    "title": "Home",
+    "custom_url": "/"
+   },
+   {
+    "_key": "about",
+    "title": "About"
+   },
+   {
+    "title": "Properties",
+    "custom_url": "/catalog"
+   },
+   {
+    "title": "Projects",
+    "custom_url": "/projects"
+   },
+   {
+    "title": "Services",
+    "custom_url": "/services"
+   },
+   {
+    "title": "Agents",
+    "custom_url": "/team"
+   },
+   {
+    "title": "Contact",
+    "custom_url": "/contact"
+   }
+  ],
+  "pages": [
+   {
+    "title": "About Us",
+    "slug": "about-us",
+    "page_heading": "About Us",
+    "page_body": "<p>Prime Nest Realty helps families and investors buy, sell and rent premium homes across Bengaluru with complete legal and loan support.</p><h2>Our story</h2><p>Prime Nest Realty started with a simple idea: find a home you'll love coming back to. Today a passionate team carries that promise forward every day.</p><h2>What we believe</h2><ul><li>People first</li><li>Quality without shortcuts</li><li>Honest, transparent communication</li></ul>",
+    "menu_id": "@about",
+    "banner_image": "u:1600596542815-ffad4c1539a9"
+   },
+   {
+    "title": "Privacy Policy",
+    "slug": "privacy-policy",
+    "page_heading": "Privacy Policy",
+    "page_body": "<p>Prime Nest Realty respects your privacy. We collect only the information you share with us through our forms, use it only to respond to you, and never sell it.</p><p>Contact us anytime to view or delete your data.</p>"
+   },
+   {
+    "title": "Terms of Use",
+    "slug": "terms",
+    "page_heading": "Terms of Use",
+    "page_body": "<p>By using the Prime Nest Realty website you agree to use it lawfully. Content is for general information and may change without notice.</p>"
+   }
+  ],
   "sliders": [
    {
     "title": "Luxury villas with private pools",
@@ -312,6 +364,83 @@
     "summary": "Title, OC and society dues — check them all.",
     "body": "<p>Title, OC and society dues — check them all.</p><p>Always ask for the encumbrance certificate for 30 years.</p>",
     "tags": "legal"
+   }
+  ],
+  "popups": [
+   {
+    "title": "Welcome to Prime Nest Realty",
+    "from_date": "2026-10-01",
+    "to_date": "2027-03-31",
+    "image": "u:1600585154340-be6161a56a0c",
+    "description": "<p>Find a home you'll love coming back to. <a href=\"/contact\">Schedule a Visit →</a></p>"
+   }
+  ],
+  "videos": [
+   {
+    "title": "Prime Nest Realty — highlights",
+    "video_url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    "video_date": "2026-09-15"
+   },
+   {
+    "title": "Behind the scenes",
+    "video_url": "https://www.youtube.com/watch?v=eRsGyueVLvQ",
+    "video_date": "2026-08-15"
+   },
+   {
+    "title": "A day with us",
+    "video_url": "https://www.youtube.com/watch?v=R6MlUcmOul8",
+    "video_date": "2026-07-15"
+   },
+   {
+    "title": "Event recap",
+    "video_url": "https://www.youtube.com/watch?v=WhWc3b3KhnY",
+    "video_date": "2026-06-15"
+   }
+  ],
+  "attachments": [
+   {
+    "title": "Prime Nest Realty — Brochure",
+    "attachment": "f:real_estate-brochure.pdf",
+    "description": "Everything about us in one PDF."
+   },
+   {
+    "title": "Enquiry Form",
+    "attachment": "f:enquiry-form.pdf",
+    "description": "Fill, sign and email it to us."
+   }
+  ],
+  "enquiries": [
+   {
+    "name": "Priya Sharma",
+    "email": "priya.sharma@example.com",
+    "phone": "9876500011",
+    "subject": "Need more details",
+    "message": "Hello, I found Prime Nest Realty online. Could you please share more details and the best time to call?",
+    "page": "/contact",
+    "status": "New"
+   },
+   {
+    "name": "Rahul Mehta",
+    "email": "rahul.m@example.com",
+    "phone": "9876500022",
+    "subject": "Thank you",
+    "message": "Thanks for the quick reply yesterday — all my questions are answered.",
+    "page": "/",
+    "status": "Replied"
+   }
+  ],
+  "subscribers": [
+   {
+    "email": "neha.k@example.com",
+    "source": "Footer"
+   },
+   {
+    "email": "arjun.v@example.com",
+    "source": "Footer"
+   },
+   {
+    "email": "sana.q@example.com",
+    "source": "Footer"
    }
   ]
  },

@@ -28,4 +28,7 @@ public interface WebsiteModuleService {
     void reorderRecords(String module, List<Map<String, Object>> items);
 
     void deleteRecord(String module, long id);
+
+    /** Ek saath kai records: action = publish | draft | delete. Jo na ho paaye wo "skipped" me (wajah ke saath) */
+    Map<String, Object> bulkAction(String module, Map<String, Object> param);
 }

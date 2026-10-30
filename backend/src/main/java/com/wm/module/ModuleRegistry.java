@@ -20,6 +20,23 @@ public class ModuleRegistry {
     public static final String MEDIA = "Gallery & Media";
     public static final String ACHIEVEMENTS = "Achievements";
     public static final String BUSINESS = "Business";
+    public static final String NEWSROOM = "Newsroom";
+    public static final String STORE = "Store";
+    public static final String INBOX = "Inbox";
+
+    /** Website ke contact form se aaye message ka haal */
+    public static final String[] ENQUIRY_STATUS = {"New", "Read", "Replied", "Spam"};
+
+    /** Product par GST % (India) */
+    public static final String[] GST_RATES = {"0", "5", "12", "18", "28"};
+    public static final String COUPON_PERCENT = "Percent";
+    public static final String COUPON_FLAT = "Flat";
+
+    /** News category label ke rang (frontend site/sections/newsroom.tsx me same naam -> hex) */
+    public static final String[] CATEGORY_COLORS = {"red", "orange", "amber", "green", "teal", "blue", "indigo", "violet", "pink", "slate"};
+
+    /** Advertisement kahan dikhe */
+    public static final String[] AD_POSITIONS = {"Header", "Home Page", "Sidebar", "In Article"};
 
     /** Services / Stats ke icon (frontend site icon map me same naam) */
     public static final String[] ICONS = {
@@ -218,7 +235,135 @@ public class ModuleRegistry {
                 .field(image("logo", "Logo").listed())
                 .field(url("link_url", "Website")));
 
+        // ---------- Newsroom (News / Magazine portal) ----------
+        add(ModuleDef.of("news_categories", "News Categories", NEWSROOM, "layers").publishable().sortable()
+                .field(text("title", "Category Name").required().listed().searchable())
+                .field(text("slug", "Slug (URL)").required().unique().listed().help("e.g. sports — website par /category/sports"))
+                .field(select("color", "Label Colour", CATEGORY_COLORS).listed())
+                .field(bool("show_on_home", "Show block on home page").listed())
+                .field(textarea("description", "Description")));
+        add(ModuleDef.of("news_posts", "News Posts", NEWSROOM, "newspaper").publishable()
+                .field(text("title", "Headline").required().listed().searchable())
+                .field(text("slug", "Slug (URL)").required().unique().help("e.g. india-wins-series — website par /news/<slug>"))
+                .field(ref("category_id", "Category", "news_categories").required().listed())
+                .field(ref("reporter_id", "Reporter", "team_members").listed())
+                .field(date("published_date", "Published Date").required().listed())
+                .field(image("cover_image", "Cover Photo").listed())
+                .field(text("image_caption", "Photo Caption"))
+                .field(text("location", "Dateline / Location").help("e.g. New Delhi"))
+                .field(textarea("summary", "Summary").help("2-3 lines — lists, share aur Google me dikhta hai"))
+                .field(richtext("body", "Full Story"))
+                .field(text("tags", "Tags").searchable().help("Comma separated, e.g. cricket, world cup"))
+                .field(url("video_url", "Video URL").help("YouTube link (optional) — story ke upar video"))
+                .field(bool("is_breaking", "Breaking News").listed().help("Website ke upar laal ticker me chalega"))
+                .field(bool("is_featured", "Top Story").listed().help("Home page ki badi headline"))
+                .field(bool("is_trending", "Trending").listed()));
+        // key "sponsors": "ads" naam ad-blockers block kar dete hain
+        add(ModuleDef.of("sponsors", "Advertisements", NEWSROOM, "megaphone").publishable().sortable()
+                .field(text("title", "Advertiser").required().listed().searchable())
+                .field(select("position", "Position", AD_POSITIONS).required().listed()
+                        .help("Header 728×90 · Home Page / In Article 970×250 · Sidebar 300×250"))
+                .field(image("image", "Banner Image").required().listed())
+                .field(text("headline", "Banner Text").help("Optional — banner par likha dikhe (image me text na ho to)"))
+                .field(url("link_url", "Click URL"))
+                .field(date("from_date", "Show From").listed().help("Khaali = abhi se"))
+                .field(date("to_date", "Show Till").listed().help("Khaali = hamesha")));
+
+        // ---------- Store (Online shop) — orders / customers / payments apne tables me (service/store) ----------
+        add(ModuleDef.of("product_categories", "Product Categories", STORE, "folder-tree").publishable().sortable()
+                .field(text("title", "Category Name").required().listed().searchable())
+                .field(text("slug", "Slug (URL)").required().unique().listed().help("e.g. men-shirts — website par /shop/category/men-shirts"))
+                .field(ref("parent_id", "Parent Category", "product_categories").listed().help("Khaali = main category"))
+                .field(image("image", "Image").listed())
+                .field(bool("show_on_home", "Show on home page").listed())
+                .field(textarea("description", "Description")));
+        add(ModuleDef.of("products", "Products", STORE, "shopping-bag").publishable().sortable()
+                .field(text("title", "Product Name").required().listed().searchable())
+                .field(text("slug", "Slug (URL)").required().unique().help("e.g. cotton-polo-tshirt — website par /product/<slug>"))
+                .field(ref("category_id", "Category", "product_categories").required().listed())
+                .field(text("brand", "Brand").searchable())
+                .field(text("sku", "SKU").searchable())
+                .field(decimal("price", "Selling Price (₹)").required().min(0).listed())
+                .field(decimal("compare_price", "MRP (₹)").min(0).help("Price se zyada ho to website par ~~MRP~~ aur % OFF dikhega"))
+                .field(select("gst_rate", "GST %", GST_RATES).required())
+                .field(number("stock", "Stock").min(0).listed().help("Khaali = unlimited. Variants ho to har variant ka apna stock"))
+                .field(image("cover_image", "Main Image").required().listed())
+                .field(image("image_2", "Image 2"))
+                .field(image("image_3", "Image 3"))
+                .field(image("image_4", "Image 4"))
+                .field(textarea("summary", "Short Description"))
+                .field(richtext("description", "Full Description"))
+                .field(text("option1_name", "Option 1 Name").help("Variants ke liye, e.g. Size"))
+                .field(text("option2_name", "Option 2 Name").help("e.g. Colour"))
+                .field(bool("is_featured", "Featured").listed())
+                .field(text("tags", "Tags").searchable().help("Comma separated"))
+                .validator(ModuleRegistry::validateProduct));
+        add(ModuleDef.of("product_variants", "Product Variants", STORE, "boxes").publishable().sortable()
+                .field(ref("product_id", "Product", "products").required().listed())
+                .field(text("title", "Variant Name").required().listed().searchable().help("e.g. M / Black"))
+                .field(text("option1", "Option 1 Value").listed().help("e.g. M"))
+                .field(text("option2", "Option 2 Value").listed().help("e.g. Black"))
+                .field(text("sku", "SKU").searchable())
+                .field(decimal("price", "Price (₹)").min(0).listed().help("Khaali = product ka price"))
+                .field(decimal("compare_price", "MRP (₹)").min(0))
+                .field(number("stock", "Stock").min(0).listed().help("Khaali = unlimited"))
+                .field(image("image", "Image").help("Is variant ki photo (optional)"))
+                .validator(ModuleRegistry::validateProduct));
+        add(ModuleDef.of("coupons", "Coupons", STORE, "ticket-percent").publishable().internal()
+                .titleField("code")
+                .field(text("code", "Coupon Code").required().unique().listed().searchable().help("e.g. WELCOME10 — customer yahi type karega"))
+                .field(select("discount_type", "Discount Type", COUPON_PERCENT, COUPON_FLAT).required().listed())
+                .field(decimal("value", "Discount Value").required().min(0).listed().help("Percent: 10 = 10% · Flat: ₹ amount"))
+                .field(decimal("min_order", "Minimum Order (₹)").min(0))
+                .field(decimal("max_discount", "Max Discount (₹)").min(0).help("Percent coupon par discount ki upper limit"))
+                .field(date("starts_on", "Valid From").listed())
+                .field(date("expires_on", "Valid Till").listed())
+                .field(number("usage_limit", "Total Uses Allowed").min(1).help("Khaali = unlimited"))
+                .field(number("per_customer_limit", "Uses per Customer").min(1).help("Khaali = unlimited"))
+                .field(textarea("description", "Note"))
+                .validator(ModuleRegistry::validateCoupon));
+
+        // ---------- Inbox (website ke contact form / newsletter se — public sirf bhej sakta hai, dekh nahi sakta) ----------
+        add(ModuleDef.of("enquiries", "Enquiries", INBOX, "mail").internal()
+                .titleField("name")
+                .field(text("name", "Name").required().listed().searchable())
+                .field(text("email", "Email").listed().searchable())
+                .field(text("phone", "Phone").listed().searchable())
+                .field(text("subject", "Subject").listed().searchable())
+                .field(textarea("message", "Message").required())
+                .field(text("page", "Sent From Page").help("Website ka kaunsa page"))
+                .field(select("status", "Status", ENQUIRY_STATUS).required().listed()));
+        add(ModuleDef.of("subscribers", "Newsletter Subscribers", INBOX, "at-sign").internal()
+                .titleField("email")
+                .field(text("email", "Email").required().unique().listed().searchable())
+                .field(text("source", "Signed Up From").listed().help("e.g. Footer")));
+
         validateRefs();
+    }
+
+    /** MRP price se kam nahi ho sakta */
+    static void validateProduct(Map<String, Object> v) {
+        java.math.BigDecimal price = decimalOf(v.get("price"));
+        java.math.BigDecimal mrp = decimalOf(v.get("compare_price"));
+        if (price != null && mrp != null && mrp.compareTo(price) < 0) throw ApiException.badRequest("MRP cannot be less than the selling price");
+    }
+
+    static void validateCoupon(Map<String, Object> v) {
+        String code = String.valueOf(v.get("code"));
+        if (!code.matches("[A-Za-z0-9_-]{3,30}")) throw ApiException.badRequest("Coupon Code: 3-30 letters / numbers, no spaces");
+        java.math.BigDecimal value = decimalOf(v.get("value"));
+        if (value == null || value.signum() <= 0) throw ApiException.badRequest("Discount Value must be more than 0");
+        if (COUPON_PERCENT.equals(v.get("discount_type")) && value.compareTo(java.math.BigDecimal.valueOf(100)) > 0) {
+            throw ApiException.badRequest("Percent discount cannot be more than 100");
+        }
+        java.time.LocalDate from = com.wm.common.DataTypeUtility.dateValue(v.get("starts_on"));
+        java.time.LocalDate till = com.wm.common.DataTypeUtility.dateValue(v.get("expires_on"));
+        if (from != null && till != null && till.isBefore(from)) throw ApiException.badRequest("Valid Till cannot be before Valid From");
+    }
+
+    private static java.math.BigDecimal decimalOf(Object o) {
+        if (o == null || String.valueOf(o).isBlank()) return null;
+        return o instanceof java.math.BigDecimal d ? d : new java.math.BigDecimal(String.valueOf(o));
     }
 
     public List<ModuleDef> all() {
@@ -261,6 +406,7 @@ public class ModuleRegistry {
     private static FieldDef.Builder image(String n, String l) { return FieldDef.of(n, l, IMAGE); }
     private static FieldDef.Builder file(String n, String l) { return FieldDef.of(n, l, FILE); }
     private static FieldDef.Builder number(String n, String l) { return FieldDef.of(n, l, NUMBER); }
+    private static FieldDef.Builder decimal(String n, String l) { return FieldDef.of(n, l, DECIMAL); }
     private static FieldDef.Builder date(String n, String l) { return FieldDef.of(n, l, DATE); }
     private static FieldDef.Builder month(String n, String l) { return FieldDef.of(n, l, MONTH); }
     private static FieldDef.Builder bool(String n, String l) { return FieldDef.of(n, l, BOOLEAN); }

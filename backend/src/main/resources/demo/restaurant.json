@@ -12,6 +12,54 @@
   "footer_text": "Fresh food, good mood. Reservations recommended on weekends."
  },
  "modules": {
+  "menus": [
+   {
+    "title": "Home",
+    "custom_url": "/"
+   },
+   {
+    "_key": "about",
+    "title": "About"
+   },
+   {
+    "title": "Menu",
+    "custom_url": "/catalog"
+   },
+   {
+    "title": "Gallery",
+    "custom_url": "/gallery"
+   },
+   {
+    "title": "Chefs",
+    "custom_url": "/team"
+   },
+   {
+    "title": "Reservations",
+    "custom_url": "/contact"
+   }
+  ],
+  "pages": [
+   {
+    "title": "About Us",
+    "slug": "about-us",
+    "page_heading": "About Us",
+    "page_body": "<p>Since 2012 The Saffron Table has served hand-crafted North Indian and continental dishes made with farm-fresh ingredients, in a cosy space made for long conversations.</p><h2>Our story</h2><p>The Saffron Table started with a simple idea: slow-cooked flavours, warm hospitality. Today a passionate team carries that promise forward every day.</p><h2>What we believe</h2><ul><li>People first</li><li>Quality without shortcuts</li><li>Honest, transparent communication</li></ul>",
+    "menu_id": "@about",
+    "banner_image": "u:1517248135467-4c7edcad34c4"
+   },
+   {
+    "title": "Privacy Policy",
+    "slug": "privacy-policy",
+    "page_heading": "Privacy Policy",
+    "page_body": "<p>The Saffron Table respects your privacy. We collect only the information you share with us through our forms, use it only to respond to you, and never sell it.</p><p>Contact us anytime to view or delete your data.</p>"
+   },
+   {
+    "title": "Terms of Use",
+    "slug": "terms",
+    "page_heading": "Terms of Use",
+    "page_body": "<p>By using the The Saffron Table website you agree to use it lawfully. Content is for general information and may change without notice.</p>"
+   }
+  ],
   "sliders": [
    {
     "title": "A table full of stories",
@@ -300,6 +348,83 @@
     "summary": "Pancakes, eggs benedict and cold brews — brunch is served every Saturday and Sunday.",
     "body": "<p>Pancakes, eggs benedict and cold brews — brunch is served every Saturday and Sunday.</p><p>Join us from 9 AM to 1 PM. Kids under 6 eat free.</p>",
     "tags": "news"
+   }
+  ],
+  "popups": [
+   {
+    "title": "Welcome to The Saffron Table",
+    "from_date": "2026-10-01",
+    "to_date": "2027-03-31",
+    "image": "u:1567620905732-2d1ec7ab7445",
+    "description": "<p>Slow-cooked flavours, warm hospitality. <a href=\"/contact\">Book a Table →</a></p>"
+   }
+  ],
+  "videos": [
+   {
+    "title": "The Saffron Table — highlights",
+    "video_url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    "video_date": "2026-09-15"
+   },
+   {
+    "title": "Behind the scenes",
+    "video_url": "https://www.youtube.com/watch?v=eRsGyueVLvQ",
+    "video_date": "2026-08-15"
+   },
+   {
+    "title": "A day with us",
+    "video_url": "https://www.youtube.com/watch?v=R6MlUcmOul8",
+    "video_date": "2026-07-15"
+   },
+   {
+    "title": "Event recap",
+    "video_url": "https://www.youtube.com/watch?v=WhWc3b3KhnY",
+    "video_date": "2026-06-15"
+   }
+  ],
+  "attachments": [
+   {
+    "title": "The Saffron Table — Brochure",
+    "attachment": "f:restaurant-brochure.pdf",
+    "description": "Everything about us in one PDF."
+   },
+   {
+    "title": "Enquiry Form",
+    "attachment": "f:enquiry-form.pdf",
+    "description": "Fill, sign and email it to us."
+   }
+  ],
+  "enquiries": [
+   {
+    "name": "Priya Sharma",
+    "email": "priya.sharma@example.com",
+    "phone": "9876500011",
+    "subject": "Need more details",
+    "message": "Hello, I found The Saffron Table online. Could you please share more details and the best time to call?",
+    "page": "/contact",
+    "status": "New"
+   },
+   {
+    "name": "Rahul Mehta",
+    "email": "rahul.m@example.com",
+    "phone": "9876500022",
+    "subject": "Thank you",
+    "message": "Thanks for the quick reply yesterday — all my questions are answered.",
+    "page": "/",
+    "status": "Replied"
+   }
+  ],
+  "subscribers": [
+   {
+    "email": "neha.k@example.com",
+    "source": "Footer"
+   },
+   {
+    "email": "arjun.v@example.com",
+    "source": "Footer"
+   },
+   {
+    "email": "sana.q@example.com",
+    "source": "Footer"
    }
   ]
  },

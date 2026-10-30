@@ -7,6 +7,8 @@ import { MenuItem, useList, useSite } from "./data";
 import { EXPLORE_PAGES } from "./coverage";
 import { getSiteType, sectionTitle, TitledSection } from "./siteTypes";
 import { Container, headingFont, RichHtml, SmartImage, useSetting } from "./ui";
+import { StoreIcons } from "./sections/shop";
+import { SubscribeBox } from "./inbox";
 
 /** Menus admin panel se aate hain; na hon to website type ke default links (Restaurant: Menu, Gym: Membership ...) */
 function useDefaultLinks(): MenuItem[] {
@@ -81,7 +83,7 @@ export function Navbar() {
       : v === "centered"
         ? `fixed inset-x-0 top-0 z-40 transition-all ${scrolled || pathname !== "/" ? "shadow-md" : "bg-transparent"}`
         : v === "light" || v === "dark"
-          ? "sticky top-0 z-40 border-b border-[var(--text)]/10 backdrop-blur"
+          ? "sticky top-0 z-40 border-b border-site-text/10 backdrop-blur"
           : "sticky top-0 z-40 shadow-md";
   const shellStyle =
     v === "solid" || v === "classic" || (v === "centered" && (scrolled || pathname !== "/"))
@@ -92,7 +94,7 @@ export function Navbar() {
   const textLight = (overHero && heroDark) || v === "solid" || v === "classic" || (v === "centered" && (scrolled || pathname !== "/"));
   const linkCls = ({ isActive }: { isActive: boolean }) =>
     `rounded-full px-3 py-2 text-sm font-medium transition ${
-      textLight ? (isActive ? "bg-white/20 text-white" : "text-white/85 hover:text-white") : isActive ? "text-[var(--primary)]" : "text-[var(--text)]/75 hover:text-[var(--primary)]"
+      textLight ? (isActive ? "bg-white/20 text-white" : "text-white/85 hover:text-white") : isActive ? "text-[var(--primary)]" : "text-site-text/75 hover:text-[var(--primary)]"
     }`;
   const navLinks = (
     <>
@@ -122,6 +124,7 @@ export function Navbar() {
         <Container className={`flex h-16 items-center gap-4 ${v === "centered" ? "lg:h-20" : ""}`}>
           <Brand light={textLight} />
           <nav className={`hidden flex-1 items-center gap-1 lg:flex ${v === "centered" ? "justify-center" : "justify-end"}`}>{navLinks}</nav>
+          <StoreIcons light={textLight} />
           <button aria-label="Menu" className={`ml-auto rounded-lg p-2 lg:hidden ${textLight ? "text-white" : "text-[var(--text)]"}`} onClick={() => setOpen(true)}>
             <Menu className="h-6 w-6" />
           </button>
@@ -222,11 +225,14 @@ export function Footer() {
           </ul>
         </div>
         <ExploreLinks exclude={new Set(quickLinks.map((l) => l.href))} />
-        <div className="space-y-2 text-sm">
-          <div className="mb-3 font-semibold text-white">Reach us</div>
-          {address && <p className="whitespace-pre-line">{address}</p>}
-          {phone && <p>{phone}</p>}
-          {email && <p>{email}</p>}
+        <div className="space-y-6 text-sm">
+          <div className="space-y-2">
+            <div className="mb-3 font-semibold text-white">Reach us</div>
+            {address && <p className="whitespace-pre-line">{address}</p>}
+            {phone && <p>{phone}</p>}
+            {email && <p>{email}</p>}
+          </div>
+          <SubscribeBox />
         </div>
       </Container>
       <div className="border-t border-white/10 py-4 text-center text-xs text-white/50">

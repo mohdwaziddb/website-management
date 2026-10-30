@@ -34,7 +34,7 @@ public class SessionValidator {
         } else {
             if (TenantContext.get() == null) return false;
             db = ds.current();
-            table = "users";
+            table = AuthPrincipal.SCOPE_CUSTOMER.equals(p.scope()) ? "customers" : "users";
         }
         List<Map<String, Object>> rows = db.queryForList("SELECT token_version, is_active FROM " + table + " WHERE id = ?", p.userId());
         if (rows.isEmpty()) return false;

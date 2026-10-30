@@ -1,9 +1,11 @@
 import { FormEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Pencil, Plus, ShieldCheck, Trash2, UserRound } from "lucide-react";
+import { Pencil, Plus, ShieldCheck, Trash2, UserRound, Users as UsersIcon } from "lucide-react";
 import { api, errorMessage, loadSession, saveSession } from "../lib/api";
 import { useAuth } from "../lib/auth";
-import { Badge, Button, Card, ErrorBox, inputClass, Modal, PageHeader, showToast } from "../components/ui";
+import { Avatar, Badge, Button, confirmDialog, EmptyState, ErrorBox, inputClass, Modal, PageHeader, Pill, showToast } from "../components/ui";
+import DataTable, { Column } from "../components/DataTable";
+import { relativeTime } from "../lib/time";
 
 type User = { id: number; name: string; email: string; role: "ADMIN" | "EDITOR"; is_active: boolean; last_login: string | null; created_on: string | null };
 type Form = { id?: number; name: string; email: string; role: string; isActive: boolean; password: string };
@@ -39,6 +41,46 @@ export default function UsersPage() {
   }, []);
 
   const isSelf = form?.id !== undefined && form.id === me?.userId;
+  const [search, setSearch] = useState("");
+  const q = search.toLowerCase();
+  const visible = users && (q ? users.filter((u) => u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q)) : users);
+
+  const edit = (u: User) => {
+    setError(null);
+    setForm({ id: u.id, name: u.name, email: u.email, role: u.role, isActive: u.is_active, password: "" });
+  };
+
+  const columns: Column<User>[] = [
+    {
+      key: "name",
+      header: "User",
+      hideable: false,
+      render: (u) => (
+        <span className="flex items-center gap-3">
+          <Avatar name={u.name} size="sm" />
+          <span>
+            <span className="flex items-center gap-2 font-medium text-slate-900">
+              {u.name}
+              {u.id === me?.userId && <Pill tone="blue">You</Pill>}
+            </span>
+            <span className="block text-xs text-slate-500">{u.email}</span>
+          </span>
+        </span>
+      ),
+      exportValue: (u) => u.name
+    },
+    { key: "email", header: "Email", render: (u) => u.email, exportValue: (u) => u.email },
+    { key: "role", header: "Role", render: (u) => <Pill tone={u.role === "ADMIN" ? "violet" : "slate"}>{u.role === "ADMIN" ? "Admin" : "Editor"}</Pill>, exportValue: (u) => (u.role === "ADMIN" ? "Admin" : "Editor") },
+    { key: "status", header: "Status", align: "center", render: (u) => <Badge on={u.is_active} onText="Active" offText="Disabled" />, exportValue: (u) => (u.is_active ? "Active" : "Disabled") },
+    {
+      key: "last_login",
+      header: "Last login",
+      className: "whitespace-nowrap text-slate-500",
+      render: (u) => <span title={u.last_login ? formatDateTime(u.last_login) : undefined}>{u.last_login ? relativeTime(u.last_login) : "Never"}</span>,
+      exportValue: (u) => (u.last_login ? formatDateTime(u.last_login) : "Never")
+    },
+    { key: "created_on", header: "Created", className: "whitespace-nowrap text-slate-500", render: (u) => formatDateTime(u.created_on).split(",")[0], exportValue: (u) => formatDateTime(u.created_on).split(",")[0] }
+  ];
 
   const save = async (e: FormEvent) => {
     e.preventDefault();
@@ -65,7 +107,13 @@ export default function UsersPage() {
   };
 
   const remove = async (u: User) => {
-    if (!confirm(`Delete ${u.name} (${u.email})? They will not be able to log in.`)) return;
+    const ok = await confirmDialog({
+      title: `Delete ${u.name}?`,
+      message: `${u.email} will no longer be able to log in to this admin panel. This cannot be undone.`,
+      confirmText: "Delete user",
+      danger: true
+    });
+    if (!ok) return;
     try {
       await api.delete(`/users/${u.id}`);
       showToast("User deleted");
@@ -78,17 +126,13 @@ export default function UsersPage() {
   return (
     <div>
       <PageHeader
+        icon={<UsersIcon className="h-5 w-5" />}
         title="Users"
         subtitle="People who can log in to this admin panel"
-        actions={
-          <Button onClick={() => { setError(null); setForm({ ...EMPTY }); }}>
-            <Plus className="h-4 w-4" /> Add User
-          </Button>
-        }
       />
       <div className="mb-4 grid gap-3 sm:grid-cols-2">
         {Object.entries(ROLE_HELP).map(([role, text]) => (
-          <div key={role} className="flex items-start gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm">
+          <div key={role} className="flex items-start gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm">
             {role === "ADMIN" ? <ShieldCheck className="mt-0.5 h-4 w-4 text-brand-600" /> : <UserRound className="mt-0.5 h-4 w-4 text-slate-500" />}
             <span>
               <b>{role === "ADMIN" ? "Admin" : "Editor"}</b> <span className="text-slate-500">— {text.split(" — ")[1]}</span>
@@ -96,64 +140,33 @@ export default function UsersPage() {
           </div>
         ))}
       </div>
-      <Card className="overflow-x-auto">
-        <table className="w-full text-left text-sm">
-          <thead className="bg-slate-50 text-xs uppercase text-slate-500">
-            <tr>
-              <th className="px-4 py-2.5 font-medium">Name</th>
-              <th className="px-4 py-2.5 font-medium">Email</th>
-              <th className="px-4 py-2.5 font-medium">Role</th>
-              <th className="px-4 py-2.5 font-medium">Status</th>
-              <th className="px-4 py-2.5 font-medium">Last login</th>
-              <th className="px-4 py-2.5 font-medium">Created</th>
-              <th className="px-4 py-2.5" />
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            {(users ?? []).map((u) => (
-              <tr key={u.id}>
-                <td className="px-4 py-2.5 font-medium text-slate-800">
-                  {u.name}
-                  {u.id === me?.userId && <span className="ml-2 rounded bg-brand-50 px-1.5 py-0.5 text-[11px] font-medium text-brand-700">You</span>}
-                </td>
-                <td className="px-4 py-2.5 text-slate-600">{u.email}</td>
-                <td className="px-4 py-2.5">
-                  <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${u.role === "ADMIN" ? "bg-brand-50 text-brand-700" : "bg-slate-100 text-slate-600"}`}>
-                    {u.role === "ADMIN" ? "Admin" : "Editor"}
-                  </span>
-                </td>
-                <td className="px-4 py-2.5">
-                  <Badge on={u.is_active} onText="Active" offText="Disabled" />
-                </td>
-                <td className="px-4 py-2.5 text-slate-500">{u.last_login ? formatDateTime(u.last_login) : "Never"}</td>
-                <td className="px-4 py-2.5 text-slate-500">{formatDateTime(u.created_on).split(",")[0]}</td>
-                <td className="whitespace-nowrap px-4 py-2.5 text-right">
-                  <button
-                    title="Edit"
-                    aria-label={`Edit ${u.name}`}
-                    className="rounded p-1.5 text-slate-500 hover:bg-slate-100"
-                    onClick={() => { setError(null); setForm({ id: u.id, name: u.name, email: u.email, role: u.role, isActive: u.is_active, password: "" }); }}
-                  >
-                    <Pencil className="h-4 w-4" />
-                  </button>
-                  {u.id !== me?.userId && (
-                    <button title="Delete" aria-label={`Delete ${u.name}`} className="rounded p-1.5 text-red-500 hover:bg-red-50" onClick={() => remove(u)}>
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
-            {users === null && (
-              <tr>
-                <td colSpan={7} className="px-4 py-10 text-center text-slate-400">
-                  Loading…
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </Card>
+      <DataTable<User>
+        id="users"
+        title="Admin users"
+        columns={columns}
+        rows={visible}
+        rowKey={(u) => u.id}
+        loading={users === null}
+        search={{ value: search, onChange: setSearch, placeholder: "Search name or email" }}
+        toolbar={
+          <Button
+            onClick={() => {
+              setError(null);
+              setForm({ ...EMPTY });
+            }}
+          >
+            <Plus className="h-4 w-4" /> Add User
+          </Button>
+        }
+        onExport={() => Promise.resolve(visible ?? [])}
+        exportName="users"
+        rowClassName={(u) => (u.is_active ? "" : "opacity-60")}
+        rowActions={(u) => [
+          { label: u.id === me?.userId ? "Edit my account" : "Edit", icon: <Pencil className="h-4 w-4" />, onClick: edit },
+          { label: "Delete", icon: <Trash2 className="h-4 w-4" />, onClick: remove, danger: true, hidden: () => u.id === me?.userId }
+        ]}
+        empty={<EmptyState title={search ? "No users match your search" : "No users yet"} />}
+      />
 
       {form && (
         <Modal title={form.id ? (isSelf ? "Edit your account" : "Edit User") : "Add User"} onClose={() => setForm(null)}>

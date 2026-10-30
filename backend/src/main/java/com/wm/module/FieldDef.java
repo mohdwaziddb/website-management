@@ -15,7 +15,9 @@ public record FieldDef(
         boolean unique,
         String ref,
         List<String> options,
-        String help
+        String help,
+        /** NUMBER / DECIMAL ki kam se kam value (null = koi limit nahi) */
+        Long min
 ) {
     public static Builder of(String name, String label, FieldType type) {
         return new Builder(name, label, type);
@@ -32,6 +34,7 @@ public record FieldDef(
         private String ref;
         private List<String> options = List.of();
         private String help;
+        private Long min;
 
         private Builder(String name, String label, FieldType type) {
             this.name = name;
@@ -46,9 +49,10 @@ public record FieldDef(
         public Builder ref(String module) { this.ref = module; return this; }
         public Builder options(String... opts) { this.options = List.of(opts); return this; }
         public Builder help(String text) { this.help = text; return this; }
+        public Builder min(long value) { this.min = value; return this; }
 
         public FieldDef build() {
-            return new FieldDef(name, label, type, required, listed, searchable, unique, ref, options, help);
+            return new FieldDef(name, label, type, required, listed, searchable, unique, ref, options, help, min);
         }
     }
 }

@@ -11,6 +11,54 @@
   "footer_text": "Let's build something great together."
  },
  "modules": {
+  "menus": [
+   {
+    "title": "Home",
+    "custom_url": "/"
+   },
+   {
+    "_key": "about",
+    "title": "About"
+   },
+   {
+    "title": "Work",
+    "custom_url": "/projects"
+   },
+   {
+    "title": "Services",
+    "custom_url": "/services"
+   },
+   {
+    "title": "Blog",
+    "custom_url": "/blogs"
+   },
+   {
+    "title": "Contact",
+    "custom_url": "/contact"
+   }
+  ],
+  "pages": [
+   {
+    "title": "About Us",
+    "slug": "about-us",
+    "page_heading": "About Us",
+    "page_body": "<p>I'm Aarav — I design and build clean, accessible digital products. 8 years of turning ideas into interfaces people love.</p><h2>Our story</h2><p>Aarav Kapoor started with a simple idea: product designer & front-end developer. Today a passionate team carries that promise forward every day.</p><h2>What we believe</h2><ul><li>People first</li><li>Quality without shortcuts</li><li>Honest, transparent communication</li></ul>",
+    "menu_id": "@about",
+    "banner_image": "u:1499951360447-b19be8fe80f5"
+   },
+   {
+    "title": "Privacy Policy",
+    "slug": "privacy-policy",
+    "page_heading": "Privacy Policy",
+    "page_body": "<p>Aarav Kapoor respects your privacy. We collect only the information you share with us through our forms, use it only to respond to you, and never sell it.</p><p>Contact us anytime to view or delete your data.</p>"
+   },
+   {
+    "title": "Terms of Use",
+    "slug": "terms",
+    "page_heading": "Terms of Use",
+    "page_body": "<p>By using the Aarav Kapoor website you agree to use it lawfully. Content is for general information and may change without notice.</p>"
+   }
+  ],
   "sliders": [
    {
     "title": "Hi, I'm Aarav.",
@@ -165,6 +213,121 @@
     "summary": "Accessible design is just good design.",
     "body": "<p>Accessible design is just good design.</p><p>Start with contrast, focus states and real content.</p>",
     "tags": "design"
+   }
+  ],
+  "gallery_categories": [
+   {
+    "_key": "moments",
+    "title": "Moments"
+   }
+  ],
+  "popups": [
+   {
+    "title": "Welcome to Aarav Kapoor",
+    "from_date": "2026-10-01",
+    "to_date": "2027-03-31",
+    "image": "u:1551288049-bebda4e38f71",
+    "description": "<p>Product designer & front-end developer. <a href=\"/contact\">Hire Me →</a></p>"
+   }
+  ],
+  "image_gallery": [
+   {
+    "title": "Aarav Kapoor — 1",
+    "image": "u:1499951360447-b19be8fe80f5",
+    "category_id": "@moments"
+   },
+   {
+    "title": "Aarav Kapoor — 2",
+    "image": "u:1551288049-bebda4e38f71",
+    "category_id": "@moments"
+   },
+   {
+    "title": "Aarav Kapoor — 3",
+    "image": "u:1561070791-2526d30994b5",
+    "category_id": "@moments"
+   },
+   {
+    "title": "Aarav Kapoor — 4",
+    "image": "u:1498050108023-c5249f4df085",
+    "category_id": "@moments"
+   },
+   {
+    "title": "Aarav Kapoor — 5",
+    "image": "u:1558655146-9f40138edfeb",
+    "category_id": "@moments"
+   },
+   {
+    "title": "Aarav Kapoor — 6",
+    "image": "u:1517694712202-14dd9538aa97",
+    "category_id": "@moments"
+   }
+  ],
+  "videos": [
+   {
+    "title": "Aarav Kapoor — highlights",
+    "video_url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    "video_date": "2026-09-15"
+   },
+   {
+    "title": "Behind the scenes",
+    "video_url": "https://www.youtube.com/watch?v=eRsGyueVLvQ",
+    "video_date": "2026-08-15"
+   },
+   {
+    "title": "A day with us",
+    "video_url": "https://www.youtube.com/watch?v=R6MlUcmOul8",
+    "video_date": "2026-07-15"
+   },
+   {
+    "title": "Event recap",
+    "video_url": "https://www.youtube.com/watch?v=WhWc3b3KhnY",
+    "video_date": "2026-06-15"
+   }
+  ],
+  "attachments": [
+   {
+    "title": "Aarav Kapoor — Brochure",
+    "attachment": "f:portfolio-brochure.pdf",
+    "description": "Everything about us in one PDF."
+   },
+   {
+    "title": "Enquiry Form",
+    "attachment": "f:enquiry-form.pdf",
+    "description": "Fill, sign and email it to us."
+   }
+  ],
+  "enquiries": [
+   {
+    "name": "Priya Sharma",
+    "email": "priya.sharma@example.com",
+    "phone": "9876500011",
+    "subject": "Need more details",
+    "message": "Hello, I found Aarav Kapoor online. Could you please share more details and the best time to call?",
+    "page": "/contact",
+    "status": "New"
+   },
+   {
+    "name": "Rahul Mehta",
+    "email": "rahul.m@example.com",
+    "phone": "9876500022",
+    "subject": "Thank you",
+    "message": "Thanks for the quick reply yesterday — all my questions are answered.",
+    "page": "/",
+    "status": "Replied"
+   }
+  ],
+  "subscribers": [
+   {
+    "email": "neha.k@example.com",
+    "source": "Footer"
+   },
+   {
+    "email": "arjun.v@example.com",
+    "source": "Footer"
+   },
+   {
+    "email": "sana.q@example.com",
+    "source": "Footer"
    }
   ]
  },

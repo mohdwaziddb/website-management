@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
  */
 @Service
 public class WebsiteModuleServiceImpl implements WebsiteModuleService {
-    private static final Set<FieldType> SORTABLE_TYPES = EnumSet.of(FieldType.TEXT, FieldType.NUMBER, FieldType.DATE, FieldType.MONTH, FieldType.REF);
+    private static final Set<FieldType> SORTABLE_TYPES = EnumSet.of(FieldType.TEXT, FieldType.NUMBER, FieldType.DECIMAL, FieldType.DATE, FieldType.MONTH, FieldType.REF);
     private static final Set<FieldType> FILTER_TYPES = EnumSet.of(FieldType.REF, FieldType.BOOLEAN, FieldType.SELECT, FieldType.MONTH, FieldType.NUMBER);
     private static final int MAX_PAGE_SIZE = 100;
 
@@ -74,7 +74,7 @@ public class WebsiteModuleServiceImpl implements WebsiteModuleService {
 
     @Override
     public PageResult<Map<String, Object>> getList(String module, Map<String, Object> param, boolean publicMode) {
-        ModuleDef m = registry.get(module);
+        ModuleDef m = publicMode ? publicModule(module) : registry.get(module);
         List<Object> args = new ArrayList<>();
         StringBuilder where = new StringBuilder(" WHERE is_deleted = 0");
 
@@ -128,7 +128,7 @@ public class WebsiteModuleServiceImpl implements WebsiteModuleService {
 
     @Override
     public Map<String, Object> getRecord(String module, long id, boolean publicMode) {
-        return findRecord(registry.get(module), id, publicMode);
+        return findRecord(publicMode ? publicModule(module) : registry.get(module), id, publicMode);
     }
 
     @Override
@@ -154,6 +154,7 @@ public class WebsiteModuleServiceImpl implements WebsiteModuleService {
     public Map<String, Object> addRecord(String module, Map<String, Object> param) {
         ModuleDef m = registry.get(module);
         Map<String, Object> values = readValues(m, param, null, true);
+        if (m.validator() != null) m.validator().validate(values);
 
         List<String> cols = new ArrayList<>(values.keySet());
         List<Object> args = new ArrayList<>(values.values());
@@ -179,6 +180,11 @@ public class WebsiteModuleServiceImpl implements WebsiteModuleService {
         Map<String, Object> before = findRecord(m, id, false);
         Map<String, Object> values = readValues(m, param, id, false);
         if (values.isEmpty()) return before;
+        if (m.validator() != null) {
+            Map<String, Object> merged = new LinkedHashMap<>(before);
+            merged.putAll(values);
+            m.validator().validate(merged);
+        }
 
         List<String> changed = values.entrySet().stream()
                 .filter(e -> !Objects.equals(DataTypeUtility.stringValue(DataTypeUtility.getJsonValue(e.getValue())),
@@ -197,6 +203,40 @@ public class WebsiteModuleServiceImpl implements WebsiteModuleService {
             activityLogService.addLog(m.key(), id, "UPDATE", "Updated \"" + title + "\": " + String.join(", ", changed));
         }
         return findRecord(m, id, false);
+    }
+
+    static final int MAX_BULK = 100;
+
+    @Override
+    public Map<String, Object> bulkAction(String module, Map<String, Object> param) {
+        ModuleDef m = registry.get(module);
+        String action = DataTypeUtility.stringValue(param.get("action")).toLowerCase(java.util.Locale.ROOT);
+        if (!List.of("publish", "draft", "delete").contains(action)) throw ApiException.badRequest("Choose an action: publish, draft or delete");
+        if (!"delete".equals(action) && !m.publishable()) throw ApiException.badRequest(m.label() + " cannot be published");
+        if (!(param.get("ids") instanceof List<?> raw) || raw.isEmpty()) throw ApiException.badRequest("Select at least one record");
+        if (raw.size() > MAX_BULK) throw ApiException.badRequest("You can select up to " + MAX_BULK + " records at a time");
+        Set<Long> ids = new LinkedHashSet<>();
+        for (Object o : raw) ids.add(ValidationUtility.requiredLong(o, "Id"));
+
+        int done = 0;
+        List<Map<String, Object>> skipped = new ArrayList<>();
+        for (long id : ids) {
+            // har record ke liye wahi logic jo akele edit / delete me (validation, ref check, log)
+            try {
+                if ("delete".equals(action)) deleteRecord(module, id);
+                else updateRecord(module, id, Map.of("is_publish", "publish".equals(action)));
+                done++;
+            } catch (ApiException e) {
+                Map<String, Object> s = new LinkedHashMap<>();
+                s.put("id", id);
+                s.put("reason", e.getMessage());
+                skipped.add(s);
+            }
+        }
+        Map<String, Object> out = new LinkedHashMap<>();
+        out.put("done", done);
+        out.put("skipped", skipped);
+        return out;
     }
 
     /** Sortable modules ka drag-drop order: [{id, sort_order}] */
@@ -233,6 +273,13 @@ public class WebsiteModuleServiceImpl implements WebsiteModuleService {
     }
 
     // ------------------------------------------------------------------ helpers
+
+    /** Internal module (coupons) public API par exist hi nahi karta */
+    private ModuleDef publicModule(String module) {
+        ModuleDef m = registry.get(module);
+        if (m.internal()) throw ApiException.notFound("Unknown module: " + module);
+        return m;
+    }
 
     private Map<String, Object> findRecord(ModuleDef m, long id, boolean publicMode) {
         String extra = publicMode ? " AND is_active = 1" + (m.publishable() ? " AND is_publish = 1" : "") : "";
@@ -285,7 +332,23 @@ public class WebsiteModuleServiceImpl implements WebsiteModuleService {
                 if (!s.startsWith("/files/") && !s.matches("(?i)^https?://\\S+$")) throw ApiException.badRequest(f.label() + ": invalid file");
                 yield ValidationUtility.maxLength(s, 500, f.label());
             }
-            case NUMBER -> ValidationUtility.requiredLong(s, f.label());
+            case NUMBER -> {
+                long n = ValidationUtility.requiredLong(s, f.label());
+                if (f.min() != null && n < f.min()) throw ApiException.badRequest(f.label() + " must be at least " + f.min());
+                yield n;
+            }
+            case DECIMAL -> {
+                java.math.BigDecimal d;
+                try {
+                    d = new java.math.BigDecimal(s.replace(",", "").trim());
+                } catch (NumberFormatException e) {
+                    throw ApiException.badRequest(f.label() + " must be a number");
+                }
+                if (d.scale() > 2) throw ApiException.badRequest(f.label() + ": max 2 decimal places");
+                if (d.abs().compareTo(new java.math.BigDecimal("9999999999")) > 0) throw ApiException.badRequest(f.label() + " is too large");
+                if (f.min() != null && d.compareTo(java.math.BigDecimal.valueOf(f.min())) < 0) throw ApiException.badRequest(f.label() + " must be at least " + f.min());
+                yield d.setScale(2, java.math.RoundingMode.UNNECESSARY);
+            }
             case DATE -> ValidationUtility.requiredDate(s, f.label());
             case MONTH -> {
                 long mo = ValidationUtility.requiredLong(s, f.label());

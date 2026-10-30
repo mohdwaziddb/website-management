@@ -11,6 +11,54 @@
   "footer_text": "Donations are tax exempt under section 80G."
  },
  "modules": {
+  "menus": [
+   {
+    "title": "Home",
+    "custom_url": "/"
+   },
+   {
+    "_key": "about",
+    "title": "About"
+   },
+   {
+    "title": "Our Causes",
+    "custom_url": "/services"
+   },
+   {
+    "title": "Campaigns",
+    "custom_url": "/projects"
+   },
+   {
+    "title": "Stories",
+    "custom_url": "/blogs"
+   },
+   {
+    "title": "Donate",
+    "custom_url": "/contact"
+   }
+  ],
+  "pages": [
+   {
+    "title": "About Us",
+    "slug": "about-us",
+    "page_heading": "About Us",
+    "page_body": "<p>Asha Foundation works with 200 villages to give children education, nutrition and healthcare. 92% of every donation reaches the ground.</p><h2>Our story</h2><p>Asha Foundation started with a simple idea: every child deserves a chance. Today a passionate team carries that promise forward every day.</p><h2>What we believe</h2><ul><li>People first</li><li>Quality without shortcuts</li><li>Honest, transparent communication</li></ul>",
+    "menu_id": "@about",
+    "banner_image": "u:1488521787991-ed7bbaae773c"
+   },
+   {
+    "title": "Privacy Policy",
+    "slug": "privacy-policy",
+    "page_heading": "Privacy Policy",
+    "page_body": "<p>Asha Foundation respects your privacy. We collect only the information you share with us through our forms, use it only to respond to you, and never sell it.</p><p>Contact us anytime to view or delete your data.</p>"
+   },
+   {
+    "title": "Terms of Use",
+    "slug": "terms",
+    "page_heading": "Terms of Use",
+    "page_body": "<p>By using the Asha Foundation website you agree to use it lawfully. Content is for general information and may change without notice.</p>"
+   }
+  ],
   "sliders": [
    {
     "title": "Give a child a future",
@@ -234,6 +282,83 @@
     "summary": "From working in fields to topping her class.",
     "body": "<p>From working in fields to topping her class.</p><p>Your support made Puja's story possible.</p>",
     "tags": "stories"
+   }
+  ],
+  "popups": [
+   {
+    "title": "Welcome to Asha Foundation",
+    "from_date": "2026-10-01",
+    "to_date": "2027-03-31",
+    "image": "u:1559027615-cd4628902d4a",
+    "description": "<p>Every child deserves a chance. <a href=\"/contact\">Donate Now →</a></p>"
+   }
+  ],
+  "videos": [
+   {
+    "title": "Asha Foundation — highlights",
+    "video_url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    "video_date": "2026-09-15"
+   },
+   {
+    "title": "Behind the scenes",
+    "video_url": "https://www.youtube.com/watch?v=eRsGyueVLvQ",
+    "video_date": "2026-08-15"
+   },
+   {
+    "title": "A day with us",
+    "video_url": "https://www.youtube.com/watch?v=R6MlUcmOul8",
+    "video_date": "2026-07-15"
+   },
+   {
+    "title": "Event recap",
+    "video_url": "https://www.youtube.com/watch?v=WhWc3b3KhnY",
+    "video_date": "2026-06-15"
+   }
+  ],
+  "attachments": [
+   {
+    "title": "Asha Foundation — Brochure",
+    "attachment": "f:ngo-brochure.pdf",
+    "description": "Everything about us in one PDF."
+   },
+   {
+    "title": "Enquiry Form",
+    "attachment": "f:enquiry-form.pdf",
+    "description": "Fill, sign and email it to us."
+   }
+  ],
+  "enquiries": [
+   {
+    "name": "Priya Sharma",
+    "email": "priya.sharma@example.com",
+    "phone": "9876500011",
+    "subject": "Need more details",
+    "message": "Hello, I found Asha Foundation online. Could you please share more details and the best time to call?",
+    "page": "/contact",
+    "status": "New"
+   },
+   {
+    "name": "Rahul Mehta",
+    "email": "rahul.m@example.com",
+    "phone": "9876500022",
+    "subject": "Thank you",
+    "message": "Thanks for the quick reply yesterday — all my questions are answered.",
+    "page": "/",
+    "status": "Replied"
+   }
+  ],
+  "subscribers": [
+   {
+    "email": "neha.k@example.com",
+    "source": "Footer"
+   },
+   {
+    "email": "arjun.v@example.com",
+    "source": "Footer"
+   },
+   {
+    "email": "sana.q@example.com",
+    "source": "Footer"
    }
   ]
  },

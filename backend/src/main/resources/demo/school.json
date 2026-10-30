@@ -12,6 +12,58 @@
   "footer_text": "Affiliated to CBSE, New Delhi."
  },
  "modules": {
+  "menus": [
+   {
+    "title": "Home",
+    "custom_url": "/"
+   },
+   {
+    "_key": "about",
+    "title": "About"
+   },
+   {
+    "title": "Facilities",
+    "custom_url": "/services"
+   },
+   {
+    "title": "News",
+    "custom_url": "/blogs"
+   },
+   {
+    "title": "Gallery",
+    "custom_url": "/gallery"
+   },
+   {
+    "title": "Downloads",
+    "custom_url": "/downloads"
+   },
+   {
+    "title": "Contact",
+    "custom_url": "/contact"
+   }
+  ],
+  "pages": [
+   {
+    "title": "About Us",
+    "slug": "about-us",
+    "page_heading": "About Us",
+    "page_body": "<p>Sunrise Public School is a co-educational CBSE school offering a balanced education that combines academic excellence with sports, arts and values.</p><h2>Our story</h2><p>Sunrise Public School started with a simple idea: learn · lead · inspire. Today a passionate team carries that promise forward every day.</p><h2>What we believe</h2><ul><li>People first</li><li>Quality without shortcuts</li><li>Honest, transparent communication</li></ul>",
+    "menu_id": "@about",
+    "banner_image": "u:1509062522246-3755977927d7"
+   },
+   {
+    "title": "Privacy Policy",
+    "slug": "privacy-policy",
+    "page_heading": "Privacy Policy",
+    "page_body": "<p>Sunrise Public School respects your privacy. We collect only the information you share with us through our forms, use it only to respond to you, and never sell it.</p><p>Contact us anytime to view or delete your data.</p>"
+   },
+   {
+    "title": "Terms of Use",
+    "slug": "terms",
+    "page_heading": "Terms of Use",
+    "page_body": "<p>By using the Sunrise Public School website you agree to use it lawfully. Content is for general information and may change without notice.</p>"
+   }
+  ],
   "sliders": [
    {
     "title": "Welcome to Sunrise",
@@ -27,6 +79,16 @@
     "title": "A library of 20,000 books",
     "description": "Reading opens every door.",
     "image": "u:1427504494785-3a9ca7044f45"
+   },
+   {
+    "title": "Every child is an artist",
+    "description": "Art, music and dance are part of every school day.",
+    "image": "u:1588072432836-e10032774350"
+   },
+   {
+    "title": "Love to learn",
+    "description": "Curious minds, caring teachers, happy classrooms.",
+    "image": "u:1546410531-bb4caa6b424d"
    }
   ],
   "thoughts": [
@@ -317,6 +379,174 @@
     "summary": "Dance, drama and music lit up the stage.",
     "body": "<p>Dance, drama and music lit up the stage.</p><p>Over 600 students performed in front of 2,000 parents.</p>",
     "tags": "events"
+   }
+  ],
+  "video_categories": [
+   {
+    "_key": "highlights",
+    "title": "Highlights"
+   },
+   {
+    "_key": "events",
+    "title": "Events"
+   }
+  ],
+  "magazine_categories": [
+   {
+    "_key": "a",
+    "title": "Annual Magazine"
+   },
+   {
+    "_key": "b",
+    "title": "Newsletter"
+   }
+  ],
+  "popups": [
+   {
+    "title": "Welcome to Sunrise Public School",
+    "from_date": "2026-10-01",
+    "to_date": "2027-03-31",
+    "image": "u:1580582932707-520aed937b7b",
+    "description": "<p>Learn · Lead · Inspire. <a href=\"/contact\">Admissions Open →</a></p>"
+   }
+  ],
+  "videos": [
+   {
+    "title": "Sunrise Public School — highlights",
+    "video_url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    "video_date": "2026-09-15",
+    "category_id": "@highlights"
+   },
+   {
+    "title": "Behind the scenes",
+    "video_url": "https://www.youtube.com/watch?v=eRsGyueVLvQ",
+    "video_date": "2026-08-15",
+    "category_id": "@highlights"
+   },
+   {
+    "title": "A day with us",
+    "video_url": "https://www.youtube.com/watch?v=R6MlUcmOul8",
+    "video_date": "2026-07-15",
+    "category_id": "@events"
+   },
+   {
+    "title": "Event recap",
+    "video_url": "https://www.youtube.com/watch?v=WhWc3b3KhnY",
+    "video_date": "2026-06-15",
+    "category_id": "@events"
+   }
+  ],
+  "livestreams": [
+   {
+    "title": "Live: Sunrise Public School annual event",
+    "event_url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    "event_date": "2026-12-12"
+   },
+   {
+    "title": "Live Q&A session",
+    "event_url": "https://www.youtube.com/watch?v=eRsGyueVLvQ",
+    "event_date": "2026-11-20"
+   }
+  ],
+  "attachments": [
+   {
+    "title": "Sunrise Public School — Brochure",
+    "attachment": "f:school-brochure.pdf",
+    "description": "Everything about us in one PDF."
+   },
+   {
+    "title": "Enquiry Form",
+    "attachment": "f:enquiry-form.pdf",
+    "description": "Fill, sign and email it to us."
+   }
+  ],
+  "enquiries": [
+   {
+    "name": "Priya Sharma",
+    "email": "priya.sharma@example.com",
+    "phone": "9876500011",
+    "subject": "Need more details",
+    "message": "Hello, I found Sunrise Public School online. Could you please share more details and the best time to call?",
+    "page": "/contact",
+    "status": "New"
+   },
+   {
+    "name": "Rahul Mehta",
+    "email": "rahul.m@example.com",
+    "phone": "9876500022",
+    "subject": "Thank you",
+    "message": "Thanks for the quick reply yesterday — all my questions are answered.",
+    "page": "/",
+    "status": "Replied"
+   }
+  ],
+  "subscribers": [
+   {
+    "email": "neha.k@example.com",
+    "source": "Footer"
+   },
+   {
+    "email": "arjun.v@example.com",
+    "source": "Footer"
+   },
+   {
+    "email": "sana.q@example.com",
+    "source": "Footer"
+   }
+  ],
+  "magazines": [
+   {
+    "title": "Magazine — October",
+    "category_id": "@a",
+    "year": 2026,
+    "month": 10,
+    "page_no": 1,
+    "cover_image": "u:1427504494785-3a9ca7044f45",
+    "file": "f:school-magazine.pdf"
+   },
+   {
+    "title": "Magazine — September",
+    "category_id": "@a",
+    "year": 2026,
+    "month": 9,
+    "page_no": 1,
+    "cover_image": "u:1588072432836-e10032774350",
+    "file": "f:school-magazine.pdf"
+   },
+   {
+    "title": "Magazine — August",
+    "category_id": "@b",
+    "year": 2026,
+    "month": 8,
+    "page_no": 1,
+    "cover_image": "u:1546410531-bb4caa6b424d",
+    "file": "f:school-magazine.pdf"
+   }
+  ],
+  "magazine_thumbnails": [
+   {
+    "title": "Page 1",
+    "year": 2026,
+    "month": 10,
+    "thumbnail": "u:1588072432836-e10032774350"
+   },
+   {
+    "title": "Page 2",
+    "year": 2026,
+    "month": 10,
+    "thumbnail": "u:1546410531-bb4caa6b424d"
+   },
+   {
+    "title": "Page 3",
+    "year": 2026,
+    "month": 10,
+    "thumbnail": "u:1497633762265-9d179a990aa6"
+   },
+   {
+    "title": "Page 4",
+    "year": 2026,
+    "month": 10,
+    "thumbnail": "u:1509062522246-3755977927d7"
    }
   ]
  },

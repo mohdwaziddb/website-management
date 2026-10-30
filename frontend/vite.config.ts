@@ -15,7 +15,10 @@ export default defineConfig({
     allowedHosts: true,
     proxy: {
       "/api": { target: backend, changeOrigin: false },
-      "/files": { target: backend, changeOrigin: false }
+      "/files": { target: backend, changeOrigin: false },
+      // Google ke liye (live: nginx me same rewrite — README)
+      "/sitemap.xml": { target: backend, changeOrigin: false, rewrite: () => "/api/public/sitemap.xml" },
+      "/robots.txt": { target: backend, changeOrigin: false, rewrite: () => "/api/public/robots.txt" }
     }
   },
   test: {

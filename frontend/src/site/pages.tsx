@@ -8,6 +8,7 @@ import { useBySlug, useList, useRecord, useSite } from "./data";
 import { TitledSection } from "./siteTypes";
 import { Achievements, BlogCard, Catalog, ContactBlock, DownloadRow, Faq, LiveStreams, Pricing, Projects, SECTIONS, Services, Team, VideoCard } from "./sections";
 import { homeSections, parseSection } from "./templates";
+import { useSeo } from "./seo";
 import {
   Container,
   EmptyState,
@@ -27,6 +28,7 @@ import {
 /** Home = template ke sections us order + style me jo template config me hai ("services:icons") */
 export function HomePage() {
   const { template } = useSite();
+  useSeo("");
   return (
     <>
       {homeSections(template).map((spec) => {
@@ -38,14 +40,12 @@ export function HomePage() {
   );
 }
 
-function useTitle(title: string) {
-  const name = useSite().settings.site_name;
-  useEffect(() => {
-    document.title = [title, name].filter(Boolean).join(" | ");
-  }, [title, name]);
+/** Page ka title (+ Google / share ke liye description aur photo) — SEO common jagah se */
+export function useTitle(title: string, extra: { description?: unknown; image?: unknown } = {}) {
+  useSeo(title, extra);
 }
 
-function Loading() {
+export function Loading() {
   return (
     <div className="flex justify-center py-20">
       <motion.span className="h-10 w-10 rounded-full border-4 border-[var(--primary)] border-t-transparent" animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }} />
@@ -86,7 +86,7 @@ function EmptyIfNone({ section }: { section: keyof typeof MODULE_OF }) {
 export function DetailPage({ module }: { module: "projects" | "catalog_items" }) {
   const { id } = useParams();
   const row = useRecord(module, id);
-  useTitle(row ? String(row.title) : "");
+  useTitle(row ? String(row.title) : "", { description: row?.summary, image: row?.cover_image ?? row?.image });
   if (row === undefined) return <Loading />;
   if (row === null) return <NotFoundPage />;
   const image = module === "projects" ? row.cover_image : row.image;
@@ -149,7 +149,7 @@ export function DetailPage({ module }: { module: "projects" | "catalog_items" })
 export function CmsPage() {
   const { slug } = useParams();
   const page = useBySlug("pages", slug);
-  useTitle(page ? String(page.title) : "");
+  useTitle(page ? String(page.title) : "", { description: page?.meta_description || page?.page_body, image: page?.banner_image });
   if (page === undefined) return <Loading />;
   if (page === null) return <NotFoundPage />;
   return (
@@ -190,7 +190,7 @@ export function BlogListPage() {
 export function BlogPage() {
   const { slug } = useParams();
   const blog = useBySlug("blogs", slug);
-  useTitle(blog ? String(blog.title) : "");
+  useTitle(blog ? String(blog.title) : "", { description: blog?.summary || blog?.body, image: blog?.cover_image });
   if (blog === undefined) return <Loading />;
   if (blog === null) return <NotFoundPage />;
   const tags = typeof blog.tags === "string" ? blog.tags.split(",").map((t) => t.trim()).filter(Boolean) : [];
@@ -206,7 +206,7 @@ export function BlogPage() {
         {tags.length > 0 && (
           <div className="mt-8 flex flex-wrap gap-2">
             {tags.map((t) => (
-              <span key={t} className="rounded-full bg-[var(--text)]/5 px-3 py-1 text-xs">#{t}</span>
+              <span key={t} className="rounded-full bg-site-text/5 px-3 py-1 text-xs">#{t}</span>
             ))}
           </div>
         )}
@@ -265,7 +265,7 @@ export function GalleryPage() {
                 <button
                   key={c.id}
                   onClick={() => setParams(c.id ? { category: String(c.id) } : {})}
-                  className={`rounded-full px-4 py-1.5 text-sm transition ${active ? "bg-[var(--primary)] text-[var(--on-primary)]" : "bg-[var(--text)]/5 hover:bg-[var(--text)]/10"}`}
+                  className={`rounded-full px-4 py-1.5 text-sm transition ${active ? "bg-[var(--primary)] text-[var(--on-primary)]" : "bg-site-text/5 hover:bg-site-text/10"}`}
                 >
                   {String(c.title)}
                 </button>
@@ -309,7 +309,7 @@ export function VideosPage() {
               <button
                 key={c.id}
                 onClick={() => setCat(c.id ? String(c.id) : "")}
-                className={`rounded-full px-4 py-1.5 text-sm transition ${String(c.id || "") === cat ? "bg-[var(--primary)] text-[var(--on-primary)]" : "bg-[var(--text)]/5 hover:bg-[var(--text)]/10"}`}
+                className={`rounded-full px-4 py-1.5 text-sm transition ${String(c.id || "") === cat ? "bg-[var(--primary)] text-[var(--on-primary)]" : "bg-site-text/5 hover:bg-site-text/10"}`}
               >
                 {String(c.title)}
               </button>

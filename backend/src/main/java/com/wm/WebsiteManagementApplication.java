@@ -8,6 +8,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 // JWT khud handle hota hai; default in-memory user/password nahi chahiye
 @SpringBootApplication(exclude = UserDetailsServiceAutoConfiguration.class)
+@org.springframework.scheduling.annotation.EnableScheduling
 @EnableConfigurationProperties(AppProperties.class)
 public class WebsiteManagementApplication {
     public static void main(String[] args) {

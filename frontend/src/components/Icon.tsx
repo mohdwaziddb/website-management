@@ -1,5 +1,16 @@
 import {
   Activity,
+  AtSign,
+  Mail,
+  History,
+  LayoutDashboard,
+  LayoutTemplate,
+  Settings,
+  ShoppingCart,
+  SlidersHorizontal,
+  Star,
+  UserRound,
+  UserCircle,
   Award,
   BookOpen,
   Bookmark,
@@ -32,11 +43,29 @@ import {
   Package,
   HelpCircle,
   BarChart3,
-  Handshake
+  Handshake,
+  Layers,
+  Megaphone,
+  FolderTree,
+  ShoppingBag,
+  Boxes,
+  TicketPercent
 } from "lucide-react";
 
 // Backend ModuleRegistry ke icon names -> lucide components (poori library import nahi karte)
 const ICONS: Record<string, LucideIcon> = {
+  mail: Mail,
+  "at-sign": AtSign,
+  // admin ke apne pages (sidebar / quick search)
+  "layout-dashboard": LayoutDashboard,
+  "layout-template": LayoutTemplate,
+  settings: Settings,
+  history: History,
+  "shopping-cart": ShoppingCart,
+  "sliders-horizontal": SlidersHorizontal,
+  star: Star,
+  "user-round": UserRound,
+  "user-circle": UserCircle,
   activity: Activity,
   award: Award,
   "book-open": BookOpen,
@@ -68,7 +97,13 @@ const ICONS: Record<string, LucideIcon> = {
   package: Package,
   "help-circle": HelpCircle,
   "bar-chart": BarChart3,
-  handshake: Handshake
+  handshake: Handshake,
+  layers: Layers,
+  megaphone: Megaphone,
+  "folder-tree": FolderTree,
+  "shopping-bag": ShoppingBag,
+  boxes: Boxes,
+  "ticket-percent": TicketPercent
 };
 
 export function ModuleIcon({ name, className = "h-4 w-4" }: { name: string; className?: string }) {

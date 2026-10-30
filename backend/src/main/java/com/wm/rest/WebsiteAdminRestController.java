@@ -5,7 +5,9 @@ import com.wm.constant.ApiPathConstants;
 import com.wm.service.activity_logs.ActivityLogService;
 import com.wm.service.auth.WebsiteAuthService;
 import com.wm.service.demo.DemoDataService;
+import com.wm.service.templates.CustomTemplateService;
 import com.wm.service.files.FileUploadService;
+import com.wm.service.notifications.NotificationService;
 import com.wm.service.settings.WebsiteSettingsService;
 import com.wm.service.users.WebsiteUserService;
 import com.wm.service.website_module.WebsiteModuleService;
@@ -22,6 +24,9 @@ import java.util.Map;
 @RestController
 @RequestMapping(ApiPathConstants.Website.BASE)
 public class WebsiteAdminRestController {
+
+    @Autowired
+    private NotificationService notificationService;
 
     @Autowired
     private ResponseFactory responseFactory;
@@ -46,6 +51,9 @@ public class WebsiteAdminRestController {
 
     @Autowired
     private DemoDataService demoDataService;
+
+    @Autowired
+    private CustomTemplateService customTemplateService;
 
     // ------------------------------------------------------------ auth
 
@@ -110,6 +118,16 @@ public class WebsiteAdminRestController {
     @PostMapping(ApiPathConstants.Website.MODULE)
     public ResponseEntity<?> addRecord(@PathVariable String module, @RequestBody Map<String, Object> param) {
         return responseFactory.success(websiteModuleService.addRecord(module, param));
+    }
+
+    @PostMapping(ApiPathConstants.Website.MODULE_BULK)
+    public ResponseEntity<?> bulkAction(@PathVariable String module, @RequestBody Map<String, Object> param) {
+        return responseFactory.success(websiteModuleService.bulkAction(module, param));
+    }
+
+    @GetMapping(ApiPathConstants.Website.NOTIFICATIONS)
+    public ResponseEntity<?> getNotifications() {
+        return responseFactory.success(notificationService.getNotifications());
     }
 
     @PutMapping(ApiPathConstants.Website.MODULE_REORDER)
@@ -196,5 +214,28 @@ public class WebsiteAdminRestController {
     @PostMapping(ApiPathConstants.Website.RESET)
     public ResponseEntity<?> resetWebsite(@RequestBody Map<String, Object> param) {
         return responseFactory.success(demoDataService.resetWebsite(param));
+    }
+
+    // ------------------------------------------------------------ custom templates (list: admin + editor, baaki ADMIN — SecurityConfig)
+
+    @GetMapping(ApiPathConstants.Website.CUSTOM_TEMPLATES)
+    public ResponseEntity<?> getCustomTemplates() {
+        return responseFactory.success(customTemplateService.getCustomTemplates());
+    }
+
+    @PostMapping(ApiPathConstants.Website.CUSTOM_TEMPLATES)
+    public ResponseEntity<?> addCustomTemplate(@RequestBody Map<String, Object> param) {
+        return responseFactory.success(customTemplateService.addCustomTemplate(param));
+    }
+
+    @PutMapping(ApiPathConstants.Website.CUSTOM_TEMPLATE)
+    public ResponseEntity<?> updateCustomTemplate(@PathVariable long id, @RequestBody Map<String, Object> param) {
+        return responseFactory.success(customTemplateService.updateCustomTemplate(id, param));
+    }
+
+    @DeleteMapping(ApiPathConstants.Website.CUSTOM_TEMPLATE)
+    public ResponseEntity<?> deleteCustomTemplate(@PathVariable long id) {
+        customTemplateService.deleteCustomTemplate(id);
+        return responseFactory.successMessage("Template deleted");
     }
 }

@@ -3,10 +3,13 @@ package com.wm.rest;
 import com.wm.common.ApiException;
 import com.wm.common.ResponseFactory;
 import com.wm.constant.ApiPathConstants;
+import com.wm.service.demo.DemoCatalog;
 import com.wm.service.demo.DemoDataService;
 import com.wm.service.platform.PlatformAuthService;
 import com.wm.service.platform.PlatformTenantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +31,9 @@ public class PlatformRestController {
 
     @Autowired
     private DemoDataService demoDataService;
+
+    @Autowired
+    private DemoCatalog demoCatalog;
 
     // ------------------------------------------------------------ auth
 
@@ -89,5 +95,12 @@ public class PlatformRestController {
     @GetMapping(ApiPathConstants.Platform.DEMO_PREVIEW)
     public ResponseEntity<?> getDemoPreview(@PathVariable String type) {
         return responseFactory.success(demoDataService.getPreview(type));
+    }
+
+    /** Demo PDF (template preview me Downloads / E-Magazine) */
+    @GetMapping(ApiPathConstants.Platform.DEMO_FILE)
+    public ResponseEntity<?> getDemoFile(@PathVariable String name) {
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_PDF).cacheControl(CacheControl.maxAge(java.time.Duration.ofDays(1)))
+                .body(demoCatalog.getFile(name));
     }
 }

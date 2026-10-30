@@ -20,11 +20,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Website type ka demo data: classpath:demo/<type>.json (tools/gen_demo.py se banta hai).
- * Image value "u:<unsplash-id>" (landscape) / "p:<id>" (portrait), ref value "@<_key>".
+ * Image value "u:<unsplash-id>" (landscape) / "p:<id>" (portrait), file "f:<name>.pdf" (classpath demo/files), ref value "@<_key>".
  */
 @Component
 public class DemoCatalog {
     private static final String UNSPLASH = "https://images.unsplash.com/photo-";
+    /** Preview me demo PDF yahan se khulti hai (PlatformRestController) */
+    public static final String FILE_URL = "/api/platform/demo/files/";
+    private static final java.util.regex.Pattern FILE_NAME = java.util.regex.Pattern.compile("^[a-z0-9_-]+\\.pdf$");
 
     @Autowired
     private ObjectMapper mapper;
@@ -103,12 +106,24 @@ public class DemoCatalog {
         return Map.of("type", type, "settings", getSettings(type), "modules", out);
     }
 
-    /** "u:<id>" / "p:<id>" => Unsplash URL; baaki value as-is */
+    /** "u:<id>" / "p:<id>" => Unsplash URL, "f:<name>" => demo file URL; baaki value as-is */
     public static Object resolveImage(Object v) {
         if (!(v instanceof String s)) return v;
+        if (s.startsWith("f:")) return FILE_URL + s.substring(2);
         if (s.startsWith("u:")) return UNSPLASH + s.substring(2) + "?w=1600&q=80&auto=format&fit=crop";
         if (s.startsWith("p:")) return UNSPLASH + s.substring(2) + "?w=600&h=600&q=80&auto=format&fit=crop&crop=faces";
         return v;
+    }
+
+    public static boolean isFileRef(Object v) {
+        return v instanceof String s && s.startsWith("f:");
+    }
+
+    /** classpath demo/files/<name> — sirf "abc-xyz.pdf" jaise naam (path traversal nahi) */
+    public ClassPathResource getFile(String name) {
+        ClassPathResource r = new ClassPathResource("demo/files/" + name);
+        if (name == null || !FILE_NAME.matcher(name).matches() || !r.exists()) throw ApiException.notFound("File not found");
+        return r;
     }
 
     public static boolean isImageRef(Object v) {

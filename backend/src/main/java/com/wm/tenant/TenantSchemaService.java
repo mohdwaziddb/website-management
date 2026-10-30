@@ -54,6 +54,17 @@ public class TenantSchemaService {
             CREATE TABLE IF NOT EXISTS site_settings (
                 setting_key VARCHAR(60) PRIMARY KEY,
                 setting_value TEXT NULL
+            )""",
+            // admin ke apne templates (kisi built-in ko base lekar rang / font / sections badle) — reset me nahi hat-te
+            """
+            CREATE TABLE IF NOT EXISTS custom_templates (
+                id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(100) NOT NULL,
+                base_template VARCHAR(30) NOT NULL,
+                config TEXT NOT NULL,
+                created_by BIGINT NULL,
+                created_on DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_on DATETIME NULL
             )"""
     );
 
@@ -91,6 +102,7 @@ public class TenantSchemaService {
 
     public void ensureSchema(JdbcTemplate jdbc) {
         CORE_TABLES.forEach(jdbc::execute);
+        StoreSchema.TABLES.forEach(jdbc::execute);
         dropRemoved(jdbc);
         for (ModuleDef m : registry.all()) {
             jdbc.execute(createTableSql(m));

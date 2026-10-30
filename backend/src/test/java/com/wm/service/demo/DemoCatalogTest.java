@@ -51,6 +51,7 @@ class DemoCatalogTest {
                         Object v = row.get(col);
                         if (v == null) continue;
                         if (f.type() == FieldType.IMAGE) assertTrue(PHOTO.matcher(String.valueOf(v)).matches(), t + ": bad photo " + v);
+                        if (f.type() == FieldType.FILE) assertTrue(catalog.getFile(String.valueOf(v).substring(2)).exists() && String.valueOf(v).startsWith("f:"), t + ": bad file " + v);
                         if (f.type() == FieldType.REF) {
                             assertTrue(String.valueOf(v).startsWith("@"), t + ": ref must be @key");
                             assertTrue(keys.contains(f.ref() + ":" + String.valueOf(v).substring(1)), t + ": unresolved ref " + v);
@@ -64,6 +65,8 @@ class DemoCatalogTest {
                 }
             }
             assertTrue(rows >= 15, t + " has only " + rows + " demo rows");
+            // har admin menu me kuch na kuch demo (khaali menu = import ke baad bhi khaali page)
+            for (String mod : type.modules()) assertTrue(!catalog.getModules(t).getOrDefault(mod, List.of()).isEmpty(), t + ": no demo for menu " + mod);
             assertTrue(catalog.getModules(t).containsKey("sliders"), t + " needs sliders");
         }
     }
@@ -83,7 +86,7 @@ class DemoCatalogTest {
 
     @Test
     void siteTypesAndTemplatesAreConsistent() {
-        assertEquals(15, SiteTypeCatalog.all().size());
+        assertEquals(17, SiteTypeCatalog.all().size());
         for (SiteTypeCatalog.SiteType type : SiteTypeCatalog.all()) {
             type.modules().forEach(m -> assertNotNull(registry.get(m)));
             type.labels().keySet().forEach(m -> assertTrue(type.modules().contains(m), type.key() + " label for disabled " + m));
@@ -91,7 +94,7 @@ class DemoCatalogTest {
             assertTrue(templates >= 3, type.key() + " has " + templates + " templates");
             assertEquals(type.key(), TemplateCatalog.typeOf(TemplateCatalog.defaultFor(type.key())));
         }
-        assertEquals(47, TemplateCatalog.KEYS.size());
+        assertEquals(53, TemplateCatalog.KEYS.size());
         assertEquals("school", SiteTypeCatalog.get("nonsense").key());
         assertEquals("restaurant", TemplateCatalog.typeOf("saffron"));
     }

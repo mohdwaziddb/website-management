@@ -23,7 +23,7 @@ public final class SiteTypeCatalog {
     /** Har type me ye modules */
     private static final List<String> COMMON = List.of(
             "menus", "pages", "sliders", "popups", "testimonials", "faqs", "stats", "partners",
-            "blogs", "gallery_categories", "image_gallery", "videos", "attachments");
+            "blogs", "gallery_categories", "image_gallery", "videos", "attachments", "enquiries", "subscribers");
 
     private static final Map<String, SiteType> TYPES = new LinkedHashMap<>();
 
@@ -74,6 +74,16 @@ public final class SiteTypeCatalog {
         add("construction", "Construction / Builder",
                 List.of("projects", "services", "team_members"),
                 Map.of("projects", "Projects", "team_members", "Team"));
+        add("news", "News / Magazine Portal",
+                List.of("news_categories", "news_posts", "sponsors", "team_members", "livestreams", "video_categories",
+                        "magazine_categories", "magazines", "magazine_thumbnails"),
+                Map.ofEntries(Map.entry("team_members", "Reporters"), Map.entry("blogs", "Opinion & Columns"),
+                        Map.entry("gallery_categories", "Photo Albums"), Map.entry("image_gallery", "Photo Gallery"),
+                        Map.entry("livestreams", "Live TV"), Map.entry("magazines", "E-Paper"),
+                        Map.entry("magazine_categories", "E-Paper Editions"), Map.entry("magazine_thumbnails", "E-Paper Pages")));
+        add("ecommerce", "Online Store / E-commerce",
+                List.of("product_categories", "products", "product_variants", "coupons"),
+                Map.of("blogs", "Blog", "testimonials", "Customer Reviews"));
     }
 
     private SiteTypeCatalog() {

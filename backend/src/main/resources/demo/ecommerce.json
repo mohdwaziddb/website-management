@@ -1,0 +1,774 @@
+{
+ "settings": {
+  "site_name": "Kartly",
+  "tagline": "Everyday style, delivered to your door",
+  "about_short": "<p>Kartly is a homegrown online store for fashion, gadgets and lifestyle products — handpicked quality, honest prices, free shipping above ₹999 and easy 7-day returns.</p>",
+  "phone": "+91 99100 55443",
+  "email": "care@kartly.in",
+  "address": "Plot 21, Sector 18, Gurugram, Haryana 122015",
+  "cta_text": "Shop Now",
+  "cta_link": "/shop",
+  "instagram": "https://instagram.com",
+  "facebook": "https://facebook.com",
+  "footer_text": "100% secure payments · Cash on Delivery · 7-day easy returns"
+ },
+ "modules": {
+  "menus": [
+   {
+    "title": "Home",
+    "custom_url": "/"
+   },
+   {
+    "_key": "about",
+    "title": "About"
+   },
+   {
+    "title": "Shop",
+    "custom_url": "/shop"
+   },
+   {
+    "title": "New Arrivals",
+    "custom_url": "/shop?sort=new"
+   },
+   {
+    "title": "Blog",
+    "custom_url": "/blogs"
+   },
+   {
+    "title": "Contact",
+    "custom_url": "/contact"
+   }
+  ],
+  "pages": [
+   {
+    "title": "About Us",
+    "slug": "about-us",
+    "page_heading": "About Us",
+    "page_body": "<p>Kartly is a homegrown online store for fashion, gadgets and lifestyle products — handpicked quality, honest prices, free shipping above ₹999 and easy 7-day returns.</p><h2>Our story</h2><p>Kartly started with a simple idea: everyday style, delivered to your door. Today a passionate team carries that promise forward every day.</p><h2>What we believe</h2><ul><li>People first</li><li>Quality without shortcuts</li><li>Honest, transparent communication</li></ul>",
+    "menu_id": "@about",
+    "banner_image": "u:1483985988355-763728e1935b"
+   },
+   {
+    "title": "Privacy Policy",
+    "slug": "privacy-policy",
+    "page_heading": "Privacy Policy",
+    "page_body": "<p>Kartly respects your privacy. We collect only the information you share with us through our forms, use it only to respond to you, and never sell it.</p><p>Contact us anytime to view or delete your data.</p>"
+   },
+   {
+    "title": "Terms of Use",
+    "slug": "terms",
+    "page_heading": "Terms of Use",
+    "page_body": "<p>By using the Kartly website you agree to use it lawfully. Content is for general information and may change without notice.</p>"
+   }
+  ],
+  "sliders": [
+   {
+    "title": "The Festive Edit is here",
+    "description": "Up to 50% off on fashion, footwear & gadgets.",
+    "image": "u:1483985988355-763728e1935b"
+   },
+   {
+    "title": "New season, new you",
+    "description": "Fresh arrivals every week — free shipping above ₹999.",
+    "image": "u:1515886657613-9f3515b0c78f"
+   },
+   {
+    "title": "Tech that travels",
+    "description": "Headphones, smartwatches and more at the best prices.",
+    "image": "u:1505740420928-5e560c06d30e"
+   }
+  ],
+  "product_categories": [
+   {
+    "_key": "men",
+    "title": "Men",
+    "slug": "men",
+    "image": "u:1503342217505-b0a15ec3261c",
+    "show_on_home": true,
+    "description": "T-shirts, shirts and everyday essentials."
+   },
+   {
+    "_key": "women",
+    "title": "Women",
+    "slug": "women",
+    "image": "u:1434389677669-e08b4cac3105",
+    "show_on_home": true,
+    "description": "Dresses, tops and handbags."
+   },
+   {
+    "_key": "footwear",
+    "title": "Footwear",
+    "slug": "footwear",
+    "image": "u:1542291026-7eec264c27ff",
+    "show_on_home": true,
+    "description": "Sneakers and running shoes."
+   },
+   {
+    "_key": "electronics",
+    "title": "Electronics",
+    "slug": "electronics",
+    "image": "u:1505740420928-5e560c06d30e",
+    "show_on_home": true,
+    "description": "Audio, wearables and cameras."
+   },
+   {
+    "_key": "accessories",
+    "title": "Accessories",
+    "slug": "accessories",
+    "image": "u:1523275335684-37898b6baf30",
+    "show_on_home": true,
+    "description": "Watches, sunglasses and bags."
+   },
+   {
+    "_key": "home",
+    "title": "Home & Living",
+    "slug": "home-living",
+    "image": "u:1514228742587-6b1558fcca3d",
+    "show_on_home": true,
+    "description": "Mugs, decor and more."
+   },
+   {
+    "_key": "beauty",
+    "title": "Beauty",
+    "slug": "beauty",
+    "image": "u:1556228578-8c89e6adf883",
+    "show_on_home": false,
+    "description": "Skincare and self-care."
+   }
+  ],
+  "products": [
+   {
+    "_key": "tee",
+    "title": "Essential Cotton Crew T-Shirt",
+    "slug": "essential-cotton-tee",
+    "category_id": "@men",
+    "brand": "Kartly Basics",
+    "sku": "ESSENTIAL-COTTON-TEE",
+    "price": 499,
+    "compare_price": 899,
+    "gst_rate": "5",
+    "stock": null,
+    "cover_image": "u:1521572163474-6864f9cf17ab",
+    "image_2": "u:1503342217505-b0a15ec3261c",
+    "summary": "Super-soft 180 GSM combed cotton tee with a relaxed fit. Pre-shrunk and bio-washed.",
+    "description": "<p>Super-soft 180 GSM combed cotton tee with a relaxed fit. Pre-shrunk and bio-washed.</p><ul><li>Premium quality, checked before dispatch</li><li>7-day easy returns</li><li>Cash on Delivery available</li></ul>",
+    "option1_name": "Size",
+    "option2_name": "Colour",
+    "is_featured": true,
+    "tags": "men"
+   },
+   {
+    "_key": "graphic",
+    "title": "Urban Graphic Oversized Tee",
+    "slug": "urban-graphic-tee",
+    "category_id": "@men",
+    "brand": "Kartly Street",
+    "sku": "URBAN-GRAPHIC-TEE",
+    "price": 699,
+    "compare_price": 1199,
+    "gst_rate": "5",
+    "stock": null,
+    "cover_image": "u:1503342217505-b0a15ec3261c",
+    "summary": "Drop-shoulder oversized tee with a minimal graphic print.",
+    "description": "<p>Drop-shoulder oversized tee with a minimal graphic print.</p><ul><li>Premium quality, checked before dispatch</li><li>7-day easy returns</li><li>Cash on Delivery available</li></ul>",
+    "option1_name": "Size",
+    "option2_name": null,
+    "is_featured": false,
+    "tags": "men"
+   },
+   {
+    "_key": "runner",
+    "title": "AirStride Running Shoes",
+    "slug": "airstride-running-shoes",
+    "category_id": "@footwear",
+    "brand": "Stride",
+    "sku": "AIRSTRIDE-RUNNING-SH",
+    "price": 2499,
+    "compare_price": 3999,
+    "gst_rate": "12",
+    "stock": null,
+    "cover_image": "u:1542291026-7eec264c27ff",
+    "summary": "Lightweight mesh runners with responsive cushioning for daily miles.",
+    "description": "<p>Lightweight mesh runners with responsive cushioning for daily miles.</p><ul><li>Premium quality, checked before dispatch</li><li>7-day easy returns</li><li>Cash on Delivery available</li></ul>",
+    "option1_name": "UK Size",
+    "option2_name": null,
+    "is_featured": true,
+    "tags": "footwear"
+   },
+   {
+    "_key": "phones",
+    "title": "Studio Wireless Headphones",
+    "slug": "studio-wireless-headphones",
+    "category_id": "@electronics",
+    "brand": "SonicWave",
+    "sku": "STUDIO-WIRELESS-HEAD",
+    "price": 3299,
+    "compare_price": 5999,
+    "gst_rate": "18",
+    "stock": 25,
+    "cover_image": "u:1505740420928-5e560c06d30e",
+    "summary": "40-hour battery, active noise cancellation and plush memory-foam ear cushions.",
+    "description": "<p>40-hour battery, active noise cancellation and plush memory-foam ear cushions.</p><ul><li>Premium quality, checked before dispatch</li><li>7-day easy returns</li><li>Cash on Delivery available</li></ul>",
+    "option1_name": null,
+    "option2_name": null,
+    "is_featured": true,
+    "tags": "electronics"
+   },
+   {
+    "_key": "smartwatch",
+    "title": "FitPulse Smartwatch",
+    "slug": "fitpulse-smartwatch",
+    "category_id": "@electronics",
+    "brand": "FitPulse",
+    "sku": "FITPULSE-SMARTWATCH",
+    "price": 2799,
+    "compare_price": 4999,
+    "gst_rate": "18",
+    "stock": 30,
+    "cover_image": "u:1546868871-7041f2a55e12",
+    "summary": "AMOLED display, SpO2 and heart-rate tracking, 7-day battery and 100+ sports modes.",
+    "description": "<p>AMOLED display, SpO2 and heart-rate tracking, 7-day battery and 100+ sports modes.</p><ul><li>Premium quality, checked before dispatch</li><li>7-day easy returns</li><li>Cash on Delivery available</li></ul>",
+    "option1_name": null,
+    "option2_name": null,
+    "is_featured": true,
+    "tags": "electronics"
+   },
+   {
+    "_key": "camera",
+    "title": "Retro Instant Camera",
+    "slug": "retro-instant-camera",
+    "category_id": "@electronics",
+    "brand": "SnapCo",
+    "sku": "RETRO-INSTANT-CAMERA",
+    "price": 5499,
+    "compare_price": 6999,
+    "gst_rate": "18",
+    "stock": 8,
+    "cover_image": "u:1526170375885-4d8ecf77b99f",
+    "summary": "Print memories instantly with this classic-styled instant camera.",
+    "description": "<p>Print memories instantly with this classic-styled instant camera.</p><ul><li>Premium quality, checked before dispatch</li><li>7-day easy returns</li><li>Cash on Delivery available</li></ul>",
+    "option1_name": null,
+    "option2_name": null,
+    "is_featured": false,
+    "tags": "electronics"
+   },
+   {
+    "_key": "watch",
+    "title": "Heritage Analog Watch",
+    "slug": "heritage-analog-watch",
+    "category_id": "@accessories",
+    "brand": "Tempo",
+    "sku": "HERITAGE-ANALOG-WATC",
+    "price": 1899,
+    "compare_price": 2999,
+    "gst_rate": "18",
+    "stock": 12,
+    "cover_image": "u:1523275335684-37898b6baf30",
+    "summary": "Minimal dial, genuine leather strap and 3 ATM water resistance.",
+    "description": "<p>Minimal dial, genuine leather strap and 3 ATM water resistance.</p><ul><li>Premium quality, checked before dispatch</li><li>7-day easy returns</li><li>Cash on Delivery available</li></ul>",
+    "option1_name": null,
+    "option2_name": null,
+    "is_featured": true,
+    "tags": "accessories"
+   },
+   {
+    "_key": "shades",
+    "title": "Aviator Polarised Sunglasses",
+    "slug": "aviator-polarised-sunglasses",
+    "category_id": "@accessories",
+    "brand": "Glare",
+    "sku": "AVIATOR-POLARISED-SU",
+    "price": 999,
+    "compare_price": 1999,
+    "gst_rate": "12",
+    "stock": 40,
+    "cover_image": "u:1572635196237-14b3f281503f",
+    "summary": "UV400 polarised lenses in a lightweight metal frame.",
+    "description": "<p>UV400 polarised lenses in a lightweight metal frame.</p><ul><li>Premium quality, checked before dispatch</li><li>7-day easy returns</li><li>Cash on Delivery available</li></ul>",
+    "option1_name": null,
+    "option2_name": null,
+    "is_featured": false,
+    "tags": "accessories"
+   },
+   {
+    "_key": "bag",
+    "title": "Everyday Leather Handbag",
+    "slug": "everyday-leather-handbag",
+    "category_id": "@women",
+    "brand": "Mia",
+    "sku": "EVERYDAY-LEATHER-HAN",
+    "price": 2199,
+    "compare_price": 3499,
+    "gst_rate": "12",
+    "stock": null,
+    "cover_image": "u:1584917865442-de89df76afd3",
+    "summary": "Spacious vegan-leather handbag with a detachable sling strap.",
+    "description": "<p>Spacious vegan-leather handbag with a detachable sling strap.</p><ul><li>Premium quality, checked before dispatch</li><li>7-day easy returns</li><li>Cash on Delivery available</li></ul>",
+    "option1_name": "Colour",
+    "option2_name": null,
+    "is_featured": true,
+    "tags": "women"
+   },
+   {
+    "_key": "laptop",
+    "title": "UltraBook 14 Laptop",
+    "slug": "ultrabook-14-laptop",
+    "category_id": "@electronics",
+    "brand": "Nova",
+    "sku": "ULTRABOOK-14-LAPTOP",
+    "price": 54990,
+    "compare_price": 64990,
+    "gst_rate": "18",
+    "stock": 5,
+    "cover_image": "u:1517336714731-489689fd1ca8",
+    "summary": "14\" FHD display, 16 GB RAM, 512 GB SSD and an all-day battery.",
+    "description": "<p>14\" FHD display, 16 GB RAM, 512 GB SSD and an all-day battery.</p><ul><li>Premium quality, checked before dispatch</li><li>7-day easy returns</li><li>Cash on Delivery available</li></ul>",
+    "option1_name": null,
+    "option2_name": null,
+    "is_featured": false,
+    "tags": "electronics"
+   },
+   {
+    "_key": "mobile",
+    "title": "Nova X Smartphone (128 GB)",
+    "slug": "nova-x-smartphone",
+    "category_id": "@electronics",
+    "brand": "Nova",
+    "sku": "NOVA-X-SMARTPHONE",
+    "price": 18999,
+    "compare_price": 21999,
+    "gst_rate": "18",
+    "stock": 3,
+    "cover_image": "u:1511707171634-5f897ff02aa9",
+    "summary": "6.5\" AMOLED, 50 MP camera and 5000 mAh battery with 33W fast charging.",
+    "description": "<p>6.5\" AMOLED, 50 MP camera and 5000 mAh battery with 33W fast charging.</p><ul><li>Premium quality, checked before dispatch</li><li>7-day easy returns</li><li>Cash on Delivery available</li></ul>",
+    "option1_name": null,
+    "option2_name": null,
+    "is_featured": false,
+    "tags": "electronics"
+   },
+   {
+    "_key": "mug",
+    "title": "Handmade Ceramic Mug Set (2)",
+    "slug": "ceramic-mug-set",
+    "category_id": "@home",
+    "brand": "Clay & Co",
+    "sku": "CERAMIC-MUG-SET",
+    "price": 649,
+    "compare_price": 999,
+    "gst_rate": "12",
+    "stock": 60,
+    "cover_image": "u:1514228742587-6b1558fcca3d",
+    "summary": "Microwave-safe stoneware mugs, glazed by hand. Set of two, 350 ml each.",
+    "description": "<p>Microwave-safe stoneware mugs, glazed by hand. Set of two, 350 ml each.</p><ul><li>Premium quality, checked before dispatch</li><li>7-day easy returns</li><li>Cash on Delivery available</li></ul>",
+    "option1_name": null,
+    "option2_name": null,
+    "is_featured": false,
+    "tags": "home"
+   },
+   {
+    "_key": "skincare",
+    "title": "Glow Daily Skincare Kit",
+    "slug": "glow-skincare-kit",
+    "category_id": "@beauty",
+    "brand": "Glow Lab",
+    "sku": "GLOW-SKINCARE-KIT",
+    "price": 1299,
+    "compare_price": 1799,
+    "gst_rate": "18",
+    "stock": 20,
+    "cover_image": "u:1556228578-8c89e6adf883",
+    "summary": "Cleanser, serum and moisturiser for a simple 3-step routine.",
+    "description": "<p>Cleanser, serum and moisturiser for a simple 3-step routine.</p><ul><li>Premium quality, checked before dispatch</li><li>7-day easy returns</li><li>Cash on Delivery available</li></ul>",
+    "option1_name": null,
+    "option2_name": null,
+    "is_featured": false,
+    "tags": "beauty"
+   }
+  ],
+  "product_variants": [
+   {
+    "product_id": "@tee",
+    "title": "S / Black",
+    "option1": "S",
+    "option2": "Black",
+    "sku": "ECT-S-BLACK",
+    "price": null,
+    "stock": 20
+   },
+   {
+    "product_id": "@tee",
+    "title": "S / White",
+    "option1": "S",
+    "option2": "White",
+    "sku": "ECT-S-WHITE",
+    "price": null,
+    "stock": 20
+   },
+   {
+    "product_id": "@tee",
+    "title": "M / Black",
+    "option1": "M",
+    "option2": "Black",
+    "sku": "ECT-M-BLACK",
+    "price": null,
+    "stock": 20
+   },
+   {
+    "product_id": "@tee",
+    "title": "M / White",
+    "option1": "M",
+    "option2": "White",
+    "sku": "ECT-M-WHITE",
+    "price": null,
+    "stock": 20
+   },
+   {
+    "product_id": "@tee",
+    "title": "L / Black",
+    "option1": "L",
+    "option2": "Black",
+    "sku": "ECT-L-BLACK",
+    "price": null,
+    "stock": 20
+   },
+   {
+    "product_id": "@tee",
+    "title": "L / White",
+    "option1": "L",
+    "option2": "White",
+    "sku": "ECT-L-WHITE",
+    "price": null,
+    "stock": 20
+   },
+   {
+    "product_id": "@tee",
+    "title": "XL / Black",
+    "option1": "XL",
+    "option2": "Black",
+    "sku": "ECT-XL-BLACK",
+    "price": null,
+    "stock": 20
+   },
+   {
+    "product_id": "@tee",
+    "title": "XL / White",
+    "option1": "XL",
+    "option2": "White",
+    "sku": "ECT-XL-WHITE",
+    "price": null,
+    "stock": 20
+   },
+   {
+    "product_id": "@graphic",
+    "title": "M",
+    "option1": "M",
+    "option2": null,
+    "sku": "UGT-M",
+    "price": null,
+    "stock": 12
+   },
+   {
+    "product_id": "@graphic",
+    "title": "L",
+    "option1": "L",
+    "option2": null,
+    "sku": "UGT-L",
+    "price": null,
+    "stock": 12
+   },
+   {
+    "product_id": "@graphic",
+    "title": "XL",
+    "option1": "XL",
+    "option2": null,
+    "sku": "UGT-XL",
+    "price": null,
+    "stock": 12
+   },
+   {
+    "product_id": "@runner",
+    "title": "7",
+    "option1": "7",
+    "option2": null,
+    "sku": "ASR-7",
+    "price": null,
+    "stock": 6
+   },
+   {
+    "product_id": "@runner",
+    "title": "8",
+    "option1": "8",
+    "option2": null,
+    "sku": "ASR-8",
+    "price": null,
+    "stock": 6
+   },
+   {
+    "product_id": "@runner",
+    "title": "9",
+    "option1": "9",
+    "option2": null,
+    "sku": "ASR-9",
+    "price": null,
+    "stock": 6
+   },
+   {
+    "product_id": "@runner",
+    "title": "10",
+    "option1": "10",
+    "option2": null,
+    "sku": "ASR-10",
+    "price": null,
+    "stock": 6
+   },
+   {
+    "product_id": "@bag",
+    "title": "Tan",
+    "option1": "Tan",
+    "option2": null,
+    "sku": "ELH-TAN",
+    "price": null,
+    "stock": 10
+   },
+   {
+    "product_id": "@bag",
+    "title": "Black",
+    "option1": "Black",
+    "option2": null,
+    "sku": "ELH-BLACK",
+    "price": null,
+    "stock": 10
+   }
+  ],
+  "coupons": [
+   {
+    "code": "WELCOME10",
+    "discount_type": "Percent",
+    "value": 10,
+    "min_order": 499,
+    "max_discount": 300,
+    "per_customer_limit": 1,
+    "description": "10% off on your first order (up to ₹300)"
+   },
+   {
+    "code": "FLAT200",
+    "discount_type": "Flat",
+    "value": 200,
+    "min_order": 1999,
+    "description": "₹200 off on orders above ₹1,999"
+   }
+  ],
+  "testimonials": [
+   {
+    "title": "Super fast delivery",
+    "parent_name": "Ritika Sharma",
+    "child_name": "Verified buyer",
+    "description": "Ordered on Monday, got it on Wednesday. Quality is great!",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "COD made it easy",
+    "parent_name": "Arjun Nair",
+    "child_name": "Verified buyer",
+    "description": "Paid cash on delivery, no hassle. The headphones are amazing.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Easy returns",
+    "parent_name": "Sneha Patil",
+    "child_name": "Verified buyer",
+    "description": "Size didn't fit — return was picked up the next day.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "faqs": [
+   {
+    "title": "How long does delivery take?",
+    "answer": "Metro cities: 2-4 days. Rest of India: 4-7 working days."
+   },
+   {
+    "title": "Is Cash on Delivery available?",
+    "answer": "Yes, COD is available on most pin codes."
+   },
+   {
+    "title": "What is the return policy?",
+    "answer": "Easy 7-day returns on unused items with tags. Refunds within 5-7 days."
+   },
+   {
+    "title": "Are payments secure?",
+    "answer": "All online payments are processed by Razorpay — we never see your card details."
+   }
+  ],
+  "stats": [
+   {
+    "title": "Happy customers",
+    "value": "50K+",
+    "icon": "Smile"
+   },
+   {
+    "title": "Products",
+    "value": "1,200+",
+    "icon": "Package"
+   },
+   {
+    "title": "Cities delivered",
+    "value": "800+",
+    "icon": "Truck"
+   },
+   {
+    "title": "Avg. rating",
+    "value": "4.7★",
+    "icon": "Star"
+   }
+  ],
+  "partners": [
+   {
+    "title": "SonicWave"
+   },
+   {
+    "title": "FitPulse"
+   },
+   {
+    "title": "Stride"
+   },
+   {
+    "title": "Nova"
+   },
+   {
+    "title": "Glow Lab"
+   },
+   {
+    "title": "Tempo"
+   }
+  ],
+  "blogs": [
+   {
+    "title": "How to choose the right running shoe",
+    "slug": "choose-running-shoe",
+    "author": "Kartly Team",
+    "published_date": "2026-10-12",
+    "cover_image": "u:1542291026-7eec264c27ff",
+    "summary": "Cushioning, fit and your running style — a quick guide.",
+    "body": "<p>Cushioning, fit and your running style — a quick guide.</p><p>Start with your foot type and the surface you run on most.</p>",
+    "tags": "guide, footwear"
+   }
+  ],
+  "gallery_categories": [
+   {
+    "_key": "moments",
+    "title": "Moments"
+   }
+  ],
+  "popups": [
+   {
+    "title": "Welcome to Kartly",
+    "from_date": "2026-10-01",
+    "to_date": "2027-03-31",
+    "image": "u:1515886657613-9f3515b0c78f",
+    "description": "<p>Everyday style, delivered to your door. <a href=\"/shop\">Shop Now →</a></p>"
+   }
+  ],
+  "image_gallery": [
+   {
+    "title": "Kartly — 1",
+    "image": "u:1483985988355-763728e1935b",
+    "category_id": "@moments"
+   },
+   {
+    "title": "Kartly — 2",
+    "image": "u:1515886657613-9f3515b0c78f",
+    "category_id": "@moments"
+   },
+   {
+    "title": "Kartly — 3",
+    "image": "u:1505740420928-5e560c06d30e",
+    "category_id": "@moments"
+   },
+   {
+    "title": "Kartly — 4",
+    "image": "u:1503342217505-b0a15ec3261c",
+    "category_id": "@moments"
+   },
+   {
+    "title": "Kartly — 5",
+    "image": "u:1434389677669-e08b4cac3105",
+    "category_id": "@moments"
+   },
+   {
+    "title": "Kartly — 6",
+    "image": "u:1542291026-7eec264c27ff",
+    "category_id": "@moments"
+   }
+  ],
+  "videos": [
+   {
+    "title": "Kartly — highlights",
+    "video_url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    "video_date": "2026-09-15"
+   },
+   {
+    "title": "Behind the scenes",
+    "video_url": "https://www.youtube.com/watch?v=eRsGyueVLvQ",
+    "video_date": "2026-08-15"
+   },
+   {
+    "title": "A day with us",
+    "video_url": "https://www.youtube.com/watch?v=R6MlUcmOul8",
+    "video_date": "2026-07-15"
+   },
+   {
+    "title": "Event recap",
+    "video_url": "https://www.youtube.com/watch?v=WhWc3b3KhnY",
+    "video_date": "2026-06-15"
+   }
+  ],
+  "attachments": [
+   {
+    "title": "Kartly — Brochure",
+    "attachment": "f:ecommerce-brochure.pdf",
+    "description": "Everything about us in one PDF."
+   },
+   {
+    "title": "Enquiry Form",
+    "attachment": "f:enquiry-form.pdf",
+    "description": "Fill, sign and email it to us."
+   }
+  ],
+  "enquiries": [
+   {
+    "name": "Priya Sharma",
+    "email": "priya.sharma@example.com",
+    "phone": "9876500011",
+    "subject": "Need more details",
+    "message": "Hello, I found Kartly online. Could you please share more details and the best time to call?",
+    "page": "/contact",
+    "status": "New"
+   },
+   {
+    "name": "Rahul Mehta",
+    "email": "rahul.m@example.com",
+    "phone": "9876500022",
+    "subject": "Thank you",
+    "message": "Thanks for the quick reply yesterday — all my questions are answered.",
+    "page": "/",
+    "status": "Replied"
+   }
+  ],
+  "subscribers": [
+   {
+    "email": "neha.k@example.com",
+    "source": "Footer"
+   },
+   {
+    "email": "arjun.v@example.com",
+    "source": "Footer"
+   },
+   {
+    "email": "sana.q@example.com",
+    "source": "Footer"
+   }
+  ]
+ },
+ "type": "ecommerce"
+}

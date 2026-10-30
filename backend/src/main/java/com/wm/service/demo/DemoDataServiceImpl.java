@@ -104,6 +104,7 @@ public class DemoDataServiceImpl implements DemoDataService {
         if (countDemoRows(db) > 0) throw ApiException.badRequest("Demo data is already imported — remove it first");
         Map<String, List<Map<String, Object>>> modules = demoCatalog.getModules(siteType);
         Map<String, String> photos = downloadPhotos(code, modules);
+        photos.putAll(copyFiles(code, modules));
 
         Map<String, Long> idByKey = new HashMap<>();
         int total = 0;
@@ -148,7 +149,7 @@ public class DemoDataServiceImpl implements DemoDataService {
             if (v == null) continue;
             if (f.type() == FieldType.REF) {
                 v = v instanceof String s && s.startsWith("@") ? idByKey.get(f.ref() + ":" + s.substring(1)) : DataTypeUtility.longValue(v);
-            } else if (DemoCatalog.isImageRef(v)) {
+            } else if (DemoCatalog.isImageRef(v) || DemoCatalog.isFileRef(v)) {
                 v = photos.getOrDefault((String) v, (String) DemoCatalog.resolveImage(v));
             } else if (f.type() == FieldType.DATE) {
                 v = DataTypeUtility.dateValue(v);
@@ -180,6 +181,24 @@ public class DemoDataServiceImpl implements DemoDataService {
             return ps;
         }, keys);
         return Objects.requireNonNull(keys.getKey()).longValue();
+    }
+
+    /** Demo PDFs (Downloads, E-Magazine) classpath se uploads/<code>/demo/ me */
+    private Map<String, String> copyFiles(String code, Map<String, List<Map<String, Object>>> modules) {
+        Map<String, String> out = new HashMap<>();
+        Path dir = uploadRoot().resolve(code).resolve("demo");
+        modules.values().stream().flatMap(List::stream).flatMap(r -> r.values().stream()).filter(DemoCatalog::isFileRef).map(String.class::cast)
+                .distinct().forEach(ref -> {
+                    String name = ref.substring(2);
+                    try (var in = demoCatalog.getFile(name).getInputStream()) {
+                        Files.createDirectories(dir);
+                        Files.copy(in, dir.resolve(name), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                        out.put(ref, "/files/" + code + "/demo/" + name);
+                    } catch (IOException | RuntimeException e) {
+                        log.warn("Demo file copy failed {}: {}", ref, e.getMessage());
+                    }
+                });
+        return out;
     }
 
     /** Saari demo photos parallel download -> uploads/<code>/demo/. Fail ho to Unsplash URL hi rehta hai. */
@@ -281,6 +300,10 @@ public class DemoDataServiceImpl implements DemoDataService {
 
         int removed = 0;
         for (ModuleDef m : registry.all()) removed += db.update("DELETE FROM `" + m.table() + "`");
+        // store: orders / customers bhi saaf (store_settings — payment keys — rehti hain)
+        for (String table : List.of("order_items", "order_events", "payments", "orders", "product_reviews", "wishlist", "customer_addresses", "customers")) {
+            removed += db.update("DELETE FROM " + table);
+        }
         db.update("DELETE FROM site_settings WHERE setting_key NOT IN (" + KEEP_ON_RESET.stream().map(k -> "'" + k + "'").collect(Collectors.joining(",")) + ")");
         deleteDir(uploadRoot().resolve(t.code()));
 

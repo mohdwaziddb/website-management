@@ -8,6 +8,7 @@ Format:
 Backend DemoCatalog in sab ko resolve karta hai; DemoDataService import karte waqt photos download karta hai.
 """
 import json
+import re
 import os
 
 OUT = os.path.join(os.path.dirname(__file__), "..", "backend", "src", "main", "resources", "demo")
@@ -268,7 +269,9 @@ DATA["school"] = {
     "modules": {
         "sliders": sliders(("Welcome to Sunrise", "Nurturing curious minds since 1985 — where every child shines.", S["kids"]),
                            ("Admissions Open 2026-27", "Limited seats for Nursery to Class IX. Apply online today.", S["cls"]),
-                           ("A library of 20,000 books", "Reading opens every door.", S["lib"])),
+                           ("A library of 20,000 books", "Reading opens every door.", S["lib"]),
+                           ("Every child is an artist", "Art, music and dance are part of every school day.", S["draw"]),
+                           ("Love to learn", "Curious minds, caring teachers, happy classrooms.", S["love"])),
         "thoughts": [{"title": "Thought of the Day", "description": "Education is not the filling of a pail, but the lighting of a fire.", "thought_date": "2026-10-29"}],
         "services": services(("Smart Classrooms", "Lightbulb", "Interactive boards in every classroom.", None, None), ("Science & Robotics Labs", "Rocket", "Hands-on STEM learning.", None, None),
                              ("Sports Complex", "Trophy", "Cricket, football, swimming and skating.", None, None), ("Safe Transport", "Truck", "GPS-tracked buses with attendants.", None, None)),
@@ -656,6 +659,376 @@ DATA["portfolio"] = {
         "blogs": blogs(("Designing for accessibility first", "accessibility-first", "Aarav", "2026-08-05", F["tablet"], "Accessible design is just good design.",
                         "Start with contrast, focus states and real content.", "design"))},
 }
+
+# ============================================================== NEWS
+NW = dict(space="1446776811953-b23d57bd21aa", earth="1451187580459-43490279c0fa", track="1461896836934-ffe607ba8211", concert="1470229722913-7c0e2dbbafd3",
+          forest="1473448912268-2022ce9509d8", city="1477959858617-67f85cf4f1df", cinema="1489599849927-2ee91cede3ba", reader="1495020689067-958852a7765e",
+          network="1495592822108-9e6261896da8", papers="1504711434969-e33886168f5c", phone="1512941937669-90a1b58e7e9c", cycling="1517649763962-0c623066013b",
+          chip="1518770660439-4636190af475", globe="1521295121783-8a321d551ad2", taj="1524492412937-b28074a5d7da", dash="1526628953301-3e589a6a8b74",
+          house="1529107386315-e1a2ed48a620", flag="1532375810709-75b1da00537c", cricket="1540747913346-19e32dc3e97e", doctor="1576091160399-112ba8d25d1d",
+          typewriter="1585829365295-ab7cd400c167", stocks="1590283603385-17ffb3a7f29f", candles="1611974789855-9c2a0a7236a3")
+
+
+def news_posts(*items):
+    """(title, slug, category, reporter, date, img, caption, location, summary, paragraphs, tags, flags) — flags: B=breaking F=top story T=trending"""
+    out = []
+    for t, slug, cat, rep, d, img, cap, loc, sm, paras, tags, flags in items:
+        body = f"<p><strong>{loc}:</strong> {sm}</p>" + "".join(f"<p>{x}</p>" for x in paras)
+        out.append({"title": t, "slug": slug, "category_id": "@" + cat, "reporter_id": "@" + rep, "published_date": d, "cover_image": u(img),
+                    "image_caption": cap, "location": loc, "summary": sm, "body": body, "tags": tags,
+                    "is_breaking": "B" in flags, "is_featured": "F" in flags, "is_trending": "T" in flags})
+    return out
+
+
+reporters = [{"_key": k, **r} for k, r in zip(["anjali", "rahul", "meera", "kabir", "farah"], team(
+    ("Anjali Verma", "Senior Political Correspondent", "Covers Parliament and national politics for 12 years."),
+    ("Rahul Khanna", "Business Editor", "Former equity analyst; writes on markets, startups and the economy."),
+    ("Meera Iyer", "Sports Reporter", "Has reported from three Cricket World Cups and two Olympics."),
+    ("Kabir Sethi", "Technology Editor", "Tracks gadgets, AI and India's digital economy."),
+    ("Farah Qureshi", "Entertainment & Lifestyle Writer", "Reviews films, music and everything pop culture.")))]
+cats, photos = gallery([("week", "Pictures of the Week"), ("sport", "Sports in Frames"), ("culture", "Culture & Festivals")],
+                       [("Monuments at dawn", NW["taj"], "week"), ("Tricolour over the capital", NW["flag"], "week"), ("City lights from space", NW["earth"], "week"),
+                        ("Night match under lights", NW["cricket"], "sport"), ("Sprint start", NW["track"], "sport"), ("Peloton in the hills", NW["cycling"], "sport"),
+                        ("Festival concert crowd", NW["concert"], "culture"), ("Back at the cinema", NW["cinema"], "culture")])
+for c, img in zip(cats, [NW["taj"], NW["cricket"], NW["concert"]]):
+    c["cover_image"] = u(img)
+NP = ["The development was confirmed by officials on Thursday evening, and a detailed notification is expected within the week.",
+      "Experts say the move could have a far-reaching impact over the next few years, though several questions about implementation remain open.",
+      "Stakeholders have welcomed the step but asked for clear timelines and regular public updates on progress."]
+DATA["news"] = {
+    "settings": {"site_name": "The Daily Pulse", "tagline": "Truth first. Every hour.",
+                 "about_short": "<p>The Daily Pulse is an independent digital newsroom bringing you fast, fair and fact-checked news from India and the world — 24×7.</p>",
+                 "phone": "+91 11 4567 8900", "email": "newsdesk@dailypulse.in", "address": "Pulse House, Barakhamba Road, New Delhi 110001",
+                 "cta_text": "Subscribe", "cta_link": "/contact", "facebook": "https://facebook.com", "youtube": "https://youtube.com", "twitter": "https://x.com",
+                 "footer_text": "Got a story? Write to newsdesk@dailypulse.in · All demo stories are fictional."},
+    "modules": {
+        "sliders": sliders(("News that matters, as it happens", "Fast, fair and fact-checked — from India and the world.", NW["papers"]),
+                           ("Read the day's biggest stories", "Politics, business, sports, tech and more.", NW["reader"])),
+        "news_categories": [
+            {"_key": "india", "title": "India", "slug": "india", "color": "orange", "show_on_home": True, "description": "National news, politics and governance."},
+            {"_key": "world", "title": "World", "slug": "world", "color": "blue", "show_on_home": True, "description": "International affairs and global events."},
+            {"_key": "business", "title": "Business", "slug": "business", "color": "green", "show_on_home": True, "description": "Markets, economy, startups and companies."},
+            {"_key": "sports", "title": "Sports", "slug": "sports", "color": "red", "show_on_home": True, "description": "Cricket, football, Olympics and more."},
+            {"_key": "tech", "title": "Technology", "slug": "technology", "color": "violet", "show_on_home": True, "description": "Gadgets, AI, apps and the internet."},
+            {"_key": "ent", "title": "Entertainment", "slug": "entertainment", "color": "pink", "show_on_home": True, "description": "Films, music, OTT and celebrities."},
+            {"_key": "health", "title": "Health", "slug": "health", "color": "teal", "show_on_home": False, "description": "Wellness, medicine and fitness."},
+            {"_key": "env", "title": "Environment", "slug": "environment", "color": "amber", "show_on_home": False, "description": "Climate, wildlife and sustainability."}],
+        "team_members": reporters,
+        "news_posts": news_posts(
+            ("Parliament clears landmark data protection rules after marathon debate", "parliament-clears-data-protection-rules", "india", "anjali", "2026-10-30",
+             NW["house"], "Members during the late-night session. (Representational)", "New Delhi",
+             "Both Houses passed the rules late on Wednesday, giving citizens new rights over how their personal data is collected and used.",
+             ["Under the new rules, companies must take clear consent before collecting personal data and delete it once the purpose is served.", *NP],
+             "parliament, privacy, data", "BFT"),
+            ("Sensex jumps 900 points as banks and IT stocks rally", "sensex-jumps-900-points", "business", "rahul", "2026-10-30",
+             NW["stocks"], "Markets closed at a record high on Thursday.", "Mumbai",
+             "Benchmark indices closed at record highs on strong buying in banking and IT shares and steady foreign inflows.",
+             ["Analysts credited the rally to better-than-expected quarterly results and easing global bond yields.", *NP[1:]], "sensex, markets, stocks", "BFT"),
+            ("India seal series with thrilling last-over win", "india-seal-series-last-over-win", "sports", "meera", "2026-10-29",
+             NW["cricket"], "Fans celebrate under the floodlights.", "Ahmedabad",
+             "Needing 11 off the final over, the lower order held its nerve to clinch the series 3-1 in front of a packed stadium.",
+             ["The captain called it 'one of the best team efforts' of the season and praised the young bowlers.", *NP[1:]], "cricket, team india", "FT"),
+            ("Made-in-India AI chip enters mass production", "made-in-india-ai-chip", "tech", "kabir", "2026-10-29",
+             NW["chip"], "The new chip is designed for phones and laptops.", "Bengaluru",
+             "A Bengaluru start-up has begun mass production of an energy-efficient AI chip designed entirely in India.",
+             ["The company says the chip uses 40% less power than comparable imports and will ship in devices next year.", *NP[1:]], "ai, semiconductors, startups", "FT"),
+            ("Global leaders agree on new climate finance target", "global-climate-finance-target", "world", "anjali", "2026-10-28",
+             NW["globe"], "Delegates at the summit venue.", "Geneva",
+             "Nearly 190 countries agreed on a fresh climate-finance goal after two weeks of tough negotiations.",
+             ["Developing nations called it a step forward but said the money must reach communities quickly.", *NP[1:]], "climate, summit", "F"),
+            ("IMD forecasts a pleasant winter for North India", "imd-forecasts-pleasant-winter", "india", "anjali", "2026-10-28",
+             NW["city"], "A clear evening skyline after the rains.", "New Delhi",
+             "The weather office expects near-normal winter temperatures and fewer cold-wave days this year.", NP, "weather, imd", "B"),
+            ("Blockbuster sequel crosses ₹500 crore in two weeks", "blockbuster-sequel-500-crore", "ent", "farah", "2026-10-28",
+             NW["cinema"], "Packed theatres across the country.", "Mumbai",
+             "The much-awaited sequel has become the fastest film of the year to cross the ₹500 crore mark worldwide.",
+             ["Trade analysts expect the run to continue through the festive weekend.", *NP[1:]], "box office, films", "T"),
+            ("Retail investors cross 15 crore demat accounts", "retail-investors-15-crore-demat", "business", "rahul", "2026-10-27",
+             NW["candles"], "First-time investors are driving the surge.", "Mumbai",
+             "Demat accounts have doubled in three years as more young Indians start investing through mobile apps.", NP, "investing, demat", ""),
+            ("Smartphone shipments hit record high this festive season", "smartphone-shipments-record", "tech", "kabir", "2026-10-27",
+             NW["phone"], "5G phones made up most of the sales.", "New Delhi",
+             "Festive sales pushed quarterly smartphone shipments to an all-time high, led by budget 5G models.", NP, "smartphones, 5g", "T"),
+            ("Young sprinter breaks 20-year-old national record", "sprinter-breaks-national-record", "sports", "meera", "2026-10-26",
+             NW["track"], "The record-breaking run in the 100m final.", "Bhubaneswar",
+             "The 19-year-old clocked 10.09 seconds to rewrite the oldest record in Indian athletics.", NP, "athletics, records", "T"),
+            ("Study links 30 minutes of daily walking to better heart health", "daily-walking-heart-health", "health", "farah", "2026-10-26",
+             NW["doctor"], "Doctors recommend regular moderate exercise.", "Chennai",
+             "A five-year study of 20,000 adults found that a brisk daily walk cut heart-disease risk by almost a third.", NP, "health, fitness, heart", ""),
+            ("Tiger count rises in central India reserves", "tiger-count-rises", "env", "kabir", "2026-10-25",
+             NW["forest"], "Dense forests of a central India tiger reserve.", "Bhopal",
+             "The latest survey shows a steady rise in tiger numbers, credited to better protection and wildlife corridors.", NP, "wildlife, tigers, environment", ""),
+            ("Satellite network to bring internet to 10,000 remote villages", "satellite-internet-remote-villages", "tech", "kabir", "2026-10-25",
+             NW["space"], "The constellation will cover hilly and island regions.", "Sriharikota",
+             "A new low-earth-orbit satellite network will connect remote villages in hilly and island regions by next year.", NP, "space, internet, satellites", ""),
+            ("Indian cycling team wins historic Asian gold", "cycling-team-asian-gold", "sports", "meera", "2026-10-24",
+             NW["cycling"], "The team on the final climb.", "Jakarta",
+             "India won its first-ever Asian gold in team road cycling after a strong finish on the final climb.", NP, "cycling, asian games", ""),
+            ("Music festival season opens with record crowds", "music-festival-season-opens", "ent", "farah", "2026-10-24",
+             NW["concert"], "Fans at the opening night.", "Goa",
+             "The country's biggest music festival opened to a sold-out crowd, with over 80 artists across five stages.", NP, "music, festivals", ""),
+            ("New light-and-sound show unveiled at historic monument", "heritage-light-show", "world", "anjali", "2026-10-23",
+             NW["taj"], "Visitors at sunrise.", "Agra",
+             "A new evening light-and-sound show will tell the monument's story using projection mapping.", NP, "tourism, heritage", ""),
+            ("Fintech start-ups raise record funding in Q3", "fintech-record-funding-q3", "business", "rahul", "2026-10-22",
+             NW["dash"], "Payments and lending apps led the funding.", "Bengaluru",
+             "Indian fintech companies raised more money in the July–September quarter than in any quarter since 2021.", NP, "fintech, funding, startups", "")),
+        "blogs": blogs(("Why local news still matters", "why-local-news-matters", "Editor's Desk", "2026-10-27", NW["typewriter"],
+                        "In an age of endless feeds, trusted local reporting is more important than ever.",
+                        "Local journalists are often the first to spot problems — from broken roads to unpaid wages — and the last to leave a story.", "opinion, journalism"),
+                       ("Reading the budget like a pro", "reading-the-budget", "Rahul Khanna", "2026-10-20", NW["papers"],
+                        "Five numbers to look at before you read any budget headline.",
+                        "Start with the fiscal deficit, then capital expenditure, tax buoyancy, subsidies and interest payments.", "opinion, economy")),
+        "sponsors": [
+            {"title": "FinEdge Bank", "position": "Header", "image": u(NW["dash"]), "headline": "Zero-fee savings account — open in 5 minutes", "link_url": "https://example.com"},
+            {"title": "SkyNet Fibre", "position": "Home Page", "image": u(NW["network"]), "headline": "1 Gbps fibre at ₹699/month · Free installation", "link_url": "https://example.com"},
+            {"title": "Pulse Premium", "position": "Sidebar", "image": u(NW["reader"]), "headline": "Go ad-free with Pulse Premium", "link_url": "https://example.com"},
+            {"title": "TravelNest", "position": "In Article", "image": u(T["beach"]), "headline": "Winter getaways from ₹9,999", "link_url": "https://example.com"}],
+        "gallery_categories": cats, "image_gallery": photos,
+        "testimonials": testi(("My first read every morning", "Sanjay Bhatt", "Reader since 2019", "Quick, balanced and no clickbait. The 7 AM briefing is perfect."),
+                              ("Best business coverage", "Pooja Nair", "Chartered Accountant", "Rahul Khanna's market wrap explains the day in five minutes."),
+                              ("Love the photo stories", "Imran Sheikh", "College student", "The weekly picture albums are beautiful.")),
+        "stats": stats(("Monthly readers", "2.4M", "Users"), ("Stories a day", "150+", "Zap"), ("Reporters", "60", "PenTool"), ("Cities covered", "120", "MapPin")),
+        "partners": partners("PTI", "Reuters", "IANS", "ANI", "AFP"),
+        "faqs": faq(("How can I send a news tip?", "Write to newsdesk@dailypulse.in or use the contact form. We protect our sources."),
+                    ("How do I advertise with you?", "Email ads@dailypulse.in for our media kit and rates."),
+                    ("Do you publish corrections?", "Yes. Errors are corrected promptly and noted at the end of the story."))},
+}
+
+# ============================================================== ECOMMERCE
+SH = dict(watch="1523275335684-37898b6baf30", phones="1505740420928-5e560c06d30e", shoe="1542291026-7eec264c27ff", camera="1526170375885-4d8ecf77b99f",
+          shades="1572635196237-14b3f281503f", tee="1521572163474-6864f9cf17ab", smartwatch="1546868871-7041f2a55e12", skincare="1556228578-8c89e6adf883",
+          bag="1584917865442-de89df76afd3", laptop="1517336714731-489689fd1ca8", mobile="1511707171634-5f897ff02aa9", mug="1514228742587-6b1558fcca3d",
+          store="1441986300917-64674bd600d8", shopping="1483985988355-763728e1935b", fashion="1515886657613-9f3515b0c78f", mantee="1503342217505-b0a15ec3261c",
+          woman="1434389677669-e08b4cac3105")
+
+
+def product(key, title, slug, cat, price, mrp, gst, stock, img, summary, brand, featured=False, opts=(None, None), extra=()):
+    images = {f"image_{i + 2}": u(x) for i, x in enumerate(extra)}
+    return {"_key": key, "title": title, "slug": slug, "category_id": "@" + cat, "brand": brand, "sku": slug.upper()[:20], "price": price, "compare_price": mrp,
+            "gst_rate": gst, "stock": stock, "cover_image": u(img), **images, "summary": summary,
+            "description": f"<p>{summary}</p><ul><li>Premium quality, checked before dispatch</li><li>7-day easy returns</li><li>Cash on Delivery available</li></ul>",
+            "option1_name": opts[0], "option2_name": opts[1], "is_featured": featured, "tags": cat}
+
+
+def variants(pkey, sku, opt1, opt2=(None,), stock=15, price=None):
+    rows = []
+    for a in opt1:
+        for b in opt2:
+            rows.append({"product_id": "@" + pkey, "title": " / ".join(x for x in (a, b) if x), "option1": a, "option2": b,
+                         "sku": f"{sku}-{a}{'-' + b if b else ''}".upper().replace(" ", ""), "price": price, "stock": stock})
+    return rows
+
+
+DATA["ecommerce"] = {
+    "settings": {"site_name": "Kartly", "tagline": "Everyday style, delivered to your door",
+                 "about_short": "<p>Kartly is a homegrown online store for fashion, gadgets and lifestyle products — handpicked quality, honest prices, free shipping above ₹999 and easy 7-day returns.</p>",
+                 "phone": "+91 99100 55443", "email": "care@kartly.in", "address": "Plot 21, Sector 18, Gurugram, Haryana 122015",
+                 "cta_text": "Shop Now", "cta_link": "/shop", "instagram": "https://instagram.com", "facebook": "https://facebook.com",
+                 "footer_text": "100% secure payments · Cash on Delivery · 7-day easy returns"},
+    "modules": {
+        "sliders": sliders(("The Festive Edit is here", "Up to 50% off on fashion, footwear & gadgets.", SH["shopping"]),
+                           ("New season, new you", "Fresh arrivals every week — free shipping above ₹999.", SH["fashion"]),
+                           ("Tech that travels", "Headphones, smartwatches and more at the best prices.", SH["phones"])),
+        "product_categories": [
+            {"_key": "men", "title": "Men", "slug": "men", "image": u(SH["mantee"]), "show_on_home": True, "description": "T-shirts, shirts and everyday essentials."},
+            {"_key": "women", "title": "Women", "slug": "women", "image": u(SH["woman"]), "show_on_home": True, "description": "Dresses, tops and handbags."},
+            {"_key": "footwear", "title": "Footwear", "slug": "footwear", "image": u(SH["shoe"]), "show_on_home": True, "description": "Sneakers and running shoes."},
+            {"_key": "electronics", "title": "Electronics", "slug": "electronics", "image": u(SH["phones"]), "show_on_home": True, "description": "Audio, wearables and cameras."},
+            {"_key": "accessories", "title": "Accessories", "slug": "accessories", "image": u(SH["watch"]), "show_on_home": True, "description": "Watches, sunglasses and bags."},
+            {"_key": "home", "title": "Home & Living", "slug": "home-living", "image": u(SH["mug"]), "show_on_home": True, "description": "Mugs, decor and more."},
+            {"_key": "beauty", "title": "Beauty", "slug": "beauty", "image": u(SH["skincare"]), "show_on_home": False, "description": "Skincare and self-care."}],
+        "products": [
+            product("tee", "Essential Cotton Crew T-Shirt", "essential-cotton-tee", "men", 499, 899, "5", None, SH["tee"],
+                    "Super-soft 180 GSM combed cotton tee with a relaxed fit. Pre-shrunk and bio-washed.", "Kartly Basics", True, ("Size", "Colour"), [SH["mantee"]]),
+            product("graphic", "Urban Graphic Oversized Tee", "urban-graphic-tee", "men", 699, 1199, "5", None, SH["mantee"],
+                    "Drop-shoulder oversized tee with a minimal graphic print.", "Kartly Street", False, ("Size", None)),
+            product("runner", "AirStride Running Shoes", "airstride-running-shoes", "footwear", 2499, 3999, "12", None, SH["shoe"],
+                    "Lightweight mesh runners with responsive cushioning for daily miles.", "Stride", True, ("UK Size", None)),
+            product("phones", "Studio Wireless Headphones", "studio-wireless-headphones", "electronics", 3299, 5999, "18", 25, SH["phones"],
+                    "40-hour battery, active noise cancellation and plush memory-foam ear cushions.", "SonicWave", True),
+            product("smartwatch", "FitPulse Smartwatch", "fitpulse-smartwatch", "electronics", 2799, 4999, "18", 30, SH["smartwatch"],
+                    "AMOLED display, SpO2 and heart-rate tracking, 7-day battery and 100+ sports modes.", "FitPulse", True),
+            product("camera", "Retro Instant Camera", "retro-instant-camera", "electronics", 5499, 6999, "18", 8, SH["camera"],
+                    "Print memories instantly with this classic-styled instant camera.", "SnapCo"),
+            product("watch", "Heritage Analog Watch", "heritage-analog-watch", "accessories", 1899, 2999, "18", 12, SH["watch"],
+                    "Minimal dial, genuine leather strap and 3 ATM water resistance.", "Tempo", True),
+            product("shades", "Aviator Polarised Sunglasses", "aviator-polarised-sunglasses", "accessories", 999, 1999, "12", 40, SH["shades"],
+                    "UV400 polarised lenses in a lightweight metal frame.", "Glare"),
+            product("bag", "Everyday Leather Handbag", "everyday-leather-handbag", "women", 2199, 3499, "12", None, SH["bag"],
+                    "Spacious vegan-leather handbag with a detachable sling strap.", "Mia", True, ("Colour", None)),
+            product("laptop", "UltraBook 14 Laptop", "ultrabook-14-laptop", "electronics", 54990, 64990, "18", 5, SH["laptop"],
+                    "14\" FHD display, 16 GB RAM, 512 GB SSD and an all-day battery.", "Nova"),
+            product("mobile", "Nova X Smartphone (128 GB)", "nova-x-smartphone", "electronics", 18999, 21999, "18", 3, SH["mobile"],
+                    "6.5\" AMOLED, 50 MP camera and 5000 mAh battery with 33W fast charging.", "Nova"),
+            product("mug", "Handmade Ceramic Mug Set (2)", "ceramic-mug-set", "home", 649, 999, "12", 60, SH["mug"],
+                    "Microwave-safe stoneware mugs, glazed by hand. Set of two, 350 ml each.", "Clay & Co"),
+            product("skincare", "Glow Daily Skincare Kit", "glow-skincare-kit", "beauty", 1299, 1799, "18", 20, SH["skincare"],
+                    "Cleanser, serum and moisturiser for a simple 3-step routine.", "Glow Lab")],
+        "product_variants": (
+            variants("tee", "ECT", ["S", "M", "L", "XL"], ["Black", "White"], stock=20)
+            + variants("graphic", "UGT", ["M", "L", "XL"], stock=12)
+            + variants("runner", "ASR", ["7", "8", "9", "10"], stock=6)
+            + variants("bag", "ELH", ["Tan", "Black"], stock=10)),
+        "coupons": [
+            {"code": "WELCOME10", "discount_type": "Percent", "value": 10, "min_order": 499, "max_discount": 300, "per_customer_limit": 1,
+             "description": "10% off on your first order (up to ₹300)"},
+            {"code": "FLAT200", "discount_type": "Flat", "value": 200, "min_order": 1999, "description": "₹200 off on orders above ₹1,999"}],
+        "testimonials": testi(("Super fast delivery", "Ritika Sharma", "Verified buyer", "Ordered on Monday, got it on Wednesday. Quality is great!"),
+                              ("COD made it easy", "Arjun Nair", "Verified buyer", "Paid cash on delivery, no hassle. The headphones are amazing."),
+                              ("Easy returns", "Sneha Patil", "Verified buyer", "Size didn't fit — return was picked up the next day.")),
+        "faqs": faq(("How long does delivery take?", "Metro cities: 2-4 days. Rest of India: 4-7 working days."),
+                    ("Is Cash on Delivery available?", "Yes, COD is available on most pin codes."),
+                    ("What is the return policy?", "Easy 7-day returns on unused items with tags. Refunds within 5-7 days."),
+                    ("Are payments secure?", "All online payments are processed by Razorpay — we never see your card details.")),
+        "stats": stats(("Happy customers", "50K+", "Smile"), ("Products", "1,200+", "Package"), ("Cities delivered", "800+", "Truck"), ("Avg. rating", "4.7★", "Star")),
+        "partners": partners("SonicWave", "FitPulse", "Stride", "Nova", "Glow Lab", "Tempo"),
+        "blogs": blogs(("How to choose the right running shoe", "choose-running-shoe", "Kartly Team", "2026-10-12", SH["shoe"],
+                        "Cushioning, fit and your running style — a quick guide.", "Start with your foot type and the surface you run on most.", "guide, footwear"))},
+}
+
+
+# ============================================================== COMMON: har admin menu me demo data
+# Upar har type ka khaas content hai. Yahan ek jagah se wo menus bharte hain jo kisi type me khaali reh gaye
+# (Menus, Pages, Popups, Videos, Live, Downloads, E-Magazine, Gallery ...) — website type ke naam / photos ke saath.
+ROOT = os.path.join(os.path.dirname(__file__), "..")
+FILES = os.path.join(OUT, "files")
+# Blender Foundation ki open movies (Creative Commons) — YouTube par saalon se stable
+YT = ["https://www.youtube.com/watch?v=aqz-KE-bpKQ", "https://www.youtube.com/watch?v=eRsGyueVLvQ",
+      "https://www.youtube.com/watch?v=R6MlUcmOul8", "https://www.youtube.com/watch?v=WhWc3b3KhnY"]
+
+
+def enabled_modules():
+    """SiteTypeCatalog.java se type -> admin menus (backend hi source of truth)"""
+    java = open(os.path.join(ROOT, "backend", "src", "main", "java", "com", "wm", "settings", "SiteTypeCatalog.java"), encoding="utf-8").read()
+    common = re.findall(r'"([a-z_]+)"', re.search(r"COMMON = List\.of\(([\s\S]*?)\);", java).group(1))
+    return {m.group(1): common + re.findall(r'"([a-z_]+)"', m.group(2))
+            for m in re.finditer(r'add\("([a-z_]+)", "[^"]+",\s*List\.of\(([\s\S]*?)\),', java)}
+
+
+def site_nav():
+    """siteTypes.ts se har type ka default navbar (wahi links Menus me)"""
+    ts = open(os.path.join(ROOT, "frontend", "src", "site", "siteTypes.ts"), encoding="utf-8").read()
+    out = {}
+    for block in re.split(r'\n  \{\n    key: ', ts)[1:]:
+        key = re.match(r'"([a-z_]+)"', block).group(1)
+        nav = re.search(r"nav: \[([\s\S]*?)\]", block).group(1)
+        out[key] = re.findall(r'\{ title: "([^"]+)", href: "([^"]+)" \}', nav)
+    return out
+
+
+def pdf(path, title, lines):
+    """Chhoti asli PDF (A4, ek page) — Downloads / E-Magazine demo ke liye"""
+    def esc(t):
+        return t.replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)").encode("latin-1", "replace").decode("latin-1")
+    text = ["BT /F1 26 Tf 60 760 Td (" + esc(title) + ") Tj ET"]
+    y = 715
+    for ln in lines:
+        text.append(f"BT /F1 12 Tf 60 {y} Td (" + esc(ln) + ") Tj ET")
+        y -= 22
+    stream = "\n".join(text).encode("latin-1")
+    objs = [b"<< /Type /Catalog /Pages 2 0 R >>", b"<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
+            b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>",
+            b"<< /Length " + str(len(stream)).encode() + b" >>\nstream\n" + stream + b"\nendstream",
+            b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>"]
+    out, offsets = bytearray(b"%PDF-1.4\n"), []
+    for i, o in enumerate(objs, 1):
+        offsets.append(len(out))
+        out += f"{i} 0 obj\n".encode() + o + b"\nendobj\n"
+    xref = len(out)
+    out += f"xref\n0 {len(objs) + 1}\n0000000000 65535 f \n".encode() + b"".join(f"{o:010d} 00000 n \n".encode() for o in offsets)
+    out += f"trailer\n<< /Size {len(objs) + 1} /Root 1 0 R >>\nstartxref\n{xref}\n%%EOF\n".encode()
+    with open(path, "wb") as fh:
+        fh.write(out)
+
+
+def photos_of(d):
+    """Is type ke demo me jitni landscape photos hain (common rows unhi se)"""
+    seen = []
+    for rows in d["modules"].values():
+        for r in rows:
+            for v in r.values():
+                if isinstance(v, str) and v.startswith("u:") and v not in seen:
+                    seen.append(v)
+    return seen
+
+
+def complete(t, d, modules, nav):
+    m, s = d["modules"], d["settings"]
+    name, tagline = s["site_name"], s.get("tagline", "")
+    img = photos_of(d)
+    pic = lambda i: img[i % len(img)]
+    add = {}
+    if "menus" in modules and not m.get("menus"):
+        links = [{"title": a, "custom_url": h} for a, h in nav]
+        # "About" menu = Pages ka About Us (custom_url khaali => us menu ka page)
+        add["menus"] = links[:1] + [{"_key": "about", "title": "About"}] + links[1:]
+    if "pages" in modules and not m.get("pages"):
+        about = s.get("about_short", f"<p>{name} — {tagline}</p>")
+        add["pages"] = [
+            {**page("About Us", "about-us", about + f"<h2>Our story</h2><p>{name} started with a simple idea: {tagline.lower() or 'do great work'}. "
+                    "Today a passionate team carries that promise forward every day.</p><h2>What we believe</h2>"
+                    "<ul><li>People first</li><li>Quality without shortcuts</li><li>Honest, transparent communication</li></ul>"),
+             "menu_id": "@about", "banner_image": pic(0)},
+            page("Privacy Policy", "privacy-policy", f"<p>{name} respects your privacy. We collect only the information you share with us "
+                 "through our forms, use it only to respond to you, and never sell it.</p><p>Contact us anytime to view or delete your data.</p>"),
+            page("Terms of Use", "terms", f"<p>By using the {name} website you agree to use it lawfully. Content is for general information "
+                 "and may change without notice.</p>")]
+    if "popups" in modules and not m.get("popups"):
+        add["popups"] = [{"title": f"Welcome to {name}", "from_date": "2026-10-01", "to_date": "2027-03-31", "image": pic(1),
+                          "description": f"<p>{tagline}. <a href=\"{s.get('cta_link', '/contact')}\">{s.get('cta_text', 'Get in touch')} →</a></p>"}]
+    if "gallery_categories" in modules and not m.get("image_gallery"):
+        add["gallery_categories"] = [{"_key": "moments", "title": "Moments"}]
+        add["image_gallery"] = [{"title": f"{name} — {i + 1}", "image": pic(i), "category_id": "@moments"} for i in range(min(6, len(img)))]
+    if "videos" in modules and not m.get("videos"):
+        cats = "video_categories" in modules and not m.get("video_categories")
+        if cats:
+            add["video_categories"] = [{"_key": "highlights", "title": "Highlights"}, {"_key": "events", "title": "Events"}]
+        titles = [f"{name} — highlights", "Behind the scenes", "A day with us", "Event recap"]
+        add["videos"] = [{"title": tt, "video_url": YT[i], "video_date": f"2026-0{9 - i}-15",
+                          **({"category_id": "@highlights" if i < 2 else "@events"} if cats else {})} for i, tt in enumerate(titles)]
+    if "livestreams" in modules and not m.get("livestreams"):
+        add["livestreams"] = [{"title": f"Live: {name} annual event", "event_url": YT[0], "event_date": "2026-12-12"},
+                              {"title": "Live Q&A session", "event_url": YT[1], "event_date": "2026-11-20"}]
+    if "attachments" in modules and not m.get("attachments"):
+        brochure = f"{t}-brochure.pdf"
+        pdf(os.path.join(FILES, brochure), name, [tagline, "", "This is a sample brochure from the demo content.",
+                                                  "Replace it with your own file from Admin > Downloads.", "", s.get("phone", ""), s.get("email", "")])
+        add["attachments"] = [{"title": f"{name} — Brochure", "attachment": "f:" + brochure, "description": "Everything about us in one PDF."},
+                              {"title": "Enquiry Form", "attachment": "f:enquiry-form.pdf", "description": "Fill, sign and email it to us."}]
+    if "enquiries" in modules and not m.get("enquiries"):
+        # contact form se aaye message jaisa (admin ko Inbox kaisa dikhta hai)
+        add["enquiries"] = [
+            {"name": "Priya Sharma", "email": "priya.sharma@example.com", "phone": "9876500011", "subject": "Need more details",
+             "message": f"Hello, I found {name} online. Could you please share more details and the best time to call?", "page": "/contact", "status": "New"},
+            {"name": "Rahul Mehta", "email": "rahul.m@example.com", "phone": "9876500022", "subject": "Thank you",
+             "message": "Thanks for the quick reply yesterday — all my questions are answered.", "page": "/", "status": "Replied"}]
+    if "subscribers" in modules and not m.get("subscribers"):
+        add["subscribers"] = [{"email": e, "source": "Footer"} for e in ("neha.k@example.com", "arjun.v@example.com", "sana.q@example.com")]
+    if "magazines" in modules and not m.get("magazines"):
+        mag = f"{t}-magazine.pdf"
+        pdf(os.path.join(FILES, mag), f"{name} Magazine", ["Sample edition from the demo content.", "Upload your own PDF from Admin."])
+        news = t == "news"
+        add["magazine_categories"] = [{"_key": "a", "title": "Daily Edition" if news else "Annual Magazine"},
+                                      {"_key": "b", "title": "Weekend Edition" if news else "Newsletter"}]
+        add["magazines"] = [{"title": f"{'E-Paper' if news else 'Magazine'} — {mo}", "category_id": "@a" if i < 2 else "@b", "year": 2026, "month": n,
+                             "page_no": 1, "cover_image": pic(i + 2), "file": "f:" + mag} for i, (mo, n) in enumerate([("October", 10), ("September", 9), ("August", 8)])]
+        add["magazine_thumbnails"] = [{"title": f"Page {i + 1}", "year": 2026, "month": 10, "thumbnail": pic(i + 3)} for i in range(4)]
+    # refs ke liye order: menus -> pages -> baaki (categories apni rows se pehle)
+    d["modules"] = {k: v for k, v in [("menus", add.pop("menus", m.get("menus"))), ("pages", add.pop("pages", m.get("pages")))] if v}
+    d["modules"].update({k: v for k, v in m.items() if k not in ("menus", "pages")})
+    for k in ["gallery_categories", "video_categories", "magazine_categories"]:
+        if k in add:
+            d["modules"][k] = add.pop(k)
+    d["modules"].update(add)
+
+
+os.makedirs(FILES, exist_ok=True)
+pdf(os.path.join(FILES, "enquiry-form.pdf"), "Enquiry Form", ["Name: ______________________________", "Phone: ______________________________",
+                                                                "Email: ______________________________", "Message:", "", "", "Signature: __________   Date: ________"])
+MODULES, NAV = enabled_modules(), site_nav()
+for k, v in DATA.items():
+    complete(k, v, MODULES[k], NAV[k])
 
 for k, v in DATA.items():
     v["type"] = k

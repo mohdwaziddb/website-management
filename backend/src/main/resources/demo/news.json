@@ -1,0 +1,819 @@
+{
+ "settings": {
+  "site_name": "The Daily Pulse",
+  "tagline": "Truth first. Every hour.",
+  "about_short": "<p>The Daily Pulse is an independent digital newsroom bringing you fast, fair and fact-checked news from India and the world — 24×7.</p>",
+  "phone": "+91 11 4567 8900",
+  "email": "newsdesk@dailypulse.in",
+  "address": "Pulse House, Barakhamba Road, New Delhi 110001",
+  "cta_text": "Subscribe",
+  "cta_link": "/contact",
+  "facebook": "https://facebook.com",
+  "youtube": "https://youtube.com",
+  "twitter": "https://x.com",
+  "footer_text": "Got a story? Write to newsdesk@dailypulse.in · All demo stories are fictional."
+ },
+ "modules": {
+  "menus": [
+   {
+    "title": "Home",
+    "custom_url": "/"
+   },
+   {
+    "_key": "about",
+    "title": "About"
+   },
+   {
+    "title": "Latest",
+    "custom_url": "/news"
+   },
+   {
+    "title": "Photos",
+    "custom_url": "/gallery"
+   },
+   {
+    "title": "Videos",
+    "custom_url": "/videos"
+   },
+   {
+    "title": "Opinion",
+    "custom_url": "/blogs"
+   },
+   {
+    "title": "E-Paper",
+    "custom_url": "/downloads"
+   },
+   {
+    "title": "Contact",
+    "custom_url": "/contact"
+   }
+  ],
+  "pages": [
+   {
+    "title": "About Us",
+    "slug": "about-us",
+    "page_heading": "About Us",
+    "page_body": "<p>The Daily Pulse is an independent digital newsroom bringing you fast, fair and fact-checked news from India and the world — 24×7.</p><h2>Our story</h2><p>The Daily Pulse started with a simple idea: truth first. every hour.. Today a passionate team carries that promise forward every day.</p><h2>What we believe</h2><ul><li>People first</li><li>Quality without shortcuts</li><li>Honest, transparent communication</li></ul>",
+    "menu_id": "@about",
+    "banner_image": "u:1504711434969-e33886168f5c"
+   },
+   {
+    "title": "Privacy Policy",
+    "slug": "privacy-policy",
+    "page_heading": "Privacy Policy",
+    "page_body": "<p>The Daily Pulse respects your privacy. We collect only the information you share with us through our forms, use it only to respond to you, and never sell it.</p><p>Contact us anytime to view or delete your data.</p>"
+   },
+   {
+    "title": "Terms of Use",
+    "slug": "terms",
+    "page_heading": "Terms of Use",
+    "page_body": "<p>By using the The Daily Pulse website you agree to use it lawfully. Content is for general information and may change without notice.</p>"
+   }
+  ],
+  "sliders": [
+   {
+    "title": "News that matters, as it happens",
+    "description": "Fast, fair and fact-checked — from India and the world.",
+    "image": "u:1504711434969-e33886168f5c"
+   },
+   {
+    "title": "Read the day's biggest stories",
+    "description": "Politics, business, sports, tech and more.",
+    "image": "u:1495020689067-958852a7765e"
+   }
+  ],
+  "news_categories": [
+   {
+    "_key": "india",
+    "title": "India",
+    "slug": "india",
+    "color": "orange",
+    "show_on_home": true,
+    "description": "National news, politics and governance."
+   },
+   {
+    "_key": "world",
+    "title": "World",
+    "slug": "world",
+    "color": "blue",
+    "show_on_home": true,
+    "description": "International affairs and global events."
+   },
+   {
+    "_key": "business",
+    "title": "Business",
+    "slug": "business",
+    "color": "green",
+    "show_on_home": true,
+    "description": "Markets, economy, startups and companies."
+   },
+   {
+    "_key": "sports",
+    "title": "Sports",
+    "slug": "sports",
+    "color": "red",
+    "show_on_home": true,
+    "description": "Cricket, football, Olympics and more."
+   },
+   {
+    "_key": "tech",
+    "title": "Technology",
+    "slug": "technology",
+    "color": "violet",
+    "show_on_home": true,
+    "description": "Gadgets, AI, apps and the internet."
+   },
+   {
+    "_key": "ent",
+    "title": "Entertainment",
+    "slug": "entertainment",
+    "color": "pink",
+    "show_on_home": true,
+    "description": "Films, music, OTT and celebrities."
+   },
+   {
+    "_key": "health",
+    "title": "Health",
+    "slug": "health",
+    "color": "teal",
+    "show_on_home": false,
+    "description": "Wellness, medicine and fitness."
+   },
+   {
+    "_key": "env",
+    "title": "Environment",
+    "slug": "environment",
+    "color": "amber",
+    "show_on_home": false,
+    "description": "Climate, wildlife and sustainability."
+   }
+  ],
+  "team_members": [
+   {
+    "_key": "anjali",
+    "title": "Anjali Verma",
+    "designation": "Senior Political Correspondent",
+    "bio": "Covers Parliament and national politics for 12 years.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "_key": "rahul",
+    "title": "Rahul Khanna",
+    "designation": "Business Editor",
+    "bio": "Former equity analyst; writes on markets, startups and the economy.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "_key": "meera",
+    "title": "Meera Iyer",
+    "designation": "Sports Reporter",
+    "bio": "Has reported from three Cricket World Cups and two Olympics.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   },
+   {
+    "_key": "kabir",
+    "title": "Kabir Sethi",
+    "designation": "Technology Editor",
+    "bio": "Tracks gadgets, AI and India's digital economy.",
+    "photo": "p:1438761681033-6461ffad8d80"
+   },
+   {
+    "_key": "farah",
+    "title": "Farah Qureshi",
+    "designation": "Entertainment & Lifestyle Writer",
+    "bio": "Reviews films, music and everything pop culture.",
+    "photo": "p:1472099645785-5658abf4ff4e"
+   }
+  ],
+  "news_posts": [
+   {
+    "title": "Parliament clears landmark data protection rules after marathon debate",
+    "slug": "parliament-clears-data-protection-rules",
+    "category_id": "@india",
+    "reporter_id": "@anjali",
+    "published_date": "2026-10-30",
+    "cover_image": "u:1529107386315-e1a2ed48a620",
+    "image_caption": "Members during the late-night session. (Representational)",
+    "location": "New Delhi",
+    "summary": "Both Houses passed the rules late on Wednesday, giving citizens new rights over how their personal data is collected and used.",
+    "body": "<p><strong>New Delhi:</strong> Both Houses passed the rules late on Wednesday, giving citizens new rights over how their personal data is collected and used.</p><p>Under the new rules, companies must take clear consent before collecting personal data and delete it once the purpose is served.</p><p>The development was confirmed by officials on Thursday evening, and a detailed notification is expected within the week.</p><p>Experts say the move could have a far-reaching impact over the next few years, though several questions about implementation remain open.</p><p>Stakeholders have welcomed the step but asked for clear timelines and regular public updates on progress.</p>",
+    "tags": "parliament, privacy, data",
+    "is_breaking": true,
+    "is_featured": true,
+    "is_trending": true
+   },
+   {
+    "title": "Sensex jumps 900 points as banks and IT stocks rally",
+    "slug": "sensex-jumps-900-points",
+    "category_id": "@business",
+    "reporter_id": "@rahul",
+    "published_date": "2026-10-30",
+    "cover_image": "u:1590283603385-17ffb3a7f29f",
+    "image_caption": "Markets closed at a record high on Thursday.",
+    "location": "Mumbai",
+    "summary": "Benchmark indices closed at record highs on strong buying in banking and IT shares and steady foreign inflows.",
+    "body": "<p><strong>Mumbai:</strong> Benchmark indices closed at record highs on strong buying in banking and IT shares and steady foreign inflows.</p><p>Analysts credited the rally to better-than-expected quarterly results and easing global bond yields.</p><p>Experts say the move could have a far-reaching impact over the next few years, though several questions about implementation remain open.</p><p>Stakeholders have welcomed the step but asked for clear timelines and regular public updates on progress.</p>",
+    "tags": "sensex, markets, stocks",
+    "is_breaking": true,
+    "is_featured": true,
+    "is_trending": true
+   },
+   {
+    "title": "India seal series with thrilling last-over win",
+    "slug": "india-seal-series-last-over-win",
+    "category_id": "@sports",
+    "reporter_id": "@meera",
+    "published_date": "2026-10-29",
+    "cover_image": "u:1540747913346-19e32dc3e97e",
+    "image_caption": "Fans celebrate under the floodlights.",
+    "location": "Ahmedabad",
+    "summary": "Needing 11 off the final over, the lower order held its nerve to clinch the series 3-1 in front of a packed stadium.",
+    "body": "<p><strong>Ahmedabad:</strong> Needing 11 off the final over, the lower order held its nerve to clinch the series 3-1 in front of a packed stadium.</p><p>The captain called it 'one of the best team efforts' of the season and praised the young bowlers.</p><p>Experts say the move could have a far-reaching impact over the next few years, though several questions about implementation remain open.</p><p>Stakeholders have welcomed the step but asked for clear timelines and regular public updates on progress.</p>",
+    "tags": "cricket, team india",
+    "is_breaking": false,
+    "is_featured": true,
+    "is_trending": true
+   },
+   {
+    "title": "Made-in-India AI chip enters mass production",
+    "slug": "made-in-india-ai-chip",
+    "category_id": "@tech",
+    "reporter_id": "@kabir",
+    "published_date": "2026-10-29",
+    "cover_image": "u:1518770660439-4636190af475",
+    "image_caption": "The new chip is designed for phones and laptops.",
+    "location": "Bengaluru",
+    "summary": "A Bengaluru start-up has begun mass production of an energy-efficient AI chip designed entirely in India.",
+    "body": "<p><strong>Bengaluru:</strong> A Bengaluru start-up has begun mass production of an energy-efficient AI chip designed entirely in India.</p><p>The company says the chip uses 40% less power than comparable imports and will ship in devices next year.</p><p>Experts say the move could have a far-reaching impact over the next few years, though several questions about implementation remain open.</p><p>Stakeholders have welcomed the step but asked for clear timelines and regular public updates on progress.</p>",
+    "tags": "ai, semiconductors, startups",
+    "is_breaking": false,
+    "is_featured": true,
+    "is_trending": true
+   },
+   {
+    "title": "Global leaders agree on new climate finance target",
+    "slug": "global-climate-finance-target",
+    "category_id": "@world",
+    "reporter_id": "@anjali",
+    "published_date": "2026-10-28",
+    "cover_image": "u:1521295121783-8a321d551ad2",
+    "image_caption": "Delegates at the summit venue.",
+    "location": "Geneva",
+    "summary": "Nearly 190 countries agreed on a fresh climate-finance goal after two weeks of tough negotiations.",
+    "body": "<p><strong>Geneva:</strong> Nearly 190 countries agreed on a fresh climate-finance goal after two weeks of tough negotiations.</p><p>Developing nations called it a step forward but said the money must reach communities quickly.</p><p>Experts say the move could have a far-reaching impact over the next few years, though several questions about implementation remain open.</p><p>Stakeholders have welcomed the step but asked for clear timelines and regular public updates on progress.</p>",
+    "tags": "climate, summit",
+    "is_breaking": false,
+    "is_featured": true,
+    "is_trending": false
+   },
+   {
+    "title": "IMD forecasts a pleasant winter for North India",
+    "slug": "imd-forecasts-pleasant-winter",
+    "category_id": "@india",
+    "reporter_id": "@anjali",
+    "published_date": "2026-10-28",
+    "cover_image": "u:1477959858617-67f85cf4f1df",
+    "image_caption": "A clear evening skyline after the rains.",
+    "location": "New Delhi",
+    "summary": "The weather office expects near-normal winter temperatures and fewer cold-wave days this year.",
+    "body": "<p><strong>New Delhi:</strong> The weather office expects near-normal winter temperatures and fewer cold-wave days this year.</p><p>The development was confirmed by officials on Thursday evening, and a detailed notification is expected within the week.</p><p>Experts say the move could have a far-reaching impact over the next few years, though several questions about implementation remain open.</p><p>Stakeholders have welcomed the step but asked for clear timelines and regular public updates on progress.</p>",
+    "tags": "weather, imd",
+    "is_breaking": true,
+    "is_featured": false,
+    "is_trending": false
+   },
+   {
+    "title": "Blockbuster sequel crosses ₹500 crore in two weeks",
+    "slug": "blockbuster-sequel-500-crore",
+    "category_id": "@ent",
+    "reporter_id": "@farah",
+    "published_date": "2026-10-28",
+    "cover_image": "u:1489599849927-2ee91cede3ba",
+    "image_caption": "Packed theatres across the country.",
+    "location": "Mumbai",
+    "summary": "The much-awaited sequel has become the fastest film of the year to cross the ₹500 crore mark worldwide.",
+    "body": "<p><strong>Mumbai:</strong> The much-awaited sequel has become the fastest film of the year to cross the ₹500 crore mark worldwide.</p><p>Trade analysts expect the run to continue through the festive weekend.</p><p>Experts say the move could have a far-reaching impact over the next few years, though several questions about implementation remain open.</p><p>Stakeholders have welcomed the step but asked for clear timelines and regular public updates on progress.</p>",
+    "tags": "box office, films",
+    "is_breaking": false,
+    "is_featured": false,
+    "is_trending": true
+   },
+   {
+    "title": "Retail investors cross 15 crore demat accounts",
+    "slug": "retail-investors-15-crore-demat",
+    "category_id": "@business",
+    "reporter_id": "@rahul",
+    "published_date": "2026-10-27",
+    "cover_image": "u:1611974789855-9c2a0a7236a3",
+    "image_caption": "First-time investors are driving the surge.",
+    "location": "Mumbai",
+    "summary": "Demat accounts have doubled in three years as more young Indians start investing through mobile apps.",
+    "body": "<p><strong>Mumbai:</strong> Demat accounts have doubled in three years as more young Indians start investing through mobile apps.</p><p>The development was confirmed by officials on Thursday evening, and a detailed notification is expected within the week.</p><p>Experts say the move could have a far-reaching impact over the next few years, though several questions about implementation remain open.</p><p>Stakeholders have welcomed the step but asked for clear timelines and regular public updates on progress.</p>",
+    "tags": "investing, demat",
+    "is_breaking": false,
+    "is_featured": false,
+    "is_trending": false
+   },
+   {
+    "title": "Smartphone shipments hit record high this festive season",
+    "slug": "smartphone-shipments-record",
+    "category_id": "@tech",
+    "reporter_id": "@kabir",
+    "published_date": "2026-10-27",
+    "cover_image": "u:1512941937669-90a1b58e7e9c",
+    "image_caption": "5G phones made up most of the sales.",
+    "location": "New Delhi",
+    "summary": "Festive sales pushed quarterly smartphone shipments to an all-time high, led by budget 5G models.",
+    "body": "<p><strong>New Delhi:</strong> Festive sales pushed quarterly smartphone shipments to an all-time high, led by budget 5G models.</p><p>The development was confirmed by officials on Thursday evening, and a detailed notification is expected within the week.</p><p>Experts say the move could have a far-reaching impact over the next few years, though several questions about implementation remain open.</p><p>Stakeholders have welcomed the step but asked for clear timelines and regular public updates on progress.</p>",
+    "tags": "smartphones, 5g",
+    "is_breaking": false,
+    "is_featured": false,
+    "is_trending": true
+   },
+   {
+    "title": "Young sprinter breaks 20-year-old national record",
+    "slug": "sprinter-breaks-national-record",
+    "category_id": "@sports",
+    "reporter_id": "@meera",
+    "published_date": "2026-10-26",
+    "cover_image": "u:1461896836934-ffe607ba8211",
+    "image_caption": "The record-breaking run in the 100m final.",
+    "location": "Bhubaneswar",
+    "summary": "The 19-year-old clocked 10.09 seconds to rewrite the oldest record in Indian athletics.",
+    "body": "<p><strong>Bhubaneswar:</strong> The 19-year-old clocked 10.09 seconds to rewrite the oldest record in Indian athletics.</p><p>The development was confirmed by officials on Thursday evening, and a detailed notification is expected within the week.</p><p>Experts say the move could have a far-reaching impact over the next few years, though several questions about implementation remain open.</p><p>Stakeholders have welcomed the step but asked for clear timelines and regular public updates on progress.</p>",
+    "tags": "athletics, records",
+    "is_breaking": false,
+    "is_featured": false,
+    "is_trending": true
+   },
+   {
+    "title": "Study links 30 minutes of daily walking to better heart health",
+    "slug": "daily-walking-heart-health",
+    "category_id": "@health",
+    "reporter_id": "@farah",
+    "published_date": "2026-10-26",
+    "cover_image": "u:1576091160399-112ba8d25d1d",
+    "image_caption": "Doctors recommend regular moderate exercise.",
+    "location": "Chennai",
+    "summary": "A five-year study of 20,000 adults found that a brisk daily walk cut heart-disease risk by almost a third.",
+    "body": "<p><strong>Chennai:</strong> A five-year study of 20,000 adults found that a brisk daily walk cut heart-disease risk by almost a third.</p><p>The development was confirmed by officials on Thursday evening, and a detailed notification is expected within the week.</p><p>Experts say the move could have a far-reaching impact over the next few years, though several questions about implementation remain open.</p><p>Stakeholders have welcomed the step but asked for clear timelines and regular public updates on progress.</p>",
+    "tags": "health, fitness, heart",
+    "is_breaking": false,
+    "is_featured": false,
+    "is_trending": false
+   },
+   {
+    "title": "Tiger count rises in central India reserves",
+    "slug": "tiger-count-rises",
+    "category_id": "@env",
+    "reporter_id": "@kabir",
+    "published_date": "2026-10-25",
+    "cover_image": "u:1473448912268-2022ce9509d8",
+    "image_caption": "Dense forests of a central India tiger reserve.",
+    "location": "Bhopal",
+    "summary": "The latest survey shows a steady rise in tiger numbers, credited to better protection and wildlife corridors.",
+    "body": "<p><strong>Bhopal:</strong> The latest survey shows a steady rise in tiger numbers, credited to better protection and wildlife corridors.</p><p>The development was confirmed by officials on Thursday evening, and a detailed notification is expected within the week.</p><p>Experts say the move could have a far-reaching impact over the next few years, though several questions about implementation remain open.</p><p>Stakeholders have welcomed the step but asked for clear timelines and regular public updates on progress.</p>",
+    "tags": "wildlife, tigers, environment",
+    "is_breaking": false,
+    "is_featured": false,
+    "is_trending": false
+   },
+   {
+    "title": "Satellite network to bring internet to 10,000 remote villages",
+    "slug": "satellite-internet-remote-villages",
+    "category_id": "@tech",
+    "reporter_id": "@kabir",
+    "published_date": "2026-10-25",
+    "cover_image": "u:1446776811953-b23d57bd21aa",
+    "image_caption": "The constellation will cover hilly and island regions.",
+    "location": "Sriharikota",
+    "summary": "A new low-earth-orbit satellite network will connect remote villages in hilly and island regions by next year.",
+    "body": "<p><strong>Sriharikota:</strong> A new low-earth-orbit satellite network will connect remote villages in hilly and island regions by next year.</p><p>The development was confirmed by officials on Thursday evening, and a detailed notification is expected within the week.</p><p>Experts say the move could have a far-reaching impact over the next few years, though several questions about implementation remain open.</p><p>Stakeholders have welcomed the step but asked for clear timelines and regular public updates on progress.</p>",
+    "tags": "space, internet, satellites",
+    "is_breaking": false,
+    "is_featured": false,
+    "is_trending": false
+   },
+   {
+    "title": "Indian cycling team wins historic Asian gold",
+    "slug": "cycling-team-asian-gold",
+    "category_id": "@sports",
+    "reporter_id": "@meera",
+    "published_date": "2026-10-24",
+    "cover_image": "u:1517649763962-0c623066013b",
+    "image_caption": "The team on the final climb.",
+    "location": "Jakarta",
+    "summary": "India won its first-ever Asian gold in team road cycling after a strong finish on the final climb.",
+    "body": "<p><strong>Jakarta:</strong> India won its first-ever Asian gold in team road cycling after a strong finish on the final climb.</p><p>The development was confirmed by officials on Thursday evening, and a detailed notification is expected within the week.</p><p>Experts say the move could have a far-reaching impact over the next few years, though several questions about implementation remain open.</p><p>Stakeholders have welcomed the step but asked for clear timelines and regular public updates on progress.</p>",
+    "tags": "cycling, asian games",
+    "is_breaking": false,
+    "is_featured": false,
+    "is_trending": false
+   },
+   {
+    "title": "Music festival season opens with record crowds",
+    "slug": "music-festival-season-opens",
+    "category_id": "@ent",
+    "reporter_id": "@farah",
+    "published_date": "2026-10-24",
+    "cover_image": "u:1470229722913-7c0e2dbbafd3",
+    "image_caption": "Fans at the opening night.",
+    "location": "Goa",
+    "summary": "The country's biggest music festival opened to a sold-out crowd, with over 80 artists across five stages.",
+    "body": "<p><strong>Goa:</strong> The country's biggest music festival opened to a sold-out crowd, with over 80 artists across five stages.</p><p>The development was confirmed by officials on Thursday evening, and a detailed notification is expected within the week.</p><p>Experts say the move could have a far-reaching impact over the next few years, though several questions about implementation remain open.</p><p>Stakeholders have welcomed the step but asked for clear timelines and regular public updates on progress.</p>",
+    "tags": "music, festivals",
+    "is_breaking": false,
+    "is_featured": false,
+    "is_trending": false
+   },
+   {
+    "title": "New light-and-sound show unveiled at historic monument",
+    "slug": "heritage-light-show",
+    "category_id": "@world",
+    "reporter_id": "@anjali",
+    "published_date": "2026-10-23",
+    "cover_image": "u:1524492412937-b28074a5d7da",
+    "image_caption": "Visitors at sunrise.",
+    "location": "Agra",
+    "summary": "A new evening light-and-sound show will tell the monument's story using projection mapping.",
+    "body": "<p><strong>Agra:</strong> A new evening light-and-sound show will tell the monument's story using projection mapping.</p><p>The development was confirmed by officials on Thursday evening, and a detailed notification is expected within the week.</p><p>Experts say the move could have a far-reaching impact over the next few years, though several questions about implementation remain open.</p><p>Stakeholders have welcomed the step but asked for clear timelines and regular public updates on progress.</p>",
+    "tags": "tourism, heritage",
+    "is_breaking": false,
+    "is_featured": false,
+    "is_trending": false
+   },
+   {
+    "title": "Fintech start-ups raise record funding in Q3",
+    "slug": "fintech-record-funding-q3",
+    "category_id": "@business",
+    "reporter_id": "@rahul",
+    "published_date": "2026-10-22",
+    "cover_image": "u:1526628953301-3e589a6a8b74",
+    "image_caption": "Payments and lending apps led the funding.",
+    "location": "Bengaluru",
+    "summary": "Indian fintech companies raised more money in the July–September quarter than in any quarter since 2021.",
+    "body": "<p><strong>Bengaluru:</strong> Indian fintech companies raised more money in the July–September quarter than in any quarter since 2021.</p><p>The development was confirmed by officials on Thursday evening, and a detailed notification is expected within the week.</p><p>Experts say the move could have a far-reaching impact over the next few years, though several questions about implementation remain open.</p><p>Stakeholders have welcomed the step but asked for clear timelines and regular public updates on progress.</p>",
+    "tags": "fintech, funding, startups",
+    "is_breaking": false,
+    "is_featured": false,
+    "is_trending": false
+   }
+  ],
+  "blogs": [
+   {
+    "title": "Why local news still matters",
+    "slug": "why-local-news-matters",
+    "author": "Editor's Desk",
+    "published_date": "2026-10-27",
+    "cover_image": "u:1585829365295-ab7cd400c167",
+    "summary": "In an age of endless feeds, trusted local reporting is more important than ever.",
+    "body": "<p>In an age of endless feeds, trusted local reporting is more important than ever.</p><p>Local journalists are often the first to spot problems — from broken roads to unpaid wages — and the last to leave a story.</p>",
+    "tags": "opinion, journalism"
+   },
+   {
+    "title": "Reading the budget like a pro",
+    "slug": "reading-the-budget",
+    "author": "Rahul Khanna",
+    "published_date": "2026-10-20",
+    "cover_image": "u:1504711434969-e33886168f5c",
+    "summary": "Five numbers to look at before you read any budget headline.",
+    "body": "<p>Five numbers to look at before you read any budget headline.</p><p>Start with the fiscal deficit, then capital expenditure, tax buoyancy, subsidies and interest payments.</p>",
+    "tags": "opinion, economy"
+   }
+  ],
+  "sponsors": [
+   {
+    "title": "FinEdge Bank",
+    "position": "Header",
+    "image": "u:1526628953301-3e589a6a8b74",
+    "headline": "Zero-fee savings account — open in 5 minutes",
+    "link_url": "https://example.com"
+   },
+   {
+    "title": "SkyNet Fibre",
+    "position": "Home Page",
+    "image": "u:1495592822108-9e6261896da8",
+    "headline": "1 Gbps fibre at ₹699/month · Free installation",
+    "link_url": "https://example.com"
+   },
+   {
+    "title": "Pulse Premium",
+    "position": "Sidebar",
+    "image": "u:1495020689067-958852a7765e",
+    "headline": "Go ad-free with Pulse Premium",
+    "link_url": "https://example.com"
+   },
+   {
+    "title": "TravelNest",
+    "position": "In Article",
+    "image": "u:1507525428034-b723cf961d3e",
+    "headline": "Winter getaways from ₹9,999",
+    "link_url": "https://example.com"
+   }
+  ],
+  "gallery_categories": [
+   {
+    "_key": "week",
+    "title": "Pictures of the Week",
+    "cover_image": "u:1524492412937-b28074a5d7da"
+   },
+   {
+    "_key": "sport",
+    "title": "Sports in Frames",
+    "cover_image": "u:1540747913346-19e32dc3e97e"
+   },
+   {
+    "_key": "culture",
+    "title": "Culture & Festivals",
+    "cover_image": "u:1470229722913-7c0e2dbbafd3"
+   }
+  ],
+  "image_gallery": [
+   {
+    "title": "Monuments at dawn",
+    "image": "u:1524492412937-b28074a5d7da",
+    "category_id": "@week"
+   },
+   {
+    "title": "Tricolour over the capital",
+    "image": "u:1532375810709-75b1da00537c",
+    "category_id": "@week"
+   },
+   {
+    "title": "City lights from space",
+    "image": "u:1451187580459-43490279c0fa",
+    "category_id": "@week"
+   },
+   {
+    "title": "Night match under lights",
+    "image": "u:1540747913346-19e32dc3e97e",
+    "category_id": "@sport"
+   },
+   {
+    "title": "Sprint start",
+    "image": "u:1461896836934-ffe607ba8211",
+    "category_id": "@sport"
+   },
+   {
+    "title": "Peloton in the hills",
+    "image": "u:1517649763962-0c623066013b",
+    "category_id": "@sport"
+   },
+   {
+    "title": "Festival concert crowd",
+    "image": "u:1470229722913-7c0e2dbbafd3",
+    "category_id": "@culture"
+   },
+   {
+    "title": "Back at the cinema",
+    "image": "u:1489599849927-2ee91cede3ba",
+    "category_id": "@culture"
+   }
+  ],
+  "testimonials": [
+   {
+    "title": "My first read every morning",
+    "parent_name": "Sanjay Bhatt",
+    "child_name": "Reader since 2019",
+    "description": "Quick, balanced and no clickbait. The 7 AM briefing is perfect.",
+    "photo": "p:1507003211169-0a1dd7228f2d"
+   },
+   {
+    "title": "Best business coverage",
+    "parent_name": "Pooja Nair",
+    "child_name": "Chartered Accountant",
+    "description": "Rahul Khanna's market wrap explains the day in five minutes.",
+    "photo": "p:1494790108377-be9c29b29330"
+   },
+   {
+    "title": "Love the photo stories",
+    "parent_name": "Imran Sheikh",
+    "child_name": "College student",
+    "description": "The weekly picture albums are beautiful.",
+    "photo": "p:1500648767791-00dcc994a43e"
+   }
+  ],
+  "stats": [
+   {
+    "title": "Monthly readers",
+    "value": "2.4M",
+    "icon": "Users"
+   },
+   {
+    "title": "Stories a day",
+    "value": "150+",
+    "icon": "Zap"
+   },
+   {
+    "title": "Reporters",
+    "value": "60",
+    "icon": "PenTool"
+   },
+   {
+    "title": "Cities covered",
+    "value": "120",
+    "icon": "MapPin"
+   }
+  ],
+  "partners": [
+   {
+    "title": "PTI"
+   },
+   {
+    "title": "Reuters"
+   },
+   {
+    "title": "IANS"
+   },
+   {
+    "title": "ANI"
+   },
+   {
+    "title": "AFP"
+   }
+  ],
+  "faqs": [
+   {
+    "title": "How can I send a news tip?",
+    "answer": "Write to newsdesk@dailypulse.in or use the contact form. We protect our sources."
+   },
+   {
+    "title": "How do I advertise with you?",
+    "answer": "Email ads@dailypulse.in for our media kit and rates."
+   },
+   {
+    "title": "Do you publish corrections?",
+    "answer": "Yes. Errors are corrected promptly and noted at the end of the story."
+   }
+  ],
+  "video_categories": [
+   {
+    "_key": "highlights",
+    "title": "Highlights"
+   },
+   {
+    "_key": "events",
+    "title": "Events"
+   }
+  ],
+  "magazine_categories": [
+   {
+    "_key": "a",
+    "title": "Daily Edition"
+   },
+   {
+    "_key": "b",
+    "title": "Weekend Edition"
+   }
+  ],
+  "popups": [
+   {
+    "title": "Welcome to The Daily Pulse",
+    "from_date": "2026-10-01",
+    "to_date": "2027-03-31",
+    "image": "u:1495020689067-958852a7765e",
+    "description": "<p>Truth first. Every hour.. <a href=\"/contact\">Subscribe →</a></p>"
+   }
+  ],
+  "videos": [
+   {
+    "title": "The Daily Pulse — highlights",
+    "video_url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    "video_date": "2026-09-15",
+    "category_id": "@highlights"
+   },
+   {
+    "title": "Behind the scenes",
+    "video_url": "https://www.youtube.com/watch?v=eRsGyueVLvQ",
+    "video_date": "2026-08-15",
+    "category_id": "@highlights"
+   },
+   {
+    "title": "A day with us",
+    "video_url": "https://www.youtube.com/watch?v=R6MlUcmOul8",
+    "video_date": "2026-07-15",
+    "category_id": "@events"
+   },
+   {
+    "title": "Event recap",
+    "video_url": "https://www.youtube.com/watch?v=WhWc3b3KhnY",
+    "video_date": "2026-06-15",
+    "category_id": "@events"
+   }
+  ],
+  "livestreams": [
+   {
+    "title": "Live: The Daily Pulse annual event",
+    "event_url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    "event_date": "2026-12-12"
+   },
+   {
+    "title": "Live Q&A session",
+    "event_url": "https://www.youtube.com/watch?v=eRsGyueVLvQ",
+    "event_date": "2026-11-20"
+   }
+  ],
+  "attachments": [
+   {
+    "title": "The Daily Pulse — Brochure",
+    "attachment": "f:news-brochure.pdf",
+    "description": "Everything about us in one PDF."
+   },
+   {
+    "title": "Enquiry Form",
+    "attachment": "f:enquiry-form.pdf",
+    "description": "Fill, sign and email it to us."
+   }
+  ],
+  "enquiries": [
+   {
+    "name": "Priya Sharma",
+    "email": "priya.sharma@example.com",
+    "phone": "9876500011",
+    "subject": "Need more details",
+    "message": "Hello, I found The Daily Pulse online. Could you please share more details and the best time to call?",
+    "page": "/contact",
+    "status": "New"
+   },
+   {
+    "name": "Rahul Mehta",
+    "email": "rahul.m@example.com",
+    "phone": "9876500022",
+    "subject": "Thank you",
+    "message": "Thanks for the quick reply yesterday — all my questions are answered.",
+    "page": "/",
+    "status": "Replied"
+   }
+  ],
+  "subscribers": [
+   {
+    "email": "neha.k@example.com",
+    "source": "Footer"
+   },
+   {
+    "email": "arjun.v@example.com",
+    "source": "Footer"
+   },
+   {
+    "email": "sana.q@example.com",
+    "source": "Footer"
+   }
+  ],
+  "magazines": [
+   {
+    "title": "E-Paper — October",
+    "category_id": "@a",
+    "year": 2026,
+    "month": 10,
+    "page_no": 1,
+    "cover_image": "u:1529107386315-e1a2ed48a620",
+    "file": "f:news-magazine.pdf"
+   },
+   {
+    "title": "E-Paper — September",
+    "category_id": "@a",
+    "year": 2026,
+    "month": 9,
+    "page_no": 1,
+    "cover_image": "u:1590283603385-17ffb3a7f29f",
+    "file": "f:news-magazine.pdf"
+   },
+   {
+    "title": "E-Paper — August",
+    "category_id": "@b",
+    "year": 2026,
+    "month": 8,
+    "page_no": 1,
+    "cover_image": "u:1540747913346-19e32dc3e97e",
+    "file": "f:news-magazine.pdf"
+   }
+  ],
+  "magazine_thumbnails": [
+   {
+    "title": "Page 1",
+    "year": 2026,
+    "month": 10,
+    "thumbnail": "u:1590283603385-17ffb3a7f29f"
+   },
+   {
+    "title": "Page 2",
+    "year": 2026,
+    "month": 10,
+    "thumbnail": "u:1540747913346-19e32dc3e97e"
+   },
+   {
+    "title": "Page 3",
+    "year": 2026,
+    "month": 10,
+    "thumbnail": "u:1518770660439-4636190af475"
+   },
+   {
+    "title": "Page 4",
+    "year": 2026,
+    "month": 10,
+    "thumbnail": "u:1521295121783-8a321d551ad2"
+   }
+  ]
+ },
+ "type": "news"
+}

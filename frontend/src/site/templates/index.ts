@@ -149,7 +149,7 @@ export const TEMPLATES: TemplateConfig[] = [
     },
     {
       key: "bistro", name: "Bistro", description: "Cream paper, forest green and elegant serif — a cosy European cafe.",
-      colors: { primary: "#14532d", accent: "#d97706", bg: "#fdf8f1", text: "#1c1917", muted: "#78716c" }, fonts: ["Cormorant Garamond", "Raleway"], nav: "light", hero: "elegant",
+      colors: { primary: "#14532d", accent: "#d97706", bg: "#fdf8f1", text: "#1c1917", muted: "#78716c" }, fonts: ["Cormorant Garamond", "Raleway"], nav: "light", hero: "collage",
       heading: "serif", radius: "rounded-none", button: "rounded-none", card: "border border-stone-300",
       sections: ["hero", "about", "catalog:menu", "gallery", "testimonials:grid", "faq", "contact"]
     },
@@ -290,8 +290,8 @@ export const TEMPLATES: TemplateConfig[] = [
       sections: ["hero", "projects:masonry", "services:list", "pricing:bold", "testimonials:marquee", "contact"]
     },
     {
-      key: "vows", name: "Vows", description: "Blush pink, champagne gold and romantic serif — wedding stories.",
-      colors: { primary: "#be185d", accent: "#d4a373", bg: "#fdf2f8", text: "#3f0d24", muted: "#9d6b84" }, fonts: ["Cormorant Garamond", "Raleway"], nav: "centered", hero: "elegant",
+      key: "vows", name: "Vows", description: "Blush-to-gold gradient, framed photos and romantic serif — wedding stories.",
+      colors: { primary: "#be185d", accent: "#d4a373", bg: "#fdf2f8", text: "#3f0d24", muted: "#9d6b84" }, fonts: ["Cormorant Garamond", "Raleway"], nav: "floating", hero: "split",
       heading: "serif", radius: "rounded-none", button: "rounded-full",
       sections: ["hero", "projects:grid", "services:alternating", "pricing:cards", "testimonials", "gallery", "faq", "contact"]
     },
@@ -360,6 +360,50 @@ export const TEMPLATES: TemplateConfig[] = [
       key: "skyline", name: "Skyline", description: "Cool slate and sky blue with collage hero — architecture & builders.",
       colors: { primary: "#334155", accent: "#0ea5e9", bg: "#f8fafc" }, fonts: ["Space Grotesk", "Inter"], nav: "floating", hero: "collage", heading: "eyebrow",
       sections: ["hero", "projects:masonry", "services:icons", "stats:cards", "testimonials:grid", "partners:grid", "cta:split", "contact"]
+    }
+  ]),
+
+  // ------------------------------------------------------------ News / Magazine
+  ...group("news", [
+    {
+      key: "herald", name: "Herald", description: "Classic newspaper front page — serif headlines, black & crimson, dense and trusted.",
+      colors: { primary: "#111111", accent: "#c8102e", muted: "#525252", text: "#111111" }, fonts: ["Playfair Display", "Inter"], nav: "light", hero: "headlines",
+      card: "border-b border-black/10", radius: "rounded-none", heading: "underline", button: "rounded-none",
+      sections: ["hero", "ad", "latest:grid", "categories:blocks", "trending:numbered", "photos", "videos", "news:list"]
+    },
+    {
+      key: "flash", name: "Flash 24×7", description: "Dark TV-news channel look — red & yellow, bold condensed type, trending first.",
+      dark: true, colors: { primary: "#e11d48", accent: "#facc15", bg: "#0b0b0f", surface: "#16161d", onAccent: "#111111" }, fonts: ["Oswald", "Inter"], nav: "dark", hero: "spotlight",
+      radius: "rounded-md", heading: "badge", button: "rounded-lg",
+      sections: ["hero", "trending:cards", "latest:list", "ad", "categories:columns", "videos", "photos", "news"]
+    },
+    {
+      key: "digest", name: "Digest", description: "Modern digital magazine — airy, colourful category columns and soft cards.",
+      colors: { primary: "#1d4ed8", accent: "#f97316", bg: "#f8fafc" }, fonts: ["Manrope", "Inter"], nav: "solid", hero: "mosaic",
+      card: "shadow-md shadow-slate-200/70 ring-1 ring-slate-100", radius: "rounded-2xl", heading: "eyebrow",
+      sections: ["hero", "categories:columns", "trending:numbered", "ad", "latest:grid", "photos", "news", "videos"]
+    }
+  ]),
+
+  // ------------------------------------------------------------ Online store
+  ...group("ecommerce", [
+    {
+      key: "shopfront", name: "Shopfront", description: "Clean modern store — big split hero, round category icons and tabbed products.",
+      colors: { primary: "#111827", accent: "#6366f1", bg: "#ffffff", surface: "#f8fafc" }, fonts: ["Manrope", "Inter"], nav: "light", hero: "split",
+      card: "ring-1 ring-slate-200", radius: "rounded-2xl", heading: "center", button: "rounded-full",
+      sections: ["hero", "shop_categories:circles", "products:grid", "perks", "testimonials:marquee", "partners:marquee", "news", "faq:two-col"]
+    },
+    {
+      key: "boutique", name: "Boutique", description: "Fashion boutique — warm cream, serif headings, editorial tiles and scrolling products.",
+      colors: { primary: "#1c1917", accent: "#b45309", bg: "#faf7f2", surface: "#f3ede4", text: "#1c1917", muted: "#78716c" }, fonts: ["Cormorant Garamond", "Josefin Sans"],
+      nav: "centered", hero: "elegant", card: "", radius: "rounded-none", heading: "serif", button: "rounded-none",
+      sections: ["hero", "shop_categories:tiles", "products:carousel", "about:image", "perks", "testimonials:grid", "news", "faq"]
+    },
+    {
+      key: "megamart", name: "MegaMart", description: "Marketplace style — bold blue & orange, slider hero, deals grid and brand logos.",
+      colors: { primary: "#1e40af", accent: "#f97316", bg: "#f1f5f9", surface: "#ffffff" }, fonts: ["Poppins", "Inter"], nav: "classic", hero: "carousel",
+      card: "shadow-sm ring-1 ring-slate-200", radius: "rounded-lg", heading: "underline", button: "rounded-lg",
+      sections: ["hero", "perks", "shop_categories:circles", "products:grid", "partners:grid", "stats:band", "testimonials", "faq:two-col"]
     }
   ])
 ];

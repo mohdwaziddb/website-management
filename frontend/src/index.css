@@ -7,6 +7,16 @@ body {
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
+/* CKEditor: kabhi apne box se bahar na phaile (chhoti screen par toolbar "⋮" me group ho jaata hai) */
+.prose-editor,
+.prose-editor .ck.ck-editor {
+  min-width: 0;
+  max-width: 100%;
+}
+.prose-editor .ck-editor__editable {
+  overflow-wrap: anywhere;
+}
+
 /* CKEditor: Tailwind preflight lists/headings reset kar deta hai, editor ke andar wapas */
 .prose-editor .ck-editor__editable {
   min-height: 260px;
@@ -92,3 +102,68 @@ body {
   aspect-ratio: 16 / 9;
   height: auto;
 }
+
+/* ------------------------------------------------------------------------------------------------
+   Admin dark mode: <html class="admin-dark"> (components/theme.ts). Har page alag se nahi badla —
+   admin me use hone wale common Tailwind rang yahan ek jagah dark kiye. Public website par ye class kabhi nahi lagti.
+   ------------------------------------------------------------------------------------------------ */
+html.admin-dark {
+  color-scheme: dark;
+}
+html.admin-dark body {
+  background: #0b1220;
+  color: #e2e8f0;
+}
+/* surfaces */
+.admin-dark .bg-white { background-color: #111a2b; }
+.admin-dark .bg-white\/80, .admin-dark .bg-white\/90 { background-color: rgb(17 26 43 / 0.85); }
+.admin-dark .bg-slate-50 { background-color: #0b1220; }
+.admin-dark .bg-slate-50\/80, .admin-dark .bg-slate-50\/60 { background-color: rgb(30 41 59 / 0.45); }
+.admin-dark .bg-slate-100 { background-color: #1e293b; }
+.admin-dark .bg-slate-200, .admin-dark .bg-slate-200\/70 { background-color: #273449; }
+.admin-dark .hover\:bg-white:hover,
+.admin-dark .hover\:bg-slate-50:hover,
+.admin-dark .hover\:bg-slate-50\/70:hover,
+.admin-dark .hover\:bg-slate-100:hover { background-color: #1e293b; }
+/* text */
+.admin-dark .text-slate-900 { color: #f1f5f9; }
+.admin-dark .text-slate-800 { color: #e2e8f0; }
+.admin-dark .text-slate-700 { color: #cbd5e1; }
+.admin-dark .text-slate-600 { color: #a3b1c6; }
+.admin-dark .text-slate-500 { color: #8b9bb4; }
+.admin-dark .text-slate-400 { color: #64748b; }
+.admin-dark .hover\:text-slate-900:hover,
+.admin-dark .hover\:text-slate-800:hover,
+.admin-dark .hover\:text-slate-700:hover { color: #f8fafc; }
+/* borders / rings */
+.admin-dark .border-slate-100 { border-color: #1c2638; }
+.admin-dark .border-slate-200, .admin-dark .border-slate-200\/80 { border-color: #24314a; }
+.admin-dark .border-slate-300, .admin-dark .hover\:border-slate-300:hover { border-color: #334155; }
+.admin-dark .divide-slate-100 > :not([hidden]) ~ :not([hidden]) { border-color: #1c2638; }
+.admin-dark .ring-slate-200, .admin-dark .ring-slate-100 { --tw-ring-color: #24314a; }
+.admin-dark .ring-white { --tw-ring-color: #111a2b; }
+/* brand (halka) */
+.admin-dark .bg-brand-50, .admin-dark .bg-brand-50\/40, .admin-dark .bg-brand-50\/50 { background-color: rgb(59 108 246 / 0.14); }
+.admin-dark .bg-brand-100 { background-color: rgb(59 108 246 / 0.25); }
+.admin-dark .hover\:bg-brand-50:hover, .admin-dark .hover\:bg-brand-50\/50:hover, .admin-dark .hover\:bg-brand-100:hover { background-color: rgb(59 108 246 / 0.22); }
+.admin-dark .text-brand-700, .admin-dark .text-brand-800 { color: #9dbbff; }
+.admin-dark .text-brand-600 { color: #7da2ff; }
+.admin-dark .ring-brand-100, .admin-dark .border-brand-100, .admin-dark .border-brand-200, .admin-dark .border-brand-300 { --tw-ring-color: rgb(96 140 250 / 0.35); border-color: rgb(96 140 250 / 0.35); }
+/* status rang (pill / badge / alert) */
+.admin-dark .bg-emerald-50 { background-color: rgb(16 185 129 / 0.14); }
+.admin-dark .bg-amber-50 { background-color: rgb(245 158 11 / 0.14); }
+.admin-dark .bg-violet-50 { background-color: rgb(139 92 246 / 0.16); }
+.admin-dark .bg-rose-50, .admin-dark .bg-red-50, .admin-dark .hover\:bg-red-50:hover { background-color: rgb(244 63 94 / 0.14); }
+.admin-dark .bg-sky-50, .admin-dark .bg-blue-50, .admin-dark .bg-indigo-50 { background-color: rgb(56 189 248 / 0.14); }
+.admin-dark .text-emerald-700, .admin-dark .text-emerald-600 { color: #6ee7b7; }
+.admin-dark .text-amber-700, .admin-dark .text-amber-800, .admin-dark .text-amber-600 { color: #fcd34d; }
+.admin-dark .text-violet-700, .admin-dark .text-violet-600 { color: #c4b5fd; }
+.admin-dark .text-rose-700, .admin-dark .text-red-700, .admin-dark .text-red-600, .admin-dark .text-rose-600 { color: #fda4af; }
+.admin-dark .ring-emerald-100, .admin-dark .ring-amber-100, .admin-dark .ring-violet-100, .admin-dark .ring-rose-100 { --tw-ring-color: rgb(148 163 184 / 0.18); }
+.admin-dark .border-red-200, .admin-dark .border-amber-200 { border-color: rgb(244 63 94 / 0.3); }
+/* inputs (FieldInput / selects) */
+.admin-dark input:not([type="checkbox"]):not([type="radio"]):not([type="color"]),
+.admin-dark select,
+.admin-dark textarea { color: #e2e8f0; }
+.admin-dark input::placeholder, .admin-dark textarea::placeholder { color: #64748b; }
+.admin-dark .shadow-sm, .admin-dark .shadow-lg, .admin-dark .shadow-xl { --tw-shadow-color: rgb(0 0 0 / 0.35); }

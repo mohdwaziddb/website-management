@@ -12,6 +12,54 @@
   "footer_text": "Best rate guaranteed when you book direct."
  },
  "modules": {
+  "menus": [
+   {
+    "title": "Home",
+    "custom_url": "/"
+   },
+   {
+    "_key": "about",
+    "title": "About"
+   },
+   {
+    "title": "Rooms & Packages",
+    "custom_url": "/catalog"
+   },
+   {
+    "title": "Amenities",
+    "custom_url": "/services"
+   },
+   {
+    "title": "Gallery",
+    "custom_url": "/gallery"
+   },
+   {
+    "title": "Contact",
+    "custom_url": "/contact"
+   }
+  ],
+  "pages": [
+   {
+    "title": "About Us",
+    "slug": "about-us",
+    "page_heading": "About Us",
+    "page_body": "<p>A boutique beachfront resort in Goa with 48 rooms, an infinity pool and curated holiday packages across India.</p><h2>Our story</h2><p>Azure Bay Resort & Travels started with a simple idea: wake up to paradise. Today a passionate team carries that promise forward every day.</p><h2>What we believe</h2><ul><li>People first</li><li>Quality without shortcuts</li><li>Honest, transparent communication</li></ul>",
+    "menu_id": "@about",
+    "banner_image": "u:1520250497591-112f2f40a3f4"
+   },
+   {
+    "title": "Privacy Policy",
+    "slug": "privacy-policy",
+    "page_heading": "Privacy Policy",
+    "page_body": "<p>Azure Bay Resort & Travels respects your privacy. We collect only the information you share with us through our forms, use it only to respond to you, and never sell it.</p><p>Contact us anytime to view or delete your data.</p>"
+   },
+   {
+    "title": "Terms of Use",
+    "slug": "terms",
+    "page_heading": "Terms of Use",
+    "page_body": "<p>By using the Azure Bay Resort & Travels website you agree to use it lawfully. Content is for general information and may change without notice.</p>"
+   }
+  ],
   "sliders": [
    {
     "title": "Your private paradise in Goa",
@@ -283,6 +331,83 @@
     "summary": "Skip the crowds and find quiet sand.",
     "body": "<p>Skip the crowds and find quiet sand.</p><p>Our favourites: Ashwem, Querim and Butterfly beach.</p>",
     "tags": "travel,goa"
+   }
+  ],
+  "popups": [
+   {
+    "title": "Welcome to Azure Bay Resort & Travels",
+    "from_date": "2026-10-01",
+    "to_date": "2027-03-31",
+    "image": "u:1542314831-068cd1dbfeeb",
+    "description": "<p>Wake up to paradise. <a href=\"/contact\">Book Your Stay →</a></p>"
+   }
+  ],
+  "videos": [
+   {
+    "title": "Azure Bay Resort & Travels — highlights",
+    "video_url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    "video_date": "2026-09-15"
+   },
+   {
+    "title": "Behind the scenes",
+    "video_url": "https://www.youtube.com/watch?v=eRsGyueVLvQ",
+    "video_date": "2026-08-15"
+   },
+   {
+    "title": "A day with us",
+    "video_url": "https://www.youtube.com/watch?v=R6MlUcmOul8",
+    "video_date": "2026-07-15"
+   },
+   {
+    "title": "Event recap",
+    "video_url": "https://www.youtube.com/watch?v=WhWc3b3KhnY",
+    "video_date": "2026-06-15"
+   }
+  ],
+  "attachments": [
+   {
+    "title": "Azure Bay Resort & Travels — Brochure",
+    "attachment": "f:hotel_travel-brochure.pdf",
+    "description": "Everything about us in one PDF."
+   },
+   {
+    "title": "Enquiry Form",
+    "attachment": "f:enquiry-form.pdf",
+    "description": "Fill, sign and email it to us."
+   }
+  ],
+  "enquiries": [
+   {
+    "name": "Priya Sharma",
+    "email": "priya.sharma@example.com",
+    "phone": "9876500011",
+    "subject": "Need more details",
+    "message": "Hello, I found Azure Bay Resort & Travels online. Could you please share more details and the best time to call?",
+    "page": "/contact",
+    "status": "New"
+   },
+   {
+    "name": "Rahul Mehta",
+    "email": "rahul.m@example.com",
+    "phone": "9876500022",
+    "subject": "Thank you",
+    "message": "Thanks for the quick reply yesterday — all my questions are answered.",
+    "page": "/",
+    "status": "Replied"
+   }
+  ],
+  "subscribers": [
+   {
+    "email": "neha.k@example.com",
+    "source": "Footer"
+   },
+   {
+    "email": "arjun.v@example.com",
+    "source": "Footer"
+   },
+   {
+    "email": "sana.q@example.com",
+    "source": "Footer"
    }
   ]
  },

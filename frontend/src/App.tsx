@@ -6,7 +6,7 @@ import { AuthProvider, useAuth } from "./lib/auth";
 import { ModulesProvider } from "./lib/modules";
 import { ADMIN_BASE, IS_PLATFORM, isAdminPath } from "./lib/tenant";
 import Layout from "./components/Layout";
-import { Toaster } from "./components/ui";
+import { ConfirmHost, Toaster } from "./components/ui";
 import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import ModuleListPage from "./pages/ModuleListPage";
@@ -14,8 +14,14 @@ import ModuleFormPage from "./pages/ModuleFormPage";
 import LogsPage from "./pages/LogsPage";
 import SettingsPage from "./pages/SettingsPage";
 import TemplatesPage from "./pages/TemplatesPage";
+import TemplateEditorPage from "./pages/TemplateEditorPage";
 import UsersPage from "./pages/UsersPage";
 import ProfilePage from "./pages/ProfilePage";
+import OrdersPage from "./pages/store/OrdersPage";
+import OrderDetailPage from "./pages/store/OrderDetailPage";
+import CustomersPage from "./pages/store/CustomersPage";
+import ReviewsPage from "./pages/store/ReviewsPage";
+import StoreSettingsPage from "./pages/store/StoreSettingsPage";
 import PlatformLayout from "./platform/PlatformLayout";
 import TenantsPage from "./platform/TenantsPage";
 import SiteApp, { ShowcaseApp, WebsiteNotFound } from "./site/SiteApp";
@@ -45,7 +51,14 @@ function TenantAdmin() {
           <Route path="logs" element={<LogsPage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="templates" element={<TemplatesPage />} />
+          {user.role === "ADMIN" && <Route path="templates/new" element={<TemplateEditorPage />} />}
+          {user.role === "ADMIN" && <Route path="templates/:id" element={<TemplateEditorPage />} />}
           {user.role === "ADMIN" && <Route path="users" element={<UsersPage />} />}
+          <Route path="store/orders" element={<OrdersPage />} />
+          <Route path="store/orders/:id" element={<OrderDetailPage />} />
+          <Route path="store/customers" element={<CustomersPage />} />
+          <Route path="store/reviews" element={<ReviewsPage />} />
+          {user.role === "ADMIN" && <Route path="store/settings" element={<StoreSettingsPage />} />}
           <Route path="profile" element={<ProfilePage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
@@ -96,6 +109,7 @@ function AdminApp() {
           </TenantGate>
         )}
         <Toaster />
+        <ConfirmHost />
       </AuthProvider>
     </BrowserRouter>
   );

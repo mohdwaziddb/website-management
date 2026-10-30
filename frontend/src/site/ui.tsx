@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from "react";
+import { CSSProperties, ReactNode, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, Variants } from "framer-motion";
 import { ArrowRight, ImageIcon } from "lucide-react";
@@ -30,6 +30,12 @@ export const reveal = { initial: "hidden", whileInView: "show", viewport: { once
 
 // ------------------------------------------------------------ theme
 
+/** "#1d4ed8" -> "29 78 216" (CSS rgb() channels) */
+export function hexToRgb(hex: string): string {
+  const h = hex.replace("#", "");
+  return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16) || 0).join(" ");
+}
+
 /** Template ke rang/fonts CSS variables me — components var(--primary) jaisa use karte hain */
 export function themeStyle(t: TemplateConfig): CSSProperties {
   return {
@@ -42,6 +48,13 @@ export function themeStyle(t: TemplateConfig): CSSProperties {
     "--hero-text": t.colors.heroText,
     "--on-primary": t.colors.onPrimary,
     "--on-accent": t.colors.onAccent,
+    // rgb channels: Tailwind "site-*" colours opacity ke saath (bg-site-text/5)
+    "--primary-rgb": hexToRgb(t.colors.primary),
+    "--accent-rgb": hexToRgb(t.colors.accent),
+    "--text-rgb": hexToRgb(t.colors.text),
+    "--muted-rgb": hexToRgb(t.colors.muted),
+    "--bg-rgb": hexToRgb(t.colors.bg),
+    "--surface-rgb": hexToRgb(t.colors.surface),
     "--font-heading": fontStack(t.fonts.heading),
     "--font-body": fontStack(t.fonts.body),
     background: t.colors.bg,
@@ -189,7 +202,9 @@ const GRADIENTS = [
 /** Image na ho to template ke rang ka gradient */
 export function SmartImage({ src, alt, className = "", seed = 0 }: { src?: unknown; alt: string; className?: string; seed?: number }) {
   const url = fileUrl(src);
-  if (url) return <img src={url} alt={alt} loading="lazy" className={`object-cover ${className}`} />;
+  // photo load na ho (link toota / network) to bhi tooti image ki jagah gradient
+  const [failed, setFailed] = useState<string | null>(null);
+  if (url && failed !== url) return <img src={url} alt={alt} loading="lazy" onError={() => setFailed(url)} className={`object-cover ${className}`} />;
   return (
     <div className={`flex items-center justify-center text-white/70 ${className}`} style={{ background: GRADIENTS[Math.abs(seed) % GRADIENTS.length] }} aria-label={alt} role="img">
       <ImageIcon className="h-8 w-8" />
@@ -233,11 +248,13 @@ export function useFixedNav(): boolean {
   return n === "floating" || n === "centered";
 }
 
+/** Navbar fixed (upar tairta) hai => uski height jitni jagah. Home par hero khud sambhalta hai (hero navbar ke peeche) */
+export const NAV_SPACER = "h-20";
+
 export function PageBanner({ title, subtitle }: { title: string; subtitle?: string }) {
-  const fixedNav = useFixedNav();
   return (
     <div
-      className={`relative overflow-hidden pb-16 ${fixedNav ? "pt-32" : "pt-16"}`}
+      className="relative overflow-hidden pb-16 pt-16"
       style={{ background: "linear-gradient(120deg, color-mix(in srgb, var(--primary) 80%, #000), color-mix(in srgb, var(--accent) 65%, #000))" }}
     >
       <motion.div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-white/10 blur-2xl" animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 8, repeat: Infinity }} />

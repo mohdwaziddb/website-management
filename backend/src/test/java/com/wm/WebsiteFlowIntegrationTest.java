@@ -32,6 +32,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @ActiveProfiles("test")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Order(100) // aakhri: test master DB yahi drop karta hai
 class WebsiteFlowIntegrationTest {
     private static final String ROOT = "http://localhost";
     private static final String ALPHA = "http://alpha.localhost";
@@ -599,6 +600,100 @@ class WebsiteFlowIntegrationTest {
         assertEquals(200, call(delete(GAMMA + "/api/users/" + secondId), gammaToken, null).status());
     }
 
+    @Test
+    @Order(28)
+    void websiteTypeAndTemplateAlwaysMatch() throws Exception {
+        String url = GAMMA + "/api/settings";
+        // Templates page: dusre type ka template => type bhi badle, admin menus bhi
+        Res r = call(put(url), gammaToken, map("template", "prime"));
+        assertEquals(200, r.status(), r.message());
+        assertEquals("real_estate", r.data().get("site_type").asText());
+        assertTrue(call(get(GAMMA + "/api/modules"), gammaToken, null).data().findValuesAsText("label").contains("Properties"));
+
+        // Settings: sirf type badla => template us type ka pehla
+        r = call(put(url), gammaToken, map("site_type", "hospital"));
+        assertEquals("care", r.data().get("template").asText());
+
+        // type + usi type ka template => dono save
+        r = call(put(url), gammaToken, map("site_type", "gym", "template", "zenfit"));
+        assertEquals("zenfit", r.data().get("template").asText());
+        assertEquals("gym", r.data().get("site_type").asText());
+
+        // type + dusre type ka template => 400, kuch save nahi
+        assertEquals("Template \"noir\" is for Restaurant / Cafe websites — choose a Gym / Fitness template",
+                call(put(url), gammaToken, map("site_type", "gym", "template", "noir")).message());
+        assertEquals("zenfit", call(get(GAMMA + "/api/public/settings"), null, null).data().get("template").asText());
+
+        // same type ka template => type nahi badalta
+        r = call(put(url), gammaToken, map("template", "iron"));
+        assertEquals("gym", r.data().get("site_type").asText());
+    }
+
+    private static Map<String, Object> customConfig(Object... overrides) {
+        Map<String, Object> colors = map("primary", "#112233", "accent", "#FFAA00", "bg", "#ffffff", "surface", "#ffffff", "text", "#111111",
+                "muted", "#666666", "heroText", "#ffffff", "onPrimary", "#ffffff", "onAccent", "#111111");
+        Map<String, Object> cfg = map("dark", false, "colors", colors, "fonts", map("heading", "Oswald", "body", "Inter"), "nav", "light",
+                "hero", "collage", "heading", "badge", "button", "rounded-lg", "radius", "large", "card", "glow",
+                "sections", List.of("hero", "services:icons", "pricing:bold", "contact"));
+        for (int i = 0; i < overrides.length; i += 2) cfg.put((String) overrides[i], overrides[i + 1]);
+        return cfg;
+    }
+
+    @Test
+    @Order(29)
+    void customTemplates() throws Exception {
+        String url = GAMMA + "/api/templates/custom";
+        String editorToken = login(GAMMA, "editor@gamma.com", "Editor@123");
+        assertEquals(403, call(post(url), editorToken, map("name", "X", "baseTemplate", "iron", "config", customConfig())).status());
+        assertEquals(200, call(get(url), editorToken, null).status());
+
+        assertEquals("Template name is required", call(post(url), gammaToken, map("name", " ", "baseTemplate", "iron", "config", customConfig())).message());
+        assertEquals("Choose a base template", call(post(url), gammaToken, map("name", "X", "baseTemplate", "hacker", "config", customConfig())).message());
+        assertEquals("Template settings are required", call(post(url), gammaToken, map("name", "X", "baseTemplate", "iron")).message());
+        Map<String, Object> badColor = customConfig();
+        ((Map<String, Object>) badColor.get("colors")).put("primary", "red;background:url(x)");
+        assertEquals("Colour \"primary\" must be like #1d4ed8", call(post(url), gammaToken, map("name", "X", "baseTemplate", "iron", "config", badColor)).message());
+        assertEquals("Hero must be the first section",
+                call(post(url), gammaToken, map("name", "X", "baseTemplate", "iron", "config", customConfig("sections", List.of("contact", "hero")))).message());
+        assertEquals("Section \"faq\" is added twice",
+                call(post(url), gammaToken, map("name", "X", "baseTemplate", "iron", "config", customConfig("sections", List.of("hero", "faq", "faq:two-col")))).message());
+        assertEquals("Unknown style \"zigzag\" for services",
+                call(post(url), gammaToken, map("name", "X", "baseTemplate", "iron", "config", customConfig("sections", List.of("hero", "services:zigzag")))).message());
+        assertEquals("Heading font: invalid option",
+                call(post(url), gammaToken, map("name", "X", "baseTemplate", "iron", "config", customConfig("fonts", map("heading", "Comic Sans", "body", "Inter")))).message());
+
+        Res created = call(post(url), gammaToken, map("name", "My Gym Look", "baseTemplate", "iron", "config", customConfig("hacker", "x")));
+        assertEquals(200, created.status(), created.message());
+        String key = created.data().get("key").asText();
+        long id = created.data().get("id").asLong();
+        assertTrue(key.startsWith("custom-"));
+        assertEquals("gym", created.data().get("type").asText());
+        assertEquals("#ffaa00", created.data().get("config").get("colors").get("accent").asText());
+        assertFalse(created.data().get("config").has("hacker"));
+
+        // restaurant website par gym ka custom template => type gym
+        call(put(GAMMA + "/api/settings"), gammaToken, map("template", "saffron"));
+        Res applied = call(put(GAMMA + "/api/settings"), gammaToken, map("template", key));
+        assertEquals(200, applied.status(), applied.message());
+        assertEquals(key, applied.data().get("template").asText());
+        assertEquals("gym", applied.data().get("site_type").asText());
+        assertEquals("Website Template: invalid option", call(put(GAMMA + "/api/settings"), gammaToken, map("template", "custom-999999")).message());
+
+        Res pub = call(get(GAMMA + "/api/public/custom-templates/" + key), null, null);
+        assertEquals("collage", pub.data().get("config").get("hero").asText());
+        assertEquals(404, call(get(GAMMA + "/api/public/custom-templates/custom-abc"), null, null).status());
+
+        Res renamed = call(put(url + "/" + id), gammaToken, map("name", "My Gym Look v2", "baseTemplate", "pulse", "config", customConfig()));
+        assertEquals("My Gym Look v2", renamed.data().get("name").asText());
+        assertEquals("This template is live on your website — its website type cannot change",
+                call(put(url + "/" + id), gammaToken, map("name", "X", "baseTemplate", "noir", "config", customConfig())).message());
+
+        assertEquals("This template is live on your website — apply another template first", call(delete(url + "/" + id), gammaToken, null).message());
+        call(put(GAMMA + "/api/settings"), gammaToken, map("template", "iron"));
+        assertEquals(200, call(delete(url + "/" + id), gammaToken, null).status());
+        assertEquals(404, call(get(GAMMA + "/api/public/custom-templates/" + key), null, null).status());
+    }
+
     /** Purana (v1) master DB: sirf subdomain column — migrator code + custom_domain add karke backfill kare */
     @Test
     @Order(21)
@@ -616,5 +711,144 @@ class WebsiteFlowIntegrationTest {
         assertEquals("demo", old.queryForObject("SELECT code FROM tenants WHERE subdomain = 'demo'", String.class));
         old.update("INSERT INTO tenants (code, custom_domain, name, db_name) VALUES ('xyz', 'xyz.com', 'Xyz', 'wm_t_xyz2')");
         assertNull(old.queryForObject("SELECT subdomain FROM tenants WHERE code = 'xyz'", String.class));
+    }
+
+    @Test
+    @Order(30)
+    void activityLogsSearchAndActionFilter() throws Exception {
+        // pehle ke tests logout-all / password change kar chuke — naya login (naya password)
+        alphaToken = login(ALPHA, "admin@alpha.com", "NewPass@123");
+        Res all = call(get(ALPHA + "/api/logs?size=100"), alphaToken, null);
+        assertEquals(200, all.status(), all.message());
+        assertTrue(all.data().get("total").asInt() > 0);
+
+        Res about = call(get(ALPHA + "/api/logs?q=About&size=100"), alphaToken, null);
+        assertTrue(about.data().get("total").asInt() > 0);
+        about.data().get("items").forEach(l -> assertTrue((l.get("summary").asText() + l.get("user_name").asText()).toLowerCase().contains("about")));
+
+        Res creates = call(get(ALPHA + "/api/logs?action=create&size=100"), alphaToken, null);
+        assertTrue(creates.data().get("total").asInt() > 0);
+        creates.data().get("items").forEach(l -> assertEquals("CREATE", l.get("action").asText()));
+
+        // % / _ wildcard nahi bante
+        assertEquals(0, call(get(ALPHA + "/api/logs?q=%25%25zz_no_match"), alphaToken, null).data().get("total").asInt());
+    }
+
+    // ------------------------------------------------------------ contact form, newsletter, bulk, SEO, notifications
+
+    private JdbcTemplate alphaDb() {
+        return dataSources.forDb(master.queryForObject("SELECT db_name FROM tenants WHERE subdomain = 'alpha'", String.class));
+    }
+
+    @Test
+    @Order(31)
+    void contactFormEnquiries() throws Exception {
+        String url = ALPHA + "/api/public/enquiries";
+        // har check alag IP (rate limit dusre checks ko na roke)
+        assertEquals("Name is required", call(post(url).header("X-Real-IP", "10.0.0.31"), null, map("email", "a@b.com", "message", "Hello there")).message());
+        assertEquals("Email is not a valid email", call(post(url).header("X-Real-IP", "10.0.0.31"), null, map("name", "A", "email", "bad", "message", "Hello there")).message());
+        assertEquals("Please share your email or phone so we can reply", call(post(url).header("X-Real-IP", "10.0.0.31"), null, map("name", "A", "message", "Hello there")).message());
+        assertEquals("Phone must be a valid mobile number", call(post(url).header("X-Real-IP", "10.0.0.31"), null, map("name", "A", "phone", "12ab", "message", "Hello there")).message());
+
+        long before = alphaDb().queryForObject("SELECT COUNT(*) FROM enquiries", Long.class);
+        // honeypot bhara = bot: "ok" par save nahi
+        assertEquals(200, call(post(url).header("X-Real-IP", "10.0.0.32"), null, map("name", "Bot", "email", "b@b.com", "message", "Buy now!!!", "website", "spam.com")).status());
+        assertEquals(before, alphaDb().queryForObject("SELECT COUNT(*) FROM enquiries", Long.class));
+
+        Res ok = call(post(url).header("X-Real-IP", "10.0.0.33"), null,
+                map("name", "<b>Riya</b> Singh", "email", "Riya@Example.com", "phone", "+91 98765 43210", "subject", "Admission", "message", "Is admission open for class 5?", "page", "/contact"));
+        assertEquals(200, ok.status(), ok.message());
+        JsonNode e = call(get(ALPHA + "/api/m/enquiries?q=Riya"), alphaToken, null).data().get("items").get(0);
+        assertEquals("Riya Singh", e.get("name").asText());
+        assertEquals("riya@example.com", e.get("email").asText());
+        assertEquals("New", e.get("status").asText());
+        // public kabhi enquiries padh nahi sakta
+        assertEquals(404, call(get(ALPHA + "/api/public/m/enquiries"), null, null).status());
+        assertTrue(call(get(ALPHA + "/api/logs?module=enquiries"), alphaToken, null).data().toString().contains("Website visitor"));
+
+        // rate limit: ek IP se 5 ke baad 429
+        for (int i = 0; i < 5; i++) {
+            assertEquals(200, call(post(url).header("X-Real-IP", "10.0.0.34"), null, map("name", "N" + i, "phone", "9876543210", "message", "Message " + i)).status());
+        }
+        assertEquals(429, call(post(url).header("X-Real-IP", "10.0.0.34"), null, map("name", "N6", "phone", "9876543210", "message", "Message six")).status());
+
+        Res bell = call(get(ALPHA + "/api/notifications"), alphaToken, null);
+        assertEquals(200, bell.status(), bell.message());
+        assertTrue(bell.data().get("total").asInt() >= 6);
+        assertEquals("/m/enquiries", bell.data().get("items").get(0).get("to").asText());
+        assertTrue(bell.data().get("recentEnquiries").size() > 0);
+    }
+
+    @Test
+    @Order(32)
+    void newsletterSubscribe() throws Exception {
+        String url = ALPHA + "/api/public/subscribe";
+        assertEquals("Email is not a valid email", call(post(url).header("X-Real-IP", "10.0.1.1"), null, map("email", "nope")).message());
+        assertEquals(200, call(post(url).header("X-Real-IP", "10.0.1.1"), null, map("email", "Fan@Example.com", "source", "Footer")).status());
+        assertEquals(200, call(post(url).header("X-Real-IP", "10.0.1.1"), null, map("email", "fan@example.com")).status());
+        assertEquals(1L, alphaDb().queryForObject("SELECT COUNT(*) FROM subscribers WHERE email = 'fan@example.com'", Long.class));
+        assertEquals(404, call(get(ALPHA + "/api/public/m/subscribers"), null, null).status());
+    }
+
+    @Test
+    @Order(33)
+    void bulkActions() throws Exception {
+        String sliders = ALPHA + "/api/m/sliders";
+        long a = call(post(sliders), alphaToken, map("title", "Bulk A", "image", "/files/a.png", "is_publish", false)).data().get("id").asLong();
+        long b = call(post(sliders), alphaToken, map("title", "Bulk B", "image", "/files/b.png", "is_publish", false)).data().get("id").asLong();
+        Res pub = call(post(sliders + "/bulk"), alphaToken, map("ids", List.of(a, b), "action", "publish"));
+        assertEquals(2, pub.data().get("done").asInt(), pub.message());
+        assertTrue(call(get(sliders + "/" + a), alphaToken, null).data().get("is_publish").asBoolean());
+        assertEquals("Choose an action: publish, draft or delete", call(post(sliders + "/bulk"), alphaToken, map("ids", List.of(a), "action", "explode")).message());
+        assertEquals("Select at least one record", call(post(sliders + "/bulk"), alphaToken, map("ids", List.of(), "action", "draft")).message());
+        List<Long> many = new java.util.ArrayList<>();
+        for (long i = 1; i <= 101; i++) many.add(i);
+        assertEquals("You can select up to 100 records at a time", call(post(sliders + "/bulk"), alphaToken, map("ids", many, "action", "draft")).message());
+
+        // category jo photo me use ho rahi — skip, baaki delete
+        long cat = call(post(ALPHA + "/api/m/gallery_categories"), alphaToken, map("title", "Bulk Cat", "is_publish", true)).data().get("id").asLong();
+        long free = call(post(ALPHA + "/api/m/gallery_categories"), alphaToken, map("title", "Free Cat", "is_publish", true)).data().get("id").asLong();
+        call(post(ALPHA + "/api/m/image_gallery"), alphaToken, map("title", "P", "category_id", cat, "image", "/files/p.png", "is_publish", true));
+        Res del = call(post(ALPHA + "/api/m/gallery_categories/bulk"), alphaToken, map("ids", List.of(cat, free), "action", "delete"));
+        assertEquals(1, del.data().get("done").asInt());
+        assertEquals(cat, del.data().get("skipped").get(0).get("id").asLong());
+        assertTrue(del.data().get("skipped").get(0).get("reason").asText().startsWith("Cannot delete"));
+    }
+
+    @Test
+    @Order(34)
+    void seoSitemapRobotsShare() throws Exception {
+        call(post(ALPHA + "/api/m/pages"), alphaToken, map("title", "Admissions Open", "slug", "admissions-2026", "page_body", "<p>Apply now for 2026.</p>", "is_publish", true));
+        call(post(ALPHA + "/api/m/pages"), alphaToken, map("title", "Secret Draft", "slug", "secret-draft", "is_publish", false));
+        MvcResult sm = mvc.perform(get(ALPHA + "/api/public/sitemap.xml")).andReturn();
+        String xml = sm.getResponse().getContentAsString(java.nio.charset.StandardCharsets.UTF_8);
+        assertEquals(200, sm.getResponse().getStatus());
+        assertTrue(xml.contains("<loc>http://alpha.localhost/page/admissions-2026</loc>"), xml);
+        assertFalse(xml.contains("secret-draft"));
+        assertFalse(xml.contains("/product/"));
+
+        String robots = mvc.perform(get(ALPHA + "/api/public/robots.txt")).andReturn().getResponse().getContentAsString();
+        assertTrue(robots.contains("Sitemap: http://alpha.localhost/sitemap.xml"), robots);
+        assertTrue(robots.contains("Disallow: /admin"));
+
+        String share = mvc.perform(get(ALPHA + "/api/public/share").param("path", "/page/admissions-2026?utm=x")).andReturn().getResponse()
+                .getContentAsString(java.nio.charset.StandardCharsets.UTF_8);
+        assertTrue(share.contains("<meta property=\"og:title\" content=\"Admissions Open |"), share);
+        assertTrue(share.contains("Apply now for 2026."));
+        assertTrue(share.contains("og:url\" content=\"http://alpha.localhost/page/admissions-2026\""));
+        // bahar ka URL / script nahi chal sakta
+        String evil = mvc.perform(get(ALPHA + "/api/public/share").param("path", "//evil.com/<script>")).andReturn().getResponse().getContentAsString();
+        assertTrue(evil.contains("og:url\" content=\"http://alpha.localhost/\""), evil);
+        assertFalse(evil.contains("<script>"));
+    }
+
+    @Test
+    @Order(35)
+    void seoSettingsValidation() throws Exception {
+        assertEquals("Google Analytics ID must look like G-AB12CD34EF", call(put(ALPHA + "/api/settings"), alphaToken, map("google_analytics_id", "12345")).message());
+        assertEquals(400, call(put(ALPHA + "/api/settings"), alphaToken, map("whatsapp", "call me")).status());
+        Res ok = call(put(ALPHA + "/api/settings"), alphaToken, map("google_analytics_id", "g-ab12cd34ef", "whatsapp", "+91 98765 43210", "seo_title", "Alpha School | Best CBSE school"));
+        assertEquals(200, ok.status(), ok.message());
+        assertEquals("G-AB12CD34EF", ok.data().get("google_analytics_id").asText());
     }
 }

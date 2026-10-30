@@ -23,7 +23,12 @@ const VARIANTS: Record<string, (string | undefined)[]> = {
   stats: [undefined, "band", "cards", "inline"],
   faq: [undefined, "accordion", "two-col"],
   partners: [undefined, "marquee", "grid"],
-  cta: [undefined, "band", "split"]
+  cta: [undefined, "band", "split"],
+  latest: [undefined, "grid", "list"],
+  categories: [undefined, "blocks", "columns"],
+  trending: [undefined, "numbered", "cards"],
+  products: [undefined, "grid", "carousel"],
+  shop_categories: [undefined, "tiles", "circles"]
 };
 
 describe("templates", () => {
@@ -34,7 +39,7 @@ describe("templates", () => {
     }
     const frontend = Object.fromEntries(TEMPLATES.map((t) => [t.key, t.type]));
     expect(frontend).toEqual(backend);
-    expect(TEMPLATES).toHaveLength(47);
+    expect(TEMPLATES).toHaveLength(53);
   });
 
   it("backend SiteTypeCatalog ke saath same website types", () => {

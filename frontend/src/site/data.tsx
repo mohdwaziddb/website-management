@@ -3,6 +3,7 @@ import { api } from "../lib/api";
 import type { PageResult, Row } from "../lib/types";
 import { getSiteType, SiteTypeKey } from "./siteTypes";
 import { getTemplate, isHexColor, TemplateConfig } from "./templates";
+import { buildCustomTemplate, CustomTemplateRow, isCustomKey } from "./templates/options";
 
 export type Settings = Record<string, string | null>;
 
@@ -62,7 +63,9 @@ export function fetchList(module: string, query: Record<string, string | number>
   return cached(`${module}?${qs}`, () => api.get<PageResult<Row>>(`/public/m/${module}?${qs}`).then((r) => r.data));
 }
 
-export function fetchBySlug(module: "pages" | "blogs", slug: string): Promise<Row> {
+export type SlugModule = "pages" | "blogs" | "news_posts" | "news_categories" | "products" | "product_categories";
+
+export function fetchBySlug(module: SlugModule, slug: string): Promise<Row> {
   return cached(`${module}/slug/${slug}`, () => api.get<Row>(`/public/${module}/slug/${encodeURIComponent(slug)}`).then((r) => r.data));
 }
 
@@ -155,7 +158,7 @@ export function useRecord(module: string, id: string | undefined): Row | null | 
 }
 
 /** Page / blog slug se; demo me ho to wahan se */
-export function useBySlug(module: "pages" | "blogs", slug: string | undefined): Row | null | undefined {
+export function useBySlug(module: SlugModule, slug: string | undefined): Row | null | undefined {
   const { demo, showcase } = useSite();
   const [row, setRow] = useState<Row | null | undefined>(undefined);
   useEffect(() => {
@@ -225,10 +228,11 @@ export function SiteProvider({ children }: { children: (state: LoadState) => Rea
       fetchList("pages", { size: 100 }).catch(() => ({ items: [] as Row[] }))
     ])
       .then(async ([settings, menus, pages]) => {
-        const base = getTemplate(PREVIEW_TEMPLATE || settings.template);
-        const template = PREVIEW_TEMPLATE ? base : withThemeColor(base, settings.primary_color);
+        // "draft" = template editor ka unsaved design (postMessage se aata hai); tab tak website ka current template
+        const wanted = PREVIEW_TEMPLATE && PREVIEW_TEMPLATE !== "draft" ? PREVIEW_TEMPLATE : settings.template;
+        const template = await resolveTemplate(wanted, PREVIEW_TEMPLATE ? null : settings.primary_color);
         // dusre type ka template preview ho raha ho to us type ke naam / nav
-        const siteType = PREVIEW_TEMPLATE ? base.type : getSiteType(settings.site_type).key;
+        const siteType = PREVIEW_TEMPLATE ? template.type : getSiteType(settings.site_type).key;
         const demo = PREVIEW ? await fetchDemo(template.type).catch(() => null) : null;
         setValue({ settings, template, siteType, menus: buildMenuTree(menus.items, pages.items), preview: PREVIEW, showcase: false, demo });
         setState("ready");
@@ -236,8 +240,41 @@ export function SiteProvider({ children }: { children: (state: LoadState) => Rea
       .catch((e) => setState(e?.response?.status === 404 ? "missing" : "error"));
   }, []);
 
+  // Template editor (admin) iframe ko unsaved design bhejta hai — sirf same website (origin) se
+  useEffect(() => {
+    if (PREVIEW_TEMPLATE !== "draft" || state !== "ready") return;
+    const onMessage = (e: MessageEvent) => {
+      if (e.origin !== window.location.origin || e.data?.type !== DRAFT_MESSAGE) return;
+      const draft = buildCustomTemplate(e.data.template);
+      setValue((v) => (v ? { ...v, template: draft, siteType: draft.type } : v));
+      fetchDemo(draft.type)
+        .then((demo) => setValue((v) => (v ? { ...v, demo } : v)))
+        .catch(() => {});
+    };
+    window.addEventListener("message", onMessage);
+    // editor ko batao ki iframe tayyar hai (wo turant current draft bhej de)
+    window.parent?.postMessage({ type: DRAFT_READY }, window.location.origin);
+    return () => window.removeEventListener("message", onMessage);
+  }, [state]);
+
   if (!value) return <>{children(state)}</>;
   return <SiteContext.Provider value={value}>{children(state)}</SiteContext.Provider>;
+}
+
+export const DRAFT_MESSAGE = "wm-template-draft";
+export const DRAFT_READY = "wm-template-draft-ready";
+
+/** Built-in key ya "custom-<id>" -> TemplateConfig. Custom na mile to type ka default. */
+async function resolveTemplate(key: string | null | undefined, themeColor: unknown): Promise<TemplateConfig> {
+  if (isCustomKey(key)) {
+    try {
+      const row = await api.get<CustomTemplateRow>(`/public/custom-templates/${key}`).then((r) => r.data);
+      return buildCustomTemplate(row);
+    } catch {
+      return getTemplate(null);
+    }
+  }
+  return themeColor === null ? getTemplate(key) : withThemeColor(getTemplate(key), themeColor);
 }
 
 /** Root domain showcase: /preview/<template> — website nahi, sirf demo content */

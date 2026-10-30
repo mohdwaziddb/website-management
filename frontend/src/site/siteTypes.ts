@@ -16,7 +16,9 @@ export type SiteTypeKey =
   | "photography"
   | "ngo"
   | "interior"
-  | "construction";
+  | "construction"
+  | "news"
+  | "ecommerce";
 
 /** Home page sections jinke title type ke hisaab se badalte hain */
 export type TitledSection = "services" | "team" | "projects" | "catalog" | "pricing" | "stats" | "faq" | "partners" | "testimonials" | "gallery" | "news" | "about" | "contact";
@@ -233,6 +235,46 @@ export const SITE_TYPES: SiteType[] = [
       { title: "Contact", href: "/contact" }
     ],
     titles: { projects: T("Our Projects", "Built to last"), services: T("What We Build", "Services"), team: T("Leadership", "Team"), partners: T("Material Partners", "Partners") }
+  },
+  {
+    key: "news",
+    label: "News / Magazine Portal",
+    description: "Breaking news, categories, reporters, photo galleries, videos & ads",
+    // categories ki patti navbar ke neeche apne aap (News Categories se)
+    nav: [
+      { title: "Home", href: "/" },
+      { title: "Latest", href: "/news" },
+      { title: "Photos", href: "/gallery" },
+      { title: "Videos", href: "/videos" },
+      { title: "Opinion", href: "/blogs" },
+      { title: "E-Paper", href: "/downloads" },
+      { title: "Contact", href: "/contact" }
+    ],
+    titles: {
+      news: T("Opinion & Columns", "Views"),
+      team: T("Our Reporters", "Newsroom"),
+      gallery: T("Photo Gallery", "In pictures"),
+      contact: T("Contact the Newsroom", "News tips, feedback & advertising")
+    }
+  },
+  {
+    key: "ecommerce",
+    label: "Online Store / E-commerce",
+    description: "Products with variants, cart, checkout, COD + Razorpay, orders & customers",
+    nav: [
+      { title: "Home", href: "/" },
+      { title: "Shop", href: "/shop" },
+      { title: "New Arrivals", href: "/shop?sort=new" },
+      { title: "Blog", href: "/blogs" },
+      { title: "Contact", href: "/contact" }
+    ],
+    titles: {
+      testimonials: T("Happy Customers", "Reviews"),
+      news: T("From the Blog", "Style guides & tips"),
+      partners: T("Brands We Carry", "Brands"),
+      gallery: T("Lookbook", "Gallery"),
+      faq: T("Shopping Help", "FAQ")
+    }
   }
 ];
 

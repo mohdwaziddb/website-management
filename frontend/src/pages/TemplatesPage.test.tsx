@@ -5,7 +5,10 @@ let demo = { siteType: "restaurant", demoRows: 0, hasDemo: false };
 const get = vi.fn((url: string) =>
   url === "/demo" ? Promise.resolve({ data: demo }) : Promise.resolve({ data: { fields: [], values: { template: "saffron", site_type: "restaurant" } } })
 );
-const put = vi.fn((_url: string, body: { template: string }) => Promise.resolve({ data: { template: body.template } }));
+// backend jaisa: template ke type se site_type
+const TYPE_OF: Record<string, string> = { saffron: "restaurant", bistro: "restaurant", noir: "restaurant", iron: "gym", pulse: "gym", zenfit: "gym" };
+const put = vi.fn((_url: string, body: { template: string }) => Promise.resolve({ data: { template: body.template, site_type: TYPE_OF[body.template] } }));
+const reload = vi.fn(() => Promise.resolve());
 const post = vi.fn(() => {
   demo = { siteType: "restaurant", demoRows: 40, hasDemo: true };
   return Promise.resolve({ data: { imported: 40 } });
@@ -18,14 +21,23 @@ vi.mock("../lib/api", async (importOriginal) => {
   return { ...real, api: { get: (u: string) => get(u), put: (u: string, b: { template: string }) => put(u, b), post: () => post(), delete: () => del() } };
 });
 vi.mock("../lib/auth", () => ({ useAuth: () => ({ user: { role }, login: vi.fn(), logout: vi.fn() }) }));
+vi.mock("../lib/modules", () => ({ useReloadModules: () => reload }));
 
-const { default: TemplatesPage, previewUrl } = await import("./TemplatesPage");
+const { default: TemplatesPageInner, previewUrl } = await import("./TemplatesPage");
+const { MemoryRouter } = await import("react-router-dom");
+// Link / useNavigate ke liye router
+const TemplatesPage = () => (
+  <MemoryRouter>
+    <TemplatesPageInner />
+  </MemoryRouter>
+);
 
 describe("TemplatesPage", () => {
   beforeEach(() => {
     get.mockClear();
     put.mockClear();
     post.mockClear();
+    reload.mockClear();
     role = "ADMIN";
     demo = { siteType: "restaurant", demoRows: 0, hasDemo: false };
   });
@@ -50,7 +62,31 @@ describe("TemplatesPage", () => {
     await waitFor(() => screen.getByText("Active"));
     fireEvent.change(screen.getByLabelText("Website type"), { target: { value: "gym" } });
     expect(container.querySelector("iframe")?.getAttribute("src")).toBe(previewUrl("iron"));
-    expect(screen.getByText(/These templates are designed for/)).toBeInTheDocument();
+    expect(screen.getByText(/applying one will switch/)).toBeInTheDocument();
+  });
+
+  it("dusre type ka template apply => confirm, type badle, sidebar reload", async () => {
+    const confirmSpy = vi.spyOn(window, "confirm").mockReturnValue(true);
+    render(<TemplatesPage />);
+    await waitFor(() => screen.getByText("Active"));
+    fireEvent.change(screen.getByLabelText("Website type"), { target: { value: "gym" } });
+    fireEvent.click(screen.getAllByRole("button", { name: "Apply" })[1]);
+    expect(confirmSpy).toHaveBeenCalled();
+    await waitFor(() => expect(put).toHaveBeenCalledWith("/settings", { template: "pulse" }));
+    await waitFor(() => expect(reload).toHaveBeenCalled());
+    expect((screen.getByLabelText("Website type") as HTMLSelectElement).value).toBe("gym");
+    expect(screen.getByText(/Gym \/ Fitness \(your type\)/)).toBeInTheDocument();
+    confirmSpy.mockRestore();
+  });
+
+  it("confirm cancel => kuch save nahi", async () => {
+    const confirmSpy = vi.spyOn(window, "confirm").mockReturnValue(false);
+    render(<TemplatesPage />);
+    await waitFor(() => screen.getByText("Active"));
+    fireEvent.change(screen.getByLabelText("Website type"), { target: { value: "gym" } });
+    fireEvent.click(screen.getAllByRole("button", { name: "Apply" })[0]);
+    expect(put).not.toHaveBeenCalled();
+    confirmSpy.mockRestore();
   });
 
   it("demo import one click", async () => {

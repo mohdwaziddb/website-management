@@ -57,8 +57,40 @@ class ModuleRegistryTest {
         FieldDef t = SettingsRegistry.FIELDS.stream().filter(f -> f.name().equals("template")).findFirst().orElseThrow();
         assertEquals(FieldType.SELECT, t.type());
         assertEquals(TemplateCatalog.KEYS, t.options());
-        assertEquals(47, TemplateCatalog.KEYS.size());
+        assertEquals(53, TemplateCatalog.KEYS.size());
         assertTrue(TemplateCatalog.isValid("classic"));
         assertFalse(TemplateCatalog.isValid("hacker"));
+    }
+
+    @Test
+    void storeValidators() {
+        ModuleDef products = registry.get("products");
+        assertEquals("MRP cannot be less than the selling price",
+                assertThrows(ApiException.class, () -> products.validator().validate(java.util.Map.of("price", new java.math.BigDecimal("500"), "compare_price", new java.math.BigDecimal("400")))).getMessage());
+        products.validator().validate(java.util.Map.of("price", new java.math.BigDecimal("500"), "compare_price", new java.math.BigDecimal("600")));
+
+        ModuleDef coupons = registry.get("coupons");
+        assertTrue(coupons.internal());
+        java.util.Map<String, Object> ok = new java.util.HashMap<>(java.util.Map.of("code", "SAVE10", "discount_type", "Percent", "value", new java.math.BigDecimal("10")));
+        coupons.validator().validate(ok);
+        ok.put("value", new java.math.BigDecimal("150"));
+        assertThrows(ApiException.class, () -> coupons.validator().validate(ok));
+        ok.put("value", new java.math.BigDecimal("10"));
+        ok.put("code", "BAD CODE");
+        assertThrows(ApiException.class, () -> coupons.validator().validate(ok));
+        ok.put("code", "SAVE10");
+        ok.put("starts_on", java.time.LocalDate.of(2026, 10, 10));
+        ok.put("expires_on", java.time.LocalDate.of(2026, 10, 1));
+        assertEquals("Valid Till cannot be before Valid From", assertThrows(ApiException.class, () -> coupons.validator().validate(ok)).getMessage());
+    }
+
+    @Test
+    void storeTablesDoNotClashWithModules() {
+        Set<String> moduleTables = new HashSet<>();
+        registry.all().forEach(m -> moduleTables.add(m.table()));
+        for (String sql : com.wm.tenant.StoreSchema.TABLES) {
+            String table = sql.replaceAll("(?s).*CREATE TABLE IF NOT EXISTS (\\w+).*", "$1");
+            assertFalse(moduleTables.contains(table), table);
+        }
     }
 }

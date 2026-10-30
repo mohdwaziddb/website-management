@@ -33,7 +33,19 @@ export const MODULE_HOME: Record<string, string> = {
   award_categories: "achievements",
   activities: "achievements",
   press_releases: "notices",
-  tenders: "notices"
+  tenders: "notices",
+  // News portal: categories ki patti + breaking ticker + ads har page par
+  news_categories: "global",
+  sponsors: "global",
+  news_posts: "latest",
+  // Online store: products / variants product pages par, coupons cart me, categories shop page par
+  products: "products",
+  product_variants: "products",
+  product_categories: "shop_categories",
+  coupons: "global",
+  // contact form (contact section / page) + footer subscribe — har page par
+  enquiries: "global",
+  subscribers: "global"
 };
 
 /**
@@ -57,5 +69,8 @@ export const EXPLORE_PAGES: { section: string; href: string; module: string; lab
   { section: "downloads", href: "/downloads", module: "magazines", label: "E-Magazines" },
   { section: "notices", href: "/press", module: "press_releases", label: "Press Releases" },
   { section: "notices", href: "/tenders", module: "tenders", label: "Tenders" },
-  { section: "faq", href: "/faq", module: "faqs" }
+  { section: "faq", href: "/faq", module: "faqs" },
+  { section: "latest", href: "/news", module: "news_posts", label: "Latest News" },
+  { section: "products", href: "/shop", module: "products", label: "Shop" },
+  { section: "shop_categories", href: "/shop", module: "product_categories", label: "Shop" }
 ];

@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { FileIcon, Upload, X } from "lucide-react";
 import { api, errorMessage, fileUrl, uploadFile } from "../lib/api";
 import { FieldDef, MONTHS } from "../lib/types";
-import { inputClass, showToast } from "./ui";
+import { inputClass, showToast, Thumb } from "./ui";
 
 // CKEditor bada hai — sirf form khulne par load ho
 const RichTextEditor = lazy(() => import("./RichTextEditor"));
@@ -36,6 +36,9 @@ interface Props {
   optionLabel?: (option: string) => string;
 }
 
+/** http(s)://... ya "/" se shuru relative path ("//evil.com" nahi) — backend DataTypeUtility.isValidUrl ke saath same */
+export const URL_PATTERN = String.raw`(https?://\S+|/(?!/)\S*)`;
+
 export default function FieldInput({ field, value, onChange, excludeId, optionLabel }: Props) {
   const str = value == null ? "" : String(value);
 
@@ -49,11 +52,34 @@ export default function FieldInput({ field, value, onChange, excludeId, optionLa
         </Suspense>
       );
     case "NUMBER":
-      return <input type="number" className={inputClass} value={str} onChange={(e) => onChange(e.target.value)} />;
+    case "DECIMAL":
+      // DECIMAL = price (paise tak), min backend jaisa
+      return (
+        <input
+          type="number"
+          step={field.type === "DECIMAL" ? "0.01" : undefined}
+          min={field.min ?? undefined}
+          className={inputClass}
+          value={str}
+          onChange={(e) => onChange(e.target.value)}
+        />
+      );
     case "DATE":
       return <input type="date" className={inputClass} value={str.slice(0, 10)} onChange={(e) => onChange(e.target.value)} />;
     case "URL":
-      return <input type="url" className={inputClass} placeholder="https://" value={str} onChange={(e) => onChange(e.target.value)} />;
+      // type="url" "/contact" jaisa site ka relative link reject karta hai — backend DataTypeUtility.isValidUrl jaisa rule
+      return (
+        <input
+          type="text"
+          inputMode="url"
+          pattern={URL_PATTERN}
+          title="https://... ya site ka page jaise /contact"
+          className={inputClass}
+          placeholder="https://... or /contact"
+          value={str}
+          onChange={(e) => onChange(e.target.value)}
+        />
+      );
     case "BOOLEAN":
       return (
         <label className="inline-flex items-center gap-2 text-sm text-slate-700">
@@ -132,7 +158,7 @@ function FileField({ image, value, onChange }: { image: boolean; value: string; 
     <div className="flex flex-wrap items-center gap-3">
       {value &&
         (image ? (
-          <img src={fileUrl(value)} alt="" className="h-20 w-28 rounded-lg border border-slate-200 object-cover" />
+          <Thumb src={fileUrl(value)} className="h-20 w-28" />
         ) : (
           <a href={fileUrl(value)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm text-brand-600 underline">
             <FileIcon className="h-4 w-4" /> View file

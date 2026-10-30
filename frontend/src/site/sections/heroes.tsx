@@ -4,25 +4,44 @@ import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 import type { Row } from "../../lib/types";
 import { useList, useSite } from "../data";
 import { getSiteType } from "../siteTypes";
+import { HeadlinesHero, MosaicHero, SpotlightHero } from "./newsroom";
+import { templatesFor } from "../templates";
 import { Container, fadeUp, headingFont, MainCta, SiteButton, SmartImage, stagger, useFixedNav, useSetting } from "../ui";
 
 // 10 hero styles — template config ka "hero" inme se ek chunta hai. Content: sliders + settings (naam, tagline, main button).
 
 function useSlides(): Row[] {
-  const { items } = useList("sliders", { size: 8 });
+  const { items, demo } = useList("sliders", { size: 8 });
+  const { template } = useSite();
   const name = useSetting("site_name");
   const tagline = useSetting("tagline");
   // koi slider na ho to site naam wala ek slide
-  return items.length ? items : ([{ id: 0, title: name || "Welcome", description: tagline, image: "" }] as Row[]);
+  if (!items.length) return [{ id: 0, title: name || "Welcome", description: tagline, image: "" }] as Row[];
+  if (!demo) return items; // asli website: admin ka rakha order
+  // demo / preview: ek type ke templates alag photo se shuru hon (warna sab same dikhte)
+  const offset = Math.max(templatesFor(template.type).findIndex((t) => t.key === template.key), 0) % items.length;
+  return [...items.slice(offset), ...items.slice(0, offset)];
 }
 
 function useAutoIndex(count: number, ms = 5500) {
+  const { preview, showcase } = useSite();
   const [i, setI] = useState(0);
   useEffect(() => {
     if (count < 2) return;
-    const t = setInterval(() => setI((p) => (p + 1) % count), ms);
-    return () => clearInterval(t);
-  }, [count, ms]);
+    // preview / live demo me pehli photo der tak rahe — warna ek type ke templates ek hi photo par aa kar same dikhte
+    let t: ReturnType<typeof setInterval> | undefined;
+    const start = setTimeout(
+      () => {
+        setI((p) => (p + 1) % count);
+        t = setInterval(() => setI((p) => (p + 1) % count), ms);
+      },
+      preview || showcase ? Math.max(ms, 12000) : ms
+    );
+    return () => {
+      clearTimeout(start);
+      if (t) clearInterval(t);
+    };
+  }, [count, ms, preview, showcase]);
   return [i % Math.max(count, 1), setI] as const;
 }
 
@@ -154,7 +173,7 @@ function MinimalHero() {
           {tagline || String(slides[0].description ?? "")}
         </motion.p>
         <HeroButtons light={false} />
-        <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 0.5, duration: 0.8 }} className="mt-10 h-px origin-left bg-[var(--text)]/15" />
+        <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 0.5, duration: 0.8 }} className="mt-10 h-px origin-left bg-site-text/15" />
         <motion.div initial="hidden" animate="show" variants={stagger} className="mt-10 grid gap-4 sm:grid-cols-3">
           {slides.slice(0, 3).map((s, n) => (
             <motion.div key={s.id} variants={fadeUp} className="group">
@@ -270,7 +289,7 @@ function TypewriterHero() {
       <div className="pointer-events-none absolute inset-0 opacity-[0.07]" style={{ backgroundImage: "linear-gradient(var(--text) 1px, transparent 1px), linear-gradient(90deg, var(--text) 1px, transparent 1px)", backgroundSize: "48px 48px" }} />
       <motion.div className="absolute left-1/2 top-24 h-80 w-80 -translate-x-1/2 rounded-full blur-3xl" style={{ background: "var(--accent)", opacity: 0.25 }} animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 7, repeat: Infinity }} />
       <Container className="relative text-center">
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 rounded-full border border-[var(--text)]/15 px-4 py-1.5 text-sm text-[var(--muted)]">
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 rounded-full border border-site-text/15 px-4 py-1.5 text-sm text-[var(--muted)]">
           <span className="h-2 w-2 animate-pulse rounded-full bg-[var(--primary)]" /> {tagline || name}
         </motion.div>
         <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }} style={headingFont} className="mx-auto mt-6 max-w-4xl text-5xl font-bold leading-tight text-[var(--text)] sm:text-7xl">
@@ -456,7 +475,11 @@ const HEROES = {
   collage: CollageHero,
   centered: CenteredHero,
   kenburns: KenBurnsHero,
-  magazine: MagazineHero
+  magazine: MagazineHero,
+  // khabar na ho to slider
+  headlines: () => <HeadlinesHero fallback={<CarouselHero />} />,
+  spotlight: () => <SpotlightHero fallback={<CarouselHero />} />,
+  mosaic: () => <MosaicHero fallback={<CarouselHero />} />
 };
 
 export function Hero() {

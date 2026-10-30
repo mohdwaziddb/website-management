@@ -6,6 +6,7 @@ export type FieldType =
   | "IMAGE"
   | "FILE"
   | "NUMBER"
+  | "DECIMAL"
   | "DATE"
   | "MONTH"
   | "BOOLEAN"
@@ -23,6 +24,8 @@ export interface FieldDef {
   ref: string | null;
   options: string[];
   help: string | null;
+  /** NUMBER / DECIMAL ki minimum value (null = koi limit nahi) */
+  min: number | null;
 }
 
 export interface ModuleDef {

@@ -8,6 +8,8 @@ public enum FieldType {
     IMAGE("VARCHAR(500)"),
     FILE("VARCHAR(500)"),
     NUMBER("BIGINT"),
+    /** Paisa / price: 2 decimal */
+    DECIMAL("DECIMAL(12,2)"),
     DATE("DATE"),
     MONTH("TINYINT"),
     BOOLEAN("TINYINT(1)"),

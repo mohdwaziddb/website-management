@@ -11,6 +11,50 @@
   "footer_text": "Made with ❤ in India for teams everywhere."
  },
  "modules": {
+  "menus": [
+   {
+    "title": "Features",
+    "custom_url": "/services"
+   },
+   {
+    "_key": "about",
+    "title": "About"
+   },
+   {
+    "title": "Pricing",
+    "custom_url": "/pricing"
+   },
+   {
+    "title": "FAQ",
+    "custom_url": "/faq"
+   },
+   {
+    "title": "Contact",
+    "custom_url": "/contact"
+   }
+  ],
+  "pages": [
+   {
+    "title": "About Us",
+    "slug": "about-us",
+    "page_heading": "About Us",
+    "page_body": "<p>FlowDesk brings tasks, docs and chat into one beautiful app so your team ships faster with fewer meetings.</p><h2>Our story</h2><p>FlowDesk started with a simple idea: the all-in-one workspace for fast teams. Today a passionate team carries that promise forward every day.</p><h2>What we believe</h2><ul><li>People first</li><li>Quality without shortcuts</li><li>Honest, transparent communication</li></ul>",
+    "menu_id": "@about",
+    "banner_image": "u:1551288049-bebda4e38f71"
+   },
+   {
+    "title": "Privacy Policy",
+    "slug": "privacy-policy",
+    "page_heading": "Privacy Policy",
+    "page_body": "<p>FlowDesk respects your privacy. We collect only the information you share with us through our forms, use it only to respond to you, and never sell it.</p><p>Contact us anytime to view or delete your data.</p>"
+   },
+   {
+    "title": "Terms of Use",
+    "slug": "terms",
+    "page_heading": "Terms of Use",
+    "page_body": "<p>By using the FlowDesk website you agree to use it lawfully. Content is for general information and may change without notice.</p>"
+   }
+  ],
   "sliders": [
    {
     "title": "Work flows better here",
@@ -192,6 +236,101 @@
     "summary": "Async-first is a habit, not a tool.",
     "body": "<p>Async-first is a habit, not a tool.</p><p>Write daily updates, record short videos and keep decisions in docs.</p>",
     "tags": "productivity"
+   }
+  ],
+  "gallery_categories": [
+   {
+    "_key": "moments",
+    "title": "Moments"
+   }
+  ],
+  "popups": [
+   {
+    "title": "Welcome to FlowDesk",
+    "from_date": "2026-10-01",
+    "to_date": "2027-03-31",
+    "image": "u:1519389950473-47ba0277781c",
+    "description": "<p>The all-in-one workspace for fast teams. <a href=\"/contact\">Start Free — No Card Needed →</a></p>"
+   }
+  ],
+  "image_gallery": [
+   {
+    "title": "FlowDesk — 1",
+    "image": "u:1551288049-bebda4e38f71",
+    "category_id": "@moments"
+   },
+   {
+    "title": "FlowDesk — 2",
+    "image": "u:1519389950473-47ba0277781c",
+    "category_id": "@moments"
+   }
+  ],
+  "videos": [
+   {
+    "title": "FlowDesk — highlights",
+    "video_url": "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    "video_date": "2026-09-15"
+   },
+   {
+    "title": "Behind the scenes",
+    "video_url": "https://www.youtube.com/watch?v=eRsGyueVLvQ",
+    "video_date": "2026-08-15"
+   },
+   {
+    "title": "A day with us",
+    "video_url": "https://www.youtube.com/watch?v=R6MlUcmOul8",
+    "video_date": "2026-07-15"
+   },
+   {
+    "title": "Event recap",
+    "video_url": "https://www.youtube.com/watch?v=WhWc3b3KhnY",
+    "video_date": "2026-06-15"
+   }
+  ],
+  "attachments": [
+   {
+    "title": "FlowDesk — Brochure",
+    "attachment": "f:landing-brochure.pdf",
+    "description": "Everything about us in one PDF."
+   },
+   {
+    "title": "Enquiry Form",
+    "attachment": "f:enquiry-form.pdf",
+    "description": "Fill, sign and email it to us."
+   }
+  ],
+  "enquiries": [
+   {
+    "name": "Priya Sharma",
+    "email": "priya.sharma@example.com",
+    "phone": "9876500011",
+    "subject": "Need more details",
+    "message": "Hello, I found FlowDesk online. Could you please share more details and the best time to call?",
+    "page": "/contact",
+    "status": "New"
+   },
+   {
+    "name": "Rahul Mehta",
+    "email": "rahul.m@example.com",
+    "phone": "9876500022",
+    "subject": "Thank you",
+    "message": "Thanks for the quick reply yesterday — all my questions are answered.",
+    "page": "/",
+    "status": "Replied"
+   }
+  ],
+  "subscribers": [
+   {
+    "email": "neha.k@example.com",
+    "source": "Footer"
+   },
+   {
+    "email": "arjun.v@example.com",
+    "source": "Footer"
+   },
+   {
+    "email": "sana.q@example.com",
+    "source": "Footer"
    }
   ]
  },

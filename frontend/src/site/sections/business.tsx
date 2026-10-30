@@ -49,9 +49,9 @@ export function Services({ variant = "cards", all }: Variant) {
   if (variant === "list") {
     return (
       <Section id="services" titled="services" title={all ? "" : undefined}>
-        <motion.div variants={stagger} className="grid border-t border-[var(--text)]/10 md:grid-cols-2 md:gap-x-12">
+        <motion.div variants={stagger} className="grid border-t border-site-text/10 md:grid-cols-2 md:gap-x-12">
           {items.map((s, n) => (
-            <motion.div key={s.id} variants={fadeUp} className="group flex gap-6 border-b border-[var(--text)]/10 py-7">
+            <motion.div key={s.id} variants={fadeUp} className="group flex gap-6 border-b border-site-text/10 py-7">
               <span style={headingFont} className="text-4xl font-bold text-[var(--accent)] opacity-70 transition group-hover:opacity-100">
                 {String(n + 1).padStart(2, "0")}
               </span>
@@ -85,7 +85,7 @@ export function Services({ variant = "cards", all }: Variant) {
                 )}
               </div>
               <div>
-                <span className="inline-flex rounded-full bg-[var(--accent)]/15 p-3 text-[var(--accent)]">
+                <span className="inline-flex rounded-full bg-site-accent/15 p-3 text-[var(--accent)]">
                   <SiteIcon name={s.icon} />
                 </span>
                 <h3 style={headingFont} className="mt-4 text-3xl font-semibold">{String(s.title)}</h3>
@@ -148,7 +148,7 @@ export function Catalog({ variant = "cards", all }: Variant) {
         {cats.length > 1 && (
           <motion.div variants={fadeUp} className="mb-10 flex flex-wrap justify-center gap-2">
             {["", ...cats].map((c) => (
-              <button key={c || "all"} onClick={() => setCat(c)} className={`rounded-full px-5 py-2 text-sm font-medium transition ${cat === c ? "bg-[var(--primary)] text-[var(--on-primary)]" : "border border-[var(--text)]/15 hover:border-[var(--primary)]"}`}>
+              <button key={c || "all"} onClick={() => setCat(c)} className={`rounded-full px-5 py-2 text-sm font-medium transition ${cat === c ? "bg-[var(--primary)] text-[var(--on-primary)]" : "border border-site-text/15 hover:border-[var(--primary)]"}`}>
                 {c || "All"}
               </button>
             ))}
@@ -162,7 +162,7 @@ export function Catalog({ variant = "cards", all }: Variant) {
                 <div className="flex items-baseline gap-2">
                   <h3 style={headingFont} className="text-lg font-semibold">{String(m.title)}</h3>
                   {!!m.badge && <span className="rounded-full bg-[var(--accent)] px-2 py-0.5 text-[10px] font-bold uppercase text-[var(--on-accent)]">{String(m.badge)}</span>}
-                  <span className="mx-1 flex-1 border-b-2 border-dotted border-[var(--text)]/20" />
+                  <span className="mx-1 flex-1 border-b-2 border-dotted border-site-text/20" />
                   <PriceTag r={m} />
                 </div>
                 <p className="mt-1 text-sm text-[var(--muted)]">{String(m.summary ?? "")}</p>
@@ -197,12 +197,12 @@ export function Catalog({ variant = "cards", all }: Variant) {
                   </div>
                 )}
                 <p className="mt-3 text-[var(--muted)]">{String(p.summary ?? "")}</p>
-                {!!p.specs && <div className="mt-4 border-t border-[var(--text)]/10 pt-4 text-sm font-medium">{String(p.specs)}</div>}
+                {!!p.specs && <div className="mt-4 border-t border-site-text/10 pt-4 text-sm font-medium">{String(p.specs)}</div>}
                 <div className="mt-5 flex items-center justify-between">
                   <span className="text-2xl">
                     <PriceTag r={p} />
                   </span>
-                  <Link to={`/catalog/${p.id}`} className="rounded-full border border-[var(--text)]/15 p-2.5 transition group-hover:bg-[var(--primary)] group-hover:text-[var(--on-primary)]">
+                  <Link to={`/catalog/${p.id}`} className="rounded-full border border-site-text/15 p-2.5 transition group-hover:bg-[var(--primary)] group-hover:text-[var(--on-primary)]">
                     <ArrowUpRight className="h-5 w-5" />
                   </Link>
                 </div>
@@ -280,7 +280,7 @@ export function Projects({ variant = "grid", all }: Variant) {
                 <SmartImage src={p.cover_image} alt={String(p.title)} seed={n} className="aspect-[16/10] w-full transition duration-1000 group-hover:scale-105" />
               </Link>
               <div className="md:col-span-5">
-                <span style={headingFont} className="text-6xl font-bold text-[var(--text)]/10">{String(n + 1).padStart(2, "0")}</span>
+                <span style={headingFont} className="text-6xl font-bold text-site-text/10">{String(n + 1).padStart(2, "0")}</span>
                 <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">{[p.category, p.location].filter(Boolean).join(" · ")}</div>
                 <h3 style={headingFont} className="mt-2 text-3xl font-semibold">{String(p.title)}</h3>
                 <p className="mt-3 text-lg text-[var(--muted)]">{String(p.summary ?? "")}</p>
@@ -301,7 +301,7 @@ export function Projects({ variant = "grid", all }: Variant) {
       {cats.length > 1 && (
         <motion.div variants={fadeUp} className="mb-8 flex flex-wrap gap-2">
           {["", ...cats].map((c) => (
-            <button key={c || "all"} onClick={() => setCat(c)} className={`rounded-full px-4 py-1.5 text-sm transition ${cat === c ? "bg-[var(--primary)] text-[var(--on-primary)]" : "bg-[var(--text)]/5 hover:bg-[var(--text)]/10"}`}>
+            <button key={c || "all"} onClick={() => setCat(c)} className={`rounded-full px-4 py-1.5 text-sm transition ${cat === c ? "bg-[var(--primary)] text-[var(--on-primary)]" : "bg-site-text/5 hover:bg-site-text/10"}`}>
               {c || "All"}
             </button>
           ))}
@@ -400,7 +400,7 @@ export function Pricing({ variant = "cards", all }: Variant) {
               variants={fadeUp}
               whileHover={{ y: -8 }}
               className={`relative flex flex-col p-8 ${hi ? "z-10 shadow-2xl lg:scale-105" : ""} ${bold ? "border-2 border-[var(--text)]" : "rounded-3xl"} ${
-                hi ? "bg-[var(--primary)] text-[var(--on-primary)]" : "bg-[var(--surface)] ring-1 ring-[var(--text)]/10"
+                hi ? "bg-[var(--primary)] text-[var(--on-primary)]" : "bg-[var(--surface)] ring-1 ring-site-text/10"
               }`}
             >
               {!!p.badge && <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[var(--accent)] px-4 py-1 text-xs font-bold uppercase tracking-wide text-[var(--on-accent)] shadow">{String(p.badge)}</span>}
@@ -485,7 +485,7 @@ export function Stats({ variant = "band" }: Variant) {
   if (variant === "inline") {
     return (
       <motion.section {...reveal} variants={stagger} className="py-14">
-        <Container className="grid grid-cols-2 divide-[var(--text)]/10 md:grid-cols-4 md:divide-x">
+        <Container className="grid grid-cols-2 divide-site-text/10 md:grid-cols-4 md:divide-x">
           {items.map((s) => (
             <motion.div key={s.id} variants={fadeUp} className="px-6 py-4">
               <div style={headingFont} className="text-5xl font-bold text-[var(--primary)]">
@@ -522,7 +522,7 @@ export function Stats({ variant = "band" }: Variant) {
 
 function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean; onToggle: () => void }) {
   return (
-    <div className="border-b border-[var(--text)]/10">
+    <div className="border-b border-site-text/10">
       <button onClick={onToggle} className="flex w-full items-center justify-between gap-4 py-5 text-left">
         <span style={headingFont} className="text-lg font-semibold">{q}</span>
         <motion.span animate={{ rotate: open ? 45 : 0 }} className="shrink-0 rounded-full bg-[var(--primary)] p-1.5 text-[var(--on-primary)]">
@@ -596,7 +596,7 @@ export function Partners({ variant = "marquee" }: Variant) {
   if (variant === "grid") {
     return (
       <Section id="partners" titled="partners">
-        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-[var(--text)]/10 sm:grid-cols-3 lg:grid-cols-6">
+        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-site-text/10 sm:grid-cols-3 lg:grid-cols-6">
           {items.map((p) => (
             <motion.div key={p.id} variants={fadeUp} className="flex h-28 items-center justify-center bg-[var(--bg)] px-4">
               <Logo p={p} />
@@ -607,7 +607,7 @@ export function Partners({ variant = "marquee" }: Variant) {
     );
   }
   return (
-    <section className="border-y border-[var(--text)]/10 py-10">
+    <section className="border-y border-site-text/10 py-10">
       <Container>
         <div className="mb-6 text-center text-xs font-semibold uppercase tracking-[0.25em] text-[var(--muted)]">{title}</div>
         <Marquee speed={30}>
@@ -635,7 +635,7 @@ export function Cta({ variant = "band" }: Variant) {
     return (
       <motion.section {...reveal} variants={stagger} className="py-16">
         <Container>
-          <motion.div variants={fadeUp} className="grid overflow-hidden rounded-3xl bg-[var(--surface)] shadow-2xl ring-1 ring-[var(--text)]/10 md:grid-cols-2">
+          <motion.div variants={fadeUp} className="grid overflow-hidden rounded-3xl bg-[var(--surface)] shadow-2xl ring-1 ring-site-text/10 md:grid-cols-2">
             <div className="p-10 sm:p-14">
               <h2 style={headingFont} className="text-3xl font-bold sm:text-4xl">Ready to get started with {name}?</h2>
               <p className="mt-4 text-[var(--muted)]">{tagline}</p>

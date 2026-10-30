@@ -5,6 +5,7 @@ import { ArrowRight, CalendarDays, Clock, Download, FileText, Mail, MapPin, Phon
 import { fileUrl } from "../../lib/api";
 import type { Row } from "../../lib/types";
 import { useList } from "../data";
+import { EnquiryForm } from "../inbox";
 import { Container, fadeUp, formatDate, headingFont, MainCta, RichHtml, Section, SiteCard, SmartImage, stagger, stripHtml, useSectionTitle, useSetting, youtubeId } from "../ui";
 
 export type Variant = { variant?: string; all?: boolean };
@@ -66,7 +67,7 @@ export function About({ variant }: Variant) {
             <h2 style={headingFont} className="mt-3 text-4xl font-bold">{name}</h2>
             <RichHtml html={about} className="mt-5 text-lg leading-relaxed text-[var(--muted)]" />
             {hours && (
-              <div className="mt-6 flex gap-3 rounded-xl border border-[var(--text)]/10 p-4">
+              <div className="mt-6 flex gap-3 rounded-xl border border-site-text/10 p-4">
                 <Clock className="h-5 w-5 shrink-0 text-[var(--accent)]" />
                 <div className="whitespace-pre-line text-sm">{hours}</div>
               </div>
@@ -157,15 +158,15 @@ export function Achievements({ all }: Variant) {
                 setTab(t.module);
                 setCat("");
               }}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${active.module === t.module ? "bg-[var(--primary)] text-[var(--on-primary)]" : "bg-[var(--text)]/5 hover:bg-[var(--text)]/10"}`}
+              className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${active.module === t.module ? "bg-[var(--primary)] text-[var(--on-primary)]" : "bg-site-text/5 hover:bg-site-text/10"}`}
             >
               {t.label}
             </button>
           ))}
-          {cats.length > 1 && <span className="mx-2 w-px bg-[var(--text)]/15" />}
+          {cats.length > 1 && <span className="mx-2 w-px bg-site-text/15" />}
           {cats.length > 1 &&
             ["", ...cats].map((c) => (
-              <button key={c || "all"} onClick={() => setCat(c)} className={`rounded-full border px-3 py-1 text-xs transition ${cat === c ? "border-[var(--accent)] text-[var(--accent)]" : "border-[var(--text)]/15"}`}>
+              <button key={c || "all"} onClick={() => setCat(c)} className={`rounded-full border px-3 py-1 text-xs transition ${cat === c ? "border-[var(--accent)] text-[var(--accent)]" : "border-site-text/15"}`}>
                 {c || "All awards"}
               </button>
             ))}
@@ -197,7 +198,7 @@ function NoticeList({ title, module, dateField, link }: { title: string; module:
         <h3 style={headingFont} className="text-xl font-semibold">{title}</h3>
         <Link to={link} className="text-sm font-medium text-[var(--primary)]">View all</Link>
       </div>
-      <ul className="divide-y divide-[var(--text)]/10">
+      <ul className="divide-y divide-site-text/10">
         {items.map((n) => (
           <li key={n.id} className="flex items-start gap-3 py-3">
             <CalendarDays className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent)]" />
@@ -253,7 +254,7 @@ export function News({ variant }: Variant) {
   return (
     <Section id="news" titled="news" alt>
       {variant === "list" ? (
-        <motion.div variants={fadeUp} className="divide-y divide-[var(--text)]/10 border-y border-[var(--text)]/10">
+        <motion.div variants={fadeUp} className="divide-y divide-site-text/10 border-y border-site-text/10">
           {items.map((b) => (
             <Link key={b.id} to={`/blog/${b.slug}`} className="group flex flex-col gap-1 py-6 sm:flex-row sm:items-baseline sm:gap-8">
               <span className="w-32 shrink-0 text-sm text-[var(--muted)]">{formatDate(b.published_date)}</span>
@@ -354,7 +355,7 @@ export function LiveStreams({ all }: { all?: boolean }) {
         const d = String(l.event_date ?? "");
         const state = d === today ? "LIVE" : d > today ? "Upcoming" : "Recorded";
         return (
-          <a key={l.id} href={String(l.event_url)} target="_blank" rel="noreferrer" className="group flex items-center gap-4 rounded-2xl bg-[var(--surface)] p-4 ring-1 ring-[var(--text)]/10 transition hover:shadow-lg">
+          <a key={l.id} href={String(l.event_url)} target="_blank" rel="noreferrer" className="group flex items-center gap-4 rounded-2xl bg-[var(--surface)] p-4 ring-1 ring-site-text/10 transition hover:shadow-lg">
             <span className={`relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${state === "LIVE" ? "bg-red-600 text-white" : "bg-[var(--primary)] text-[var(--on-primary)]"}`}>
               {state === "LIVE" && <span className="absolute inset-0 animate-ping rounded-full bg-red-600 opacity-40" />}
               <PlayCircle className="relative h-6 w-6" />
@@ -477,7 +478,7 @@ export function Testimonials({ variant }: Variant) {
         {items.length > 1 && (
           <div className="mt-6 flex justify-center gap-2">
             {items.map((x, n) => (
-              <button key={x.id} aria-label={`Testimonial ${n + 1}`} onClick={() => setI(n)} className={`h-2 rounded-full transition-all ${n === i % items.length ? "w-6 bg-[var(--primary)]" : "w-2 bg-[var(--muted)]/40"}`} />
+              <button key={x.id} aria-label={`Testimonial ${n + 1}`} onClick={() => setI(n)} className={`h-2 rounded-full transition-all ${n === i % items.length ? "w-6 bg-[var(--primary)]" : "w-2 bg-site-muted/40"}`} />
             ))}
           </div>
         )}
@@ -490,7 +491,7 @@ export function Testimonials({ variant }: Variant) {
 
 export function DownloadRow({ d }: { d: Row }) {
   const href = fileUrl(d.attachment);
-  const cls = "flex items-center gap-3 rounded-xl border border-[var(--text)]/10 bg-[var(--surface)] p-4 transition hover:-translate-y-0.5 hover:shadow-md";
+  const cls = "flex items-center gap-3 rounded-xl border border-site-text/10 bg-[var(--surface)] p-4 transition hover:-translate-y-0.5 hover:shadow-md";
   const body = (
     <>
       <FileText className="h-8 w-8 text-[var(--primary)]" />
@@ -536,6 +537,7 @@ export function ContactBlock() {
     { icon: Clock, label: "Hours", value: hours }
   ].filter((r) => r.value);
   return (
+    <div className="space-y-10">
     <div className="grid gap-8 md:grid-cols-2">
       <motion.div variants={fadeUp} className="space-y-5">
         {rows.map((r) => (
@@ -567,6 +569,10 @@ export function ContactBlock() {
             <MapPin className="relative h-12 w-12 text-white" />
           </div>
         )}
+      </motion.div>
+    </div>
+      <motion.div variants={fadeUp} className="mx-auto max-w-2xl">
+        <EnquiryForm />
       </motion.div>
     </div>
   );
