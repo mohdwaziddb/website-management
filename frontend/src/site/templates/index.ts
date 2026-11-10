@@ -1,4 +1,4 @@
-// 47 templates (15 website types). Har template sirf config hai — sections (src/site/sections) sab me common,
+// 54 templates (17 website types). Har template sirf config hai — sections (src/site/sections) sab me common,
 // config rang, font, navbar, hero, card ka look aur sections ka order/style badalta hai.
 // Backend me same keys: com.wm.settings.TemplateCatalog
 import type { SiteTypeKey } from "../siteTypes";
@@ -136,6 +136,13 @@ export const TEMPLATES: TemplateConfig[] = [
       key: "fresh", name: "Fresh", description: "Friendly green and rounded cards — great for startups and SMEs.",
       colors: { primary: "#16a34a", accent: "#f59e0b", bg: "#f7fee7", onAccent: "#1c1917" }, fonts: ["Outfit", "Outfit"], nav: "floating", hero: "split", radius: "rounded-3xl", heading: "badge",
       sections: ["hero", "services:icons", "catalog:cards", "stats:cards", "projects:grid", "testimonials:marquee", "faq:two-col", "contact"]
+    },
+    {
+      // product ki marketing site (src/marketing) jaisa look: dark aurora hero, glass navbar, light body, bento, gradient CTA
+      key: "aurora", name: "Aurora", description: "Dark aurora hero with glowing gradients and a live browser preview — modern SaaS / IT company.",
+      colors: { primary: "#6366f1", accent: "#06b6d4", bg: "#f8fafc", surface: "#ffffff", text: "#0f172a", muted: "#64748b" },
+      fonts: ["Inter", "Inter"], nav: "glass", hero: "aurora", heading: "eyebrow", radius: "rounded-3xl",
+      sections: ["hero", "partners:marquee", "services:bento", "stats:cards", "projects:showcase", "catalog:cards", "team:cards", "testimonials:grid", "faq:accordion", "cta:gradient", "contact"]
     }
   ]),
 

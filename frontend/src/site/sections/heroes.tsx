@@ -465,7 +465,108 @@ function MagazineHero() {
   );
 }
 
+// ------------------------------------------------------------ 11. aurora — product marketing site jaisa: dark grid + glowing blobs,
+// gradient heading, browser frame me slider photos, floating stat cards
+
+function AuroraHero() {
+  const slides = useSlides();
+  const [i] = useAutoIndex(slides.length, 5000);
+  const name = useSetting("site_name");
+  const tagline = useSetting("tagline");
+  const { siteType } = useSite();
+  const { items: stats } = useList("stats", { size: 2 });
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 600], [0, 60]);
+  const s = slides[i];
+  const words = String(s.title || name || "Welcome").split(" ");
+  const last = words.pop();
+  const second = getSiteType(siteType).nav.find((n) => n.href !== "/" && n.href !== "/contact");
+  const glow = (c: string, pct: number) => `color-mix(in srgb, ${c} ${pct}%, transparent)`;
+  return (
+    <section className="relative overflow-hidden bg-[#020617] pb-24 pt-32 text-white sm:pt-40">
+      {/* grid lines, upar se neeche fade */}
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_75%)]" />
+      <motion.div className="pointer-events-none absolute -left-40 -top-40 h-[560px] w-[560px] rounded-full blur-3xl" style={{ background: glow("var(--primary)", 30) }} animate={{ x: [0, 60, 0], y: [0, 40, 0] }} transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }} />
+      <motion.div className="pointer-events-none absolute -right-40 top-20 h-[560px] w-[560px] rounded-full blur-3xl" style={{ background: glow("var(--accent)", 20) }} animate={{ x: [0, -50, 0], y: [0, 60, 0] }} transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }} />
+      <motion.div className="pointer-events-none absolute bottom-0 left-1/3 h-[400px] w-[400px] rounded-full blur-3xl" style={{ background: glow("color-mix(in srgb, var(--primary) 50%, #a855f7)", 22) }} animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} />
+
+      <Container className="relative grid items-center gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+        <motion.div initial="hidden" animate="show" variants={stagger}>
+          {(tagline || name) && (
+            <motion.span variants={fadeUp} className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium text-white/80 backdrop-blur">
+              <Sparkles className="h-3.5 w-3.5 text-amber-300" /> {tagline || name}
+            </motion.span>
+          )}
+          <motion.h1 variants={fadeUp} style={headingFont} className="mt-6 text-[2.6rem] font-extrabold leading-[1.08] tracking-tight sm:text-6xl xl:text-7xl">
+            {words.join(" ")}{" "}
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={s.id}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -24 }}
+                transition={{ duration: 0.45 }}
+                className="inline-block bg-clip-text text-transparent"
+                style={{ backgroundImage: "linear-gradient(90deg, color-mix(in srgb, var(--primary) 55%, white), color-mix(in srgb, #a855f7 45%, white), color-mix(in srgb, var(--accent) 55%, white))" }}
+              >
+                {last}
+              </motion.span>
+            </AnimatePresence>
+          </motion.h1>
+          {!!s.description && (
+            <motion.p variants={fadeUp} className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
+              {String(s.description)}
+            </motion.p>
+          )}
+          <motion.div variants={fadeUp} className="mt-9 flex flex-wrap gap-3">
+            <MainCta kind="gradient" className="!px-7 !py-3.5" />
+            {second && (
+              <SiteButton to={second.href} kind="outline-light" className="!border-white/20 bg-white/5 !px-7 !py-3.5 backdrop-blur">
+                {second.title}
+              </SiteButton>
+            )}
+          </motion.div>
+        </motion.div>
+
+        {/* browser frame me slider photos + floating stat cards */}
+        <motion.div style={{ y }} initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1 }} transition={{ duration: 0.9, delay: 0.2 }} className="relative">
+          <motion.div className="absolute -inset-6 rounded-[2rem] blur-3xl" style={{ background: "linear-gradient(135deg, color-mix(in srgb, var(--primary) 45%, transparent), color-mix(in srgb, var(--accent) 35%, transparent))" }} animate={{ opacity: [0.5, 0.85, 0.5] }} transition={{ duration: 6, repeat: Infinity }} />
+          <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-slate-900/80 shadow-2xl shadow-black/60 backdrop-blur">
+            <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-3">
+              <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
+              <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
+              <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+              <span className="ml-3 truncate rounded-md bg-white/5 px-3 py-1 text-[11px] text-slate-400">{window.location.host}</span>
+            </div>
+            <div className="relative aspect-[16/10]">
+              <AnimatePresence>
+                <motion.div key={s.id} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.9 }} className="absolute inset-0">
+                  <SmartImage src={s.image} alt={String(s.title)} seed={i + 1} className="h-full w-full" />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+          {stats.slice(0, 2).map((st, n) => (
+            <motion.div
+              key={st.id}
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 5, repeat: Infinity, delay: n * 1.2 }}
+              className={`absolute hidden rounded-2xl bg-white px-4 py-3 text-slate-900 shadow-xl sm:block ${n ? "-right-4 -top-5" : "-bottom-6 -left-6"}`}
+            >
+              <div style={headingFont} className="text-xl font-extrabold" >
+                {String(st.value ?? "")}
+              </div>
+              <div className="text-xs text-slate-500">{String(st.title ?? "")}</div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </Container>
+    </section>
+  );
+}
+
 const HEROES = {
+  aurora: AuroraHero,
   carousel: CarouselHero,
   split: SplitHero,
   minimal: MinimalHero,

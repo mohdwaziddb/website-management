@@ -57,7 +57,7 @@ class ModuleRegistryTest {
         FieldDef t = SettingsRegistry.FIELDS.stream().filter(f -> f.name().equals("template")).findFirst().orElseThrow();
         assertEquals(FieldType.SELECT, t.type());
         assertEquals(TemplateCatalog.KEYS, t.options());
-        assertEquals(53, TemplateCatalog.KEYS.size());
+        assertEquals(54, TemplateCatalog.KEYS.size());
         assertTrue(TemplateCatalog.isValid("classic"));
         assertFalse(TemplateCatalog.isValid("hacker"));
     }

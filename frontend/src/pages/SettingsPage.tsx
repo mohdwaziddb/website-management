@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AlertTriangle, RotateCcw, Settings as SettingsIcon } from "lucide-react";
 import { api, errorMessage } from "../lib/api";
 import { useAuth } from "../lib/auth";
-import { FieldDef } from "../lib/types";
+import { FieldDef, isAdminRole } from "../lib/types";
 import { getSiteType } from "../site/siteTypes";
 import { getTemplate, templatesFor } from "../site/templates";
 import type { CustomTemplateRow } from "../site/templates/options";
@@ -127,7 +127,7 @@ export function groupSettings(fields: FieldDef[]): { title: string; description:
 
 export default function SettingsPage() {
   const { user } = useAuth();
-  const canEdit = user?.role === "ADMIN";
+  const canEdit = isAdminRole(user?.role);
   const [fields, setFields] = useState<FieldDef[]>([]);
   const [values, setValues] = useState<Record<string, unknown>>({});
   const [error, setError] = useState<string | null>(null);

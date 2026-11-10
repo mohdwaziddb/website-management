@@ -10,8 +10,8 @@ import java.util.Map;
  */
 public final class TemplateOptions {
 
-    public static final List<String> NAV = List.of("solid", "light", "centered", "floating", "classic", "dark");
-    public static final List<String> HERO = List.of("carousel", "split", "minimal", "fullscreen", "elegant", "typewriter", "collage", "centered", "kenburns", "magazine", "headlines", "spotlight", "mosaic");
+    public static final List<String> NAV = List.of("solid", "light", "centered", "floating", "classic", "dark", "glass");
+    public static final List<String> HERO = List.of("carousel", "split", "minimal", "fullscreen", "elegant", "typewriter", "collage", "centered", "kenburns", "magazine", "headlines", "spotlight", "mosaic", "aurora");
     public static final List<String> HEADING = List.of("underline", "center", "eyebrow", "serif", "badge");
     public static final List<String> BUTTON = List.of("rounded-full", "rounded-lg", "rounded-none");
     public static final List<String> RADIUS = List.of("none", "small", "medium", "large");
@@ -26,7 +26,7 @@ public final class TemplateOptions {
     static {
         SECTIONS.put("hero", List.of());
         SECTIONS.put("about", List.of("image"));
-        SECTIONS.put("services", List.of("cards", "icons", "list", "alternating"));
+        SECTIONS.put("services", List.of("cards", "icons", "list", "alternating", "bento"));
         SECTIONS.put("catalog", List.of("cards", "menu", "listing"));
         SECTIONS.put("projects", List.of("grid", "masonry", "showcase"));
         SECTIONS.put("team", List.of("cards", "circles", "overlay"));
@@ -37,7 +37,7 @@ public final class TemplateOptions {
         SECTIONS.put("news", List.of("list"));
         SECTIONS.put("faq", List.of("accordion", "two-col"));
         SECTIONS.put("partners", List.of("marquee", "grid"));
-        SECTIONS.put("cta", List.of("band", "split"));
+        SECTIONS.put("cta", List.of("band", "split", "gradient"));
         SECTIONS.put("videos", List.of());
         SECTIONS.put("achievements", List.of());
         SECTIONS.put("thought", List.of());

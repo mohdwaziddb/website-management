@@ -94,7 +94,7 @@ class DemoCatalogTest {
             assertTrue(templates >= 3, type.key() + " has " + templates + " templates");
             assertEquals(type.key(), TemplateCatalog.typeOf(TemplateCatalog.defaultFor(type.key())));
         }
-        assertEquals(53, TemplateCatalog.KEYS.size());
+        assertEquals(54, TemplateCatalog.KEYS.size());
         assertEquals("school", SiteTypeCatalog.get("nonsense").key());
         assertEquals("restaurant", TemplateCatalog.typeOf("saffron"));
     }

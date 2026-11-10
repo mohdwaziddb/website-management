@@ -155,7 +155,7 @@ export function SiteCard({ children, className = "", hover = true }: { children:
   );
 }
 
-type BtnKind = "accent" | "primary" | "outline" | "outline-light";
+type BtnKind = "accent" | "primary" | "outline" | "outline-light" | "white" | "gradient";
 
 /** Template ke shape (pill / square) wala button; internal path => Link, http => <a> */
 export function SiteButton({ to, kind = "accent", children, className = "" }: { to: string; kind?: BtnKind; children: ReactNode; className?: string }) {
@@ -164,7 +164,9 @@ export function SiteButton({ to, kind = "accent", children, className = "" }: { 
     accent: "bg-[var(--accent)] text-[var(--on-accent)] shadow-lg hover:brightness-110",
     primary: "bg-[var(--primary)] text-[var(--on-primary)] shadow-lg hover:brightness-110",
     outline: "border border-current text-[var(--text)] hover:bg-black/5",
-    "outline-light": "border border-white/60 text-white hover:bg-white/10"
+    "outline-light": "border border-white/60 text-white hover:bg-white/10",
+    white: "bg-white text-slate-900 shadow-lg shadow-white/10 hover:bg-slate-100",
+    gradient: "bg-[linear-gradient(90deg,var(--primary),color-mix(in_srgb,var(--primary)_50%,var(--accent)),var(--accent))] text-white shadow-xl shadow-site-primary/30 hover:brightness-110"
   };
   const cls = `inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold transition ${template.button} ${styles[kind]} ${className}`;
   if (/^https?:\/\//i.test(to)) {
@@ -245,7 +247,7 @@ export function lines(v: unknown): string[] {
 /** Floating / centered navbar fixed hota hai — page ka pehla block uske neeche na chhupe */
 export function useFixedNav(): boolean {
   const n = useSite().template.nav;
-  return n === "floating" || n === "centered";
+  return n === "floating" || n === "centered" || n === "glass";
 }
 
 /** Navbar fixed (upar tairta) hai => uski height jitni jagah. Home par hero khud sambhalta hai (hero navbar ke peeche) */

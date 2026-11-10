@@ -1,3 +1,4 @@
+import { roleLabel } from "../lib/types";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -159,7 +160,7 @@ function UserMenu() {
         <Avatar name={user?.name} size="sm" />
         <span className="hidden text-left sm:block">
           <span className="block text-sm font-medium leading-tight text-slate-800">{user?.name}</span>
-          <span className="block text-[11px] leading-tight text-slate-500">{user?.role === "ADMIN" ? "Administrator" : "Editor"}</span>
+          <span className="block text-[11px] leading-tight text-slate-500">{roleLabel(user?.role)}</span>
         </span>
         <ChevronDown className="h-4 w-4 text-slate-400" />
       </button>

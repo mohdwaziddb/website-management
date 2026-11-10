@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 import { KeyRound, LogOut, ShieldCheck } from "lucide-react";
 import { api, errorMessage, saveSession } from "../lib/api";
 import { useAuth } from "../lib/auth";
-import { Session } from "../lib/types";
+import { isAdminRole, roleLabel, Session } from "../lib/types";
 import { Avatar, Button, Card, confirmDialog, ErrorBox, FormField, inputClass, PageHeader, Pill, SectionCard, showToast } from "../components/ui";
 
 /** 0-4: lambai + bade/chhote akshar + number + symbol */
@@ -76,8 +76,8 @@ export default function ProfilePage() {
           <div className="text-lg font-semibold text-slate-900">{user?.name}</div>
           <div className="text-sm text-slate-500">{user?.email}</div>
         </div>
-        <Pill tone={user?.role === "ADMIN" ? "violet" : "blue"}>
-          <ShieldCheck className="h-3.5 w-3.5" /> {user?.role === "ADMIN" ? "Administrator" : "Editor"}
+        <Pill tone={isAdminRole(user?.role) ? "violet" : "blue"}>
+          <ShieldCheck className="h-3.5 w-3.5" /> {roleLabel(user?.role)}
         </Pill>
       </Card>
 

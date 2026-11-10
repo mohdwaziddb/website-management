@@ -1,5 +1,6 @@
 // Admin ka navigation ek jagah se — sidebar, breadcrumb aur Ctrl+K quick search teeno yahi use karte hain.
 import type { ModuleDef } from "../lib/types";
+import { isAdminRole } from "../lib/types";
 
 export interface NavItem {
   to: string;
@@ -19,7 +20,7 @@ export const SYSTEM = "System";
 
 /** Modules (website type ke hisaab se) + role => sidebar sections */
 export function buildNav(modules: ModuleDef[], role: string | undefined): NavSection[] {
-  const isAdmin = role === "ADMIN";
+  const isAdmin = isAdminRole(role);
   const sections: NavSection[] = [{ title: MAIN, items: [{ to: "/", label: "Dashboard", icon: "layout-dashboard", group: MAIN }] }];
   // online store (products module) => usi group me orders / customers / reviews / settings
   const storeGroup = modules.find((m) => m.key === "products")?.group;
@@ -40,7 +41,8 @@ export function buildNav(modules: ModuleDef[], role: string | undefined): NavSec
     { to: "/settings", label: "Website Settings", icon: "settings", group: SYSTEM },
     { to: "/templates", label: "Templates", icon: "layout-template", group: SYSTEM }
   ];
-  if (isAdmin) system.push({ to: "/users", label: "Users", icon: "users", group: SYSTEM });
+  // users sirf Super Admin banata / badalta hai
+  if (role === "SUPER_ADMIN") system.push({ to: "/users", label: "Users", icon: "users", group: SYSTEM });
   system.push({ to: "/logs", label: "Activity Logs", icon: "history", group: SYSTEM }, { to: "/profile", label: "My Profile", icon: "user-circle", group: SYSTEM });
   sections.push({ title: SYSTEM, items: system });
   return sections;

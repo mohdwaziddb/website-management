@@ -154,7 +154,9 @@ class StoreFlowIntegrationTest {
         adminToken = call(post(SHOP + "/api/auth/login"), null, map("email", "admin@kart.test", "password", TestTenants.ADMIN_PASSWORD)).data().get("accessToken").asText();
         Res demo = call(post(SHOP + "/api/demo/import"), adminToken, null);
         assertEquals(200, demo.status(), demo.message());
-        Res ed = call(post(SHOP + "/api/users"), adminToken, map("name", "Ed", "email", "editor@kart.test", "password", "Editor@123", "role", "EDITOR"));
+        // users sirf Super Admin banata hai
+        String superToken = call(post(SHOP + "/api/auth/login"), null, map("email", TestTenants.SUPER_USERNAME, "password", TestTenants.SUPER_PASSWORD)).data().get("accessToken").asText();
+        Res ed = call(post(SHOP + "/api/users"), superToken, map("name", "Ed", "email", "editor@kart.test", "password", "Editor@123", "role", "EDITOR"));
         assertEquals(200, ed.status(), ed.message());
         editorToken = call(post(SHOP + "/api/auth/login"), null, map("email", "editor@kart.test", "password", "Editor@123")).data().get("accessToken").asText();
 

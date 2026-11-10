@@ -111,6 +111,10 @@ class WebsiteFlowIntegrationTest {
         return TestTenants.create(tenantRepository, schemaService, dataSources, code, sub, domain, name, "admin@" + name.toLowerCase() + ".com");
     }
 
+    private String superLogin(String host) throws Exception {
+        return login(host, TestTenants.SUPER_USERNAME, TestTenants.SUPER_PASSWORD);
+    }
+
     private String login(String host, String email, String password) throws Exception {
         Res r = call(post(host + "/api/auth/login"), null, map("email", email, "password", password));
         assertEquals(200, r.status(), r.message());
@@ -132,9 +136,9 @@ class WebsiteFlowIntegrationTest {
         Long dbs = master.queryForObject("SELECT COUNT(*) FROM information_schema.schemata WHERE schema_name IN ('wmtest_alpha','wmtest_beta_school')", Long.class);
         assertEquals(2L, dbs);
 
-        // super admin master ke admin_username se (role ADMIN), site_name = tenants.name
+        // super admin master ke admin_username se (role SUPER_ADMIN), site_name = tenants.name
         JdbcTemplate db = dataSources.forDb(alpha.dbName());
-        assertEquals("ADMIN", db.queryForObject("SELECT role FROM users WHERE email = ?", String.class, TestTenants.SUPER_USERNAME));
+        assertEquals("SUPER_ADMIN", db.queryForObject("SELECT role FROM users WHERE email = ?", String.class, TestTenants.SUPER_USERNAME));
         assertEquals("ADMIN", db.queryForObject("SELECT role FROM users WHERE email = 'admin@alpha.com'", String.class));
         assertEquals("Alpha", db.queryForObject("SELECT setting_value FROM site_settings WHERE setting_key = 'site_name'", String.class));
 
@@ -172,9 +176,15 @@ class WebsiteFlowIntegrationTest {
         assertEquals("admin@alpha.com", users.get(0).get("email").asText());
         JdbcTemplate db = dataSources.forDb("wmtest_alpha");
         long superId = db.queryForObject("SELECT id FROM users WHERE email = ?", Long.class, TestTenants.SUPER_USERNAME);
-        assertEquals(404, call(put(ALPHA + "/api/users/" + superId), clientToken,
+        assertEquals(404, call(put(ALPHA + "/api/users/" + superId), superToken,
                 map("name", "X", "email", "x@alpha.com", "role", "EDITOR", "isActive", false)).status());
-        assertEquals(404, call(delete(ALPHA + "/api/users/" + superId), clientToken, null).status());
+        assertEquals("You cannot delete yourself", call(delete(ALPHA + "/api/users/" + superId), superToken, null).message());
+        // users sirf Super Admin banata / badalta hai — client ADMIN ko bhi nahi
+        assertEquals(403, call(get(ALPHA + "/api/users"), clientToken, null).status());
+        assertEquals(403, call(post(ALPHA + "/api/users"), clientToken, map("name", "X", "email", "x@alpha.com", "role", "ADMIN", "password", "Editor@123")).status());
+        assertEquals("SUPER_ADMIN", call(get(ALPHA + "/api/auth/me"), superToken, null).data().get("role").asText());
+        // Super Admin ke paas ADMIN ke saare kaam bhi
+        assertEquals(200, call(put(ALPHA + "/api/settings"), superToken, map("template", "modern")).status());
         // client admin akela hai => khud ko demote nahi; super admin count me nahi
         long clientId = users.get(0).get("id").asLong();
         assertEquals("At least one active admin is required", call(put(ALPHA + "/api/users/" + clientId), superToken,
@@ -198,6 +208,17 @@ class WebsiteFlowIntegrationTest {
         long before = beta.queryForObject("SELECT COUNT(*) FROM users", Long.class);
         schemaService.provision(new Tenant(0, "beta-school", null, "beta-school.test", "Beta", "wmtest_beta_school", null, true, null, null, null));
         assertEquals(before, beta.queryForObject("SELECT COUNT(*) FROM users", Long.class));
+    }
+
+    @Test
+    @Order(4)
+    void storeOnlyOnEcommerceWebsite() throws Exception {
+        // alpha = business website => customer sign-up / login / cart / store admin sab band
+        assertEquals(404, call(post(ALPHA + "/api/store/auth/register"), null, map("name", "R", "email", "r@x.com", "password", "Secret@123")).status());
+        assertEquals("Online store is not enabled for this website",
+                call(post(ALPHA + "/api/store/auth/login"), null, map("email", "r@x.com", "password", "Secret@123")).message());
+        assertEquals(404, call(get(ALPHA + "/api/public/store/config"), null, null).status());
+        assertEquals(404, call(get(ALPHA + "/api/shop/summary"), superLogin(ALPHA), null).status());
     }
 
     // ------------------------------------------------------------ host resolution
@@ -377,12 +398,13 @@ class WebsiteFlowIntegrationTest {
     @Test
     @Order(16)
     void editorCannotManageUsersOrSettings() throws Exception {
-        Res u = call(post(ALPHA + "/api/users"), alphaToken, map("name", "Ed", "email", "ed@alpha.com", "role", "EDITOR", "password", "Editor@123"));
+        String superToken = superLogin(ALPHA);
+        Res u = call(post(ALPHA + "/api/users"), superToken, map("name", "Ed", "email", "ed@alpha.com", "role", "EDITOR", "password", "Editor@123"));
         assertEquals(200, u.status(), u.message());
         assertEquals("Email already exists",
-                call(post(ALPHA + "/api/users"), alphaToken, map("name", "Ed", "email", "ED@alpha.com", "role", "EDITOR", "password", "Editor@123")).message());
+                call(post(ALPHA + "/api/users"), superToken, map("name", "Ed", "email", "ED@alpha.com", "role", "EDITOR", "password", "Editor@123")).message());
         assertEquals("Role must be ADMIN or EDITOR",
-                call(post(ALPHA + "/api/users"), alphaToken, map("name", "X", "email", "x@alpha.com", "role", "ROOT", "password", "Editor@123")).message());
+                call(post(ALPHA + "/api/users"), superToken, map("name", "X", "email", "x@alpha.com", "role", "ROOT", "password", "Editor@123")).message());
 
         String editor = login(ALPHA, "ed@alpha.com", "Editor@123");
         assertEquals(403, call(get(ALPHA + "/api/users"), editor, null).status());
@@ -489,7 +511,7 @@ class WebsiteFlowIntegrationTest {
     @Order(25)
     void resetWebsite() throws Exception {
         assertEquals("Type the website name \"Gamma\" to confirm reset", call(post(GAMMA + "/api/website/reset"), gammaToken, map("confirm", "nope")).message());
-        Res editor = call(post(GAMMA + "/api/users"), gammaToken, map("name", "Ed", "email", "ed@gamma.com", "role", "EDITOR", "password", "Editor@123"));
+        Res editor = call(post(GAMMA + "/api/users"), superLogin(GAMMA), map("name", "Ed", "email", "ed@gamma.com", "role", "EDITOR", "password", "Editor@123"));
         assertEquals(200, editor.status(), editor.message());
         String editorToken = login(GAMMA, "ed@gamma.com", "Editor@123");
         assertEquals(403, call(post(GAMMA + "/api/website/reset"), editorToken, map("confirm", "Gamma")).status());
@@ -532,45 +554,42 @@ class WebsiteFlowIntegrationTest {
     @Test
     @Order(27)
     void usersPageRules() throws Exception {
-        JsonNode users = call(get(GAMMA + "/api/users"), gammaToken, null).data();
+        String superToken = superLogin(GAMMA);
+        JsonNode users = call(get(GAMMA + "/api/users"), superToken, null).data();
         long adminId = -1, editorId = -1;
         for (JsonNode u : users) {
             if (u.get("email").asText().equals("admin@gamma.com")) adminId = u.get("id").asLong();
             if (u.get("email").asText().equals("ed@gamma.com")) editorId = u.get("id").asLong();
         }
-        // apna sirf naam badla => session chalta rahe (pehle yahin logout ho jata tha)
-        Res self = call(put(GAMMA + "/api/users/" + adminId), gammaToken, map("name", "Gamma Owner", "email", "admin@gamma.com", "role", "ADMIN", "isActive", true));
-        assertEquals(200, self.status(), self.message());
-        assertEquals("Gamma Owner", self.data().get("name").asText());
+        // admin ka sirf naam badla => uska session chalta rahe
+        Res renamed = call(put(GAMMA + "/api/users/" + adminId), superToken, map("name", "Gamma Owner", "email", "admin@gamma.com", "role", "ADMIN", "isActive", true));
+        assertEquals(200, renamed.status(), renamed.message());
+        assertEquals("Gamma Owner", renamed.data().get("name").asText());
         assertEquals(200, call(get(GAMMA + "/api/dashboard"), gammaToken, null).status());
-
-        assertEquals("Change your own password from the Profile page",
-                call(put(GAMMA + "/api/users/" + adminId), gammaToken, map("name", "G", "email", "admin@gamma.com", "role", "ADMIN", "isActive", true, "password", "NewPass@123")).message());
-        assertEquals("You cannot disable or demote yourself",
-                call(put(GAMMA + "/api/users/" + adminId), gammaToken, map("name", "G", "email", "admin@gamma.com", "role", "EDITOR", "isActive", true)).message());
-        assertEquals(404, call(put(GAMMA + "/api/users/999999"), gammaToken, map("name", "X", "email", "x@gamma.com", "role", "EDITOR")).status());
+        // akela client admin => disable / demote nahi
+        assertEquals("At least one active admin is required",
+                call(put(GAMMA + "/api/users/" + adminId), superToken, map("name", "G", "email", "admin@gamma.com", "role", "EDITOR", "isActive", true)).message());
+        assertEquals(404, call(put(GAMMA + "/api/users/999999"), superToken, map("name", "X", "email", "x@gamma.com", "role", "EDITOR")).status());
 
         // editor ka naam badla => uska session chalta rahe; email badla => logout
         String editorToken = login(GAMMA, "ed@gamma.com", "Editor@123");
-        call(put(GAMMA + "/api/users/" + editorId), gammaToken, map("name", "Ed Writer", "email", "ed@gamma.com", "role", "EDITOR", "isActive", true));
+        call(put(GAMMA + "/api/users/" + editorId), superToken, map("name", "Ed Writer", "email", "ed@gamma.com", "role", "EDITOR", "isActive", true));
         assertEquals(200, call(get(GAMMA + "/api/dashboard"), editorToken, null).status());
-        call(put(GAMMA + "/api/users/" + editorId), gammaToken, map("name", "Ed Writer", "email", "editor@gamma.com", "role", "EDITOR", "isActive", true));
+        call(put(GAMMA + "/api/users/" + editorId), superToken, map("name", "Ed Writer", "email", "editor@gamma.com", "role", "EDITOR", "isActive", true));
         Res stale = call(post(GAMMA + "/api/auth/login"), null, map("email", "ed@gamma.com", "password", "Editor@123"));
         assertEquals(401, stale.status());
         login(GAMMA, "editor@gamma.com", "Editor@123");
 
-        // dusra admin pehle wale ko disable kare => pehle wale ka session turant khatam; khud ko delete nahi kar sakta
-        Res second = call(post(GAMMA + "/api/users"), gammaToken, map("name", "Second", "email", "second@gamma.com", "role", "ADMIN", "password", "Second@123"));
+        // dusra admin bana => pehle wale ko disable kar sakte => uska session turant khatam; password reset bhi yahin se
+        Res second = call(post(GAMMA + "/api/users"), superToken, map("name", "Second", "email", "second@gamma.com", "role", "ADMIN", "password", "Second@123"));
         assertEquals(200, second.status(), second.message());
         long secondId = second.data().get("id").asLong();
-        String secondToken = login(GAMMA, "second@gamma.com", "Second@123");
-        assertEquals(200, call(put(GAMMA + "/api/users/" + adminId), secondToken, map("name", "Gamma Owner", "email", "admin@gamma.com", "role", "ADMIN", "isActive", false)).status());
+        assertEquals(200, call(put(GAMMA + "/api/users/" + adminId), superToken, map("name", "Gamma Owner", "email", "admin@gamma.com", "role", "ADMIN", "isActive", false)).status());
         assertEquals(401, call(get(GAMMA + "/api/dashboard"), gammaToken, null).status());
         assertEquals("Account is disabled", call(post(GAMMA + "/api/auth/login"), null, map("email", "admin@gamma.com", "password", "Secret@123")).message());
-        assertEquals("You cannot delete yourself", call(delete(GAMMA + "/api/users/" + secondId), secondToken, null).message());
-        assertEquals(200, call(put(GAMMA + "/api/users/" + adminId), secondToken, map("name", "Gamma Owner", "email", "admin@gamma.com", "role", "ADMIN", "isActive", true)).status());
+        assertEquals(200, call(put(GAMMA + "/api/users/" + adminId), superToken, map("name", "Gamma Owner", "email", "admin@gamma.com", "role", "ADMIN", "isActive", true)).status());
         gammaToken = login(GAMMA, "admin@gamma.com", "Secret@123");
-        assertEquals(200, call(delete(GAMMA + "/api/users/" + secondId), gammaToken, null).status());
+        assertEquals(200, call(delete(GAMMA + "/api/users/" + secondId), superToken, null).status());
     }
 
     @Test

@@ -21,11 +21,40 @@ function ViewAll({ to, all, label = "View all" }: { to: string; all?: boolean; l
   );
 }
 
-// ================================================================ SERVICES (cards | icons | list | alternating)
+// ================================================================ SERVICES (cards | icons | list | alternating | bento)
+
+/** Bento grid: chaudai ka pattern (6 column grid me) — bade / chhote card baari baari */
+const BENTO_SPANS = ["lg:col-span-4", "lg:col-span-2", "lg:col-span-3", "lg:col-span-3", "lg:col-span-2", "lg:col-span-4"];
 
 export function Services({ variant = "cards", all }: Variant) {
   const { items } = useList("services", size(all, 6));
   if (!items.length) return null;
+
+  if (variant === "bento") {
+    return (
+      <Section id="services" titled="services" title={all ? "" : undefined}>
+        <motion.div {...reveal} variants={stagger} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
+          {items.map((s, n) => (
+            <motion.div
+              key={s.id}
+              variants={fadeUp}
+              whileHover={{ y: -6 }}
+              className={`group relative overflow-hidden rounded-3xl border border-site-text/10 bg-[var(--surface)] p-7 shadow-sm transition-shadow hover:shadow-xl ${BENTO_SPANS[n % BENTO_SPANS.length]}`}
+            >
+              <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-0 blur-2xl transition-opacity group-hover:opacity-100" style={{ background: `color-mix(in srgb, ${n % 2 ? "var(--accent)" : "var(--primary)"} 25%, transparent)` }} />
+              <span className="relative inline-flex rounded-2xl p-3" style={{ background: `color-mix(in srgb, ${n % 2 ? "var(--accent)" : "var(--primary)"} 12%, transparent)`, color: n % 2 ? "var(--accent)" : "var(--primary)" }}>
+                <SiteIcon name={s.icon} />
+              </span>
+              <h3 style={headingFont} className="relative mt-5 text-xl font-bold tracking-tight">{String(s.title)}</h3>
+              <p className="relative mt-2 text-sm leading-relaxed text-[var(--muted)]">{String(s.summary ?? "")}</p>
+              {!!s.price && <div className="relative mt-4 text-sm font-semibold text-[var(--primary)]">{String(s.price)}</div>}
+            </motion.div>
+          ))}
+        </motion.div>
+        <ViewAll to="/services" all={all} />
+      </Section>
+    );
+  }
 
   if (variant === "icons") {
     return (
@@ -622,7 +651,7 @@ export function Partners({ variant = "marquee" }: Variant) {
   );
 }
 
-// ================================================================ CTA (band | split)
+// ================================================================ CTA (band | split | gradient)
 
 export function Cta({ variant = "band" }: Variant) {
   const name = useSetting("site_name");
@@ -631,6 +660,37 @@ export function Cta({ variant = "band" }: Variant) {
   const ctaText = useSetting("cta_text") || "Contact Us";
   const ctaLink = useSetting("cta_link") || "/contact";
   const { items } = useList("sliders", { size: 1 });
+  if (variant === "gradient") {
+    return (
+      <motion.section {...reveal} variants={stagger} className="py-20">
+        <Container>
+          <motion.div
+            variants={fadeUp}
+            className="relative overflow-hidden rounded-[2rem] px-8 py-16 text-center text-white shadow-2xl sm:px-16"
+            style={{ background: "linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 50%, #7c3aed), var(--accent))", boxShadow: "0 25px 50px -12px color-mix(in srgb, var(--primary) 35%, transparent)" }}
+          >
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.25),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(255,255,255,0.15),transparent_40%)]" />
+            <h2 style={headingFont} className="relative mx-auto max-w-3xl text-3xl font-extrabold tracking-tight sm:text-5xl">
+              {tagline || `Ready to get started with ${name}?`}
+            </h2>
+            <p className="relative mx-auto mt-4 max-w-xl text-lg text-white/85">
+              {phone ? `Call us at ${phone} or reach out online — we reply fast.` : "Reach out today — we reply fast."}
+            </p>
+            <div className="relative mt-9 flex flex-wrap justify-center gap-3">
+              <SiteButton to={ctaLink} kind="white" className="!px-7 !py-3.5">
+                {ctaText} <ArrowRight className="h-4 w-4" />
+              </SiteButton>
+              {phone && (
+                <a href={`tel:${phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-2 rounded-full border border-white/40 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10">
+                  <Phone className="h-4 w-4" /> {phone}
+                </a>
+              )}
+            </div>
+          </motion.div>
+        </Container>
+      </motion.section>
+    );
+  }
   if (variant === "split") {
     return (
       <motion.section {...reveal} variants={stagger} className="py-16">

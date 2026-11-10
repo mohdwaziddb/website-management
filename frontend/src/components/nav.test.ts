@@ -17,13 +17,14 @@ const SCHOOL = [mod("pages", "Pages", "Content"), mod("sliders", "Home Sliders",
 const STORE = [...SCHOOL, mod("products", "Products", "Store"), mod("coupons", "Coupons", "Store")];
 
 describe("admin nav", () => {
-  it("groups + system, editor ko Users nahi", () => {
+  it("groups + system, Users sirf Super Admin ko", () => {
     const nav = buildNav(SCHOOL, "EDITOR");
     expect(nav.map((s) => s.title)).toEqual(["Main", "Content", "Gallery & Media", "System"]);
     const labels = flatNav(nav).map((i) => i.label);
     expect(labels).not.toContain("Users");
     expect(labels).not.toContain("Orders");
-    expect(flatNav(buildNav(SCHOOL, "ADMIN")).map((i) => i.label)).toContain("Users");
+    expect(flatNav(buildNav(SCHOOL, "ADMIN")).map((i) => i.label)).not.toContain("Users");
+    expect(flatNav(buildNav(SCHOOL, "SUPER_ADMIN")).map((i) => i.label)).toContain("Users");
   });
 
   it("store website: orders / customers / reviews, settings sirf admin", () => {

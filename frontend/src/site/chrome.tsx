@@ -6,7 +6,7 @@ import { fileUrl } from "../lib/api";
 import { MenuItem, useList, useSite } from "./data";
 import { EXPLORE_PAGES } from "./coverage";
 import { getSiteType, sectionTitle, TitledSection } from "./siteTypes";
-import { Container, headingFont, RichHtml, SmartImage, useSetting } from "./ui";
+import { Container, headingFont, MainCta, RichHtml, SmartImage, useSetting } from "./ui";
 import { StoreIcons } from "./sections/shop";
 import { SubscribeBox } from "./inbox";
 
@@ -17,7 +17,7 @@ function useDefaultLinks(): MenuItem[] {
 }
 
 /** In heroes ke upar photo / gradient hota hai — transparent navbar ka text safed */
-const DARK_HEROES = ["carousel", "split", "fullscreen", "elegant", "centered", "kenburns"];
+const DARK_HEROES = ["carousel", "split", "fullscreen", "elegant", "centered", "kenburns", "aurora"];
 
 type LinkClass = string | ((s: { isActive: boolean }) => string);
 
@@ -72,7 +72,7 @@ export function Navbar() {
 
   const v = template.nav;
   // hero ke upar transparent navbar sirf home par, scroll hone tak
-  const overHero = pathname === "/" && !scrolled && (v === "floating" || v === "centered");
+  const overHero = pathname === "/" && !scrolled && (v === "floating" || v === "centered" || v === "glass");
   const heroDark = DARK_HEROES.includes(template.hero);
   // surface rang ka glass (dark templates me bhi sahi)
   const glass = { background: "color-mix(in srgb, var(--surface) 88%, transparent)" };
@@ -82,16 +82,19 @@ export function Navbar() {
       ? `fixed inset-x-0 top-3 z-40 mx-auto w-[calc(100%-1.5rem)] max-w-6xl rounded-2xl backdrop-blur transition-all ${overHero ? (heroDark ? "bg-white/10" : "") : "shadow-lg"}`
       : v === "centered"
         ? `fixed inset-x-0 top-0 z-40 transition-all ${scrolled || pathname !== "/" ? "shadow-md" : "bg-transparent"}`
-        : v === "light" || v === "dark"
-          ? "sticky top-0 z-40 border-b border-site-text/10 backdrop-blur"
-          : "sticky top-0 z-40 shadow-md";
+        : v === "glass"
+          ? // hero ke upar transparent, scroll / doosre page par dark glass (marketing site jaisa)
+            `fixed inset-x-0 top-0 z-40 transition-all duration-300 ${overHero ? "bg-transparent" : "border-b border-white/10 bg-slate-950/80 backdrop-blur-xl"}`
+          : v === "light" || v === "dark"
+            ? "sticky top-0 z-40 border-b border-site-text/10 backdrop-blur"
+            : "sticky top-0 z-40 shadow-md";
   const shellStyle =
     v === "solid" || v === "classic" || (v === "centered" && (scrolled || pathname !== "/"))
       ? { background: "var(--primary)" }
       : (v === "floating" && !overHero) || v === "light" || v === "dark"
         ? glass
         : undefined;
-  const textLight = (overHero && heroDark) || v === "solid" || v === "classic" || (v === "centered" && (scrolled || pathname !== "/"));
+  const textLight = (overHero && heroDark) || v === "glass" || v === "solid" || v === "classic" || (v === "centered" && (scrolled || pathname !== "/"));
   const linkCls = ({ isActive }: { isActive: boolean }) =>
     `rounded-full px-3 py-2 text-sm font-medium transition ${
       textLight ? (isActive ? "bg-white/20 text-white" : "text-white/85 hover:text-white") : isActive ? "text-[var(--primary)]" : "text-site-text/75 hover:text-[var(--primary)]"
@@ -125,6 +128,7 @@ export function Navbar() {
           <Brand light={textLight} />
           <nav className={`hidden flex-1 items-center gap-1 lg:flex ${v === "centered" ? "justify-center" : "justify-end"}`}>{navLinks}</nav>
           <StoreIcons light={textLight} />
+          {v === "glass" && <MainCta kind="white" className="hidden !px-5 !py-2 lg:inline-flex" />}
           <button aria-label="Menu" className={`ml-auto rounded-lg p-2 lg:hidden ${textLight ? "text-white" : "text-[var(--text)]"}`} onClick={() => setOpen(true)}>
             <Menu className="h-6 w-6" />
           </button>

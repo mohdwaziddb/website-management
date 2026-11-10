@@ -15,7 +15,7 @@ const VARIANTS: Record<string, (string | undefined)[]> = {
   news: [undefined, "list"],
   gallery: [undefined, "strip"],
   testimonials: [undefined, "grid", "marquee"],
-  services: [undefined, "cards", "icons", "list", "alternating"],
+  services: [undefined, "cards", "icons", "list", "alternating", "bento"],
   catalog: [undefined, "cards", "menu", "listing"],
   projects: [undefined, "grid", "masonry", "showcase"],
   team: [undefined, "cards", "circles", "overlay"],
@@ -23,7 +23,7 @@ const VARIANTS: Record<string, (string | undefined)[]> = {
   stats: [undefined, "band", "cards", "inline"],
   faq: [undefined, "accordion", "two-col"],
   partners: [undefined, "marquee", "grid"],
-  cta: [undefined, "band", "split"],
+  cta: [undefined, "band", "split", "gradient"],
   latest: [undefined, "grid", "list"],
   categories: [undefined, "blocks", "columns"],
   trending: [undefined, "numbered", "cards"],
@@ -39,7 +39,7 @@ describe("templates", () => {
     }
     const frontend = Object.fromEntries(TEMPLATES.map((t) => [t.key, t.type]));
     expect(frontend).toEqual(backend);
-    expect(TEMPLATES).toHaveLength(53);
+    expect(TEMPLATES).toHaveLength(54);
   });
 
   it("backend SiteTypeCatalog ke saath same website types", () => {

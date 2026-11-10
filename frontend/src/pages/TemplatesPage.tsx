@@ -1,3 +1,4 @@
+import { isAdminRole } from "../lib/types";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -117,7 +118,7 @@ interface CardItem {
 
 export default function TemplatesPage() {
   const { user } = useAuth();
-  const canEdit = user?.role === "ADMIN";
+  const canEdit = isAdminRole(user?.role);
   const navigate = useNavigate();
   const [current, setCurrent] = useState<string | null>(null);
   const [siteType, setSiteType] = useState<string>("school");

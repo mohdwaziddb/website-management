@@ -5,6 +5,7 @@ import { api } from "./lib/api";
 import { AuthProvider, useAuth } from "./lib/auth";
 import { ModulesProvider } from "./lib/modules";
 import { ADMIN_BASE, IS_PLATFORM, isAdminPath } from "./lib/tenant";
+import { isAdminRole } from "./lib/types";
 import Layout from "./components/Layout";
 import { ConfirmHost, Toaster } from "./components/ui";
 import LoginPage from "./pages/LoginPage";
@@ -49,14 +50,14 @@ function TenantAdmin() {
           <Route path="logs" element={<LogsPage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="templates" element={<TemplatesPage />} />
-          {user.role === "ADMIN" && <Route path="templates/new" element={<TemplateEditorPage />} />}
-          {user.role === "ADMIN" && <Route path="templates/:id" element={<TemplateEditorPage />} />}
-          {user.role === "ADMIN" && <Route path="users" element={<UsersPage />} />}
+          {isAdminRole(user.role) && <Route path="templates/new" element={<TemplateEditorPage />} />}
+          {isAdminRole(user.role) && <Route path="templates/:id" element={<TemplateEditorPage />} />}
+          {user.role === "SUPER_ADMIN" && <Route path="users" element={<UsersPage />} />}
           <Route path="store/orders" element={<OrdersPage />} />
           <Route path="store/orders/:id" element={<OrderDetailPage />} />
           <Route path="store/customers" element={<CustomersPage />} />
           <Route path="store/reviews" element={<ReviewsPage />} />
-          {user.role === "ADMIN" && <Route path="store/settings" element={<StoreSettingsPage />} />}
+          {isAdminRole(user.role) && <Route path="store/settings" element={<StoreSettingsPage />} />}
           <Route path="profile" element={<ProfilePage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>

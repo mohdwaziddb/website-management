@@ -17,7 +17,7 @@ public final class TemplateCatalog {
         add("school", "classic", "modern", "minimal", "vibrant", "elegant");
         add("coaching", "achiever", "focus", "toppers");
         add("portfolio", "mono", "neon", "canvas");
-        add("business", "corporate", "summit", "fresh");
+        add("business", "corporate", "summit", "fresh", "aurora");
         add("restaurant", "saffron", "bistro", "noir");
         add("gym", "iron", "pulse", "zenfit");
         add("real_estate", "prime", "urban", "haven");

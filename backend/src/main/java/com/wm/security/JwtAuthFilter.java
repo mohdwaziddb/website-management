@@ -39,8 +39,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 AuthPrincipal p = JwtService.toPrincipal(claims);
                 // sahi website + user abhi bhi active + token_version same (disable / logout-all turant lage)
                 if (belongsHere(p) && sessions.isCurrent(p, claims.get("ver", Integer.class))) {
-                    var auth = new UsernamePasswordAuthenticationToken(p, null,
-                            List.of(new SimpleGrantedAuthority("ROLE_" + p.role())));
+                    // Super Admin = ADMIN ke saare kaam bhi
+                    var roles = SecurityConfig.SUPER_ADMIN.equals(p.role())
+                            ? List.of(new SimpleGrantedAuthority("ROLE_" + SecurityConfig.SUPER_ADMIN), new SimpleGrantedAuthority("ROLE_" + SecurityConfig.ADMIN))
+                            : List.of(new SimpleGrantedAuthority("ROLE_" + p.role()));
+                    var auth = new UsernamePasswordAuthenticationToken(p, null, roles);
                     SecurityContextHolder.getContext().setAuthentication(auth);
                 }
             } catch (ApiException ignored) {

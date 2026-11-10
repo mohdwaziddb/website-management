@@ -12,7 +12,8 @@ export const NAV_OPTIONS: Opt<NavVariant>[] = [
   { value: "light", label: "Light / glass bar" },
   { value: "floating", label: "Floating rounded bar" },
   { value: "centered", label: "Centered, transparent over hero" },
-  { value: "dark", label: "Dark glass bar" }
+  { value: "dark", label: "Dark glass bar" },
+  { value: "glass", label: "Transparent over hero, dark glass on scroll" }
 ];
 
 export const HERO_OPTIONS: Opt<HeroVariant>[] = [
@@ -28,7 +29,8 @@ export const HERO_OPTIONS: Opt<HeroVariant>[] = [
   { value: "minimal", label: "Minimal big text" },
   { value: "headlines", label: "News: top stories + latest" },
   { value: "spotlight", label: "News: rotating top story (TV)" },
-  { value: "mosaic", label: "News: photo mosaic" }
+  { value: "mosaic", label: "News: photo mosaic" },
+  { value: "aurora", label: "Dark aurora glow + browser preview" }
 ];
 
 export const HEADING_OPTIONS: Opt<HeadingStyle>[] = [
@@ -88,7 +90,8 @@ export const SECTION_OPTIONS: Record<string, { label: string; variants: Opt[] }>
       { value: "cards", label: "Image cards" },
       { value: "icons", label: "Icon cards" },
       { value: "list", label: "Numbered list" },
-      { value: "alternating", label: "Zig-zag" }
+      { value: "alternating", label: "Zig-zag" },
+      { value: "bento", label: "Bento grid" }
     ]
   },
   catalog: {
@@ -136,7 +139,7 @@ export const SECTION_OPTIONS: Record<string, { label: string; variants: Opt[] }>
   news: { label: "News / Blog", variants: [{ value: "", label: "Cards" }, { value: "list", label: "List" }] },
   faq: { label: "FAQ", variants: [{ value: "accordion", label: "Accordion" }, { value: "two-col", label: "Two columns" }] },
   partners: { label: "Clients / Partners", variants: [{ value: "marquee", label: "Scrolling logos" }, { value: "grid", label: "Logo grid" }] },
-  cta: { label: "Call to action", variants: [{ value: "band", label: "Colour band" }, { value: "split", label: "Card with photo" }] },
+  cta: { label: "Call to action", variants: [{ value: "band", label: "Colour band" }, { value: "split", label: "Card with photo" }, { value: "gradient", label: "Gradient card" }] },
   videos: { label: "Videos & Live", variants: [] },
   achievements: { label: "Achievements / Awards", variants: [] },
   thought: { label: "Thought of the day", variants: [] },

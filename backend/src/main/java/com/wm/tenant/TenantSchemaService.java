@@ -132,7 +132,7 @@ public class TenantSchemaService {
     }
 
     /**
-     * Master ke admin_username / admin_password se website ka Super Admin (role ADMIN, users list me chhupa).
+     * Master ke admin_username / admin_password se website ka Super Admin (role SUPER_ADMIN, users list me chhupa).
      * Master me password badla => restart par naya hash + token_version++ (purane sessions khatam).
      */
     private void syncSuperAdmin(JdbcTemplate db, Tenant t) {
@@ -145,14 +145,14 @@ public class TenantSchemaService {
         List<Map<String, Object>> rows = db.queryForList("SELECT id, password_hash FROM users WHERE email = ?", login);
         if (rows.isEmpty()) {
             db.update("INSERT INTO users (name, email, password_hash, role) VALUES (?,?,?,?)",
-                    "Super Admin", login, encoder.encode(password), SecurityConfig.ADMIN);
+                    "Super Admin", login, encoder.encode(password), SecurityConfig.SUPER_ADMIN);
             log.info("Tenant {}: super admin {} bana", t.code(), login);
         } else if (!encoder.matches(password, DataTypeUtility.stringValue(rows.get(0).get("password_hash")))) {
             db.update("UPDATE users SET password_hash = ?, role = ?, is_active = 1, token_version = token_version + 1 WHERE email = ?",
-                    encoder.encode(password), SecurityConfig.ADMIN, login);
+                    encoder.encode(password), SecurityConfig.SUPER_ADMIN, login);
             log.info("Tenant {}: super admin password update hua", t.code());
         } else {
-            db.update("UPDATE users SET role = ?, is_active = 1 WHERE email = ?", SecurityConfig.ADMIN, login);
+            db.update("UPDATE users SET role = ?, is_active = 1 WHERE email = ?", SecurityConfig.SUPER_ADMIN, login);
         }
     }
 

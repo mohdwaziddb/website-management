@@ -27,6 +27,8 @@ import java.util.Map;
 public class SecurityConfig {
     public static final String ADMIN = "ADMIN";
     public static final String EDITOR = "EDITOR";
+    /** Website ka Super Admin (master tenants.admin_username) — ADMIN ke saare kaam + users banana (sirf yahi) */
+    public static final String SUPER_ADMIN = "SUPER_ADMIN";
     public static final String CUSTOMER = "CUSTOMER";
 
     @Bean
@@ -50,7 +52,7 @@ public class SecurityConfig {
                         // store admin: payment keys / SMTP sirf ADMIN
                         .requestMatchers("/api/shop/settings/**", "/api/shop/settings").hasRole(ADMIN)
                         // tenant admin only
-                        .requestMatchers("/api/users/**").hasRole(ADMIN)
+                        .requestMatchers("/api/users/**").hasRole(SUPER_ADMIN)
                         .requestMatchers(HttpMethod.PUT, "/api/settings").hasRole(ADMIN)
                         .requestMatchers("/api/demo/**", "/api/website/**").hasRole(ADMIN)
                         .requestMatchers(HttpMethod.POST, "/api/templates/**").hasRole(ADMIN)

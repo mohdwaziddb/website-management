@@ -40,7 +40,7 @@ function ScrollTop() {
 
 /** Template ke theme ke saath layout + page transition */
 export function SiteLayout() {
-  const { template, settings, preview, showcase } = useSite();
+  const { template, settings, preview, showcase, siteType } = useSite();
   const location = useLocation();
   // fixed navbar (floating / centered) ke neeche content na chhupe — home ke alawa har page par common jagah
   const navOffset = useFixedNav() && location.pathname !== "/";
@@ -102,17 +102,22 @@ export function SiteLayout() {
             <Route path="news/:slug" element={<ArticlePage />} />
             <Route path="category/:slug" element={<CategoryPage />} />
             <Route path="reporter/:id" element={<ReporterPage />} />
-            <Route path="shop" element={<ShopPage />} />
-            <Route path="shop/category/:slug" element={<ShopPage />} />
-            <Route path="product/:slug" element={<ProductPage />} />
-            <Route path="cart" element={<CartPage />} />
-            <Route path="checkout" element={<CheckoutPage />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="register" element={<LoginPage mode="register" />} />
-            <Route path="forgot-password" element={<ForgotPasswordPage />} />
-            <Route path="reset-password" element={<ResetPasswordPage />} />
-            <Route path="account" element={<AccountPage />} />
-            <Route path="account/orders/:orderNo" element={<CustomerOrderPage />} />
+            {/* online store (shop, cart, customer login / sign-up) sirf E-commerce website par — baaki par "Page not found" */}
+            {siteType === "ecommerce" && (
+              <>
+                <Route path="shop" element={<ShopPage />} />
+                <Route path="shop/category/:slug" element={<ShopPage />} />
+                <Route path="product/:slug" element={<ProductPage />} />
+                <Route path="cart" element={<CartPage />} />
+                <Route path="checkout" element={<CheckoutPage />} />
+                <Route path="login" element={<LoginPage />} />
+                <Route path="register" element={<LoginPage mode="register" />} />
+                <Route path="forgot-password" element={<ForgotPasswordPage />} />
+                <Route path="reset-password" element={<ResetPasswordPage />} />
+                <Route path="account" element={<AccountPage />} />
+                <Route path="account/orders/:orderNo" element={<CustomerOrderPage />} />
+              </>
+            )}
             <Route path="contact" element={<ContactPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

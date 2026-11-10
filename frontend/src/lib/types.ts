@@ -52,7 +52,7 @@ export interface AuthUser {
   userId: number;
   name: string;
   email: string;
-  role: "ADMIN" | "EDITOR";
+  role: "ADMIN" | "EDITOR" | "SUPER_ADMIN";
   scope: "TENANT";
   tenant: string | null;
 }
@@ -85,3 +85,8 @@ export interface TenantInfo {
 }
 
 export const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+/** Super Admin (master se) ADMIN ke saare kaam kar sakta hai */
+export const isAdminRole = (role: string | undefined) => role === "ADMIN" || role === "SUPER_ADMIN";
+
+export const roleLabel = (role: string | undefined) => (role === "SUPER_ADMIN" ? "Super Admin" : role === "ADMIN" ? "Administrator" : "Editor");
