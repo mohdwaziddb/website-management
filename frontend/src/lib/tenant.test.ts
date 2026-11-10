@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isAdminPath, isPlatformHost, tenantUrl } from "./tenant";
+import { isAdminPath, isPlatformHost } from "./tenant";
 
 describe("isPlatformHost (backend TenantResolver jaisa)", () => {
   it("root, www, reserved, IP aur bare hosts platform hain", () => {
@@ -28,13 +28,5 @@ describe("isAdminPath", () => {
     expect(isAdminPath("/")).toBe(false);
     expect(isAdminPath("/administrator")).toBe(false);
     expect(isAdminPath("/page/admin")).toBe(false);
-  });
-});
-
-describe("tenantUrl", () => {
-  it("subdomain pehle, warna custom domain", () => {
-    const port = window.location.port ? ":" + window.location.port : "";
-    expect(tenantUrl({ subdomain: "abc", customDomain: "xyz.com" })).toBe(`http://abc.localhost${port}/`);
-    expect(tenantUrl({ subdomain: null, customDomain: "xyz.com" }, "/admin")).toBe(`http://xyz.com${port}/admin`);
   });
 });

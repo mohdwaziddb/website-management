@@ -4,7 +4,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wm.service.store.RazorpayGateway;
 import com.wm.service.store.StoreCheckoutService;
+import com.wm.tenant.Tenant;
 import com.wm.tenant.TenantDataSources;
+import com.wm.tenant.TenantRepository;
+import com.wm.tenant.TenantSchemaService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -28,7 +31,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 /**
- * Online store ka poora flow local MySQL par (wmtest_t_shop). Razorpay ka asli server nahi — RazorpayGateway mock,
+ * Online store ka poora flow local MySQL par (wmtest_shop). Razorpay ka asli server nahi — RazorpayGateway mock,
  * signatures asli HMAC se banti hain (jaise Razorpay banata hai).
  * WebsiteFlowIntegrationTest se pehle chalta hai (wo end me test master DB drop karta hai).
  */
@@ -39,7 +42,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Order(50)
 class StoreFlowIntegrationTest {
-    private static final String ROOT = "http://localhost";
     private static final String SHOP = "http://shop.localhost";
     private static final String KEY_SECRET = "test_key_secret";
     private static final String WEBHOOK_SECRET = "wh_secret";
@@ -58,6 +60,12 @@ class StoreFlowIntegrationTest {
 
     @Autowired
     private StoreCheckoutService checkoutService;
+
+    @Autowired
+    private TenantRepository tenantRepository;
+
+    @Autowired
+    private TenantSchemaService schemaService;
 
     @MockBean
     private RazorpayGateway razorpay;
@@ -141,11 +149,11 @@ class StoreFlowIntegrationTest {
     @Test
     @Order(1)
     void createStoreWebsite() throws Exception {
-        String platform = call(post(ROOT + "/api/platform/auth/login"), null, map("email", "root@test.local", "password", "Root@12345")).data().get("accessToken").asText();
-        Res t = call(post(ROOT + "/api/platform/tenants"), platform, map("subdomain", "shop", "name", "Kart Shop", "contactEmail", "info@kart.test",
-                "siteType", "ecommerce", "importDemo", true, "adminName", "Shop Admin", "adminEmail", "admin@kart.test", "adminPassword", "Secret@123"));
-        assertEquals(200, t.status(), t.message());
-        adminToken = call(post(SHOP + "/api/auth/login"), null, map("email", "admin@kart.test", "password", "Secret@123")).data().get("accessToken").asText();
+        Tenant shop = TestTenants.create(tenantRepository, schemaService, dataSources, "shop", "shop", null, "Kart Shop", "admin@kart.test");
+        TestTenants.setting(dataSources, shop, "site_type", "ecommerce");
+        adminToken = call(post(SHOP + "/api/auth/login"), null, map("email", "admin@kart.test", "password", TestTenants.ADMIN_PASSWORD)).data().get("accessToken").asText();
+        Res demo = call(post(SHOP + "/api/demo/import"), adminToken, null);
+        assertEquals(200, demo.status(), demo.message());
         Res ed = call(post(SHOP + "/api/users"), adminToken, map("name", "Ed", "email", "editor@kart.test", "password", "Editor@123", "role", "EDITOR"));
         assertEquals(200, ed.status(), ed.message());
         editorToken = call(post(SHOP + "/api/auth/login"), null, map("email", "editor@kart.test", "password", "Editor@123")).data().get("accessToken").asText();

@@ -183,9 +183,6 @@ function Nav() {
           ))}
         </nav>
         <div className="ml-auto hidden items-center gap-2 lg:ml-0 lg:flex">
-          <a href="/admin" className="rounded-full px-4 py-2 text-sm font-medium text-slate-200 transition hover:text-white">
-            Admin login
-          </a>
           <ScrollLink to="contact" className="inline-flex items-center gap-1.5 rounded-full bg-white px-5 py-2 text-sm font-semibold text-slate-900 shadow-lg shadow-white/10 transition hover:bg-indigo-50">
             Get started <ArrowRight className="h-4 w-4" />
           </ScrollLink>
@@ -203,9 +200,6 @@ function Nav() {
                   {l}
                 </ScrollLink>
               ))}
-              <a href="/admin" className="block rounded-lg px-3 py-2.5 text-slate-200 hover:bg-white/10">
-                Admin login
-              </a>
             </div>
           </motion.div>
         )}
@@ -819,11 +813,6 @@ function Footer() {
           <a href={`mailto:${CONTACT_EMAIL}`} className="text-sm hover:text-white">
             {CONTACT_EMAIL}
           </a>
-          <div className="mt-3">
-            <a href="/admin" className="text-sm hover:text-white">
-              Admin login
-            </a>
-          </div>
         </div>
       </div>
       <div className="mt-14 border-t border-white/10 py-6 text-center text-xs text-slate-500">

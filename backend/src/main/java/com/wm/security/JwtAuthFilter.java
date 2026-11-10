@@ -52,9 +52,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     private boolean belongsHere(AuthPrincipal p) {
         Tenant current = TenantContext.get();
-        if (AuthPrincipal.SCOPE_PLATFORM.equals(p.scope())) {
-            return current == null;
-        }
         return current != null && current.code().equals(p.tenant());
     }
 }

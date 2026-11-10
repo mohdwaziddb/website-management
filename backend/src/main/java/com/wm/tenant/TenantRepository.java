@@ -20,7 +20,9 @@ public class TenantRepository {
             rs.getString("db_name"),
             rs.getString("contact_email"),
             rs.getBoolean("is_active"),
-            String.valueOf(rs.getTimestamp("created_on")));
+            String.valueOf(rs.getTimestamp("created_on")),
+            rs.getString("admin_username"),
+            rs.getString("admin_password"));
 
     /** Lookup / unique check ke columns (SQL me column naam sirf isi enum se). */
     public enum Key {
@@ -61,22 +63,10 @@ public class TenantRepository {
         return master.query("SELECT * FROM tenants ORDER BY id DESC", MAPPER);
     }
 
-    /** Cache ke bina — create/update ki unique validation ke liye. */
-    public boolean exists(Key key, String value, Long excludeId) {
-        Long n = master.queryForObject("SELECT COUNT(*) FROM tenants WHERE " + key.column + " = ? AND id <> ?",
-                Long.class, value, excludeId == null ? -1L : excludeId);
-        return n != null && n > 0;
-    }
-
-    public long insert(String code, String subdomain, String customDomain, String name, String dbName, String contactEmail) {
-        master.update("INSERT INTO tenants (code, subdomain, custom_domain, name, db_name, contact_email) VALUES (?,?,?,?,?,?)",
-                code, subdomain, customDomain, name, dbName, contactEmail);
+    public long insert(String code, String subdomain, String customDomain, String name, String dbName, String contactEmail,
+                       String adminUsername, String adminPassword) {
+        master.update("INSERT INTO tenants (code, subdomain, custom_domain, name, db_name, contact_email, admin_username, admin_password) VALUES (?,?,?,?,?,?,?,?)",
+                code, subdomain, customDomain, name, dbName, contactEmail, adminUsername, adminPassword);
         return master.queryForObject("SELECT id FROM tenants WHERE code = ?", Long.class, code);
-    }
-
-    public void update(long id, String subdomain, String customDomain, String name, String contactEmail, boolean active) {
-        master.update("UPDATE tenants SET subdomain = ?, custom_domain = ?, name = ?, contact_email = ?, is_active = ? WHERE id = ?",
-                subdomain, customDomain, name, contactEmail, active, id);
-        cache.clear();
     }
 }

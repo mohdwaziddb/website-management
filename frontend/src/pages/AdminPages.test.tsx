@@ -106,14 +106,13 @@ describe("Login", () => {
     routeApi({});
     login.mockRejectedValueOnce({ response: { data: { message: "Invalid email or password" } } }).mockResolvedValueOnce(undefined);
     render(<LoginPage />);
-    // jsdom host = localhost = root domain => super admin login
-    expect(screen.getByText("Super admin sign in")).toBeInTheDocument();
+    expect(screen.getByText("Website admin sign in")).toBeInTheDocument();
     const pw = screen.getByLabelText("Password");
     expect(pw).toHaveAttribute("type", "password");
     fireEvent.click(screen.getByLabelText("Show password"));
     expect(pw).toHaveAttribute("type", "text");
 
-    fireEvent.change(screen.getByLabelText("Email"), { target: { value: "anita@x.com" } });
+    fireEvent.change(screen.getByLabelText("Email or username"), { target: { value: "anita@x.com" } });
     fireEvent.change(pw, { target: { value: "wrong-pass" } });
     fireEvent.click(screen.getByLabelText("Remember my email"));
     fireEvent.click(screen.getByRole("button", { name: "Sign in" }));

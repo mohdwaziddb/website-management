@@ -1,5 +1,6 @@
 package com.wm.tenant;
 
+import com.wm.common.DataTypeUtility;
 import com.wm.module.FieldDef;
 import com.wm.module.FieldType;
 import com.wm.module.ModuleDef;
@@ -8,7 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import com.wm.security.SecurityConfig;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,6 +19,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 /**
  * Tenant DB ka schema registry se banata hai.
@@ -78,26 +82,83 @@ public class TenantSchemaService {
             "magazine_thumbnails", List.of("session_id"),
             "activities", List.of("session_id", "class_id"));
 
+    /** DB naam sirf yahi characters (SQL me backtick ke andar jata hai) */
+    private static final Pattern DB_NAME = Pattern.compile("^[a-z0-9_]{1,64}$");
+    /** MySQL ke apne DB — website ka DB kabhi ye na ho */
+    private static final Set<String> SYSTEM_DBS = Set.of("mysql", "sys", "information_schema", "performance_schema");
+
     private final ModuleRegistry registry;
     private final TenantRepository tenants;
     private final TenantDataSources dataSources;
+    private final JdbcTemplate master;
+    private final PasswordEncoder encoder;
 
-    public TenantSchemaService(ModuleRegistry registry, TenantRepository tenants, TenantDataSources dataSources) {
+    public TenantSchemaService(ModuleRegistry registry, TenantRepository tenants, TenantDataSources dataSources,
+                               JdbcTemplate master, PasswordEncoder encoder) {
         this.registry = registry;
         this.tenants = tenants;
         this.dataSources = dataSources;
+        this.master = master;
+        this.encoder = encoder;
     }
 
-    /** Startup par saare tenants ka schema sync. Ek tenant fail ho to baaki chalte rahen. */
+    /**
+     * Startup par saare tenants: DB na ho to banao + schema sync + pehla admin. Ek tenant fail ho to baaki chalte rahen.
+     * Isliye nayi website = master tenants me SQL se row + restart.
+     */
     @EventListener(ApplicationReadyEvent.class)
     public void syncAll() {
         for (Tenant t : tenants.findAll()) {
             try {
-                ensureSchema(dataSources.forDb(t.dbName()));
+                provision(t);
             } catch (Exception e) {
-                log.error("Schema sync failed for tenant {}", t.code(), e);
+                log.error("Setup failed for tenant {}", t.code(), e);
             }
         }
+    }
+
+    /** Idempotent — har startup par chal sakta hai. site_name sirf tab jab khaali ho. */
+    public void provision(Tenant t) {
+        String dbName = t.dbName();
+        if (!validDbName(dbName)) {
+            log.error("Tenant {}: invalid db_name '{}' (sirf a-z, 0-9, _ ; system / master DB nahi) — skipped", t.code(), dbName);
+            return;
+        }
+        master.execute("CREATE DATABASE IF NOT EXISTS `" + dbName + "` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+        JdbcTemplate db = dataSources.forDb(dbName);
+        ensureSchema(db);
+        syncSuperAdmin(db, t);
+        db.update("INSERT IGNORE INTO site_settings (setting_key, setting_value) VALUES ('site_name', ?)", t.name());
+    }
+
+    /**
+     * Master ke admin_username / admin_password se website ka Super Admin (role ADMIN, users list me chhupa).
+     * Master me password badla => restart par naya hash + token_version++ (purane sessions khatam).
+     */
+    private void syncSuperAdmin(JdbcTemplate db, Tenant t) {
+        String login = t.superAdminLogin();
+        String password = DataTypeUtility.stringNullValue(t.adminPassword());
+        if (DataTypeUtility.isEmpty(login) || password == null) {
+            log.warn("Tenant {}: master me admin_username / admin_password khaali — super admin nahi bana", t.code());
+            return;
+        }
+        List<Map<String, Object>> rows = db.queryForList("SELECT id, password_hash FROM users WHERE email = ?", login);
+        if (rows.isEmpty()) {
+            db.update("INSERT INTO users (name, email, password_hash, role) VALUES (?,?,?,?)",
+                    "Super Admin", login, encoder.encode(password), SecurityConfig.ADMIN);
+            log.info("Tenant {}: super admin {} bana", t.code(), login);
+        } else if (!encoder.matches(password, DataTypeUtility.stringValue(rows.get(0).get("password_hash")))) {
+            db.update("UPDATE users SET password_hash = ?, role = ?, is_active = 1, token_version = token_version + 1 WHERE email = ?",
+                    encoder.encode(password), SecurityConfig.ADMIN, login);
+            log.info("Tenant {}: super admin password update hua", t.code());
+        } else {
+            db.update("UPDATE users SET role = ?, is_active = 1 WHERE email = ?", SecurityConfig.ADMIN, login);
+        }
+    }
+
+    boolean validDbName(String dbName) {
+        if (dbName == null || !DB_NAME.matcher(dbName).matches() || SYSTEM_DBS.contains(dbName)) return false;
+        return !dbName.equals(master.queryForObject("SELECT DATABASE()", String.class));
     }
 
     public void ensureSchema(JdbcTemplate jdbc) {

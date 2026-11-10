@@ -95,11 +95,6 @@ public class DemoDataServiceImpl implements DemoDataService {
         return importInto(db, t.code(), siteType(db), p.userId(), p.name());
     }
 
-    @Override
-    public Map<String, Object> importDemo(Tenant tenant, String siteType) {
-        return importInto(ds.forDb(tenant.dbName()), tenant.code(), siteType, null, "System");
-    }
-
     private Map<String, Object> importInto(JdbcTemplate db, String code, String siteType, Long userId, String userName) {
         if (countDemoRows(db) > 0) throw ApiException.badRequest("Demo data is already imported — remove it first");
         Map<String, List<Map<String, Object>>> modules = demoCatalog.getModules(siteType);

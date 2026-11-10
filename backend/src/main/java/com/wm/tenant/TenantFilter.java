@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * /api/** (platform ke alawa) par tenant zaroori hai. Inactive / unknown tenant = 404.
+ * /api/** (/api/open ke alawa) par tenant zaroori hai. Inactive / unknown tenant = 404.
  * Spring bean nahi hai (SecurityConfig me new hota hai) taaki do baar register na ho.
  */
 public class TenantFilter extends OncePerRequestFilter {
@@ -29,7 +29,7 @@ public class TenantFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getRequestURI().substring(request.getContextPath().length());
-        return !path.startsWith("/api/") || path.startsWith("/api/platform/");
+        return !path.startsWith("/api/") || path.startsWith("/api/open/");
     }
 
     @Override

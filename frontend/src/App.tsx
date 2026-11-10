@@ -22,8 +22,6 @@ import OrderDetailPage from "./pages/store/OrderDetailPage";
 import CustomersPage from "./pages/store/CustomersPage";
 import ReviewsPage from "./pages/store/ReviewsPage";
 import StoreSettingsPage from "./pages/store/StoreSettingsPage";
-import PlatformLayout from "./platform/PlatformLayout";
-import TenantsPage from "./platform/TenantsPage";
 import SiteApp, { ShowcaseApp, WebsiteNotFound } from "./site/SiteApp";
 import MarketingApp from "./marketing/MarketingApp";
 
@@ -67,21 +65,6 @@ function TenantAdmin() {
   );
 }
 
-/** www.yourdomain.com/admin — super admin */
-function PlatformAdmin() {
-  const { user } = useAuth();
-  if (!user) return <LoginPage />;
-  return (
-    <Routes>
-      <Route element={<PlatformLayout />}>
-        <Route index element={<TenantsPage />} />
-        <Route path="profile" element={<ProfilePage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Route>
-    </Routes>
-  );
-}
-
 /** Domain registered/active hai ya nahi — nahi to "Website not found" */
 function TenantGate({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<"loading" | "ok" | "missing">("loading");
@@ -101,13 +84,9 @@ function AdminApp() {
   return (
     <BrowserRouter basename={ADMIN_BASE}>
       <AuthProvider>
-        {IS_PLATFORM ? (
-          <PlatformAdmin />
-        ) : (
-          <TenantGate>
-            <TenantAdmin />
-          </TenantGate>
-        )}
+        <TenantGate>
+          <TenantAdmin />
+        </TenantGate>
         <Toaster />
         <ConfirmHost />
       </AuthProvider>
@@ -116,14 +95,18 @@ function AdminApp() {
 }
 
 /**
- * Ek hi React app, 4 roop:
+ * Ek hi React app, 3 roop:
  *   www.yourdomain.com          -> MarketingApp (product ki website), /preview/<template> = live demo
- *   www.yourdomain.com/admin    -> super admin
  *   abc.yourdomain.com, xyz.com -> SiteApp (client ki public website, chosen template me)
  *   abc.yourdomain.com/admin    -> us website ka admin panel
+ * Root domain par /admin nahi hai (websites master DB me SQL se banti hain) — wahan / par bhej do.
  */
 export default function App() {
   const path = window.location.pathname;
+  if (IS_PLATFORM && isAdminPath(path)) {
+    window.history.replaceState({}, "", "/");
+    return <MarketingApp />;
+  }
   if (isAdminPath(path)) return <AdminApp />;
   if (!IS_PLATFORM) return <SiteApp />;
   // root domain: /preview/<template> = kisi bhi template ka live demo (demo content)

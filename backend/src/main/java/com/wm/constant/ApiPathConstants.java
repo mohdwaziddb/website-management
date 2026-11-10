@@ -123,23 +123,17 @@ public final class ApiPathConstants {
         }
     }
 
-    /** Super admin — root domain */
-    public static final class Platform {
-        public static final String BASE = API + "/platform";
-        public static final String LOGIN = "/auth/login";
-        public static final String REFRESH = "/auth/refresh";
-        public static final String ME = "/auth/me";
-        public static final String CHANGE_PASSWORD = "/auth/change-password";
-        public static final String TENANTS = "/tenants";
-        public static final String TENANT = "/tenants/{id}";
-        public static final String TENANT_RESET_ADMIN = "/tenants/{id}/reset-admin";
+    /** Bina login + bina tenant (kisi bhi domain se) */
+    public static final class Open {
+        public static final String BASE = API + "/open";
+        /** Caddy on-demand TLS ask */
         public static final String DOMAIN_CHECK = "/domain-check";
-        /** Template preview ke liye demo data — bina login, kisi bhi domain se */
+        /** Template preview ke liye demo data */
         public static final String DEMO_PREVIEW = "/demo/{type}";
         /** Preview me demo PDF (Downloads / E-Magazine) */
         public static final String DEMO_FILE = "/demo/files/{name:.+}";
 
-        private Platform() {
+        private Open() {
         }
     }
 }

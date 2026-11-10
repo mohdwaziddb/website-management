@@ -52,8 +52,8 @@ export interface AuthUser {
   userId: number;
   name: string;
   email: string;
-  role: "ADMIN" | "EDITOR" | "SUPER_ADMIN";
-  scope: "TENANT" | "PLATFORM";
+  role: "ADMIN" | "EDITOR";
+  scope: "TENANT";
   tenant: string | null;
 }
 

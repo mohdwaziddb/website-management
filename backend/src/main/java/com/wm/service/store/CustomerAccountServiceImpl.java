@@ -77,7 +77,7 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
     @Override
     public Map<String, Object> login(Map<String, Object> param) {
         Tenant t = TenantContext.require();
-        Map<String, Object> tokens = accountAuthSupport.login(ds.current(), TABLE, t.code() + ":customer", param, u -> principal(u, t));
+        Map<String, Object> tokens = accountAuthSupport.login(ds.current(), TABLE, t.code() + ":customer", param, null, u -> principal(u, t));
         ds.current().update("UPDATE customers SET last_login = NOW() WHERE email = ?", DataTypeUtility.lowerValue(param.get("email")));
         return tokens;
     }

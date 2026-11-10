@@ -16,8 +16,8 @@ import java.util.Map;
 import java.util.function.Function;
 
 /**
- * Login / refresh / change-password ka common logic. Website users (tenant DB "users") aur
- * super admins (master DB "super_admins") dono isi se chalte hain — dono tables me
+ * Login / refresh / change-password ka common logic. Website users ("users") aur store customers
+ * ("customers") dono isi se chalte hain — dono tables me
  * id, name, email, password_hash, token_version, is_active columns hain.
  */
 @Component
@@ -35,10 +35,14 @@ public class AccountAuthSupport {
         this.dummyHash = encoder.encode("not-a-real-password");
     }
 
-    /** table naam sirf code se aata hai ("users" / "super_admins"), user input se kabhi nahi */
-    public Map<String, Object> login(JdbcTemplate db, String table, String guardPrefix, Map<String, Object> param,
+    /**
+     * table naam sirf code se aata hai ("users" / "customers"), user input se kabhi nahi.
+     * extraLogin = email ke alawa allowed login (website ka super admin username), nahi to null.
+     */
+    public Map<String, Object> login(JdbcTemplate db, String table, String guardPrefix, Map<String, Object> param, String extraLogin,
                                      Function<Map<String, Object>, AuthPrincipal> principal) {
-        String email = ValidationUtility.requiredEmail(param.get("email"), "Email");
+        String raw = DataTypeUtility.lowerValue(param.get("email"));
+        String email = extraLogin != null && extraLogin.equals(raw) ? raw : ValidationUtility.requiredEmail(param.get("email"), "Email");
         String password = ValidationUtility.requiredString(param.get("password"), "Password", 100);
         String guardKey = guardPrefix + ":" + email;
         guard.check(guardKey);

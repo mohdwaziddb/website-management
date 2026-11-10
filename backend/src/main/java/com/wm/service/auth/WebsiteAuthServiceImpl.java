@@ -1,5 +1,6 @@
 package com.wm.service.auth;
 
+import com.wm.common.ApiException;
 import com.wm.common.DataTypeUtility;
 import com.wm.security.AuthPrincipal;
 import com.wm.service.settings.WebsiteSettingsService;
@@ -42,7 +43,7 @@ public class WebsiteAuthServiceImpl implements WebsiteAuthService {
     @Override
     public Map<String, Object> login(Map<String, Object> param) {
         Tenant t = TenantContext.require();
-        Map<String, Object> tokens = accountAuthSupport.login(ds.current(), TABLE, t.code(), param, u -> principal(u, t));
+        Map<String, Object> tokens = accountAuthSupport.login(ds.current(), TABLE, t.code(), param, t.superAdminLogin(), u -> principal(u, t));
         ds.current().update("UPDATE users SET last_login = NOW() WHERE email = ?", DataTypeUtility.lowerValue(param.get("email")));
         return tokens;
     }
@@ -61,6 +62,9 @@ public class WebsiteAuthServiceImpl implements WebsiteAuthService {
     @Override
     public Map<String, Object> changePassword(Map<String, Object> param) {
         Tenant t = TenantContext.require();
+        if (t.isSuperAdmin(AuthPrincipal.current().email())) {
+            throw ApiException.badRequest("Super admin password is set in the master database");
+        }
         return accountAuthSupport.changePassword(ds.current(), TABLE, AuthPrincipal.current().userId(), param, u -> principal(u, t));
     }
 

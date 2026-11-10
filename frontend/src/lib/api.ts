@@ -1,5 +1,4 @@
 import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from "axios";
-import { IS_PLATFORM } from "./tenant";
 import type { Session } from "./types";
 
 const SESSION_KEY = "wm_session";
@@ -41,7 +40,7 @@ api.interceptors.request.use((cfg) => {
   return cfg;
 });
 
-const REFRESH_PATH = IS_PLATFORM ? "/platform/auth/refresh" : "/auth/refresh";
+const REFRESH_PATH = "/auth/refresh";
 let refreshing: Promise<string | null> | null = null;
 
 /** Ek saath kai 401 aaye to bhi refresh sirf ek baar chale. */

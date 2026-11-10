@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Eye, EyeOff, LayoutTemplate, LockKeyhole, Mail, ShieldCheck, Sparkles } from "lucide-react";
 import { api, errorMessage, fileUrl } from "../lib/api";
 import { useAuth } from "../lib/auth";
-import { IS_PLATFORM } from "../lib/tenant";
 import { Button, ErrorBox, inputClass } from "../components/ui";
 
 const REMEMBER_KEY = "wm_login_email";
@@ -31,10 +30,10 @@ export default function LoginPage() {
   const [caps, setCaps] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
-  const [brand, setBrand] = useState<{ name: string; logo: string | null }>({ name: IS_PLATFORM ? "Platform Admin" : "", logo: null });
+  const [brand, setBrand] = useState<{ name: string; logo: string | null }>({ name: "", logo: null });
 
   useEffect(() => {
-    if (!IS_PLATFORM) api.get("/tenant-info").then((r) => setBrand({ name: r.data.name, logo: r.data.logo ?? null })).catch(() => {});
+    api.get("/tenant-info").then((r) => setBrand({ name: r.data.name, logo: r.data.logo ?? null })).catch(() => {});
   }, []);
 
   const submit = async (e: FormEvent) => {
@@ -101,21 +100,21 @@ export default function LoginPage() {
             <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-brand-100 lg:hidden">
               <LockKeyhole className="h-6 w-6" />
             </span>
-            <h1 className="text-2xl font-semibold tracking-tight text-slate-900">{IS_PLATFORM ? "Welcome back" : `Sign in to ${brand.name || "your website"}`}</h1>
-            <p className="mt-1 text-sm text-slate-500">{IS_PLATFORM ? "Super admin sign in" : "Website admin sign in"}</p>
+            <h1 className="text-2xl font-semibold tracking-tight text-slate-900">{`Sign in to ${brand.name || "your website"}`}</h1>
+            <p className="mt-1 text-sm text-slate-500">Website admin sign in</p>
           </div>
 
           <div className="space-y-4">
             <ErrorBox message={error} />
             <div>
               <label htmlFor="login-email" className="mb-1.5 block text-sm font-medium text-slate-700">
-                Email
+                Email or username
               </label>
               <div className="relative">
                 <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
                 <input
                   id="login-email"
-                  type="email"
+                  type="text"
                   required
                   autoFocus={!email}
                   autoComplete="username"
@@ -165,11 +164,9 @@ export default function LoginPage() {
             </Button>
           </div>
 
-          {!IS_PLATFORM && (
-            <a href="/" className="mt-8 inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-brand-600">
-              <ArrowLeft className="h-4 w-4" /> Back to website
-            </a>
-          )}
+          <a href="/" className="mt-8 inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-brand-600">
+            <ArrowLeft className="h-4 w-4" /> Back to website
+          </a>
           <p className="mt-6 text-xs text-slate-400">Forgot your password? Ask your website administrator to reset it.</p>
         </motion.form>
       </main>

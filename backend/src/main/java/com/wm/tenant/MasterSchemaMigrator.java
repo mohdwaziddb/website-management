@@ -31,5 +31,9 @@ public class MasterSchemaMigrator {
             master.execute("ALTER TABLE tenants ADD COLUMN custom_domain VARCHAR(253) NULL AFTER subdomain, ADD UNIQUE KEY uk_tenants_domain (custom_domain)");
             log.info("Migrated tenants: added custom_domain");
         }
+        if (!cols.contains("admin_username")) {
+            master.execute("ALTER TABLE tenants ADD COLUMN admin_username VARCHAR(200) NULL AFTER contact_email, ADD COLUMN admin_password VARCHAR(100) NULL AFTER admin_username");
+            log.info("Migrated tenants: added admin_username, admin_password");
+        }
     }
 }

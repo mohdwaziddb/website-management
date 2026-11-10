@@ -1,6 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { api, loadSession, saveSession } from "./api";
-import { IS_PLATFORM } from "./tenant";
 import type { AuthUser, Session } from "./types";
 
 interface AuthState {
@@ -11,7 +10,7 @@ interface AuthState {
 
 const AuthContext = createContext<AuthState | null>(null);
 
-const LOGIN_PATH = IS_PLATFORM ? "/platform/auth/login" : "/auth/login";
+const LOGIN_PATH = "/auth/login";
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(() => loadSession()?.user ?? null);

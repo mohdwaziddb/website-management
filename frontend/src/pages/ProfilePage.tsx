@@ -2,7 +2,6 @@ import { FormEvent, useState } from "react";
 import { KeyRound, LogOut, ShieldCheck } from "lucide-react";
 import { api, errorMessage, saveSession } from "../lib/api";
 import { useAuth } from "../lib/auth";
-import { IS_PLATFORM } from "../lib/tenant";
 import { Session } from "../lib/types";
 import { Avatar, Button, Card, confirmDialog, ErrorBox, FormField, inputClass, PageHeader, Pill, SectionCard, showToast } from "../components/ui";
 
@@ -31,7 +30,7 @@ export default function ProfilePage() {
   const [confirm, setConfirm] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const base = IS_PLATFORM ? "/platform/auth" : "/auth";
+  const base = "/auth";
   const strength = passwordStrength(next);
 
   const submit = async (e: FormEvent) => {
@@ -77,8 +76,8 @@ export default function ProfilePage() {
           <div className="text-lg font-semibold text-slate-900">{user?.name}</div>
           <div className="text-sm text-slate-500">{user?.email}</div>
         </div>
-        <Pill tone={user?.role === "ADMIN" || user?.role === "SUPER_ADMIN" ? "violet" : "blue"}>
-          <ShieldCheck className="h-3.5 w-3.5" /> {user?.role === "ADMIN" ? "Administrator" : user?.role === "EDITOR" ? "Editor" : "Super admin"}
+        <Pill tone={user?.role === "ADMIN" ? "violet" : "blue"}>
+          <ShieldCheck className="h-3.5 w-3.5" /> {user?.role === "ADMIN" ? "Administrator" : "Editor"}
         </Pill>
       </Card>
 
@@ -111,13 +110,11 @@ export default function ProfilePage() {
           </form>
         </SectionCard>
 
-        {!IS_PLATFORM && (
-          <SectionCard title="Sessions" description="Lost a device or shared your password?">
-            <Button variant="secondary" className="w-full" onClick={logoutAll}>
-              <LogOut className="h-4 w-4" /> Log out all devices
-            </Button>
-          </SectionCard>
-        )}
+        <SectionCard title="Sessions" description="Lost a device or shared your password?">
+          <Button variant="secondary" className="w-full" onClick={logoutAll}>
+            <LogOut className="h-4 w-4" /> Log out all devices
+          </Button>
+        </SectionCard>
       </div>
     </div>
   );

@@ -25,7 +25,7 @@ class JwtServiceTest {
 
     @Test
     void refreshTokenCannotBeUsedAsAccess() {
-        AuthPrincipal p = new AuthPrincipal(1, "A", "a@x.com", "SUPER_ADMIN", AuthPrincipal.SCOPE_PLATFORM, null);
+        AuthPrincipal p = new AuthPrincipal(1, "A", "a@x.com", "CUSTOMER", AuthPrincipal.SCOPE_CUSTOMER, null);
         String refresh = (String) jwt.issueTokens(p, 0).get("refreshToken");
         assertThrows(ApiException.class, () -> jwt.parse(refresh, JwtService.TYPE_ACCESS));
         assertNull(JwtService.toPrincipal(jwt.parse(refresh, JwtService.TYPE_REFRESH)).tenant());

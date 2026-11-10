@@ -2,7 +2,9 @@ package com.wm;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wm.tenant.Tenant;
 import com.wm.tenant.TenantDataSources;
+import com.wm.tenant.TenantRepository;
 import com.wm.tenant.TenantSchemaService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 /**
- * Poora flow local MySQL par (alag DBs: wm_test_master + wmtest_t_*), test ke end me sab drop.
+ * Poora flow local MySQL par (alag DBs: wm_test_master + wmtest_*), test ke end me sab drop.
  * Host = URL ka host (http://alpha.localhost/...), isliye subdomain / custom domain resolution bhi test hota hai.
  */
 @SpringBootTest
@@ -53,10 +55,11 @@ class WebsiteFlowIntegrationTest {
     @Autowired
     private TenantSchemaService schemaService;
 
-    private String platformToken;
+    @Autowired
+    private TenantRepository tenantRepository;
+
     private String alphaToken;
     private String betaToken;
-    private long alphaId;
 
     @BeforeAll
     void cleanStart() {
@@ -71,7 +74,7 @@ class WebsiteFlowIntegrationTest {
     }
 
     private void dropTenantDbs() {
-        for (String db : master.queryForList("SELECT schema_name FROM information_schema.schemata WHERE schema_name LIKE 'wmtest\\_t\\_%'", String.class)) {
+        for (String db : master.queryForList("SELECT schema_name FROM information_schema.schemata WHERE schema_name LIKE 'wmtest\\_%'", String.class)) {
             dataSources.close(db);
             master.execute("DROP DATABASE IF EXISTS `" + db + "`");
         }
@@ -103,9 +106,9 @@ class WebsiteFlowIntegrationTest {
         return m;
     }
 
-    private static Map<String, Object> tenant(String sub, String domain, String name) {
-        return map("subdomain", sub, "customDomain", domain, "name", name, "contactEmail", "info@" + name.toLowerCase() + ".com",
-                "template", "modern", "adminName", "Admin", "adminEmail", "admin@" + name.toLowerCase() + ".com", "adminPassword", "Secret@123");
+    /** Website waise hi jaise live par: master me row + provision. Admin = admin@<name>.com / Secret@123 (test default) */
+    private Tenant tenant(String code, String sub, String domain, String name) {
+        return TestTenants.create(tenantRepository, schemaService, dataSources, code, sub, domain, name, "admin@" + name.toLowerCase() + ".com");
     }
 
     private String login(String host, String email, String password) throws Exception {
@@ -115,77 +118,86 @@ class WebsiteFlowIntegrationTest {
         return r.data().get("accessToken").asText();
     }
 
-    // ------------------------------------------------------------ platform
+    // ------------------------------------------------------------ website = master row (SQL) + startup provision
 
     @Test
     @Order(1)
-    void platformLogin() throws Exception {
-        Res bad = call(post(ROOT + "/api/platform/auth/login"), null, map("email", "root@test.local", "password", "wrong-pass"));
-        assertEquals(401, bad.status());
-        assertFalse(bad.body().get("success").asBoolean());
-        assertEquals("Invalid email or password", bad.message());
+    void createTenantsFromMasterRow() {
+        Tenant alpha = tenant("alpha", "alpha", null, "Alpha");
+        Tenant beta = tenant("beta-school", null, "beta-school.test", "Beta");
+        TestTenants.setting(dataSources, alpha, "template", "modern");
+        assertEquals("wmtest_alpha", alpha.dbName());
+        assertEquals("wmtest_beta_school", beta.dbName());
 
-        assertEquals(400, call(post(ROOT + "/api/platform/auth/login"), null, map("email", "", "password", "x")).status());
+        Long dbs = master.queryForObject("SELECT COUNT(*) FROM information_schema.schemata WHERE schema_name IN ('wmtest_alpha','wmtest_beta_school')", Long.class);
+        assertEquals(2L, dbs);
 
-        Res ok = call(post(ROOT + "/api/platform/auth/login"), null, map("email", "ROOT@test.local", "password", "Root@12345"));
-        assertEquals(200, ok.status());
-        platformToken = ok.data().get("accessToken").asText();
-        assertEquals("SUPER_ADMIN", ok.data().get("user").get("role").asText());
+        // super admin master ke admin_username se (role ADMIN), site_name = tenants.name
+        JdbcTemplate db = dataSources.forDb(alpha.dbName());
+        assertEquals("ADMIN", db.queryForObject("SELECT role FROM users WHERE email = ?", String.class, TestTenants.SUPER_USERNAME));
+        assertEquals("ADMIN", db.queryForObject("SELECT role FROM users WHERE email = 'admin@alpha.com'", String.class));
+        assertEquals("Alpha", db.queryForObject("SELECT setting_value FROM site_settings WHERE setting_key = 'site_name'", String.class));
+
+        // dobara (har startup) chale to kuch duplicate / overwrite nahi
+        db.update("UPDATE site_settings SET setting_value = 'Alpha Renamed' WHERE setting_key = 'site_name'");
+        schemaService.provision(alpha);
+        assertEquals(2L, db.queryForObject("SELECT COUNT(*) FROM users", Long.class));
+        assertEquals("Alpha Renamed", db.queryForObject("SELECT setting_value FROM site_settings WHERE setting_key = 'site_name'", String.class));
+        db.update("UPDATE site_settings SET setting_value = 'Alpha' WHERE setting_key = 'site_name'");
     }
 
     @Test
     @Order(2)
-    void tenantsRequireSuperAdmin() throws Exception {
-        assertEquals(401, call(get(ROOT + "/api/platform/tenants"), null, null).status());
-        assertEquals(200, call(get(ROOT + "/api/platform/tenants"), platformToken, null).status());
+    void invalidDbNameIsSkipped() {
+        for (String bad : List.of("mysql", "wm_test_master", "bad-name", "x`y")) {
+            schemaService.provision(new Tenant(0, "bad", null, null, "Bad", bad, "a@b.com", true, null, "@x", "Pass@1234"));
+        }
+        Long t = master.queryForObject("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema IN ('mysql','wm_test_master') AND table_name = 'site_settings'", Long.class);
+        assertEquals(0L, t);
+        Long d = master.queryForObject("SELECT COUNT(*) FROM information_schema.schemata WHERE schema_name IN ('bad-name','x`y')", Long.class);
+        assertEquals(0L, d);
     }
 
     @Test
     @Order(3)
-    void createTenantValidation() throws Exception {
-        String url = ROOT + "/api/platform/tenants";
-        assertEquals("Subdomain or custom domain is required", call(post(url), platformToken, tenant(null, null, "Gamma")).message());
-        assertEquals("Subdomain 'www' is reserved", call(post(url), platformToken, tenant("www", null, "Gamma")).message());
-        assertEquals(400, call(post(url), platformToken, tenant("Bad_Sub", null, "Gamma")).status());
-        assertEquals("Use the subdomain field for *.localhost", call(post(url), platformToken, tenant(null, "x.localhost", "Gamma")).message());
-        assertEquals(400, call(post(url), platformToken, tenant(null, "bad domain.com", "Gamma")).status());
+    void superAdminLoginHiddenAndFixed() throws Exception {
+        String superToken = login(ALPHA, " " + TestTenants.SUPER_USERNAME.toUpperCase() + " ", TestTenants.SUPER_PASSWORD);
+        String clientToken = login(ALPHA, "admin@alpha.com", "Secret@123");
+        // username sirf usi website ke super admin ke liye — baaki jagah email hi chahiye
+        assertEquals(400, call(post(ALPHA + "/api/auth/login"), null, map("email", "@someone", "password", "x")).status());
 
-        Map<String, Object> weak = tenant("gamma", null, "Gamma");
-        weak.put("adminPassword", "123");
-        assertEquals("Admin password must be 8-100 characters", call(post(url), platformToken, weak).message());
+        // client ko users list me nahi dikhta, edit / delete nahi kar sakta
+        JsonNode users = call(get(ALPHA + "/api/users"), superToken, null).data();
+        assertEquals(1, users.size());
+        assertEquals("admin@alpha.com", users.get(0).get("email").asText());
+        JdbcTemplate db = dataSources.forDb("wmtest_alpha");
+        long superId = db.queryForObject("SELECT id FROM users WHERE email = ?", Long.class, TestTenants.SUPER_USERNAME);
+        assertEquals(404, call(put(ALPHA + "/api/users/" + superId), clientToken,
+                map("name", "X", "email", "x@alpha.com", "role", "EDITOR", "isActive", false)).status());
+        assertEquals(404, call(delete(ALPHA + "/api/users/" + superId), clientToken, null).status());
+        // client admin akela hai => khud ko demote nahi; super admin count me nahi
+        long clientId = users.get(0).get("id").asLong();
+        assertEquals("At least one active admin is required", call(put(ALPHA + "/api/users/" + clientId), superToken,
+                map("name", "Admin", "email", "admin@alpha.com", "role", "EDITOR", "isActive", true)).message());
 
-        Map<String, Object> badTpl = tenant("gamma", null, "Gamma");
-        badTpl.put("template", "hacker");
-        assertEquals("Unknown template", call(post(url), platformToken, badTpl).message());
+        assertEquals("Super admin password is set in the master database", call(post(ALPHA + "/api/auth/change-password"), superToken,
+                map("currentPassword", TestTenants.SUPER_PASSWORD, "newPassword", "Other@12345")).message());
 
-        Map<String, Object> noName = tenant("gamma", null, "Gamma");
-        noName.put("name", " ");
-        assertEquals("Website name is required", call(post(url), platformToken, noName).message());
+        // master me password badla + restart (provision) => naya chale, purana session + password band
+        master.update("UPDATE tenants SET admin_password = 'Changed@123' WHERE code = 'alpha'");
+        schemaService.provision(tenantRepository.find(TenantRepository.Key.CODE, "alpha").map(t -> tenantRepository.findById(t.id()).orElseThrow()).orElseThrow());
+        assertEquals(401, call(get(ALPHA + "/api/dashboard"), superToken, null).status());
+        assertEquals(401, call(post(ALPHA + "/api/auth/login"), null, map("email", TestTenants.SUPER_USERNAME, "password", TestTenants.SUPER_PASSWORD)).status());
+        login(ALPHA, TestTenants.SUPER_USERNAME, "Changed@123");
+        master.update("UPDATE tenants SET admin_password = ? WHERE code = 'alpha'", TestTenants.SUPER_PASSWORD);
+        schemaService.provision(tenantRepository.findById(tenantRepository.find(TenantRepository.Key.CODE, "alpha").orElseThrow().id()).orElseThrow());
+        login(ALPHA, TestTenants.SUPER_USERNAME, TestTenants.SUPER_PASSWORD);
 
-        assertEquals(400, call(post(url).contentType(MediaType.APPLICATION_JSON).content("{bad json"), platformToken, null).status());
-    }
-
-    @Test
-    @Order(4)
-    void createSubdomainAndCustomDomainTenants() throws Exception {
-        Res alpha = call(post(ROOT + "/api/platform/tenants"), platformToken, tenant("alpha", null, "Alpha"));
-        assertEquals(200, alpha.status(), alpha.message());
-        assertEquals("alpha", alpha.data().get("code").asText());
-        assertEquals("wmtest_t_alpha", alpha.data().get("dbName").asText());
-        alphaId = alpha.data().get("id").asLong();
-
-        Res beta = call(post(ROOT + "/api/platform/tenants"), platformToken, tenant(null, "WWW.Beta-School.test", "Beta"));
-        assertEquals(200, beta.status(), beta.message());
-        assertEquals("beta-school", beta.data().get("code").asText());
-        assertEquals("beta-school.test", beta.data().get("customDomain").asText());
-        assertTrue(beta.data().get("subdomain").isNull());
-
-        assertEquals("Subdomain already taken", call(post(ROOT + "/api/platform/tenants"), platformToken, tenant("alpha", null, "Other")).message());
-        assertEquals("Custom domain already used by another website",
-                call(post(ROOT + "/api/platform/tenants"), platformToken, tenant("other", "beta-school.test", "Other")).message());
-
-        Long dbs = master.queryForObject("SELECT COUNT(*) FROM information_schema.schemata WHERE schema_name IN ('wmtest_t_alpha','wmtest_t_beta_school')", Long.class);
-        assertEquals(2L, dbs);
+        // master me username / password khaali => super admin nahi banta
+        JdbcTemplate beta = dataSources.forDb("wmtest_beta_school");
+        long before = beta.queryForObject("SELECT COUNT(*) FROM users", Long.class);
+        schemaService.provision(new Tenant(0, "beta-school", null, "beta-school.test", "Beta", "wmtest_beta_school", null, true, null, null, null));
+        assertEquals(before, beta.queryForObject("SELECT COUNT(*) FROM users", Long.class));
     }
 
     // ------------------------------------------------------------ host resolution
@@ -211,11 +223,11 @@ class WebsiteFlowIntegrationTest {
     @Test
     @Order(6)
     void domainCheckForSsl() throws Exception {
-        assertEquals(200, call(get(ROOT + "/api/platform/domain-check?domain=www.beta-school.test"), null, null).status());
-        assertEquals(200, call(get(ROOT + "/api/platform/domain-check?domain=alpha.localhost"), null, null).status());
-        assertEquals(200, call(get(ROOT + "/api/platform/domain-check?domain=localhost"), null, null).status());
-        assertEquals(404, call(get(ROOT + "/api/platform/domain-check?domain=evil.com"), null, null).status());
-        assertEquals(404, call(get(ROOT + "/api/platform/domain-check"), null, null).status());
+        assertEquals(200, call(get(ROOT + "/api/open/domain-check?domain=www.beta-school.test"), null, null).status());
+        assertEquals(200, call(get(ROOT + "/api/open/domain-check?domain=alpha.localhost"), null, null).status());
+        assertEquals(200, call(get(ROOT + "/api/open/domain-check?domain=localhost"), null, null).status());
+        assertEquals(404, call(get(ROOT + "/api/open/domain-check?domain=evil.com"), null, null).status());
+        assertEquals(404, call(get(ROOT + "/api/open/domain-check"), null, null).status());
     }
 
     // ------------------------------------------------------------ tenant auth
@@ -228,10 +240,9 @@ class WebsiteFlowIntegrationTest {
         betaToken = login(BETA, "admin@beta.com", "Secret@123");
 
         assertEquals(200, call(get(ALPHA + "/api/dashboard"), alphaToken, null).status());
-        // alpha ka token beta par nahi chalega, platform token tenant par nahi
+        // alpha ka token beta par nahi chalega, root par bhi nahi
         assertEquals(401, call(get(BETA + "/api/dashboard"), alphaToken, null).status());
-        assertEquals(401, call(get(ALPHA + "/api/dashboard"), platformToken, null).status());
-        assertEquals(401, call(get(ROOT + "/api/platform/tenants"), alphaToken, null).status());
+        assertEquals(404, call(get(ROOT + "/api/dashboard"), alphaToken, null).status());
         assertEquals(401, call(get(ALPHA + "/api/dashboard"), null, null).status());
     }
 
@@ -393,12 +404,12 @@ class WebsiteFlowIntegrationTest {
         assertTrue(bad.getResponse().getContentAsString().contains("File type .svg not allowed"));
     }
 
-    // ------------------------------------------------------------ schema cleanup + suspend
+    // ------------------------------------------------------------ schema cleanup
 
     @Test
     @Order(18)
     void removedTablesAndColumnsAreDropped() {
-        JdbcTemplate db = dataSources.forDb("wmtest_t_alpha");
+        JdbcTemplate db = dataSources.forDb("wmtest_alpha");
         db.execute("CREATE TABLE wings (id BIGINT PRIMARY KEY)");
         db.execute("ALTER TABLE activities ADD COLUMN session_id BIGINT NULL");
         schemaService.ensureSchema(db);
@@ -409,38 +420,6 @@ class WebsiteFlowIntegrationTest {
         assertEquals(0L, col);
     }
 
-    @Test
-    @Order(19)
-    void updateAndSuspendTenant() throws Exception {
-        String url = ROOT + "/api/platform/tenants/" + alphaId;
-        assertEquals("Subdomain or custom domain is required",
-                call(put(url), platformToken, map("name", "Alpha", "subdomain", "", "customDomain", "", "active", true)).message());
-
-        Res moved = call(put(url), platformToken, map("name", "Alpha", "subdomain", "alpha", "customDomain", "alpha-school.test", "active", true));
-        assertEquals(200, moved.status(), moved.message());
-        // same code => purana token naye domain par bhi chalega
-        assertEquals(200, call(get("http://alpha-school.test/api/dashboard"), alphaToken, null).status());
-
-        call(put(url), platformToken, map("name", "Alpha", "subdomain", "alpha", "customDomain", "alpha-school.test", "active", false));
-        assertEquals(404, call(get(ALPHA + "/api/tenant-info"), null, null).status());
-        assertEquals(404, call(get("http://alpha-school.test/api/public/settings"), null, null).status());
-
-        call(put(url), platformToken, map("name", "Alpha", "subdomain", "alpha", "customDomain", null, "active", true));
-        assertEquals(200, call(get(ALPHA + "/api/tenant-info"), null, null).status());
-    }
-
-    @Test
-    @Order(20)
-    void resetTenantAdmin() throws Exception {
-        String url = ROOT + "/api/platform/tenants/" + alphaId + "/reset-admin";
-        assertEquals(400, call(post(url), platformToken, map("email", "admin@alpha.com", "password", "x")).status());
-        assertEquals(200, call(post(url), platformToken, map("email", "admin@alpha.com", "password", "NewPass@123")).status());
-        // purana token ab invalid (token_version++) — refresh fail hoga, naya login chalega
-        login(ALPHA, "admin@alpha.com", "NewPass@123");
-        assertEquals(404, call(post(ROOT + "/api/platform/tenants/999999/reset-admin"), platformToken,
-                map("email", "a@b.com", "password", "NewPass@123")).status());
-    }
-
     // ------------------------------------------------------------ website types + demo data + reset
 
     private static final String GAMMA = "http://gamma.localhost";
@@ -448,23 +427,17 @@ class WebsiteFlowIntegrationTest {
 
     @Test
     @Order(22)
-    void restaurantSiteWithDemoOnCreate() throws Exception {
-        Map<String, Object> bad = tenant("gamma", null, "Gamma");
-        bad.put("siteType", "casino");
-        assertEquals("Unknown website type", call(post(ROOT + "/api/platform/tenants"), platformToken, bad).message());
-
-        Map<String, Object> req = tenant("gamma", null, "Gamma");
-        req.put("siteType", "restaurant");
-        req.put("template", null);
-        req.put("importDemo", true);
-        Res r = call(post(ROOT + "/api/platform/tenants"), platformToken, req);
+    void restaurantSiteWithDemoImport() throws Exception {
+        Tenant gamma = tenant("gamma", "gamma", null, "Gamma");
+        TestTenants.setting(dataSources, gamma, "site_type", "restaurant");
+        gammaToken = login(GAMMA, "admin@gamma.com", "Secret@123");
+        Res r = call(post(GAMMA + "/api/demo/import"), gammaToken, null);
         assertEquals(200, r.status(), r.message());
 
         Res info = call(get(GAMMA + "/api/tenant-info"), null, null);
         assertEquals("saffron", info.data().get("template").asText());
         assertEquals("Gamma", info.data().get("name").asText()); // demo ne site_name overwrite nahi kiya
 
-        gammaToken = login(GAMMA, "admin@gamma.com", "Secret@123");
         JsonNode modules = call(get(GAMMA + "/api/modules"), gammaToken, null).data();
         Map<String, String> labels = new LinkedHashMap<>();
         modules.forEach(m -> labels.put(m.get("key").asText(), m.get("label").asText()));
@@ -542,12 +515,12 @@ class WebsiteFlowIntegrationTest {
     @Test
     @Order(26)
     void publicDemoPreviewAndTypeSwitch() throws Exception {
-        Res gym = call(get(ROOT + "/api/platform/demo/gym"), null, null);
+        Res gym = call(get(ROOT + "/api/open/demo/gym"), null, null);
         assertEquals(200, gym.status());
         assertEquals("Iron Pulse Fitness", gym.data().get("settings").get("site_name").asText());
         assertTrue(gym.data().get("modules").get("pricing_plans").size() >= 3);
-        assertEquals(200, call(get(GAMMA + "/api/platform/demo/hospital"), null, null).status());
-        assertEquals(404, call(get(ROOT + "/api/platform/demo/casino"), null, null).status());
+        assertEquals(200, call(get(GAMMA + "/api/open/demo/hospital"), null, null).status());
+        assertEquals(404, call(get(ROOT + "/api/open/demo/casino"), null, null).status());
 
         // admin type badle => menus badle
         assertEquals(200, call(put(GAMMA + "/api/settings"), gammaToken, map("site_type", "gym")).status());
@@ -698,26 +671,26 @@ class WebsiteFlowIntegrationTest {
     @Test
     @Order(21)
     void migratesOldMasterSchema() {
-        master.execute("CREATE DATABASE wmtest_t_migration");
-        JdbcTemplate old = dataSources.forDb("wmtest_t_migration");
+        master.execute("CREATE DATABASE wmtest_migration");
+        JdbcTemplate old = dataSources.forDb("wmtest_migration");
         old.execute("CREATE TABLE tenants (id BIGINT AUTO_INCREMENT PRIMARY KEY, subdomain VARCHAR(40) NOT NULL UNIQUE, name VARCHAR(200) NOT NULL, "
                 + "db_name VARCHAR(64) NOT NULL UNIQUE, contact_email VARCHAR(200), is_active TINYINT(1) NOT NULL DEFAULT 1, "
                 + "created_on DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP)");
-        old.update("INSERT INTO tenants (subdomain, name, db_name) VALUES ('demo', 'Demo', 'wm_t_demo')");
+        old.update("INSERT INTO tenants (subdomain, name, db_name) VALUES ('demo', 'Demo', 'demo')");
 
         new com.wm.tenant.MasterSchemaMigrator(old);
         new com.wm.tenant.MasterSchemaMigrator(old); // dobara chalne par kuch na toote
 
         assertEquals("demo", old.queryForObject("SELECT code FROM tenants WHERE subdomain = 'demo'", String.class));
-        old.update("INSERT INTO tenants (code, custom_domain, name, db_name) VALUES ('xyz', 'xyz.com', 'Xyz', 'wm_t_xyz2')");
+        old.update("INSERT INTO tenants (code, custom_domain, name, db_name) VALUES ('xyz', 'xyz.com', 'Xyz', 'xyz')");
         assertNull(old.queryForObject("SELECT subdomain FROM tenants WHERE code = 'xyz'", String.class));
     }
 
     @Test
     @Order(30)
     void activityLogsSearchAndActionFilter() throws Exception {
-        // pehle ke tests logout-all / password change kar chuke — naya login (naya password)
-        alphaToken = login(ALPHA, "admin@alpha.com", "NewPass@123");
+        // pehle ke tests logout-all kar chuke — naya login
+        alphaToken = login(ALPHA, "admin@alpha.com", "Secret@123");
         Res all = call(get(ALPHA + "/api/logs?size=100"), alphaToken, null);
         assertEquals(200, all.status(), all.message());
         assertTrue(all.data().get("total").asInt() > 0);

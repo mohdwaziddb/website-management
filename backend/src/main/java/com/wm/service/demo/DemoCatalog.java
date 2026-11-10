@@ -26,7 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class DemoCatalog {
     private static final String UNSPLASH = "https://images.unsplash.com/photo-";
     /** Preview me demo PDF yahan se khulti hai (PlatformRestController) */
-    public static final String FILE_URL = "/api/platform/demo/files/";
+    public static final String FILE_URL = "/api/open/demo/files/";
     private static final java.util.regex.Pattern FILE_NAME = java.util.regex.Pattern.compile("^[a-z0-9_-]+\\.pdf$");
 
     @Autowired

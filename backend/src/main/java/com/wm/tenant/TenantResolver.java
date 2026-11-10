@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 /**
  * Host header se tenant pehchanta hai (nginx / vite proxy Host forward karte hain):
- *   yourdomain.com, www.yourdomain.com, admin.yourdomain.com -> null (platform: marketing site + super admin)
+ *   yourdomain.com, www.yourdomain.com, admin.yourdomain.com -> null (platform: marketing site + /preview)
  *   abc.yourdomain.com / www.abc.yourdomain.com            -> SUBDOMAIN "abc"
  *   xyz.com / www.xyz.com (koi bhi aur domain)              -> DOMAIN "xyz.com"  (client ka apna domain)
  *   IP / "localhost" (bina dot)                             -> null

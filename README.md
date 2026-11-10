@@ -4,8 +4,7 @@ Ek product, bahut saari websites. Har client website = **subdomain ya client ka 
 
 | URL | Kya khulta hai |
 |---|---|
-| `www.abc.com` (root) | Product ki marketing website (features, templates, contact) |
-| `www.abc.com/admin` | Super admin — websites banao, domain jodo, band karo |
+| `www.abc.com` (root) | Product ki marketing website (features, templates, contact), `/preview/<template>` = live demo |
 | `dbwebsite.abc.com` | Client ki **public website** (admin ka data + chosen template) |
 | `dbwebsite.abc.com/admin` | Us website ka admin panel |
 | `www.xyz.com` (client ka apna domain) | Uski public website (koi subdomain nahi) |
@@ -17,7 +16,7 @@ Local me `abc.com` ki jagah `localhost` (`dbwebsite.localhost:5173`).
 
 ```
 backend/   Spring Boot 3.3, Java 21, JDBC, JWT, MySQL
-  rest/            WebsiteAdminRestController, PublicWebsiteRestController, PlatformRestController
+  rest/            WebsiteAdminRestController, PublicWebsiteRestController, OpenRestController (/api/open: demo preview, domain check)
   service/<area>/  XService (interface) + XServiceImpl — saara logic yahan
   common/          DataTypeUtility (stringValue, longValue, booleanValue, dateValue ...),
                    ValidationUtility (requiredString, requiredEmail ...), GeneralResponse,
@@ -29,7 +28,6 @@ frontend/  React 18 + Vite + TypeScript + Tailwind + framer-motion + CKEditor 5
   src/marketing/   root domain ki product website
   src/site/        client ki public website: sections (common) + 5 templates (sirf config)
   src/pages/       admin panel (TemplatesPage = 5 live previews + Apply)
-  src/platform/    super admin
 ```
 
 **Har API response:** `{ "success": true/false, "message": "...", "data": ... }`.
@@ -45,7 +43,7 @@ Naya module / field = registry me ek line → restart → har tenant DB me table
 Gym, Real Estate, Hospital, Agency, Hotel/Travel, Landing Page, Photography, NGO, Interior, Construction.
 - Type ke hisaab se admin menu badalta hai: common modules (Services, Team, Projects, Catalog, Pricing, FAQs, Stats, Partners …)
   har type me apne naam se — Restaurant: *Menu Items, Chefs*; Real Estate: *Properties, Agents*; Gym: *Programs, Trainers, Memberships*.
-- Super admin website banate waqt type + template chunta hai; admin baad me Settings me type badal sakta hai.
+- Website ka admin Settings me type / template chunta hai (default: School).
 
 **47 templates** (har type ke 3, school ke 5) — `frontend/src/site/templates/index.ts`, backend `TemplateCatalog`.
 - Template = sirf config: rang, font, navbar (6 style), hero (10 style), card look, aur sections + unka style (`"services:icons"`, `"catalog:menu"` …).
@@ -59,14 +57,18 @@ Gym, Real Estate, Hospital, Agency, Hotel/Travel, Landing Page, Photography, NGO
   Photos Unsplash ki (free license); import par website ke `uploads/<code>/demo/` me download hoti hain.
 - Admin → Templates → **Import demo content** (ek click). Demo rows `is_demo = 1` hoti hain → **Remove demo** sirf unhe hatata hai;
   admin ka apna data (aur jis demo category me admin ne photo daali) bacha rehta hai. Settings sirf khaali hon tabhi bharti hain.
-- Super admin website banate waqt "Import demo content" tick kar sakta hai.
 - Admin → Settings → **Reset website**: website ka naam type karke confirm; saara content, uploads aur settings saaf
   (naam / type / template + users rehte hain). Option: reset ke baad fresh demo.
 
 ## Databases
 
-- `wm_master` — `tenants` (code, subdomain, custom_domain ...), `super_admins`
-- `wm_t_<code>` — har website ka: `users`, `activity_logs`, `site_settings` + module tables
+- `wm_master` — `tenants` (code, subdomain, custom_domain, name, db_name, contact_email, admin_username, admin_password, is_active) — sirf websites ki list
+- `<db_name>` (koi prefix nahi, aam taur par code jaisa: `demo`) — har website ka: `users`, `activity_logs`, `site_settings` + module tables
+- Startup par har tenant ke liye `TenantSchemaService.provision`: DB na ho to banao, tables sync, **Super Admin** user
+  (`admin_username` / `admin_password` se, role ADMIN), `site_name` khaali ho to `tenants.name`.
+- Super Admin client ko Users list me nahi dikhta, edit / delete / password change nahi hota. Password badalna = master me
+  `admin_password` update + restart (purane sessions khatam). Super Admin hi Users page se client ka ADMIN banata hai.
+- `admin_password` master me plain text hai — `wm_master` ka access sirf apne paas rakhein.
 - Purana master DB startup par apne aap upgrade (`MasterSchemaMigrator`).
 - Hataye gaye modules (wings, sessions, classes, transfer_certificates) ke tables startup par har tenant DB se drop (`TenantSchemaService.REMOVED_TABLES`).
 
@@ -84,25 +86,32 @@ npm install
 npm run dev                    # port 5173, /api + /files -> 6900 proxy
 ```
 
-1. `http://localhost:5173` → marketing site; `http://localhost:5173/admin` → super admin `admin@platform.local` / `Admin@123` (**password turant badlein**)
-2. "New Website" → subdomain `demo` → DB `wm_t_demo`
-3. `http://demo.localhost:5173` → public website, `http://demo.localhost:5173/admin` → website admin
+1. `http://localhost:5173` → marketing site (`/preview/<template>` = demo)
+2. **Nayi website** = master DB me ek row, phir backend restart:
+   ```sql
+   INSERT INTO wm_master.tenants (code, subdomain, custom_domain, name, db_name, admin_username, admin_password)
+   VALUES ('website', 'website', NULL, 'Bizio Website', 'website', '@biziotechnologieswebsite', '<password>');
+   ```
+   - `code` / `subdomain`: sirf a-z, 0-9, `-`. `db_name`: sirf a-z, 0-9, `_` (system DB / master ka naam nahi).
+   - Restart par DB `website` + tables + Super Admin apne aap. `/admin` par Super Admin se login → Users → client ka ADMIN banao.
+   - Band karna: `UPDATE wm_master.tenants SET is_active = 0 WHERE code = 'demo'` + restart (tenant lookup cache me rehta hai).
+3. `http://website.localhost:5173` → public website, `http://website.localhost:5173/admin` → website admin (Templates → Import demo content)
 
 **Custom domain local test:** `C:\Windows\System32\drivers\etc\hosts` me `127.0.0.1 xyz.test www.xyz.test` (admin rights),
-super admin me custom domain `xyz.test` daalo → `http://www.xyz.test:5173`.
+`tenants.custom_domain = 'xyz.test'` + restart → `http://www.xyz.test:5173`.
 
 ## Tests
 
 ```bash
-cd backend && mvn test        # 61 tests: unit + integration (local MySQL par alag wm_test_* DBs, test ke baad drop)
-cd frontend && npm test       # 173 tests (vitest) — saare 47 templates render, backend keys sync, har menu ka data website par dikhta hai (coverage.test.ts)
+cd backend && mvn test        # 94 tests: unit + integration (local MySQL par alag wm_test_* DBs, test ke baad drop)
+cd frontend && npm test       # 331 tests (vitest) — saare 47 templates render, backend keys sync, har menu ka data website par dikhta hai (coverage.test.ts)
 ```
 
 ## Login / Security flow
 
 - Login → `accessToken` (60 min) + `refreshToken` (7 din). 401 par frontend apne aap refresh karta hai.
 - Token me tenant `code` hota hai: `abc` ka token `xyz` par **reject**. Subdomain/domain badle to bhi code same, token chalta rahe.
-- Super admin token sirf root domain par, tenant token sirf apni website par.
+- Root domain par koi login / admin nahi; token sirf apni website par.
 - Password change / user disable / role change → `token_version++` → purane sessions khatam.
 - 5 galat password → 10 min lock. Roles: `ADMIN` (sab + users + settings + template), `EDITOR` (sirf content).
 - Rich text HTML server par sanitize (jsoup); uploads me sirf safe extensions (SVG/HTML nahi).
@@ -118,7 +127,6 @@ cd frontend && npm test       # 173 tests (vitest) — saare 47 templates render
    DB_USERNAME=... DB_PASSWORD=...
    MASTER_DB_URL=jdbc:mysql://db-host:3306/wm_master?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=Asia/Kolkata
    TENANT_DB_URL_TEMPLATE=jdbc:mysql://db-host:3306/{db}?useSSL=false&serverTimezone=Asia/Kolkata
-   PLATFORM_ADMIN_PASSWORD=<strong password>
    UPLOAD_DIR=/var/wm/uploads
    ```
    DB user ko `CREATE DATABASE` permission chahiye.
@@ -128,7 +136,7 @@ cd frontend && npm test       # 173 tests (vitest) — saare 47 templates render
 ```caddy
 {
     on_demand_tls {
-        ask http://127.0.0.1:6900/api/platform/domain-check
+        ask http://127.0.0.1:6900/api/open/domain-check
     }
 }
 
@@ -180,10 +188,8 @@ location / {
 
 | Method | Path | Kaun |
 |---|---|---|
-| POST | `/api/platform/auth/login`, `/refresh` | public (root domain) |
-| GET/POST/PUT | `/api/platform/tenants`, `/{id}/reset-admin` | super admin |
-| GET | `/api/platform/domain-check?domain=` | public (Caddy SSL check) |
-| GET | `/api/platform/demo/{type}` | public (template preview ka demo data) |
+| GET | `/api/open/domain-check?domain=` | public (Caddy SSL check) |
+| GET | `/api/open/demo/{type}`, `/api/open/demo/files/{name}` | public (template preview ka demo data) |
 | GET / POST / DELETE | `/api/demo`, `/api/demo/import` | admin (demo status / import / remove) |
 | POST | `/api/website/reset` | admin (`{ confirm, importDemo }`) |
 | GET | `/api/tenant-info` | public (website domain) |

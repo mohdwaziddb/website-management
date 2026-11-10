@@ -1,7 +1,5 @@
 package com.wm.service.demo;
 
-import com.wm.tenant.Tenant;
-
 import java.util.Map;
 
 /**
@@ -15,9 +13,6 @@ public interface DemoDataService {
 
     /** Current website ke type ka demo data add karo (photos download hoti hain) */
     Map<String, Object> importDemo();
-
-    /** Naya website banate waqt (super admin) — TenantContext ke bina */
-    Map<String, Object> importDemo(Tenant tenant, String siteType);
 
     /** Sirf demo rows / demo settings / demo photos hatao */
     Map<String, Object> removeDemo();

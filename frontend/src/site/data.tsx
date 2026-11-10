@@ -15,7 +15,7 @@ export interface MenuItem {
   children: MenuItem[];
 }
 
-/** Backend /api/platform/demo/{type} — template preview / showcase ke liye sample content */
+/** Backend /api/open/demo/{type} — template preview / showcase ke liye sample content */
 export interface DemoData {
   type: string;
   settings: Record<string, string>;
@@ -74,7 +74,7 @@ function fetchRecord(module: string, id: string | number): Promise<Row> {
 }
 
 export function fetchDemo(type: string): Promise<DemoData> {
-  return cached(`demo:${type}`, () => api.get<DemoData>(`/platform/demo/${type}`).then((r) => r.data));
+  return cached(`demo:${type}`, () => api.get<DemoData>(`/open/demo/${type}`).then((r) => r.data));
 }
 
 export function clearSiteCache() {

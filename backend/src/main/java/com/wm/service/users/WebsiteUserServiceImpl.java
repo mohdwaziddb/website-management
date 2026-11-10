@@ -6,6 +6,7 @@ import com.wm.common.ValidationUtility;
 import com.wm.security.AuthPrincipal;
 import com.wm.security.SecurityConfig;
 import com.wm.service.activity_logs.ActivityLogService;
+import com.wm.tenant.TenantContext;
 import com.wm.tenant.TenantDataSources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -32,7 +33,7 @@ public class WebsiteUserServiceImpl implements WebsiteUserService {
 
     @Override
     public List<Map<String, Object>> getUsers() {
-        List<Map<String, Object>> rows = ds.current().queryForList("SELECT " + COLUMNS + " FROM users ORDER BY id");
+        List<Map<String, Object>> rows = ds.current().queryForList("SELECT " + COLUMNS + " FROM users WHERE email <> ? ORDER BY id", superLogin());
         rows.forEach(r -> r.replaceAll((k, v) -> DataTypeUtility.getJsonValue(v)));
         return rows;
     }
@@ -106,7 +107,7 @@ public class WebsiteUserServiceImpl implements WebsiteUserService {
     }
 
     private Map<String, Object> findById(long id) {
-        List<Map<String, Object>> rows = ds.current().queryForList("SELECT " + COLUMNS + " FROM users WHERE id = ?", id);
+        List<Map<String, Object>> rows = ds.current().queryForList("SELECT " + COLUMNS + " FROM users WHERE id = ? AND email <> ?", id, superLogin());
         if (rows.isEmpty()) throw ApiException.notFound("User not found");
         Map<String, Object> row = rows.get(0);
         row.replaceAll((k, v) -> DataTypeUtility.getJsonValue(v));
@@ -114,7 +115,8 @@ public class WebsiteUserServiceImpl implements WebsiteUserService {
     }
 
     private long countActiveAdmins() {
-        Long n = ds.current().queryForObject("SELECT COUNT(*) FROM users WHERE role = ? AND is_active = 1", Long.class, SecurityConfig.ADMIN);
+        Long n = ds.current().queryForObject("SELECT COUNT(*) FROM users WHERE role = ? AND is_active = 1 AND email <> ?", Long.class,
+                SecurityConfig.ADMIN, superLogin());
         return n == null ? 0 : n;
     }
 
@@ -122,6 +124,12 @@ public class WebsiteUserServiceImpl implements WebsiteUserService {
         Map<String, Object> row = ds.current().queryForMap("SELECT " + COLUMNS + " FROM users WHERE email = ?", email);
         row.replaceAll((k, v) -> DataTypeUtility.getJsonValue(v));
         return row;
+    }
+
+    /** Website ka super admin (master se) — client ko list me nahi dikhta, edit / delete nahi hota, admin count me nahi */
+    private static String superLogin() {
+        String login = TenantContext.require().superAdminLogin();
+        return login == null ? "" : login;
     }
 
     private static String role(Object value) {

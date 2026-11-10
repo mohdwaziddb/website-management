@@ -27,7 +27,6 @@ import java.util.Map;
 public class SecurityConfig {
     public static final String ADMIN = "ADMIN";
     public static final String EDITOR = "EDITOR";
-    public static final String SUPER_ADMIN = "SUPER_ADMIN";
     public static final String CUSTOMER = "CUSTOMER";
 
     @Bean
@@ -42,17 +41,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests(a -> a
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         // public
-                        .requestMatchers("/api/platform/auth/login", "/api/platform/auth/refresh").permitAll()
                         .requestMatchers("/api/auth/login", "/api/auth/refresh", "/api/tenant-info").permitAll()
-                        .requestMatchers("/api/public/**", "/files/**", "/api/platform/domain-check", "/api/platform/demo/**").permitAll()
+                        .requestMatchers("/api/public/**", "/files/**", "/api/open/**").permitAll()
                         // online store: shopper (customer) — signup / login khula, baaki customer login
                         .requestMatchers("/api/store/auth/register", "/api/store/auth/login", "/api/store/auth/refresh",
                                 "/api/store/auth/forgot-password", "/api/store/auth/reset-password").permitAll()
                         .requestMatchers("/api/store/**").hasRole(CUSTOMER)
                         // store admin: payment keys / SMTP sirf ADMIN
                         .requestMatchers("/api/shop/settings/**", "/api/shop/settings").hasRole(ADMIN)
-                        // super admin (root domain)
-                        .requestMatchers("/api/platform/**").hasRole(SUPER_ADMIN)
                         // tenant admin only
                         .requestMatchers("/api/users/**").hasRole(ADMIN)
                         .requestMatchers(HttpMethod.PUT, "/api/settings").hasRole(ADMIN)
