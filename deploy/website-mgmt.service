@@ -1,0 +1,16 @@
+# sudo cp deploy/website-mgmt.service /etc/systemd/system/ && sudo systemctl daemon-reload && sudo systemctl enable --now website-mgmt
+# Server par RAM kam hai, isliye heap 256 MB + serial GC
+[Unit]
+Description=Website Management
+After=network.target mysql.service
+
+[Service]
+User=jenkins
+WorkingDirectory=/opt/website-mgmt
+EnvironmentFile=/opt/website-mgmt/.env
+ExecStart=/usr/bin/java -Xmx256m -XX:+UseSerialGC -jar /opt/website-mgmt/app.jar
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
